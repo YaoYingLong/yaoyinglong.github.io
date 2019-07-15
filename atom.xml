@@ -5,9 +5,9 @@
   <subtitle>虽奔放不羁，但也自我束缚</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://yaoyinglong.github.io/"/>
+  <link href="wiki.yaoyinglong.me/"/>
   <updated>2019-06-27T09:26:09.588Z</updated>
-  <id>https://yaoyinglong.github.io/</id>
+  <id>wiki.yaoyinglong.me/</id>
   
   <author>
     <name>YaoYingLong</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Linux常用技巧</title>
-    <link href="https://yaoyinglong.github.io/Blog/Linux/Linux%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
-    <id>https://yaoyinglong.github.io/Blog/Linux/Linux常用技巧/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Linux/Linux%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+    <id>wiki.yaoyinglong.me/Blog/Linux/Linux常用技巧/</id>
     <published>2019-06-27T09:26:09.588Z</published>
     <updated>2019-06-27T09:26:09.588Z</updated>
     
@@ -34,17 +34,17 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://yaoyinglong.github.io/categories/Linux/"/>
+      <category term="Linux" scheme="wiki.yaoyinglong.me/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="https://yaoyinglong.github.io/tags/Linux/"/>
+      <category term="Linux" scheme="wiki.yaoyinglong.me/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Arthas诊断工具</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/Arthas%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7/"/>
-    <id>https://yaoyinglong.github.io/Blog/杂记/Arthas诊断工具/</id>
+    <link href="wiki.yaoyinglong.me/Blog/%E6%9D%82%E8%AE%B0/Arthas%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7/"/>
+    <id>wiki.yaoyinglong.me/Blog/杂记/Arthas诊断工具/</id>
     <published>2019-05-31T16:00:00.000Z</published>
     <updated>2019-06-30T10:18:53.419Z</updated>
     
@@ -52,17 +52,17 @@
     
     </summary>
     
-      <category term="杂记" scheme="https://yaoyinglong.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="杂记" scheme="wiki.yaoyinglong.me/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="Arthas" scheme="https://yaoyinglong.github.io/tags/Arthas/"/>
+      <category term="Arthas" scheme="wiki.yaoyinglong.me/tags/Arthas/"/>
     
   </entry>
   
   <entry>
     <title>Hystrix总结</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%A1%86%E6%9E%B6/Spring/Hystrix%E6%80%BB%E7%BB%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/框架/Spring/Hystrix总结/</id>
+    <link href="wiki.yaoyinglong.me/Blog/%E6%A1%86%E6%9E%B6/Spring/Hystrix%E6%80%BB%E7%BB%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/框架/Spring/Hystrix总结/</id>
     <published>2019-05-25T16:00:00.000Z</published>
     <updated>2019-06-30T10:18:53.420Z</updated>
     
@@ -78,19 +78,19 @@
     
     </summary>
     
-      <category term="框架" scheme="https://yaoyinglong.github.io/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="wiki.yaoyinglong.me/categories/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="Spring" scheme="https://yaoyinglong.github.io/categories/%E6%A1%86%E6%9E%B6/Spring/"/>
+      <category term="Spring" scheme="wiki.yaoyinglong.me/categories/%E6%A1%86%E6%9E%B6/Spring/"/>
     
     
-      <category term="Hystrix，限流，熔断，降级" scheme="https://yaoyinglong.github.io/tags/Hystrix%EF%BC%8C%E9%99%90%E6%B5%81%EF%BC%8C%E7%86%94%E6%96%AD%EF%BC%8C%E9%99%8D%E7%BA%A7/"/>
+      <category term="Hystrix，限流，熔断，降级" scheme="wiki.yaoyinglong.me/tags/Hystrix%EF%BC%8C%E9%99%90%E6%B5%81%EF%BC%8C%E7%86%94%E6%96%AD%EF%BC%8C%E9%99%8D%E7%BA%A7/"/>
     
   </entry>
   
   <entry>
     <title>Java8时间及日期</title>
-    <link href="https://yaoyinglong.github.io/Blog/Java/%E5%9F%BA%E7%A1%80/%E6%97%B6%E9%97%B4%E5%8F%8A%E6%97%A5%E6%9C%9F%E6%80%BB%E7%BB%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/Java/基础/时间及日期总结/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Java/%E5%9F%BA%E7%A1%80/%E6%97%B6%E9%97%B4%E5%8F%8A%E6%97%A5%E6%9C%9F%E6%80%BB%E7%BB%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/Java/基础/时间及日期总结/</id>
     <published>2019-05-21T16:00:00.000Z</published>
     <updated>2019-06-30T10:18:53.418Z</updated>
     
@@ -105,19 +105,19 @@
     
     </summary>
     
-      <category term="Java" scheme="https://yaoyinglong.github.io/categories/Java/"/>
+      <category term="Java" scheme="wiki.yaoyinglong.me/categories/Java/"/>
     
-      <category term="基础" scheme="https://yaoyinglong.github.io/categories/Java/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="wiki.yaoyinglong.me/categories/Java/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="Java8" scheme="https://yaoyinglong.github.io/tags/Java8/"/>
+      <category term="Java8" scheme="wiki.yaoyinglong.me/tags/Java8/"/>
     
   </entry>
   
   <entry>
     <title>方法调用</title>
-    <link href="https://yaoyinglong.github.io/Blog/Java/VM/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8/"/>
-    <id>https://yaoyinglong.github.io/Blog/Java/VM/方法调用/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Java/VM/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8/"/>
+    <id>wiki.yaoyinglong.me/Blog/Java/VM/方法调用/</id>
     <published>2019-03-13T16:00:00.000Z</published>
     <updated>2019-07-15T12:32:20.456Z</updated>
     
@@ -132,19 +132,19 @@
     
     </summary>
     
-      <category term="Java" scheme="https://yaoyinglong.github.io/categories/Java/"/>
+      <category term="Java" scheme="wiki.yaoyinglong.me/categories/Java/"/>
     
-      <category term="VM" scheme="https://yaoyinglong.github.io/categories/Java/VM/"/>
+      <category term="VM" scheme="wiki.yaoyinglong.me/categories/Java/VM/"/>
     
     
-      <category term="JVM" scheme="https://yaoyinglong.github.io/tags/JVM/"/>
+      <category term="JVM" scheme="wiki.yaoyinglong.me/tags/JVM/"/>
     
   </entry>
   
   <entry>
     <title>运行时栈帧结构</title>
-    <link href="https://yaoyinglong.github.io/Blog/Java/VM/%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84/"/>
-    <id>https://yaoyinglong.github.io/Blog/Java/VM/运行时栈帧结构/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Java/VM/%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84/"/>
+    <id>wiki.yaoyinglong.me/Blog/Java/VM/运行时栈帧结构/</id>
     <published>2019-03-10T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.586Z</updated>
     
@@ -159,19 +159,19 @@
     
     </summary>
     
-      <category term="Java" scheme="https://yaoyinglong.github.io/categories/Java/"/>
+      <category term="Java" scheme="wiki.yaoyinglong.me/categories/Java/"/>
     
-      <category term="VM" scheme="https://yaoyinglong.github.io/categories/Java/VM/"/>
+      <category term="VM" scheme="wiki.yaoyinglong.me/categories/Java/VM/"/>
     
     
-      <category term="JVM，栈帧" scheme="https://yaoyinglong.github.io/tags/JVM%EF%BC%8C%E6%A0%88%E5%B8%A7/"/>
+      <category term="JVM，栈帧" scheme="wiki.yaoyinglong.me/tags/JVM%EF%BC%8C%E6%A0%88%E5%B8%A7/"/>
     
   </entry>
   
   <entry>
     <title>Maven插件编写</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven插件编写/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven插件编写/</id>
     <published>2019-03-02T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.591Z</updated>
     
@@ -187,17 +187,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>Maven属性</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B1%9E%E6%80%A7/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven属性/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E5%B1%9E%E6%80%A7/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven属性/</id>
     <published>2019-02-24T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.589Z</updated>
     
@@ -213,17 +213,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>IT测试总结</title>
-    <link href="https://yaoyinglong.github.io/Blog/Test/IT%E6%B5%8B%E8%AF%95%E6%80%BB%E7%BB%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/Test/IT测试总结/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Test/IT%E6%B5%8B%E8%AF%95%E6%80%BB%E7%BB%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/Test/IT测试总结/</id>
     <published>2019-02-23T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.593Z</updated>
     
@@ -240,17 +240,17 @@
     
     </summary>
     
-      <category term="Test" scheme="https://yaoyinglong.github.io/categories/Test/"/>
+      <category term="Test" scheme="wiki.yaoyinglong.me/categories/Test/"/>
     
     
-      <category term="Test" scheme="https://yaoyinglong.github.io/tags/Test/"/>
+      <category term="Test" scheme="wiki.yaoyinglong.me/tags/Test/"/>
     
   </entry>
   
   <entry>
     <title>UT测试总结</title>
-    <link href="https://yaoyinglong.github.io/Blog/Test/UT%E6%B5%8B%E8%AF%95%E6%80%BB%E7%BB%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/Test/UT测试总结/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Test/UT%E6%B5%8B%E8%AF%95%E6%80%BB%E7%BB%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/Test/UT测试总结/</id>
     <published>2019-02-23T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.594Z</updated>
     
@@ -266,17 +266,17 @@
     
     </summary>
     
-      <category term="Test" scheme="https://yaoyinglong.github.io/categories/Test/"/>
+      <category term="Test" scheme="wiki.yaoyinglong.me/categories/Test/"/>
     
     
-      <category term="Test" scheme="https://yaoyinglong.github.io/tags/Test/"/>
+      <category term="Test" scheme="wiki.yaoyinglong.me/tags/Test/"/>
     
   </entry>
   
   <entry>
     <title>SonarQube配置总结</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/SonarQube%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/杂记/SonarQube配置总结/</id>
+    <link href="wiki.yaoyinglong.me/Blog/%E6%9D%82%E8%AE%B0/SonarQube%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/杂记/SonarQube配置总结/</id>
     <published>2019-02-19T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.597Z</updated>
     
@@ -292,19 +292,19 @@
     
     </summary>
     
-      <category term="杂记" scheme="https://yaoyinglong.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="杂记" scheme="wiki.yaoyinglong.me/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="SonarQube" scheme="https://yaoyinglong.github.io/tags/SonarQube/"/>
+      <category term="SonarQube" scheme="wiki.yaoyinglong.me/tags/SonarQube/"/>
     
-      <category term="jacoco" scheme="https://yaoyinglong.github.io/tags/jacoco/"/>
+      <category term="jacoco" scheme="wiki.yaoyinglong.me/tags/jacoco/"/>
     
   </entry>
   
   <entry>
     <title>Maven聚合与继承</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E8%81%9A%E5%90%88%E4%B8%8E%E7%BB%A7%E6%89%BF/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven聚合与继承/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E8%81%9A%E5%90%88%E4%B8%8E%E7%BB%A7%E6%89%BF/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven聚合与继承/</id>
     <published>2019-02-18T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.592Z</updated>
     
@@ -319,17 +319,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>Maven插件基础</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E6%8F%92%E4%BB%B6%E5%9F%BA%E7%A1%80/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven插件基础/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E6%8F%92%E4%BB%B6%E5%9F%BA%E7%A1%80/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven插件基础/</id>
     <published>2019-01-02T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.591Z</updated>
     
@@ -344,17 +344,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>Maven仓库</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E4%BB%93%E5%BA%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven仓库/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E4%BB%93%E5%BA%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven仓库/</id>
     <published>2018-12-31T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.589Z</updated>
     
@@ -369,17 +369,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>Maven生命周期</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven生命周期/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven生命周期/</id>
     <published>2018-12-31T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.592Z</updated>
     
@@ -394,17 +394,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>XSD实用总结</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/XSD%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>https://yaoyinglong.github.io/Blog/杂记/XSD使用总结/</id>
+    <link href="wiki.yaoyinglong.me/Blog/%E6%9D%82%E8%AE%B0/XSD%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
+    <id>wiki.yaoyinglong.me/Blog/杂记/XSD使用总结/</id>
     <published>2018-12-31T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.598Z</updated>
     
@@ -419,17 +419,17 @@
     
     </summary>
     
-      <category term="杂记" scheme="https://yaoyinglong.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="杂记" scheme="wiki.yaoyinglong.me/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="XSD" scheme="https://yaoyinglong.github.io/tags/XSD/"/>
+      <category term="XSD" scheme="wiki.yaoyinglong.me/tags/XSD/"/>
     
   </entry>
   
   <entry>
     <title>Maven常用工具</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven常用工具/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven常用工具/</id>
     <published>2018-12-07T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.590Z</updated>
     
@@ -444,17 +444,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>Maven基础</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E5%9F%BA%E7%A1%80/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven基础/</id>
+    <link href="wiki.yaoyinglong.me/Blog/Maven/Maven%E5%9F%BA%E7%A1%80/"/>
+    <id>wiki.yaoyinglong.me/Blog/Maven/Maven基础/</id>
     <published>2018-12-07T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.589Z</updated>
     
@@ -469,17 +469,17 @@
     
     </summary>
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/categories/Maven/"/>
     
     
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="wiki.yaoyinglong.me/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>IDEA常用插件</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/IDEA%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6/"/>
-    <id>https://yaoyinglong.github.io/Blog/杂记/IDEA常用插件/</id>
+    <link href="wiki.yaoyinglong.me/Blog/%E6%9D%82%E8%AE%B0/IDEA%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6/"/>
+    <id>wiki.yaoyinglong.me/Blog/杂记/IDEA常用插件/</id>
     <published>2018-12-07T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.597Z</updated>
     
@@ -494,17 +494,17 @@
     
     </summary>
     
-      <category term="杂记" scheme="https://yaoyinglong.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="杂记" scheme="wiki.yaoyinglong.me/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="IDEA" scheme="https://yaoyinglong.github.io/tags/IDEA/"/>
+      <category term="IDEA" scheme="wiki.yaoyinglong.me/tags/IDEA/"/>
     
   </entry>
   
   <entry>
     <title>Redis分布式锁实现</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%A1%86%E6%9E%B6/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://yaoyinglong.github.io/Blog/框架/Redis分布式锁实现/</id>
+    <link href="wiki.yaoyinglong.me/Blog/%E6%A1%86%E6%9E%B6/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0/"/>
+    <id>wiki.yaoyinglong.me/Blog/框架/Redis分布式锁实现/</id>
     <published>2018-11-30T16:00:00.000Z</published>
     <updated>2019-06-27T09:26:09.599Z</updated>
     
@@ -519,10 +519,10 @@
     
     </summary>
     
-      <category term="框架" scheme="https://yaoyinglong.github.io/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="wiki.yaoyinglong.me/categories/%E6%A1%86%E6%9E%B6/"/>
     
     
-      <category term="分布式锁" scheme="https://yaoyinglong.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"/>
+      <category term="分布式锁" scheme="wiki.yaoyinglong.me/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"/>
     
   </entry>
   

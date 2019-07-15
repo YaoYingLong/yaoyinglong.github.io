@@ -13,16 +13,16 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对象是否存活">
-<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/对象是否存活/index.html">
+<meta property="og:url" content="wiki.yaoyinglong.me/Blog/Java/VM/对象是否存活/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。 了解GC和内存非配的目的是：当需要排查各种内存溢出、内存泄露问题时，当垃圾收集成为系统达到更高并发量的瓶颈时，为了更好的对这些自动化技术实施必要的监控和调节。 程序计数器、虚拟机栈、本地方法栈这三个区域是线程私有的方法结束或线程结束内存就跟着回收了；但在堆和方法区中，一个接口中的多个实现类">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://yaoyinglong.github.io/images/可达性分析算法判断对象是否可回收.png">
+<meta property="og:image" content="wiki.yaoyinglong.me/images/可达性分析算法判断对象是否可回收.png">
 <meta property="og:updated_time" content="2019-06-27T09:26:09.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象是否存活">
 <meta name="twitter:description" content="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。 了解GC和内存非配的目的是：当需要排查各种内存溢出、内存泄露问题时，当垃圾收集成为系统达到更高并发量的瓶颈时，为了更好的对这些自动化技术实施必要的监控和调节。 程序计数器、虚拟机栈、本地方法栈这三个区域是线程私有的方法结束或线程结束内存就跟着回收了；但在堆和方法区中，一个接口中的多个实现类">
-<meta name="twitter:image" content="https://yaoyinglong.github.io/images/可达性分析算法判断对象是否可回收.png">
+<meta name="twitter:image" content="wiki.yaoyinglong.me/images/可达性分析算法判断对象是否可回收.png">
     
 
     
