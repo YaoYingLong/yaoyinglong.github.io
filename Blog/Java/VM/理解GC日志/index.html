@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>理解GC日志 | YingLong</title>
+    
+    
+        <meta name="keywords" content="JVM">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="阅读GC日志是处理Java虚拟机内存问题的基础技能，每一种收集器的日志形式都是由他们自身的实现所决定的，所以每个收集器的日志格式都可以不一样，但虚拟机设计者为了方便用户阅读，将各个收集器的日志都维持一定的共性。下面是一段GC日志：1234567[GC [PSYoungGen: 23552K-&amp;gt;3581K(">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解GC日志">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/理解GC日志/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="阅读GC日志是处理Java虚拟机内存问题的基础技能，每一种收集器的日志形式都是由他们自身的实现所决定的，所以每个收集器的日志格式都可以不一样，但虚拟机设计者为了方便用户阅读，将各个收集器的日志都维持一定的共性。下面是一段GC日志：1234567[GC [PSYoungGen: 23552K-&amp;gt;3581K(27136K)] 23552K-&amp;gt;16249K(88576K), 0.018561">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-27T09:26:09.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解GC日志">
+<meta name="twitter:description" content="阅读GC日志是处理Java虚拟机内存问题的基础技能，每一种收集器的日志形式都是由他们自身的实现所决定的，所以每个收集器的日志格式都可以不一样，但虚拟机设计者为了方便用户阅读，将各个收集器的日志都维持一定的共性。下面是一段GC日志：1234567[GC [PSYoungGen: 23552K-&amp;gt;3581K(27136K)] 23552K-&amp;gt;16249K(88576K), 0.018561">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>  <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>  <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>  <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>  <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>  <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>  <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>  <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>  <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>  <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>  <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>  <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>  <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>  <li class="file active"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>  <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>  <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>  <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>  <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>  <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>  <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>  <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>  <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>  <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>  <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>  <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>  <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>  <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>  <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>  <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/杂记/IDEA常用插件/">IDEA常用插件</a></li>  <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>  <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>  <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>  <li class="file"><a href="/Blog/杂记/Arthas诊断工具/">Arthas诊断工具</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>  <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>  <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>  <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/VM/理解GC日志" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/VM/">VM</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Java/VM/理解GC日志/">
+            <time datetime="2018-01-16T16:00:00.000Z" itemprop="datePublished">2018-01-17</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            理解GC日志
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>阅读GC日志是处理Java虚拟机内存问题的基础技能，每一种收集器的日志形式都是由他们自身的实现所决定的，所以每个收集器的日志格式都可以不一样，但虚拟机设计者为了方便用户阅读，将各个收集器的日志都维持一定的共性。下面是一段GC日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[GC [PSYoungGen: 23552K-&gt;3581K(27136K)] 23552K-&gt;16249K(88576K), 0.0185611 secs] [Times: user=0.08 sys=0.02, real=0.02 secs] </span><br><span class="line">[GC [PSYoungGen: 27133K-&gt;3560K(27136K)] 39801K-&gt;31030K(88576K), 0.0323523 secs] [Times: user=0.11 sys=0.01, real=0.03 secs] </span><br><span class="line">[GC [PSYoungGen: 27112K-&gt;3568K(27136K)] 54582K-&gt;54585K(88576K), 0.0363496 secs] [Times: user=0.16 sys=0.02, real=0.04 secs] </span><br><span class="line">[Full GC [PSYoungGen: 3568K-&gt;0K(27136K)] [ParOldGen: 51017K-&gt;47268K(61440K)] 54585K-&gt;47268K(88576K) [PSPermGen: 3169K-&gt;3168K(21504K)], 0.5726540 secs] [Times: user=1.78 sys=0.01, real=0.57 secs] </span><br><span class="line">[Full GC [PSYoungGen: 23552K-&gt;0K(27136K)] [ParOldGen: 47268K-&gt;60136K(61440K)] 70820K-&gt;60136K(88576K) [PSPermGen: 3168K-&gt;3168K(21504K)], 0.3987444 secs] [Times: user=1.41 sys=0.02, real=0.40 secs] </span><br><span class="line">[Full GC [PSYoungGen: 20624K-&gt;19567K(27136K)] [ParOldGen: 60136K-&gt;61132K(61440K)] 80761K-&gt;80700K(88576K) [PSPermGen: 3168K-&gt;3168K(21504K)], 0.8462723 secs] [Times: user=3.38 sys=0.05, real=0.85 secs] </span><br><span class="line">[Full GC [PSYoungGen: 19567K-&gt;19567K(27136K)] [ParOldGen: 61132K-&gt;61116K(61440K)] 80700K-&gt;80684K(88576K) [PSPermGen: 3168K-&gt;3168K(21504K)], 0.4721533 secs] [Times: user=2.83 sys=0.03, real=0.47 secs]</span><br></pre></td></tr></table></figure></p>
+<p>GC日志开头的<strong><code>[GC</code></strong>和<strong><code>[Full GC</code></strong>说明这次垃圾收集的<strong>停顿类型</strong>，而<strong>不是用来区分新生代GC还是老年代GC</strong>。如果是调用<strong><code>System.gc()</code></strong>方法所触发的收集，这里就将显示<strong><code>[Full GC（System）</code></strong>。</p>
+<p>接下来的<strong><code>[PSYoungGen</code></strong>、<strong><code>[ParOldGen</code></strong>、<strong><code>[PSPermGen</code></strong>表是<strong>GC发生的区域</strong>，<strong>区域名称与使用的GC收集器是密切相关的</strong>。</p>
+<p>后面<strong>方括号内</strong>的<strong><code>23552K-&gt;3581K(27136K)</code></strong>表示<strong>GC前该内存区域已使用容量-&gt;GC后该内存区域已使用容量（该内存区域总容量）</strong></p>
+<p><strong>方括号外</strong>的<strong><code>23552K-&gt;16249K(88576K)</code></strong>表示<strong>GC前Java堆已使用容量-&gt;GC后Java堆已使用容量（Java堆总容量）</strong></p>
+<p><strong><code>0.0185611 secs</code></strong>表示该内存区域<strong>GC所占用的时间</strong>，单位<strong>秒</strong>。<strong><code>[Times: user=0.08 sys=0.02, real=0.02 secs]</code></strong>更具体的时间数据，这里的user、sys和real与<strong>Linux的time命令</strong>所输出的时间含义一致，分别代表<strong>CPU时间、内核态消耗的CPU事件和操作从开始到结束所经过的墙钟时间</strong>。</p>
+<h3 id="Serial-amp-Serial-Old-GC日志"><a href="#Serial-amp-Serial-Old-GC日志" class="headerlink" title="Serial &amp; Serial Old GC日志"></a>Serial &amp; Serial Old GC日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[GC[DefNew: 24234K-&gt;3072K(27648K), 0.0279728 secs] 24234K-&gt;16411K(89088K), 0.0280186 secs] [Times: user=0.03 sys=0.00, real=0.03 secs] </span><br><span class="line">[GC[DefNew: 27648K-&gt;3072K(27648K), 0.0348831 secs] 40987K-&gt;35255K(89088K), 0.0349111 secs] [Times: user=0.03 sys=0.00, real=0.04 secs] </span><br><span class="line">[GC[DefNew: 27648K-&gt;3072K(27648K), 0.0420056 secs] 59831K-&gt;59830K(89088K), 0.0420333 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] </span><br><span class="line">[GC[DefNew: 27648K-&gt;27648K(27648K), 0.0000186 secs][Tenured: 56758K-&gt;61440K(61440K), 0.1322486 secs] 84406K-&gt;63429K(89088K), [Perm : 3169K-&gt;3169K(21248K)], 0.1323137 secs] [Times: user=0.14 sys=0.00, real=0.13 secs] </span><br><span class="line">[Full GC[Tenured: 61440K-&gt;61440K(61440K), 0.1457481 secs] 80851K-&gt;80700K(89088K), [Perm : 3169K-&gt;3169K(21248K)], 0.1457820 secs] [Times: user=0.16 sys=0.00, real=0.14 secs] </span><br><span class="line">[Full GC[Tenured: 61440K-&gt;61440K(61440K), 0.1661660 secs] 80700K-&gt;80684K(89088K), [Perm : 3169K-&gt;3168K(21248K)], 0.1661913 secs] [Times: user=0.16 sys=0.00, real=0.17 secs]</span><br></pre></td></tr></table></figure>
+<p><strong><code>[DefNew</code></strong>、<strong><code>[Tenured</code></strong>、<strong><code>[Perm</code></strong>分别表示<strong>年轻代、老年代和永久代</strong>。</p>
+<h3 id="ParNew-amp-serial-Old-GC日志"><a href="#ParNew-amp-serial-Old-GC日志" class="headerlink" title="ParNew &amp; serial Old GC日志"></a>ParNew &amp; serial Old GC日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[GC[ParNew: 24234K-&gt;3072K(27648K), 0.0240967 secs] 24234K-&gt;16475K(89088K), 0.0241453 secs] [Times: user=0.11 sys=0.00, real=0.02 secs] </span><br><span class="line">[GC[ParNew: 27648K-&gt;3072K(27648K), 0.0361463 secs] 41051K-&gt;35736K(89088K), 0.0362102 secs] [Times: user=0.19 sys=0.00, real=0.04 secs] </span><br><span class="line">[GC[ParNew: 27648K-&gt;3072K(27648K), 0.0369859 secs] 60312K-&gt;60003K(89088K), 0.0370325 secs] [Times: user=0.23 sys=0.00, real=0.04 secs] </span><br><span class="line">[GC[ParNew: 27648K-&gt;27648K(27648K), 0.0000158 secs][Tenured: 56931K-&gt;61440K(61440K), 0.1430511 secs] 84579K-&gt;63429K(89088K), [Perm : 3169K-&gt;3169K(21248K)], 0.1431067 secs] [Times: user=0.14 sys=0.00, real=0.14 secs] </span><br><span class="line">[Full GC[Tenured: 61440K-&gt;61440K(61440K), 0.1444908 secs] 80851K-&gt;80700K(89088K), [Perm : 3169K-&gt;3169K(21248K)], 0.1445358 secs] [Times: user=0.14 sys=0.00, real=0.14 secs] </span><br><span class="line">[Full GC[Tenured: 61440K-&gt;61440K(61440K), 0.1710500 secs] 80700K-&gt;80684K(89088K), [Perm : 3169K-&gt;3168K(21248K)], 0.1710760 secs] [Times: user=0.17 sys=0.00, real=0.17 secs]</span><br></pre></td></tr></table></figure>
+<p><strong><code>[ParNew</code></strong>、<strong><code>[Tenured</code></strong>、<strong><code>[Perm</code></strong>分别表示<strong>年轻代、老年代和永久代</strong>。</p>
+<h3 id="ParNew-amp-CMS（serial-old为替补）GC日志"><a href="#ParNew-amp-CMS（serial-old为替补）GC日志" class="headerlink" title="ParNew &amp; CMS（serial old为替补）GC日志"></a>ParNew &amp; CMS（serial old为替补）GC日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[GC[ParNew: 23938K-&gt;3072K(27648K), 0.0849733 secs] 23938K-&gt;21528K(89088K), 0.0850416 secs] [Times: user=0.53 sys=0.02, real=0.09 secs] </span><br><span class="line">[GC[ParNew: 27648K-&gt;3072K(27648K), 0.0363515 secs] 46104K-&gt;45931K(89088K), 0.0363863 secs] [Times: user=0.22 sys=0.05, real=0.04 secs] </span><br><span class="line">[GC [1 CMS-initial-mark: 42859K(61440K)] 46267K(89088K), 0.0020835 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </span><br><span class="line">[GC[ParNew: 27648K-&gt;27648K(27648K), 0.0000146 secs][CMS[CMS-concurrent-mark: 0.132/0.133 secs] [Times: user=0.17 sys=0.06, real=0.13 secs] </span><br><span class="line"> (concurrent mode failure): 42859K-&gt;61439K(61440K), 0.2594182 secs] 70507K-&gt;66264K(89088K), [CMS Perm : 3170K-&gt;3169K(21248K)], 0.2594711 secs] [Times: user=0.31 sys=0.06, real=0.26 secs] </span><br><span class="line">[Full GC[CMS: 61439K-&gt;61439K(61440K), 0.1218246 secs] 71016K-&gt;70720K(89088K), [CMS Perm : 3169K-&gt;3169K(21248K)], 0.1218598 secs] [Times: user=0.13 sys=0.00, real=0.12 secs] </span><br><span class="line">[Full GC[CMS: 61439K-&gt;61440K(61440K), 0.1510773 secs] 70720K-&gt;70709K(89088K), [CMS Perm : 3169K-&gt;3169K(21248K)], 0.1511120 secs] [Times: user=0.14 sys=0.00, real=0.15 secs]</span><br></pre></td></tr></table></figure>
+<p><strong><code>[ParNew</code></strong>、<strong><code>[CMS</code></strong>、<strong><code>[Perm</code></strong>分别表示<strong>年轻代、老年代和永久代</strong>。其中<strong><code>(concurrent mode failure)</code></strong>表示CMS收集器无法处理浮动垃圾，出现了<strong><a href="../垃圾收集器#CMS收集器">Concurrent Mode Failure</a></strong>失败而导致另一次<strong>Full GC</strong>产生，这时虚拟机就会启动<strong>后备预案</strong>，临时使用<strong>Serial Old</strong>收集器来重新进行<strong>老年代</strong>的垃圾收集。</p>
+<h3 id="Parallel-Scavenge-amp-Parallel-Old-GC日志"><a href="#Parallel-Scavenge-amp-Parallel-Old-GC日志" class="headerlink" title="Parallel Scavenge &amp; Parallel Old GC日志"></a>Parallel Scavenge &amp; Parallel Old GC日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[GC [PSYoungGen: 23552K-&gt;3581K(27136K)] 23552K-&gt;16249K(88576K), 0.0185611 secs] [Times: user=0.08 sys=0.02, real=0.02 secs] </span><br><span class="line">[GC [PSYoungGen: 27133K-&gt;3560K(27136K)] 39801K-&gt;31030K(88576K), 0.0323523 secs] [Times: user=0.11 sys=0.01, real=0.03 secs] </span><br><span class="line">[GC [PSYoungGen: 27112K-&gt;3568K(27136K)] 54582K-&gt;54585K(88576K), 0.0363496 secs] [Times: user=0.16 sys=0.02, real=0.04 secs] </span><br><span class="line">[Full GC [PSYoungGen: 3568K-&gt;0K(27136K)] [ParOldGen: 51017K-&gt;47268K(61440K)] 54585K-&gt;47268K(88576K) [PSPermGen: 3169K-&gt;3168K(21504K)], 0.5726540 secs] [Times: user=1.78 sys=0.01, real=0.57 secs] </span><br><span class="line">[Full GC [PSYoungGen: 23552K-&gt;0K(27136K)] [ParOldGen: 47268K-&gt;60136K(61440K)] 70820K-&gt;60136K(88576K) [PSPermGen: 3168K-&gt;3168K(21504K)], 0.3987444 secs] [Times: user=1.41 sys=0.02, real=0.40 secs] </span><br><span class="line">[Full GC [PSYoungGen: 20624K-&gt;19567K(27136K)] [ParOldGen: 60136K-&gt;61132K(61440K)] 80761K-&gt;80700K(88576K) [PSPermGen: 3168K-&gt;3168K(21504K)], 0.8462723 secs] [Times: user=3.38 sys=0.05, real=0.85 secs] </span><br><span class="line">[Full GC [PSYoungGen: 19567K-&gt;19567K(27136K)] [ParOldGen: 61132K-&gt;61116K(61440K)] 80700K-&gt;80684K(88576K) [PSPermGen: 3168K-&gt;3168K(21504K)], 0.4721533 secs] [Times: user=2.83 sys=0.03, real=0.47 secs]</span><br></pre></td></tr></table></figure>
+<p><strong><code>[PSYoungGen</code></strong>、<strong><code>[ParOldGen</code></strong>、<strong><code>[PSPermGen</code></strong>分别表示<strong>年轻代、老年代和永久代</strong>。</p>
+<h3 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[GC pause (young) (initial-mark), 0.0089815 secs]</span><br><span class="line">   [Parallel Time: 8.7 ms, GC Workers: 8]</span><br><span class="line">      [GC Worker Start (ms): Min: 1992.2, Avg: 1992.3, Max: 1992.3, Diff: 0.1]</span><br><span class="line">      [Ext Root Scanning (ms): Min: 0.3, Avg: 0.3, Max: 0.3, Diff: 0.1, Sum: 2.5]</span><br><span class="line">      [Update RS (ms): Min: 2.2, Avg: 2.8, Max: 3.8, Diff: 1.6, Sum: 22.8]</span><br><span class="line">         [Processed Buffers: Min: 4, Avg: 4.9, Max: 6, Diff: 2, Sum: 39]</span><br><span class="line">      [Scan RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</span><br><span class="line">      [Object Copy (ms): Min: 4.5, Avg: 5.4, Max: 6.0, Diff: 1.6, Sum: 43.0]</span><br><span class="line">      [Termination (ms): Min: 0.0, Avg: 0.0, Max: 0.1, Diff: 0.1, Sum: 0.3]</span><br><span class="line">      [GC Worker Other (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]</span><br><span class="line">      [GC Worker Total (ms): Min: 8.6, Avg: 8.6, Max: 8.6, Diff: 0.1, Sum: 68.7]</span><br><span class="line">      [GC Worker End (ms): Min: 2000.8, Avg: 2000.8, Max: 2000.8, Diff: 0.0]</span><br><span class="line">   [Code Root Fixup: 0.0 ms]</span><br><span class="line">   [Clear CT: 0.2 ms]</span><br><span class="line">   [Other: 0.1 ms]</span><br><span class="line">      [Choose CSet: 0.0 ms]</span><br><span class="line">      [Ref Proc: 0.1 ms]</span><br><span class="line">      [Ref Enq: 0.0 ms]</span><br><span class="line">      [Free CSet: 0.0 ms]</span><br><span class="line">   [Eden: 1024.0K(3072.0K)-&gt;0.0B(3072.0K) Survivors: 1024.0K-&gt;1024.0K Heap: 79.0M(90.0M)-&gt;81.8M(90.0M)]</span><br><span class="line"> [Times: user=0.13 sys=0.00, real=0.01 secs] </span><br><span class="line">[GC concurrent-root-region-scan-start]</span><br><span class="line">[GC pause (young)[GC concurrent-root-region-scan-end, 0.0001366 secs]</span><br><span class="line">[GC concurrent-mark-start], 0.0030254 secs]</span><br><span class="line">   [Root Region Scan Waiting: 0.1 ms]</span><br><span class="line">   [Parallel Time: 2.7 ms, GC Workers: 8]</span><br><span class="line">      [GC Worker Start (ms): Min: 2001.5, Avg: 2001.5, Max: 2001.5, Diff: 0.0]</span><br><span class="line">      [Ext Root Scanning (ms): Min: 0.3, Avg: 0.3, Max: 0.4, Diff: 0.1, Sum: 2.7]</span><br><span class="line">      [SATB Filtering (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</span><br><span class="line">      [Update RS (ms): Min: 1.1, Avg: 1.3, Max: 1.9, Diff: 0.8, Sum: 10.6]</span><br><span class="line">         [Processed Buffers: Min: 2, Avg: 2.8, Max: 4, Diff: 2, Sum: 22]</span><br><span class="line">      [Scan RS (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.0]</span><br><span class="line">      [Object Copy (ms): Min: 0.3, Avg: 0.8, Max: 1.1, Diff: 0.8, Sum: 6.7]</span><br><span class="line">      [Termination (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]</span><br><span class="line">      [GC Worker Other (ms): Min: 0.0, Avg: 0.0, Max: 0.0, Diff: 0.0, Sum: 0.1]</span><br><span class="line">      [GC Worker Total (ms): Min: 2.5, Avg: 2.5, Max: 2.6, Diff: 0.0, Sum: 20.3]</span><br><span class="line">      [GC Worker End (ms): Min: 2004.0, Avg: 2004.0, Max: 2004.0, Diff: 0.0]</span><br><span class="line">   [Code Root Fixup: 0.0 ms]</span><br><span class="line">   [Clear CT: 0.1 ms]</span><br><span class="line">   [Other: 0.2 ms]</span><br><span class="line">      [Choose CSet: 0.0 ms]</span><br><span class="line">      [Ref Proc: 0.1 ms]</span><br><span class="line">      [Ref Enq: 0.0 ms]</span><br><span class="line">      [Free CSet: 0.0 ms]</span><br><span class="line">   [Eden: 0.0B(3072.0K)-&gt;0.0B(4096.0K) Survivors: 1024.0K-&gt;0.0B Heap: 81.8M(90.0M)-&gt;81.6M(90.0M)]</span><br><span class="line"> [Times: user=0.00 sys=0.00, real=0.00 secs] </span><br><span class="line">[Full GC 81M-&gt;78M(90M), 0.1786909 secs]</span><br><span class="line">   [Eden: 0.0B(4096.0K)-&gt;0.0B(4096.0K) Survivors: 0.0B-&gt;0.0B Heap: 81.6M(90.0M)-&gt;78.8M(90.0M)]</span><br><span class="line"> [Times: user=0.28 sys=0.00, real=0.18 secs] </span><br><span class="line">[Full GC 78M-&gt;78M(90M), 0.1693387 secs]</span><br><span class="line">   [Eden: 0.0B(4096.0K)-&gt;0.0B(4096.0K) Survivors: 0.0B-&gt;0.0B Heap: 78.8M(90.0M)-&gt;78.8M(90.0M)]</span><br><span class="line"> [Times: user=0.17 sys=0.00, real=0.17 secs]</span><br></pre></td></tr></table></figure>
+<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong><code>UseSerialGC</code></strong></td>
+<td style="text-align:center">使用<strong><code>Serial &amp; Serial Old</code></strong>收集器（client模式默认值）</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>UseParNewGC</code></strong></td>
+<td style="text-align:center">使用<strong><code>ParNew &amp; Serial Old</code></strong>收集器（不推荐）</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>UseConcMarkSweepGC</code></strong></td>
+<td style="text-align:center">使用<strong><code>ParNew &amp; CMS（Serial Old为替补）</code></strong>收集器</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>UseParallelGC</code></strong></td>
+<td style="text-align:center">使用<strong><code>Parallel Scavenge &amp; Parallel Old</code></strong>收集器（Server模式默认值）</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>UseParallelOldGC</code></strong></td>
+<td style="text-align:center">在年老代使用<strong><code>Parallel Old</code></strong>收集器</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>UseG1GC</code></strong></td>
+<td style="text-align:center">使用<strong><code>G1</code></strong>收集器</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Maven/Maven常用/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Maven常用
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Java/VM/内存非配与回收策略/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">内存分配与回收策略</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2019 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Maven插件基础 | YingLong</title>
+    
+    
+        <meta name="keywords" content="Maven">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Maven核心仅仅定义了抽象的生命周期，具体任务交给插件来完成，插件以独立的构件形式存在，Maven核心分发包不到3M大小，Maven会在需要时下载并使用插件。如maven-dependency-plugin能分析项目依赖，找出潜在无用依赖，列出项目依赖树，分析依赖来源等 生命周期的阶段与插件的目标相互绑定，来完成某个">
+<meta name="keywords" content="Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven插件基础">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Maven/Maven插件基础/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="Maven核心仅仅定义了抽象的生命周期，具体任务交给插件来完成，插件以独立的构件形式存在，Maven核心分发包不到3M大小，Maven会在需要时下载并使用插件。如maven-dependency-plugin能分析项目依赖，找出潜在无用依赖，列出项目依赖树，分析依赖来源等 生命周期的阶段与插件的目标相互绑定，来完成某个具体的构建任务，例如项目编译任务对应了default生命周期的compile阶段">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-27T09:26:09.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven插件基础">
+<meta name="twitter:description" content="Maven核心仅仅定义了抽象的生命周期，具体任务交给插件来完成，插件以独立的构件形式存在，Maven核心分发包不到3M大小，Maven会在需要时下载并使用插件。如maven-dependency-plugin能分析项目依赖，找出潜在无用依赖，列出项目依赖树，分析依赖来源等 生命周期的阶段与插件的目标相互绑定，来完成某个具体的构建任务，例如项目编译任务对应了default生命周期的compile阶段">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>  <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>  <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>  <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>  <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>  <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>  <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>  <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>  <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>  <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>  <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>  <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>  <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>  <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>  <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>  <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>  <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>  <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>  <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>  <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>  <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>  <li class="file active"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>  <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>  <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>  <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>  <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>  <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>  <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>  <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>  <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/杂记/IDEA常用插件/">IDEA常用插件</a></li>  <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>  <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>  <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>  <li class="file"><a href="/Blog/杂记/Arthas诊断工具/">Arthas诊断工具</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>  <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>  <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>  <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Maven/Maven插件基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Maven/">Maven</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Maven/">Maven</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Maven/Maven插件基础/">
+            <time datetime="2019-01-02T16:00:00.000Z" itemprop="datePublished">2019-01-03</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Maven插件基础
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>Maven核心<strong>仅仅定义了抽象的生命周期</strong>，<strong>具体任务交给插件来完成</strong>，插件以独立的构件形式存在，Maven核心分发包<strong>不到<code>3M</code></strong>大小，Maven会在需要时下载并使用插件。如<strong><code>maven-dependency-plugin</code></strong>能分析项目依赖，找出潜在无用依赖，列出项目依赖树，分析依赖来源等</p>
+<p><strong>生命周期的阶段与插件的目标相互绑定</strong>，来完成某个具体的构建任务，例如项目<strong>编译任务</strong>对应了<strong><code>default</code>生命周期的<code>compile</code>阶段</strong>，而<strong><code>maven-compiler-plugin</code></strong>插件的<strong><code>compile</code>目标</strong>能完成该任务，将其绑定能实现项目编译目的</p>
+<p>插件的每个<strong>目标</strong>都对应一个<strong>功能</strong>，如<strong><code>dependency:analyze</code></strong>、<strong><code>dependency:tree</code></strong>、<strong><code>dependency:list</code></strong>，<strong>冒号前面是插件前缀</strong>，<strong>冒号后面是插件目标</strong></p>
+<h3 id="插件绑定"><a href="#插件绑定" class="headerlink" title="插件绑定"></a>插件绑定</h3><p>Maven核心<strong>默认</strong>为一些主要的生命周期阶段<strong>内置绑定</strong>了很多插件目标，当调用生命周期阶段时，对应的插件目标就会执行相应的任务。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">生命周期阶段</th>
+<th style="text-align:center">插件目标</th>
+<th style="text-align:center">执行任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong><code>pre-clean</code></strong></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>clean</code></strong></td>
+<td style="text-align:center"><strong><code>maven-clean-plugin:clean</code></strong></td>
+<td style="text-align:center">删除项目输出目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>post-clean</code></strong></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>pre-site</code></strong></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>site</code></strong></td>
+<td style="text-align:center"><strong><code>maven-site-plugin:site</code></strong></td>
+<td style="text-align:center">生成项目站点</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>post-site</code></strong></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>site-deploy</code></strong></td>
+<td style="text-align:center"><strong><code>maven-site-plugin:deploy</code></strong></td>
+<td style="text-align:center">将项目站点部署到远程服务器</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>pro-resources</code></strong></td>
+<td style="text-align:center"><strong><code>maven-resources-plugin:resources</code></strong></td>
+<td style="text-align:center">复制主资源文件至主输出目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>compile</code></strong></td>
+<td style="text-align:center"><strong><code>maven-compiler-plugin:compile</code></strong></td>
+<td style="text-align:center">编译主代码至主输出目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>process-test-resources</code></strong></td>
+<td style="text-align:center"><strong><code>maven-resources-plugin:testResources</code></strong></td>
+<td style="text-align:center">复制测试资源文件至测试输出目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>test-compile</code></strong></td>
+<td style="text-align:center"><strong><code>maven-compiler-plugin:testCompile</code></strong></td>
+<td style="text-align:center">编译测试代码至测试输出目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>test</code></strong></td>
+<td style="text-align:center"><strong><code>maven-surefire-plugin:test</code></strong></td>
+<td style="text-align:center">执行测试用例</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>package</code></strong></td>
+<td style="text-align:center"><strong><code>maven-jar-plugin:jar</code></strong></td>
+<td style="text-align:center">创建项目jar包</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>install</code></strong></td>
+<td style="text-align:center"><strong><code>maven-install-plugin:install</code></strong></td>
+<td style="text-align:center">将项目输出构件安装到本地仓库</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><code>deploy</code></strong></td>
+<td style="text-align:center"><strong><code>maven-deploy-plugin:deploy</code></strong></td>
+<td style="text-align:center">将项目输出构件部署到远程仓库</td>
+</tr>
+</tbody>
+</table>
+<p>上表只列出了<strong><code>clean</code></strong>和<strong><code>site</code></strong>生命周期<strong>插件绑定关系</strong>，以及<strong><code>default</code></strong>生命周期<strong>拥有插件绑定关系的阶段</strong>，default生命周期还有很多其他阶段，默认<strong>没有绑定任何插件</strong>，故<strong>无任何实际行为</strong>。</p>
+<p>还可以<strong>自定义将某个插件目标绑定到生命周期的某个阶段上</strong>，可以通过<strong><code>phrase</code></strong>标签将<strong><code>goals</code></strong>标签中<strong>指定的插件目标</strong>绑定到具体的生命周期阶段上。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>xml-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>xslt-generate<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>transform<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>executions</code></strong>下每一个<strong><code>execution</code></strong>都可以用来配置执行一个任务，通过<strong><code>phase</code></strong>将<strong><code>xml-maven-plugin</code></strong>的<strong><code>transform</code>目标</strong>绑定到<strong><code>default</code>生命周期的<code>compile</code>阶段</strong>上。<strong><code>goals</code></strong>用于<strong>配置指定要执行的插件目标</strong>。</p>
+<p>很多插件目标在<strong>编写时已定义了默认绑定阶段</strong>，即使不通过phase元素配置生命周期阶段，也能绑定到生命周期中去。</p>
+<p>当<strong>多个插件目标</strong>绑定到<strong>同一个生命周期阶段</strong>时，插件<strong>声明的先后顺序决定了目标执行的顺序</strong>。</p>
+<h3 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h3><p>完成插件目标和声明周期阶段绑定后，还能<strong>配置插件目标参数</strong>，几乎所有插件目标都有一些可配置的参数，可通过<strong>命令行</strong>和<strong>POM配置</strong>等方式来配置。</p>
+<p>Maven命令行中可以使用：<strong><code>-D</code>参数键<code>=</code>参数值</strong>，来配置插件目标参数。例如：<strong><code>mvn install -Dmaven.test.skip=true</code></strong></p>
+<p>并非所有插件参数都适合命令行配置，可以在插件声明时，对插件进行全局配置，所有基于该插件的目标任务都会使用全局配置。还可以为插件的某个目标配置特定的参数。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jvnet.jaxb2.maven2<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jaxb2-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 全局配置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">schemaDirectory</span>&gt;</span>src/main/resources/xsd<span class="tag">&lt;/<span class="name">schemaDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">generateDirectory</span>&gt;</span>src/main/java/<span class="tag">&lt;/<span class="name">generateDirectory</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>xsd1-generate<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 特定目标任务配置 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">schemaIncludes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">include</span>&gt;</span>test.xsd<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">schemaIncludes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="获取插件信息"><a href="#获取插件信息" class="headerlink" title="获取插件信息"></a>获取插件信息</h3><p>主要的插件都来自Apache和Codehaus，文档链接分别为 <strong><code>http://maven.apache.org/plugin/index.html</code></strong> 和 <strong><code>http://mojo.codehaus.org/plugins.html</code></strong>，下载地址分别为 <strong><code>http://repo1.maven.org/maven2/org/apache/maven/plugins</code></strong> 和 <strong><code>http://repository.codehaus.org/org/codehuas/mojo</code></strong></p>
+<p>可以使用<strong><code>maven-help-plugin</code></strong>查看插件详细信息。查看<strong>插件目标默认绑定阶段</strong>：<strong><code>mvn help:</code>目标<code>-DgroupId:artifactId:version</code></strong>，例如：<strong><code>mvn help:describe-Dplugin = org.apache.maven.plugins:maven-source-plugin:2.1.1</code></strong>，可以<strong>省去版本</strong>信息，可以<strong>使用插件目标前缀</strong>替换坐标，加上<strong><code>goal</code></strong>参数仅查询描述<strong>插件目标信息</strong>，加上<strong><code>detail</code></strong>参数查询<strong>详细信息</strong>，例如：<strong><code>mvn help:describe-Dplugin=compiler[-Dgoal=compiler][-Ddetail]</code></strong></p>
+<p>明显可以发现<strong>命令行传入参数不同于该插件目标参数名称</strong>，命令行参数是由插件参数表达式（Expression）决定的，例如<strong><code>surefire:test skip</code></strong>参数表达式为<strong><code>${maven.test.skip}</code></strong>。并非所有插件目标都有表达式，一些插件目标参数只能在POM中配置。</p>
+<h3 id="插件解析机制"><a href="#插件解析机制" class="headerlink" title="插件解析机制"></a>插件解析机制</h3><p>与依赖构件一样，插件构件同样基于坐标存储在Maven仓库中。需要时，Maven会从本地仓库寻找插件，若不存在，则从远程仓库查找，找到后下载到本地仓库使用。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>central<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Central Repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://repo.maven.apache.org/maven2<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">layout</span>&gt;</span>default<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">updatePolicy</span>&gt;</span>never<span class="tag">&lt;/<span class="name">updatePolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所有子<strong>元素表达含义与依赖远程仓库配置完全</strong>一样。</p>
+<p>若插件的<strong><code>groupId</code></strong>为<strong><code>org.apache.maven.plugins</code></strong>表示为<strong>官方插件</strong>，在配置插件信息时可以<strong>省略<code>groupId</code></strong>，不推荐使用。</p>
+<p>插件版本的解析与依赖版本解析类似，未提供版本会自动解析版本，Maven在<strong>超级POM中为所有核心插件设定了版本</strong>，在使用核心插件时即使不做任何配置，其版本已经确定了。</p>
+<p>若某个插件未设定版本，又<strong>不是核心插件</strong>，Maven会检查所有仓库中可用版本，然后做出选择，选择版本<strong>方式与依赖类似</strong>，都是<strong>到归并后的元数据文件中确定版本</strong>。</p>
+<p>插件解析元数据时，会默认使用<strong><code>org.apache.maven.plugins</code></strong>和<strong><code>org.codehaus.mojo</code></strong>两个<strong><code>groupId</code></strong>，也可以通过<strong><code>settings</code></strong>配置让Maven检查其他groupId上的插件仓库元数据。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pluginGroups</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pluginGroup</span>&gt;</span>com.your.plugins<span class="tag">&lt;/<span class="name">pluginGroup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">pluginGroups</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>基于该配置Maven不仅会检查<strong><code>org/apache/maven/plugins/maven-metadata.xml</code></strong> 和 <strong><code>org/codehaus/mojo/maven-metadata.xml</code></strong> 还会检查 <strong><code>com/your/plugins/maven-metadata.xml</code></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">metadata</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>Apache Maven ACR Plugin<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">prefix</span>&gt;</span>acr<span class="tag">&lt;/<span class="name">prefix</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-acr-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>Apache Maven Ant Plugin<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">prefix</span>&gt;</span>ant<span class="tag">&lt;/<span class="name">prefix</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-ant-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">metadata</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>prefix</code>表示插件前缀</strong>，当Maven解析到类似dependency:tree命令时，先<strong>基于默认<code>groupId</code>归并所有插件仓库元数据</strong>，再检查归并后的元数据，<strong>根据<code>prefix</code>找到对应的<code>artifactId</code></strong>，然后<strong>结合当前元数据的<code>groupId</code>解析得到<code>version</code></strong>，就得到了完整的坐标。若<strong><code>org/apache/maven/plugins/maven-metadata.xml</code></strong>没有记录该插件前缀，则接着<strong>检查剩下的两个元数据</strong>。若所有元数据<strong>都不包含该前缀则报错</strong>。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Maven/Maven聚合与继承/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Maven聚合与继承
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Maven/Maven仓库/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Maven仓库</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2019 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

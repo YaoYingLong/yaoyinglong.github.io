@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>属性表集合 | YingLong</title>
+    
+    
+        <meta name="keywords" content="JVM">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="在Class文件、字段表、方法表都可以携带自己的属性表集合，属性表集合不要求各个属性表具有严格顺序。    属性名称 使用位置 含义     Code 方法表 Java代码编译成的字节码指令   ConstantValue 字段表 final关键字定义的常量池   Deprecated 类，方法，字段表 被声明为dep">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="属性表集合">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/属性表集合/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="在Class文件、字段表、方法表都可以携带自己的属性表集合，属性表集合不要求各个属性表具有严格顺序。    属性名称 使用位置 含义     Code 方法表 Java代码编译成的字节码指令   ConstantValue 字段表 final关键字定义的常量池   Deprecated 类，方法，字段表 被声明为deprecated的方法和字段   Exceptions 方法表 方法抛出的异常">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-27T09:26:09.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="属性表集合">
+<meta name="twitter:description" content="在Class文件、字段表、方法表都可以携带自己的属性表集合，属性表集合不要求各个属性表具有严格顺序。    属性名称 使用位置 含义     Code 方法表 Java代码编译成的字节码指令   ConstantValue 字段表 final关键字定义的常量池   Deprecated 类，方法，字段表 被声明为deprecated的方法和字段   Exceptions 方法表 方法抛出的异常">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>  <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>  <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>  <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>  <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>  <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>  <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>  <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>  <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>  <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>  <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>  <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>  <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>  <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>  <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>  <li class="file active"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>  <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>  <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>  <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>  <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>  <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>  <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>  <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>  <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>  <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>  <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>  <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>  <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>  <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/杂记/IDEA常用插件/">IDEA常用插件</a></li>  <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>  <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>  <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>  <li class="file"><a href="/Blog/杂记/Arthas诊断工具/">Arthas诊断工具</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>  <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>  <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>  <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/VM/属性表集合" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/VM/">VM</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Java/VM/属性表集合/">
+            <time datetime="2018-02-03T16:00:00.000Z" itemprop="datePublished">2018-02-04</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            属性表集合
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>在Class文件、字段表、方法表都可以携带自己的属性表集合，属性表集合不要求各个属性表具有严格顺序。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">使用位置</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>Code</code></td>
+<td style="text-align:center">方法表</td>
+<td style="text-align:center">Java代码编译成的<strong>字节码指令</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ConstantValue</code></td>
+<td style="text-align:center">字段表</td>
+<td style="text-align:center"><code>final</code>关键字定义的<strong>常量池</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Deprecated</code></td>
+<td style="text-align:center">类，方法，字段表</td>
+<td style="text-align:center">被声明为<code>deprecated</code>的方法和字段</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Exceptions</code></td>
+<td style="text-align:center">方法表</td>
+<td style="text-align:center">方法抛出的<strong>异常</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>EnclosingMethod</code></td>
+<td style="text-align:center">类文件</td>
+<td style="text-align:center">仅当一个类为<strong>局部类</strong>或者<strong>匿名类</strong>时才能拥有该属性，<br>该属性用于标识该类所在的<strong>外围方法</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>InnerClass</code></td>
+<td style="text-align:center">类文件</td>
+<td style="text-align:center"><strong>内部类</strong>列表</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>LineNumberTable</code></td>
+<td style="text-align:center">Code属性</td>
+<td style="text-align:center">Java源码的<strong>行号</strong>与<strong>字节码指令</strong>的对应关系</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>LocalVariableTable</code></td>
+<td style="text-align:center">Code属性</td>
+<td style="text-align:center">方法的<strong>局部变量</strong>描述</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>StackMapTable</code></td>
+<td style="text-align:center">Code属性</td>
+<td style="text-align:center">JDK1.6新增，供新的<strong>类型检查验证器检查</strong>和处理目标<br>方法的<strong>局部变量</strong>和<strong>操作数</strong>有所需要的类是否匹配</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Signature</code></td>
+<td style="text-align:center">类，方法表，字段表</td>
+<td style="text-align:center">用于支持<strong>泛型</strong>情况下的<strong>方法签名</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>SourceFile</code></td>
+<td style="text-align:center">类文件</td>
+<td style="text-align:center">记录<strong>源文件</strong>名称</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>SourceDebugExtension</code></td>
+<td style="text-align:center">类文件</td>
+<td style="text-align:center">用于存储额外的<strong>调试</strong>信息</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Synthetic</code></td>
+<td style="text-align:center">类，方法表，字段表</td>
+<td style="text-align:center">标志方法或字段为<strong>编译器自动生成</strong>的</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>LocalVariableTypeTable</code></td>
+<td style="text-align:center">类</td>
+<td style="text-align:center">使用<strong>特征签名</strong>代替描述符，为了引入泛型<br>语法之后能描述<strong>泛型参数化类型</strong>而添加</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>RuntimeVisibleAnnotations</code></td>
+<td style="text-align:center">类，方法表，字段表</td>
+<td style="text-align:center">为<strong>动态注解</strong>提供支持</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>RuntimeInvisibleAnnotations</code></td>
+<td style="text-align:center">表，方法表，字段表</td>
+<td style="text-align:center">用于指明哪些注解是<strong>运行时不可见</strong>的</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>RuntimeVisibleParameterAnnotation</code></td>
+<td style="text-align:center">方法表</td>
+<td style="text-align:center">作用与<code>RuntimeVisibleAnnotations</code>属性类似，<br><strong>作用对象方法</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>RuntimeInvisibleParameterAnnotation</code></td>
+<td style="text-align:center">方法表</td>
+<td style="text-align:center">作用与<code>RuntimeInvisibleAnnotations</code>属性类似，<br><strong>作用对象方法参数</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>AnnotationDefault</code></td>
+<td style="text-align:center">方法表</td>
+<td style="text-align:center">用于记录<strong>注解类元素的默认值</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>BootstrapMethods</code></td>
+<td style="text-align:center">类文件</td>
+<td style="text-align:center">用于保存<strong><code>invokeddynamic</code>指令</strong>引用的<strong>引导方法限定符</strong></td>
+</tr>
+</tbody>
+</table>
+<p>每个<strong>属性名称</strong>都需要从常量池中引用一个<strong><code>CONSTANT_Utf8_info</code></strong>类型的常量来表示，<strong>属性值</strong>的结构<strong>完全自定义</strong>的，只需要通过一个<strong>u4长度属性</strong>去说明属性值所占用的位数即可。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u1</td>
+<td style="text-align:center">info</td>
+<td style="text-align:center">attribute_length</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Code属性"><a href="#Code属性" class="headerlink" title="Code属性"></a>Code属性</h3><p><strong><code>Java</code>方法体中代码</strong>经过<strong>Javac编译器</strong>处理后，最终变为<strong>字节码指令</strong>存储在<strong>Code属性</strong>内。Code属性出现在<strong>方法表</strong>的<strong>属性集合</strong>中，<strong>接口</strong>和<strong>抽象类</strong>中的<strong>抽象</strong>方法<strong>不存在Code属性</strong>。</p>
+<p><strong>Code属性</strong>是Class文件中<strong>最重要</strong>的一个属性，如果把一个Java程序中的信息分为<strong>代码（方法体中的代码）</strong>和<strong>元数据（类、字段、方法定义及其他信息）</strong>，那整个Class文件中，Code属性用于描述代码，其他数据项目都有于描述元数据。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">max_stack</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">max_locals</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">code_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u1</td>
+<td style="text-align:center">code</td>
+<td style="text-align:center">code_length</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">exception_table_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">exception_info</td>
+<td style="text-align:center">exception_table</td>
+<td style="text-align:center">exception_length</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attributes_count</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">attribute_info</td>
+<td style="text-align:center">attributes</td>
+<td style="text-align:center">attributes_count</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>attribute_name_index</code></strong>是指向<strong><code>CONSTANT_Utf8_info</code></strong>型常量的索引，其<strong>值固定为Code</strong>，代表该属性的<strong>属性名称</strong>，<strong><code>attribute_length</code></strong>表示<strong>属性值长度</strong>，<strong>属性名称索引与属性长度共<code>6</code>字节</strong>。</p>
+<p><strong><code>max_stack</code></strong>代表<strong>操作数栈最大深度</strong>，虚拟机运行时需要根据该值来分配<strong>栈帧</strong>中的<strong>操作数栈深度</strong>。</p>
+<p><strong><code>max_locals</code></strong>代表<strong>局部变量表所需内存空间</strong>，单位<strong><code>Slot</code></strong>，是虚拟机为局部变量表分配内存所使用的<strong>最小单位</strong>。<strong><code>byte、char、float、int、short、boolean、returnAddress</code></strong>等长度<strong>不超过32位</strong>的数据类型，每个局部变量<strong>占用1个Slot</strong>，而<strong><code>double</code></strong>和<strong><code>long</code></strong>这两种<strong>64位</strong>的数据类型则<strong>占用2个Slo</strong>t。<strong>方法参数</strong>包括<strong>实例方法</strong>中的<strong>隐藏参数this</strong>、<strong>显式异常处理器</strong>的参数就是<strong><code>try-catch</code></strong>语句中<strong><code>catch</code>块所定义的异常</strong>、<strong>方法体</strong>中定义的<strong>局部变量</strong>，都需要使用局部变量表来存放。局部变量中的<strong>Slot可以重用</strong>，当代码执行<strong>超出一个局部变量的作用域</strong>时，这个局部变量所占的Slot可以被其他局部变量所使用，Javac编译器会<strong>根据变量的作用域</strong>来分配Slot给各个变量使用，然后计算出<strong><code>max_locals</code></strong>的大小。</p>
+<p><strong><code>code_length</code></strong>和<strong><code>code</code></strong>用来存储<strong>Java源程序编译后</strong>生成的<strong>字节码指令</strong>。<strong><code>code_length</code></strong>代表<strong>字节码长度</strong>，<strong><code>code</code></strong>用于存储<strong>字节码指令的一系列字节流</strong>。每个<strong>字节码指令</strong>都是<strong>u1类型</strong>的数据，当虚拟机读取code中的<strong>字节码</strong>时，能够对应找出这个字节码<strong>代表的指令</strong>，指令后面是否需要<strong>跟随参数</strong>，参数应该如何理解。u1数据类型取值范围为<strong><code>0x00~0xFF</code></strong>，一共可表达<strong>256条指令</strong>，目前虚拟机规范定义了<strong>约200条编码值对应的指令含义</strong>。</p>
+<p><strong><code>code_length</code></strong>虽然是一个<strong>u4类型</strong>的数据，但<strong>虚拟机限制方法不允许超过65535条字节码指令</strong>，即它实际上<strong>只使用了u2的长度</strong>，如果<strong>超过限制Javac编译器会拒绝编译</strong>。在编译一个很浮渣的JSP文件时，某些JSP编译器会把JSP内容和页面输出信息归并于一个方法，可能因方法生成字节码超长导致编译失败。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> com.coms.jvm.ClassFileConstantPool.TestClassA();</span><br><span class="line">   flags: ACC_PUBLIC</span><br><span class="line">   Code:</span><br><span class="line">     stack=<span class="number">1</span>, locals=<span class="number">1</span>, args_size=<span class="number">1</span></span><br><span class="line">        <span class="number">0</span>: aload_0       </span><br><span class="line">        1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">        <span class="number">4</span>: <span class="keyword">return</span>        </span><br><span class="line">     LineNumberTable:</span><br><span class="line">       line <span class="number">3</span>: <span class="number">0</span></span><br><span class="line">     LocalVariableTable:</span><br><span class="line">       Start  Length  Slot  Name   Signature</span><br><span class="line">       <span class="number">0</span>      <span class="number">5</span>       <span class="number">0</span>     <span class="keyword">this</span>   Lcom/coms/jvm/ClassFileConstantPool/TestClassA;</span><br></pre></td></tr></table></figure>
+<p>从上面的代码可以看到，实例方法明显没有参数，但<strong><code>locals</code></strong>和<strong><code>args_size</code></strong>的值却为1，这是Java程序一个很重要的<strong>访问机制</strong>，在<strong>任何实例方法</strong>中，都可以通过<strong><code>this</code>关键字访问到此方法的所属的对象</strong>，Javac编译器编译时把对<strong><code>this</code>关键字</strong>的访问<strong>转变为</strong>对一个普通方法参数的访问，在虚拟机调用实例方法时<strong>自动传入</strong>此参数。</p>
+<p>在字节码指令之后是<strong>方法的显示异常处理表集合<code>exception_table</code></strong>，它对应Code属性来说并不是必须存在的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Exception table:</span><br><span class="line">     from    to  target type</span><br><span class="line">        <span class="number">0</span>     <span class="number">4</span>     <span class="number">8</span>   Class java/lang/Exception</span><br><span class="line">        <span class="number">0</span>     <span class="number">4</span>    <span class="number">17</span>   any</span><br><span class="line">        <span class="number">8</span>    <span class="number">13</span>    <span class="number">17</span>   any</span><br><span class="line">       <span class="number">17</span>    <span class="number">19</span>    <span class="number">17</span>   any</span><br></pre></td></tr></table></figure>
+<h3 id="Exceptions属性"><a href="#Exceptions属性" class="headerlink" title="Exceptions属性"></a>Exceptions属性</h3><p>Exceptions属性是在方法表中于Code属性<strong>平级</strong>的属性，<strong>区别于</strong>前面的<strong>Code属性中的异常表</strong>。其作用是<strong>列举方法中</strong>可能抛出的<strong>受检查的异常</strong>，也就是<strong>方法描述</strong>时在<strong><code>throws</code>关键字后面列举的异常</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exceptions:</span><br><span class="line">      <span class="keyword">throws</span> java.lang.Exception, java.sql.SQLException</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_of_exceptions</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">exception_index_table</td>
+<td style="text-align:center">number_of_exceptions</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>attribute_of_exceptions</code></strong>表示方法可能抛出<strong><code>attribute_of_exceptions</code></strong>种异常，每一种受查异常使用一个<strong><code>exception_index_table</code></strong>项表示，<strong><code>exception_index_table</code></strong>时一个指向常量池种<strong><code>CONSTANT_Class_info</code></strong>型常量索引，代表了该<strong>受查异常的类型</strong>。</p>
+<h3 id="LineNumberTable属性"><a href="#LineNumberTable属性" class="headerlink" title="LineNumberTable属性"></a>LineNumberTable属性</h3><p><strong><code>LineNumberTable</code></strong>属性用于<strong>描述<code>Java</code>源码行号</strong>与<strong>字节码行号（字节码偏移量）</strong>之间的对应关系。并非运行时必需属性，默认会生成到Class文件中，可以在Javac种使用<strong><code>-g:none</code></strong>或<strong><code>-g:line</code></strong>选项来<strong>取消</strong>或<strong>要求生成</strong>该项信息。如果选择<strong>不生成该属性</strong>，当程序抛出异常时，堆栈中将<strong>不会显示出错的行号</strong>，在调试程序时也<strong>无法按照源码行来设置断点</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">line_number_table_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">line_number_info</td>
+<td style="text-align:center">line_number_table</td>
+<td style="text-align:center">line_number_table_length</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>line_number_table</code></strong>是一个数量为<strong><code>line_number_table_length</code></strong>、类型为<strong><code>line_number_info</code></strong>的集合，<strong><code>line_number_info</code></strong>包括了<strong>字节码行号<code>start_pc</code></strong>和<strong><code>Java</code>源码行号<code>line_number</code></strong>两个u2类型的数据。</p>
+<h3 id="LocalVeriableTable属性"><a href="#LocalVeriableTable属性" class="headerlink" title="LocalVeriableTable属性"></a>LocalVeriableTable属性</h3><p><strong><code>LocalVeriableTable</code></strong>属性用于<strong>描述栈帧中局部变量表中的变量</strong>与<strong>Java源码中定义的变量之间的关系</strong>，非运行时必需属性，默认生成到Class文件中，可以在Javac种使用<strong><code>-g:none</code></strong>或<strong><code>-g:vars</code></strong>选项来<strong>取消</strong>或<strong>要求生成</strong>该项信息。如果<strong>不生成该属性</strong>，当<strong>其他人引用该方法</strong>时，<strong>所有参数名称都将丢失</strong>，IDE将会使用诸如<strong><code>arg0</code></strong>、<strong><code>arg1</code></strong>之类的<strong>占位符</strong>代替原有的<strong>参数名</strong>，虽对程序运行无影响，但对代码编写带来较大不便，且<strong>在调试时无法根据参数名称从上下文中获得参数值</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">local_veriable_table_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">local_veriable_info</td>
+<td style="text-align:center">local_veriable_table</td>
+<td style="text-align:center">local_veriable_table_length</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>local_veriable_info</code></strong>代表一个<strong>栈帧</strong>与<strong>源码中局部变量的关联</strong>。下表是local_veriable_info项目结构。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">start_pc</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">descriptor_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">index</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>start_pc</code></strong>和<strong><code>length</code></strong>属性分别代表这个<strong>局部变量</strong>的<strong>生命周期</strong>开始<strong>字节码偏移量</strong>及其<strong>作用范围覆盖长度</strong>，两者结合就是该<strong>局部变量在字节码之中的作用范围</strong>。</p>
+<p><strong><code>name_index</code></strong>和<strong><code>descriptor_index</code></strong>都是指向常量池中<strong><code>CONSTANT_UTF8_info</code></strong>型常量索引，分别代表<strong>局部变量名称</strong>以及该<strong>局部变量的描述符</strong>。</p>
+<p><strong><code>index</code></strong>是该<strong>局部变量在栈帧局部变量表中Slot位置</strong>，当该变量数据类型是64位类型是，它占用的<strong><code>Slot</code></strong>位<strong><code>index</code></strong>和<strong><code>index+1</code></strong>。</p>
+<h3 id="LocalVeriableTypeTable属性"><a href="#LocalVeriableTypeTable属性" class="headerlink" title="LocalVeriableTypeTable属性"></a>LocalVeriableTypeTable属性</h3><p><strong><code>LocalVeriableTypeTable</code></strong>属性是<strong><code>LocalVeriableTable</code></strong>属性的<strong>姐妹属性</strong>，其结构与<strong><code>LocalVeriableTable</code></strong>非常相似，仅仅把记录<strong>字段描述符</strong>的<strong><code>descriptor_index</code>替换成</strong>了字段的<strong>特征签名</strong>，对于<strong>非泛型</strong>类型来说，<strong>描述符</strong>和<strong>特征签名</strong>能描述的信息<strong>基本上一致</strong>，但泛型中，<strong>描述符中泛型的参数化类型被擦除</strong>，描述符不能准确描述泛型类型。</p>
+<h3 id="SourceFile属性"><a href="#SourceFile属性" class="headerlink" title="SourceFile属性"></a>SourceFile属性</h3><p>SourceFile属性用于<strong>记录生成这个Class文件的源码文件名称</strong>，定长属性，非运行时必需属性，默认生成到Class文件中，可以在Javac种使用<strong><code>-g:none</code></strong>或<strong><code>-g:source</code></strong>选项来<strong>取消</strong>或<strong>要求生成</strong>该项信息。Java中大多数类的类名和文件名一致，但<strong>内部类</strong>列外，如果<strong>不生成该属性</strong>，当<strong>抛异常时</strong>，<strong>堆栈中将不会显示出错误代码所属的文件名</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">sourcefile_index</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>sourcefile_index</code></strong>数据项是指向常量池中<strong><code>CONSTANT_UTF8_info</code></strong>型常量索引，常量值是源文件的<strong>文件名</strong>。</p>
+<h3 id="ConstantValue属性"><a href="#ConstantValue属性" class="headerlink" title="ConstantValue属性"></a>ConstantValue属性</h3><p><strong><code>ConstantValue</code></strong>属性的作用是<strong>通知虚拟机自动为静态变量赋值</strong>，定长属性，只有被<strong><code>final</code>关键字</strong>修饰的变量才可以使用这项属性。对于<strong>非<code>static</code>类型</strong>的变量赋值时在<strong>实例构造器<code>&lt;init&gt;</code>方法中进行</strong>的，而<strong><code>static</code>类型</strong>变量，有两种方式可以选择，在<strong>类构造器<code>&lt;clinit&gt;</code>方法中</strong>或者<strong>使用<code>ConstantValue</code>属性</strong>。目前在<strong><code>Sun Javac</code>编译器中</strong>，如果同时<strong>使用<code>final</code>和<code>static</code>修饰变量</strong>，且该变量数据类型是<strong>基本数据类型</strong>或者<strong><code>java.lang.String</code></strong>，就<strong>生成<code>ConstantValue</code>属性类进行初始化</strong>，如果这个变量<strong>没有别<code>final</code>修饰</strong>或者并<strong>非基本类型及字符串</strong>，则会<strong>在<code>&lt;clinit&gt;</code>方法中进行初始化</strong>。</p>
+<p>虚拟机规范中只要求了有<strong><code>ConstantValue</code>属性</strong>的字段<strong>必须设置<code>ACC_STATIC</code>标志</strong>，并没有强制要求设置<strong><code>ACC_FINAL</code>标志</strong>，对final关键字的要求是<strong>Javac编译器自己加入</strong>的限制。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">constantvalue_index</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>constantvalue_index</code></strong>数据项代表了<strong>常量池中</strong>一个<strong>字面量常量的引用</strong>，根据字段类型不同，字面量可以是<strong><code>CONSTANT_Long_info、CONSTANT_Float_info、CONSTANT_Double_info、CONSTANT_Integer_info、CONSTANT_String_info</code></strong></p>
+<h3 id="InnerClasses属性"><a href="#InnerClasses属性" class="headerlink" title="InnerClasses属性"></a>InnerClasses属性</h3><p><strong><code>InnerClasses</code></strong>属性用于<strong>记录内部类与宿主类之间的关联</strong>，如果类中定义了内部类，<strong>编译器</strong>将会<strong>为它以及它所包含的内部类</strong>生成<strong><code>InnerClasses</code></strong>属性。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">number_of_classes</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">inner_classes_info</td>
+<td style="text-align:center">inner_classes</td>
+<td style="text-align:center">number_of_classes</td>
+</tr>
+</tbody>
+</table>
+<p>数据项<strong><code>inner_classes_info</code></strong>代表需要记录<strong>多少个内部类</strong>信息，每个内部类信息都由一个<strong><code>inner_classes_info</code></strong>表进行描述。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">inner_class_info_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">other_class_info_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">inner_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">inner_class_access_flags</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>inner_class_info_index</code></strong>和<strong><code>other_class_info_index</code></strong>都是指向常量池中<strong><code>CONSTANT_Class_info</code></strong>型常量索引，分别代表<strong>内部类</strong>和<strong>宿主类</strong>的<strong>符号引用</strong>；<strong><code>inner_name_index</code></strong>是指向常量池中<strong><code>CONSTANT_UTF8_info</code></strong>型常量索引，代表这个<strong>内部类的名称</strong>，如果是<strong>匿名内部类该项值为0</strong>；<strong><code>inner_class_access_flags</code></strong>是<strong>内部类的访问标志</strong>，类似于类的<strong><code>access_flags</code></strong>。</p>
+<h3 id="Deprecated-amp-Synthetic属性"><a href="#Deprecated-amp-Synthetic属性" class="headerlink" title="Deprecated &amp; Synthetic属性"></a>Deprecated &amp; Synthetic属性</h3><p><strong><code>Deprecated</code></strong>和<strong><code>Synthetic</code></strong>两个属性都<strong>属于标志类型</strong>的<strong>布尔属性</strong>，只存在有和没有的区别，<strong>没有属性值</strong>的概念。</p>
+<p><strong><code>Deprecated</code></strong>属性用于表示某个<strong>类、字段、方法</strong>，已经被程序作者定为<strong>不再推荐使用</strong>，通过在代码中使用<strong><code>@deprecated</code>注解</strong>进行设置。</p>
+<p><strong><code>Synthetic</code></strong>属性代表此<strong>字段或者方法</strong>并不是由Java源代码直接生成的，而是由<strong>编译器自行添加</strong>的，标识一个<strong>类、字段或者方法是编译器自动产生</strong>的，也可以设置访问标志中的<strong><code>ACC_SYNTHETIC</code></strong>标志位。所有由非用户代码产生的<strong>类、方法及字段</strong>都应当<strong>至少</strong>设置<strong><code>Synthetic</code>属性</strong>和<strong><code>ACC_SYNTHETIC</code>标志位</strong>中的一项，<strong>唯一例外</strong>是<strong>实例构造器<code>&lt;init&gt;</code></strong>和<strong>类构造器<code>&lt;clinit&gt;</code></strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>attribute_length</code></strong>的值必须为<strong><code>0x00000000</code></strong>，因为没有任何属性值需要设置。</p>
+<h3 id="StackMapTable属性"><a href="#StackMapTable属性" class="headerlink" title="StackMapTable属性"></a>StackMapTable属性</h3><p><strong><code>StackMapTable</code></strong>属性<strong><code>JDK1.6</code></strong>增加到<strong><code>Class</code>文件规范</strong>中，在<strong><code>JDK1.7</code></strong>中<strong>强制代替</strong>原本<strong>基于类型推断</strong>的<strong>字节码验证器</strong>，它是一个复杂的<strong>变长属性</strong>，位于<strong><code>Code</code></strong>属性的<strong><code>attributes</code>属性表</strong>中，该属性会在<strong>虚拟机类加载的字节码验证阶段被新类型检查验证器使用</strong>，目的在于<strong>替代</strong>以前<strong>比较消耗性能</strong>的<strong>基于数据流分析</strong>的<strong>类型推导验证器</strong>。</p>
+<p>新验证器在同样能<strong>保证Class文件合法性的前提下</strong>，<strong>省略</strong>了在<strong>运行期</strong>通过<strong>数据流分析</strong>去确认<strong>字节码的行为逻辑合法性</strong>的步骤，而是在<strong>编译阶段</strong>将一系列的验证类型直接<strong>记录在Class文件</strong>中，通过检查这些验证类型<strong>代替了类型推导过程</strong>，从而大幅度提升了字节码验证的性能。</p>
+<p><strong><code>StackMapTable</code></strong>属性中包含<strong>0至多个栈映射帧</strong>，<strong>每个栈映射帧</strong>都<strong>显式</strong>或<strong>隐式</strong>地代表了一个<strong>字节码偏移量</strong>，用于表示该<strong>执行到该字节码时局部变量表</strong>和<strong>操作数栈的验证类型</strong>。<strong>类型检查验证器</strong>会通过<strong>检查目标方法</strong>的<strong>局部变量</strong>和<strong>操作数栈所需要的类型</strong>来确定一段<strong>字节码指令是否符合逻辑约束</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">number_of_entries</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">stack_map_frame</td>
+<td style="text-align:center">stack_map_frame_entries</td>
+<td style="text-align:center">number_of_entries</td>
+</tr>
+</tbody>
+</table>
+<p>在<strong>版本号大于或等于<code>50.0</code>的<code>Class</code>文件</strong>中，如果<strong>方法的<code>Code</code>属性中没有附带<code>StackMapTable属性</code></strong>，意味着它带有一个<strong>隐式的<code>StackMap</code>属性</strong>，起作用<strong>等同于<code>number_of_entries</code>值为<code>0</code></strong>的<strong><code>StackMapTable</code></strong>属性。一个方法的Code属性<strong>最多只能有一个<code>StackMapTable</code>属性</strong>，否则将抛出<strong><code>ClassFormatError</code>异常</strong>。</p>
+<h3 id="Signature属性"><a href="#Signature属性" class="headerlink" title="Signature属性"></a>Signature属性</h3><p><strong><code>Signature</code>属性</strong>在<strong><code>JDK1.5</code></strong>增加到<strong><code>Class</code></strong>文件规范中，<strong>可选定长属性</strong>，可以出现于<strong>类、字段表和方法表</strong>结构的<strong>属性表</strong>中。<strong>任何类、接口、初始化方法或成员的泛型签名</strong>如果包含了<strong>类型变量</strong>或<strong>参数化类型</strong>，则<strong><code>Signature</code>属性</strong>会为它<strong>记录泛型签名信息</strong>，之所以这样是由于<strong><code>Java</code></strong>的泛型采用的是<strong>擦除法</strong>实现的<strong>伪泛型</strong>，在字节码中，泛型信息编译之后<strong>类型变量</strong>和<strong>参数化类型</strong>都<strong>被擦除</strong>了，运行期做反射时无法获得泛型信息。<strong><code>Signature</code></strong>属性就是为了<strong>弥补这个缺陷</strong>，现在<strong><code>Java</code></strong>的反射<strong><code>API</code></strong>能获取泛型类型，最终的<strong>数据类来源</strong>为<strong><code>Signature</code>属性</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">signature_index</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>signature_index</code></strong>值必须时一个<strong>对常量池的有效索引</strong>，参量池在该索引处必须是<strong><code>CONSTANT_UTF8_info</code></strong>结构，表示类签名、方法类型签名或字段类型签名。<strong><code>Signature</code>属性</strong>是<strong>类文件属性</strong>该结构表示<strong>类签名</strong>，<strong><code>Signature</code>属性</strong>是<strong>方法表的属性</strong>该结构表示<strong>方法类型签名</strong>，<strong><code>Signature</code>属性</strong>是<strong>字段表的属性</strong>该结构表示<strong>字段类型签名</strong>。</p>
+<h3 id="BootstrapMethods属性"><a href="#BootstrapMethods属性" class="headerlink" title="BootstrapMethods属性"></a>BootstrapMethods属性</h3><p><strong><code>BootstrapMethods</code></strong>属性在<strong><code>JDK1.7</code></strong>增加到<strong><code>Class</code></strong>文件规范中，<strong>复杂变长属性</strong>，位于类文件属性表中。该属性<strong>用于保存<code>invokedynamic</code>指令引用的引导方法限定符</strong>。如果某个类文件结构的常量池中曾经出现过<strong><code>CONSTANT_InvokeDynamic_info</code>类型</strong>的常量，那该类文件的属性表中<strong>必须</strong>存在一个<strong>明确的<code>BootstrapMethods</code>属性</strong>，<strong>即使出现多次也最多也只能有一个</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">attribute_name_index</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">attribute_length</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">num_bootstrap_methods</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">bootstrap_method</td>
+<td style="text-align:center">bootstrap_methods</td>
+<td style="text-align:center">num_bootstrap_methods</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>num_bootstrap_methods</code></strong>值为<strong><code>bootstrap_methods[]</code></strong>数组中的<strong>引导方法限定符的数量</strong>，<strong><code>bootstrap_methods[]</code></strong>数组的每个成员都包含一个指向常量池<strong><code>CONSTANT_MethodHandle</code></strong>结构的索引值，它代表示一个<strong>引导方法</strong>，还包含了<strong>该引导方法静态参数的序列</strong>。其中<strong><code>num_bootstrap_method</code></strong>表结构如下所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">bootstrap_method_ref</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u4</td>
+<td style="text-align:center">num_bootstrap_arguments</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">u2</td>
+<td style="text-align:center">bootstrap_arguments</td>
+<td style="text-align:center">num_bootstrap_arguments</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>bootstrap_method_ref</code></strong>值必须是一个对常量池的有效索引，且该索引值必须是一个<strong><code>CONSTANT_MethodHandle_info</code></strong>结构；<strong><code>num_bootstrap_arguments</code></strong>表示<strong><code>bootstrap_arguments[]</code></strong>数组成员的数量；<strong><code>bootstrap_arguments[]</code></strong>数组成员必须是一个对常量池有效的索引，且必须是一下结构之一：<strong><code>CONSTANT_String_info、CONSTANT_Class_info、CONSTANT_Integer_info、CONSTANT_Long_info、CONSTANT_Float_info、CONSTANT_Double_info、CONSTANT_MethodHandle_info、CONSTANT_MothodType_info</code></strong>。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Java/VM/字节码指令/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    字节码指令
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Maven/Maven标签全解/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Maven标签全解</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2019 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

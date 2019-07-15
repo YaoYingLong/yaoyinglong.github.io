@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>方法调用 | YingLong</title>
+    
+    
+        <meta name="keywords" content="JVM">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="方法调用并不等同于方法执行，方法调用阶段唯一任务是确定被调用方法的版本，暂时不涉及方法内部具体运行过程。程序运行时，进行方法调用是最普遍最频繁的操作。 Class文件编译过程中不包含传统编译中的连接步骤，一切方法的调用在Class文件中存储的都只是符号引用，而非方法在实际运行内存布局中的入口地址（直接引用）。该特性带来">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="方法调用">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/方法调用/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="方法调用并不等同于方法执行，方法调用阶段唯一任务是确定被调用方法的版本，暂时不涉及方法内部具体运行过程。程序运行时，进行方法调用是最普遍最频繁的操作。 Class文件编译过程中不包含传统编译中的连接步骤，一切方法的调用在Class文件中存储的都只是符号引用，而非方法在实际运行内存布局中的入口地址（直接引用）。该特性带来了强大的动态扩展性，但同时使得方法调用过程变得相对复杂，需要在类加载期间、甚至运">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-15T12:32:20.456Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="方法调用">
+<meta name="twitter:description" content="方法调用并不等同于方法执行，方法调用阶段唯一任务是确定被调用方法的版本，暂时不涉及方法内部具体运行过程。程序运行时，进行方法调用是最普遍最频繁的操作。 Class文件编译过程中不包含传统编译中的连接步骤，一切方法的调用在Class文件中存储的都只是符号引用，而非方法在实际运行内存布局中的入口地址（直接引用）。该特性带来了强大的动态扩展性，但同时使得方法调用过程变得相对复杂，需要在类加载期间、甚至运">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>  <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>  <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>  <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>  <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>  <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>  <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>  <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>  <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>  <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>  <li class="file active"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>  <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>  <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>  <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>  <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>  <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>  <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>  <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>  <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>  <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>  <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>  <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>  <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>  <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>  <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>  <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>  <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>  <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>  <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>  <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>  <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>  <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>  <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>  <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/杂记/IDEA常用插件/">IDEA常用插件</a></li>  <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>  <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>  <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>  <li class="file"><a href="/Blog/杂记/Arthas诊断工具/">Arthas诊断工具</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>  <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>  <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>  <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/VM/方法调用" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/VM/">VM</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Java/VM/方法调用/">
+            <time datetime="2019-03-13T16:00:00.000Z" itemprop="datePublished">2019-03-14</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            方法调用
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><strong>方法调用并不等同于方法执行</strong>，方法调用阶段<strong>唯一任务是确定被调用方法的版本</strong>，暂时<strong>不涉及方法内部具体运行过程</strong>。程序运行时，进行方法调用是<strong>最普遍最频繁</strong>的操作。</p>
+<p>Class文件编译过程中<strong>不包含传统编译中的连接步骤</strong>，一切方法的调用在Class文件中存储的都只是<strong>符号引用</strong>，而非方法在实际运行内存布局中的入口地址（<strong>直接引用</strong>）。该特性带来了<strong>强大的动态扩展性</strong>，但同时使得方法调用过程变得<strong>相对复杂</strong>，需要在<strong>类加载期间</strong>、甚至<strong>运行期间</strong>才能确定目标方法的<strong>直接引用</strong>。</p>
+<h3 id="解析调用"><a href="#解析调用" class="headerlink" title="解析调用"></a>解析调用</h3><p>所有方法调用中的<strong>目标方法</strong>在<strong><code>Class</code>文件</strong>里面都是一个<strong>常量池</strong>中的<strong>符号引用</strong>，在类加载的解析阶段，会将其中在<strong>编译期可知，运行期不可变</strong>的方法的<strong>符号引用</strong>转化为<strong>直接引用</strong>。</p>
+<p>编译器可知，运行期不可变的方法主要包括：<strong>静态方法</strong>、<strong>私有方法</strong>、<strong>实例构造器</strong>、<strong>父类方法</strong>、<strong><code>final</code>修饰的方法</strong>。这类方法被称为<strong>非虚方法</strong>，其他方法称为<strong>虚方法</strong>。</p>
+<p>虚拟机提供<strong><code>5</code>条</strong>方法调用字节码指令，前四条指令的分派逻辑是固化在Java虚拟机内部的，而<strong><code>invokedynamic</code></strong>的分派逻辑是由用户所设定的引导方法决定的：</p>
+<ul>
+<li><strong><code>invokestatic</code></strong>：调用<strong>静态方法</strong></li>
+<li><strong><code>invokespecial</code></strong>：调用<strong>实例构造器<code>&lt;init&gt;</code></strong>方法、<strong>私有</strong>方法、<strong>父类</strong>方法</li>
+<li><strong><code>invokevirtual</code></strong>：调用<strong>所有的虚方法</strong>，以及<strong><code>final</code>修饰的方法</strong>。</li>
+<li><strong><code>invokeinterface</code></strong>：调用<strong>接口方法</strong>，在运行时再确定一个实现此接口的对象</li>
+<li><strong><code>invokedynamic</code></strong>：在<strong>运行时动态解析出调用点限定符所引用的方法</strong>，然后再执行该方法</li>
+</ul>
+<p>只要能被<strong><code>invokestatic</code></strong>和<strong><code>invokespecial</code></strong>指令调用的方法，都可以<strong>在解析阶段确定唯一的调用版本</strong>，包括了<strong>静态方法</strong>、<strong>私有方法</strong>、<strong>实例构造器</strong>、<strong>父类方法</strong>4类。</p>
+<p><strong>解析调用</strong>一定是一个<strong>静态过程</strong>，编译器就可以完全确定，在类装载的解析阶段就会把涉及的<strong>符号引用</strong>全部转变为可确定的<strong>直接引用</strong>，不会延迟到运行期去完成。</p>
+<h3 id="分派调用"><a href="#分派调用" class="headerlink" title="分派调用"></a>分派调用</h3><p>分派调用可能是<strong>静态</strong>的也可能是<strong>动态</strong>的，根据<strong>宗量</strong>（<strong>方法的接收者</strong>和<strong>方法的参数</strong>统称为方法的宗量）分为<strong>单分派</strong>和<strong>多分派</strong>，两类分派方式两两组合就构成了：静态单分派、静态多分派、动态单分派、动态多分派。</p>
+<p>分派的调用过程其实就是Java<strong>多态</strong>的实现原理，如<strong>重写</strong>和<strong>重载</strong>在Java虚拟机中是如何实现的。</p>
+<h4 id="静态分派"><a href="#静态分派" class="headerlink" title="静态分派"></a>静态分派</h4><p>说到静态分派，首先先说一下变量的<strong>静态类型</strong>或者叫<strong>外观类型</strong>，以及变量的<strong>实际类型</strong>。假设有抽象类Human和其实现类Man、Woman，若<strong><code>Human man = new Man();</code></strong>,则<strong><code>Human</code></strong>是man的<strong>静态类型</strong>，<strong><code>Man</code></strong>是其<strong>实际类型</strong>。</p>
+<p>静态类型和实际类型在程序中都可能发生一些变化，<strong>静态类型</strong>的变化仅仅在<strong>使用时发生</strong>，变量<strong>本身的静态类型不会被改变</strong>，且<strong>最终的静态类型是在编译器可知</strong>的；<strong>实际类型</strong>的变化结果在<strong>运行期才可以确定</strong>，编译器在编译程序时并不知道对象的实际类型是什么。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实际类型的变化</span></span><br><span class="line">Human man = <span class="keyword">new</span> Man();</span><br><span class="line">man = Woman();</span><br><span class="line"><span class="comment">// 静态类型的变化</span></span><br><span class="line">sr.sayHello((Man) man);</span><br><span class="line">sr.sayHello((Woman) man);</span><br></pre></td></tr></table></figure>
+<p>虚拟机（编译器）在调用<strong>重载</strong>（<strong><code>Overload</code></strong>）时是通过参数的<strong>静态类型</strong>而不是<strong>实际类型</strong>作为判定依据，在<strong>编译阶段<code>Javac</code></strong>编译器会根据参数的<strong>静态类型</strong>来确定具体调用哪个重载版本的方法。</p>
+<p><strong>所有依赖 静态类型来定位方法执行版本的分派动作称为静态分派，静态分派的典型应用是方法重载</strong>。</p>
+<p>静态分派发生在<strong>编译阶段</strong>，因此确定静态分派的动作实际上<strong>不是由虚拟机来执行的</strong>，编译器虽然能确定方法的重载版本，但很多情况下这个<strong>重载版本并不唯一</strong>，往往只能确定一个<strong>更加合适的版本</strong>，主要原因是<strong>字面量不需要定义</strong>，所以<strong>字面量是没有显式的静态类型</strong>，其静态类型只能通过语言上的规则去理解和推断。</p>
+<h4 id="动态分派"><a href="#动态分派" class="headerlink" title="动态分派"></a>动态分派</h4><p><strong>动态分派</strong>与<strong>多态</strong>的另一个重要体现<strong>重写</strong>（<strong><code>Override</code></strong>）有着密切的关联。</p>
+<p><strong>动态分派</strong>其实就是<strong><code>invokevirtual</code></strong>指令的<strong>多态查找</strong>的过程。由于该指令第一步就是在运行其确定接收者的实际类型，所以对于不同的调用，该指令会将常量池中的类方法符号引用解析到不同的直接引用上，该过程就是Java中方法重写的本质。</p>
+<p>我们将这种在<strong>运行期</strong>根据<strong>实际类型</strong>确定<strong>方法执行版本</strong>的分派过程称为<strong>动态分派</strong>。</p>
+<p><strong>解析</strong>和<strong>分派</strong>这两者之间的关系并<strong>不是二选一的排他关系</strong>，它们是在<strong>不同层次</strong>上去<strong>筛选</strong>、<strong>确定</strong>目标方法的过程。</p>
+<h4 id="单分派与多分派"><a href="#单分派与多分派" class="headerlink" title="单分派与多分派"></a>单分派与多分派</h4><p>单分派是根据一个宗量对目标方法进行选择，多分派是根据多个宗量对目标方法进行选择。到目前为止可以说Java语言是一门<strong>静态多分派、动态单分派</strong>的语言。</p>
+<h4 id="虚拟机动态分派的实现"><a href="#虚拟机动态分派的实现" class="headerlink" title="虚拟机动态分派的实现"></a>虚拟机动态分派的实现</h4><p>由于动态分派是非常频繁的动作，而且动态分派的方法版本的选择过程需要<strong>运行时</strong>在类的<strong>方法元数据中搜索合适的目标方法</strong>，在虚拟机的实际实现中基于性能考虑会对其进行一些优化，最常用的<strong>稳定优化</strong>手段是为类<strong>在方法区中建立一个虚方法表或接口方法表</strong>，<strong>使用虚方法表索引来代替元数据查找提高性能</strong>。</p>
+<p>虚方法表中存放着各个方法的<strong>实际入口地址</strong>。具有<strong>相同签名</strong>的方法，在之类和父类的虚方法表中都应当<strong>具有相同的索引序号</strong>，在类型变换时便于查找。</p>
+<p>虚拟机除了使用方法表之外，在条件允许下，还会使用<strong>内联缓存</strong>和基于<strong>类型继承关系分析技术的守护内联</strong>两种非稳定的优化手段来获取更高的性能。</p>
+<h3 id="动态类型语言支持"><a href="#动态类型语言支持" class="headerlink" title="动态类型语言支持"></a>动态类型语言支持</h3><p>动态类型语言的<strong>关键特征</strong>是它的<strong>类型检查</strong>的<strong>主体过程是在运行期而不是编译期</strong>。<strong>变量无类型而变量值才有类型</strong>这也是动态语言的一个重要特征。</p>
+<p><strong>静态类型</strong>语言在编译期确定类型，可以提供<strong>严谨的类型检查</strong>，与类型相关的问题在编码时就能及时发现，<strong>利于稳定性及代码达到更大规模</strong>；</p>
+<p><strong>动态类型</strong>语言在运行期确定类型，为开发人员提供<strong>更大的灵活性</strong>，代码会更加<strong>清晰简单</strong>，也意味着<strong>高效的开发效率</strong>。</p>
+<h4 id="Reflection与MethodHandler"><a href="#Reflection与MethodHandler" class="headerlink" title="Reflection与MethodHandler"></a>Reflection与MethodHandler</h4><p><strong><code>JDK7</code></strong>提供了<strong><code>java.lang.invoke</code></strong>包，其主要目的是用于提供一种新的动态确定目标方法的机制，称为<strong><code>MethodHandler</code></strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        System.out.println(string);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    Object obj = System.currentTimeMillis() % <span class="number">2</span> == <span class="number">0</span> ? System.out : <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">    MethodType methodType = MethodType.methodType(<span class="keyword">void</span>.class, String.class);</span><br><span class="line">    MethodHandle methodHandle = MethodHandles.lookup().findVirtual(obj.getClass(), <span class="string">"println"</span>, methodType).bindTo(obj);</span><br><span class="line"></span><br><span class="line">    methodHandle.invokeExact(<span class="string">"param"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>MethodHandler</code></strong>的使用方法与<strong><code>Reflection</code></strong>有众多相似之处，以及以下区别：</p>
+<ul>
+<li>本质上<strong><code>MethodHandler</code></strong>和<strong><code>Reflection</code></strong>都是在<strong>模拟方法调用</strong>，<strong><code>Reflection</code></strong>是在模拟<strong>Java层次</strong>的方法调用，<strong><code>MethodHandler</code></strong>是在模拟<strong>字节码层次</strong>的方法调用。</li>
+<li><strong><code>Reflection</code></strong>中的<strong><code>Method</code></strong>对象远比<strong><code>MethodHandler</code></strong>中的<strong><code>MethodHandler</code></strong>对象所包含的信息多。<strong><code>Method</code></strong>包含了<strong>方法签名、描述符、方法属性表中各种属性、以及执行权限</strong>等运行期信息。而<strong><code>MethodHandler</code></strong>仅包含与<strong>执行该方法相关</strong>的信息。</li>
+<li><strong><code>MethodHandler</code></strong>理论上可以采用类似虚拟机在字节码上做的各种优化思路。而<strong><code>Reflection</code></strong>不行。</li>
+<li><strong><code>Reflection</code></strong>仅支持Java语言，<strong><code>MethodHandler</code></strong>支持所有语言。</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Java/基础/时间及日期总结/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Java8时间及日期
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Java/VM/运行时栈帧结构/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">运行时栈帧结构</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2019 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
