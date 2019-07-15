@@ -13,18 +13,18 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OOM异常实验">
-<meta property="og:url" content="http://yaoyinglong.github.io/Blog/Java/VM/OutOfMemoryError异常/index.html">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/OutOfMemoryError异常/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。 堆溢出堆中存储的是对象的实例，只要不断的创建对象，并保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象，当对象数量达到最大堆的通量限制后就会产生内存溢出异常。本次测试中通过限制堆内存的大小且将其限制为不可扩展（将堆的最小值-Xms和最大值-Xmx参数设置为一样）来进行堆">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yaoyinglong.github.io/images/虚拟机参数设置.png">
-<meta property="og:image" content="http://yaoyinglong.github.io/images/堆OOM异常GC详情.png">
-<meta property="og:image" content="http://yaoyinglong.github.io/images/堆OOM异常运行结果.png">
+<meta property="og:image" content="https://yaoyinglong.github.io/images/虚拟机参数设置.png">
+<meta property="og:image" content="https://yaoyinglong.github.io/images/堆OOM异常GC详情.png">
+<meta property="og:image" content="https://yaoyinglong.github.io/images/堆OOM异常运行结果.png">
 <meta property="og:updated_time" content="2019-06-27T09:26:09.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OOM异常实验">
 <meta name="twitter:description" content="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。 堆溢出堆中存储的是对象的实例，只要不断的创建对象，并保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象，当对象数量达到最大堆的通量限制后就会产生内存溢出异常。本次测试中通过限制堆内存的大小且将其限制为不可扩展（将堆的最小值-Xms和最大值-Xmx参数设置为一样）来进行堆">
-<meta name="twitter:image" content="http://yaoyinglong.github.io/images/虚拟机参数设置.png">
+<meta name="twitter:image" content="https://yaoyinglong.github.io/images/虚拟机参数设置.png">
     
 
     

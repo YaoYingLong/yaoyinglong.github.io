@@ -13,7 +13,7 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存分配与回收策略">
-<meta property="og:url" content="http://yaoyinglong.github.io/Blog/Java/VM/内存非配与回收策略/index.html">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/内存非配与回收策略/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="Java体系技术中所提倡的自动内存管理最终可以归结为自动化地解决两个问题：给对象分配内存以及回收分配给对象的内存。 对象的内存分配，往大的方向讲就是在堆上分配，但也可能经过JIT编译后被拆散为标量类型并间接地在栈上分配，对象主要分配在新生代的Eden区上，如果启动了本地线程分配缓冲，就按线程优先在TLAB上分配，少数情况下可能直接分配在老年代中。 大对象直接进入老年代一般对象在新生代Eden区中分">
 <meta property="og:locale" content="en">
