@@ -13,22 +13,22 @@
 <meta name="keywords" content="Spring，Servlet3.x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMvc异步原理及实现">
-<meta property="og:url" content="wiki.yaoyinglong.me/Blog/框架/Spring/SpringMvc异步/index.html">
+<meta property="og:url" content="http://yaoyinglong.github.io/Blog/框架/Spring/SpringMvc异步/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="在实际的项目中，可能会用到HTTP异步请求方式来提高系统的吞吐量。 同步请求客户端发起同步HTTP请求时，线程进入等待状态，直到接受到一个response对象或者请求超时状态 ，往返WEB服务器的过程：  HTTP请求在经过DNS服务器的域名解析，到Nginx反向代理转发到我们的WEB服务器（servlet容器，Tomcat），WEB服务器会启动一个请求处理线程来处理请求，完成资源分配处理之后，线">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/HTTP同步请求过程图.png">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/HTTP异步请求过程图.png">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/Servlet3异步流程.png">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/同步线程阻塞Tomcat参数使用情况.png">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/异步线程非阻塞Tomcat参数使用情况.png">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/未自定义线程池导致线程数飙升.png">
-<meta property="og:image" content="wiki.yaoyinglong.me/images/框架/Servlet3.1非阻塞IO.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/HTTP同步请求过程图.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/HTTP异步请求过程图.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/Servlet3异步流程.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/同步线程阻塞Tomcat参数使用情况.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/异步线程非阻塞Tomcat参数使用情况.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/未自定义线程池导致线程数飙升.png">
+<meta property="og:image" content="http://yaoyinglong.github.io/images/框架/Servlet3.1非阻塞IO.png">
 <meta property="og:updated_time" content="2019-06-27T09:26:09.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMvc异步原理及实现">
 <meta name="twitter:description" content="在实际的项目中，可能会用到HTTP异步请求方式来提高系统的吞吐量。 同步请求客户端发起同步HTTP请求时，线程进入等待状态，直到接受到一个response对象或者请求超时状态 ，往返WEB服务器的过程：  HTTP请求在经过DNS服务器的域名解析，到Nginx反向代理转发到我们的WEB服务器（servlet容器，Tomcat），WEB服务器会启动一个请求处理线程来处理请求，完成资源分配处理之后，线">
-<meta name="twitter:image" content="wiki.yaoyinglong.me/images/框架/HTTP同步请求过程图.png">
+<meta name="twitter:image" content="http://yaoyinglong.github.io/images/框架/HTTP同步请求过程图.png">
     
 
     
