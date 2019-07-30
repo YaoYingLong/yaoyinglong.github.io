@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyinglong.github.io/"/>
-  <updated>2019-06-27T09:26:09.588Z</updated>
+  <updated>2019-07-30T02:10:01.659Z</updated>
   <id>https://yaoyinglong.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Win实用工具</title>
+    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/Win%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>https://yaoyinglong.github.io/Blog/杂记/Win实用工具/</id>
+    <published>2019-07-29T16:00:00.000Z</published>
+    <updated>2019-07-30T02:10:01.659Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="PotPlayer"><a href="#PotPlayer" class="headerlink" title="PotPlayer"></a>PotPlayer</h3><p>非常好用的视频播放器。</p><h3 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h3><p>轻便简洁的Markdown编辑器，支持即时渲染</p><h3 id="TeamViewer"><a href="#TeamViewer" class="headerlink" title="TeamViewer"></a>TeamViewer</h3><p>用于远程控制的应用程序</p><h3 id="Notepad"><a href="#Notepad" class="headerlink" title="Notepad++"></a>Notepad++</h3><p>文本编辑器</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;PotPlayer&quot;&gt;&lt;a href=&quot;#PotPlayer&quot; class=&quot;headerlink&quot; title=&quot;PotPlayer&quot;&gt;&lt;/a&gt;PotPlayer&lt;/h3&gt;&lt;p&gt;非常好用的视频播放器。&lt;/p&gt;
+&lt;h3 id=&quot;Typora&quot;&gt;&lt;a href=&quot;#
+      
+    
+    </summary>
+    
+      <category term="杂记" scheme="https://yaoyinglong.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="工具" scheme="https://yaoyinglong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux常用技巧</title>
@@ -42,20 +68,28 @@
   </entry>
   
   <entry>
-    <title>Arthas诊断工具</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/Arthas%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7/"/>
-    <id>https://yaoyinglong.github.io/Blog/杂记/Arthas诊断工具/</id>
+    <title>JAVA实用工具</title>
+    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/JAVA%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>https://yaoyinglong.github.io/Blog/杂记/JAVA实用工具/</id>
     <published>2019-05-31T16:00:00.000Z</published>
-    <updated>2019-06-30T10:18:53.419Z</updated>
+    <updated>2019-07-30T02:11:12.558Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h3><p>Java 线上诊断工具</p><h3 id="EasyExcel"><a href="#EasyExcel" class="headerlink" title="EasyExcel"></a>EasyExcel</h3><p>用来对 Java 进行解析、生成 Excel 的框架，它重写了 poi 对 07 版 Excel 的解析，原本一个 3M 的 Excel 用 POI sax 需要 100M 左右内存，EasyExcel 可降低到 KB 级别，并且再大的 excel 也不会出现内存溢出的情况。03 版依赖 POI 的 sax 模式。在上层做了模型转换的封装，让使用者更加简单方便。</p><h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p>接口调试工具</p><h3 id="LoadRunner"><a href="#LoadRunner" class="headerlink" title="LoadRunner"></a>LoadRunner</h3><p>压测工具</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Arthas&quot;&gt;&lt;a href=&quot;#Arthas&quot; class=&quot;headerlink&quot; title=&quot;Arthas&quot;&gt;&lt;/a&gt;Arthas&lt;/h3&gt;&lt;p&gt;Java 线上诊断工具&lt;/p&gt;
+&lt;h3 id=&quot;EasyExcel&quot;&gt;&lt;a href=&quot;#EasyExcel
+      
     
     </summary>
     
       <category term="杂记" scheme="https://yaoyinglong.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="Arthas" scheme="https://yaoyinglong.github.io/tags/Arthas/"/>
+      <category term="工具" scheme="https://yaoyinglong.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -427,31 +461,6 @@
   </entry>
   
   <entry>
-    <title>Maven常用工具</title>
-    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
-    <id>https://yaoyinglong.github.io/Blog/Maven/Maven常用工具/</id>
-    <published>2018-12-07T16:00:00.000Z</published>
-    <updated>2019-06-27T09:26:09.590Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="Mybatis-Plus"><a href="#Mybatis-Plus" class="headerlink" title="Mybatis Plus"></a>Mybatis Plus</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mybatis-plus.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>Mybatis 增强工具，在 Mybatis 的基础上只做增强不做改变，简化开发、提高效率。</p><h3 id="Okhttp"><a href="#Okhttp" class="headerlink" title="Okhttp"></a>Okhttp</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.squareup.okhttp3<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>okhttp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;okhttp.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>高效的HTTP客户端，默认特性：</p><ul><li>支持HTTP/2，允许所有同一个主机地址的请求共享同一个socket连接</li><li>连接池减少请求延时</li><li>透明的GZIP压缩减少响应数据的大小</li><li>缓存响应内容，避免一些完全重复的请求</li></ul><h3 id="Java工具包"><a href="#Java工具包" class="headerlink" title="Java工具包"></a>Java工具包</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.hutool<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hutool-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hutool.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>Hutool是一个Java工具包类库，对文件、流、加密解密、转码、正则、线程、XML等JDK方法进行封装，组成各种Util工具类，文档地址：<a href="https://www.hutool.cn/" rel="external nofollow noopener noreferrer" target="_blank">https://www.hutool.cn/</a></p><h3 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Lombok&quot;&gt;&lt;a href=&quot;#Lombok&quot; class=&quot;headerlink&quot; title=&quot;Lombok&quot;&gt;&lt;/a&gt;Lombok&lt;/h3&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte
-      
-    
-    </summary>
-    
-      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
-    
-    
-      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Maven基础</title>
     <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E5%9F%BA%E7%A1%80/"/>
     <id>https://yaoyinglong.github.io/Blog/Maven/Maven基础/</id>
@@ -477,13 +486,13 @@
   </entry>
   
   <entry>
-    <title>IDEA常用插件</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/IDEA%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6/"/>
-    <id>https://yaoyinglong.github.io/Blog/杂记/IDEA常用插件/</id>
+    <title>IDEA实用插件</title>
+    <link href="https://yaoyinglong.github.io/Blog/%E6%9D%82%E8%AE%B0/IDEA%E5%AE%9E%E7%94%A8%E6%8F%92%E4%BB%B6/"/>
+    <id>https://yaoyinglong.github.io/Blog/杂记/IDEA实用插件/</id>
     <published>2018-12-07T16:00:00.000Z</published>
-    <updated>2019-06-27T09:26:09.597Z</updated>
+    <updated>2019-07-30T01:54:02.104Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Alibaba-Java-Coding-Guidelines"><a href="#Alibaba-Java-Coding-Guidelines" class="headerlink" title="Alibaba Java Coding Guidelines"></a>Alibaba Java Coding Guidelines</h3><p><strong>《阿里巴巴Java开发规约》</strong>扫描插件</p><h3 id="MyBatis-plugin"><a href="#MyBatis-plugin" class="headerlink" title="MyBatis plugin"></a>MyBatis plugin</h3><p>将<strong><code>Mybatis</code></strong>中的<strong><code>Mapper</code></strong>文件中的方法和<strong><code>XML</code></strong>中对应的方法相互关联</p><h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><p>通过注解减少很多重复代码的书写，比如说<strong><code>getter/setter/toString</code></strong>等方法的编写</p><h3 id="Maven-Helper"><a href="#Maven-Helper" class="headerlink" title="Maven Helper"></a>Maven Helper</h3><p>包含的<strong><code>Maven</code></strong>使用命令，以及引入插件的命令，可以通过按钮直接操作，且包含强大<strong><code>Dependency Analyzer</code></strong>功能</p><h3 id="String-Manipulation"><a href="#String-Manipulation" class="headerlink" title="String Manipulation"></a>String Manipulation</h3><p>把字符串处理成编程时常用的格式</p><h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><p>一个牛逼好用翻译插件，不用来回切换翻译软件，直接就能在<strong><code>IDE</code></strong>中使用</p><h3 id="iedis"><a href="#iedis" class="headerlink" title="iedis"></a>iedis</h3><p><strong><code>redis</code></strong>客户端可视化插件</p><h3 id="GsonFormat"><a href="#GsonFormat" class="headerlink" title="GsonFormat"></a>GsonFormat</h3><p>根据<strong><code>JSON</code></strong>生成<strong><code>POJO</code></strong></p><h3 id="GenerateSerialVersionUID"><a href="#GenerateSerialVersionUID" class="headerlink" title="GenerateSerialVersionUID"></a>GenerateSerialVersionUID</h3><p>生成<strong><code>serialVersionUID</code></strong>的小插件</p><h3 id="VisualVM-Launcher"><a href="#VisualVM-Launcher" class="headerlink" title="VisualVM Launcher"></a>VisualVM Launcher</h3><p><strong><code>Java</code></strong>性能分析插件</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="Alibaba-Java-Coding-Guidelines"><a href="#Alibaba-Java-Coding-Guidelines" class="headerlink" title="Alibaba Java Coding Guidelines"></a>Alibaba Java Coding Guidelines</h3><p><strong>《阿里巴巴Java开发规约》</strong>扫描插件</p><h3 id="MyBatis-plugin"><a href="#MyBatis-plugin" class="headerlink" title="MyBatis plugin"></a>MyBatis plugin</h3><p>将<strong><code>Mybatis</code></strong>中的<strong><code>Mapper</code></strong>文件中的方法和<strong><code>XML</code></strong>中对应的方法相互关联</p><h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><p>通过注解减少很多重复代码的书写，比如说<strong><code>getter/setter/toString</code></strong>等方法的编写</p><h3 id="Maven-Helper"><a href="#Maven-Helper" class="headerlink" title="Maven Helper"></a>Maven Helper</h3><p>包含的<strong><code>Maven</code></strong>使用命令，以及引入插件的命令，可以通过按钮直接操作，且包含强大<strong><code>Dependency Analyzer</code></strong>功能</p><h3 id="String-Manipulation"><a href="#String-Manipulation" class="headerlink" title="String Manipulation"></a>String Manipulation</h3><p>把字符串处理成编程时常用的格式</p><h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><p>一个牛逼好用翻译插件，不用来回切换翻译软件，直接就能在<strong><code>IDE</code></strong>中使用</p><h3 id="iedis"><a href="#iedis" class="headerlink" title="iedis"></a>iedis</h3><p><strong><code>redis</code></strong>客户端可视化插件</p><h3 id="GsonFormat"><a href="#GsonFormat" class="headerlink" title="GsonFormat"></a>GsonFormat</h3><p>根据<strong><code>JSON</code></strong>生成<strong><code>POJO</code></strong></p><h3 id="GenerateSerialVersionUID"><a href="#GenerateSerialVersionUID" class="headerlink" title="GenerateSerialVersionUID"></a>GenerateSerialVersionUID</h3><p>生成<strong><code>serialVersionUID</code></strong>的小插件</p><h3 id="VisualVM-Launcher"><a href="#VisualVM-Launcher" class="headerlink" title="VisualVM Launcher"></a>VisualVM Launcher</h3><p><strong><code>Java</code></strong>性能分析插件</p><h3 id="Cloud-Toolkit"><a href="#Cloud-Toolkit" class="headerlink" title="Cloud Toolkit"></a>Cloud Toolkit</h3><p>帮助开发者更高效地开发、测试、诊断并部署应用。通过 Cloud Toolkit，开发者能够方便地将本地应用一键部署到任意机器（本地或云端），并内置 Arthas 诊断、高效执行终端命令和 SQL 等</p><h3 id="Mybatis-Log-Plugin"><a href="#Mybatis-Log-Plugin" class="headerlink" title="Mybatis Log Plugin"></a>Mybatis Log Plugin</h3><p>对Mybatis打印的SQL日志进行优化，能直接拷贝使用。</p><h3 id="RestfulToolkit"><a href="#RestfulToolkit" class="headerlink" title="RestfulToolkit"></a>RestfulToolkit</h3><p><strong><code>RESTful</code></strong> 服务开发辅助工具集，<em>URL 直接跳转到对应的方法定义</em> ，提供了一个 Services tree 的显示窗口，一个简单的 http 请求工具</p>]]></content>
     
     <summary type="html">
     
@@ -502,27 +511,27 @@
   </entry>
   
   <entry>
-    <title>Redis分布式锁实现</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E6%A1%86%E6%9E%B6/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://yaoyinglong.github.io/Blog/框架/Redis分布式锁实现/</id>
-    <published>2018-11-30T16:00:00.000Z</published>
-    <updated>2019-06-27T09:26:09.599Z</updated>
+    <title>Maven常用工具</title>
+    <link href="https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>https://yaoyinglong.github.io/Blog/Maven/Maven常用工具/</id>
+    <published>2018-12-07T16:00:00.000Z</published>
+    <updated>2019-06-27T09:26:09.590Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="锁实现"><a href="#锁实现" class="headerlink" title="锁实现"></a>锁实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOCK_SUCCESS = <span class="string">"OK"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Long RELEASE_SUCCESS = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String SET_IF_NOT_EXIST = <span class="string">"NX"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String SET_WITH_EXPIRE = <span class="string">"PX"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String COMPARE_AND_DELETE = <span class="string">"if redis.call('get',KEYS[1]) == ARGV[1]\n"</span> +</span><br><span class="line">    <span class="string">"then\n"</span> +</span><br><span class="line">    <span class="string">"    return redis.call('del',KEYS[1])\n"</span> +</span><br><span class="line">    <span class="string">"else\n"</span> +</span><br><span class="line">    <span class="string">"    return 0\n"</span> +</span><br><span class="line">    <span class="string">"end"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">getLock</span><span class="params">(String key, String requestId)</span> </span>&#123;</span><br><span class="line">    String status = stringRedisTemplate.execute((RedisCallback&lt;String&gt;) connection -&gt; &#123;</span><br><span class="line">        Jedis jedis = (Jedis) connection.getNativeConnection();</span><br><span class="line">        <span class="keyword">return</span> jedis.set(key, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE, <span class="number">20000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> LOCK_SUCCESS.equals(status);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">releaseLock</span><span class="params">(String key, String requestId)</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; keys = Collections.singletonList(key);</span><br><span class="line">    Object result = stringRedisTemplate.execute(<span class="keyword">new</span> DefaultRedisScript&lt;&gt;(COMPARE_AND_DELETE, String.class), keys, requestId);</span><br><span class="line">    <span class="keyword">return</span> RELEASE_SUCCESS.equals(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="运用"><a href="#运用" class="headerlink" title="运用"></a>运用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">syncUpdateCheck</span><span class="params">(String pid, Company company)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> beforeTime = System.currentTimeMillis();</span><br><span class="line">        Date date = lastUpdateTime(company);</span><br><span class="line">        <span class="keyword">if</span> (date == <span class="keyword">null</span> || System.currentTimeMillis() - date.getTime() &gt; updatePeriod()) &#123;</span><br><span class="line">            String tag = <span class="string">"ENT:DATA:UPDATE:CHECK:"</span> + code() + <span class="string">":"</span> + company.getUuid();</span><br><span class="line">            <span class="keyword">long</span> maxSleepMills = System.currentTimeMillis() + <span class="number">20000</span>;</span><br><span class="line">            <span class="keyword">boolean</span> lock = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">while</span> (!lock) &#123;</span><br><span class="line">                    lock = redisLockService.getLock(tag, pid);</span><br><span class="line">                    <span class="keyword">if</span> (lock) &#123;</span><br><span class="line">                        date = lastUpdateTime(company);</span><br><span class="line">                        <span class="keyword">if</span> (date == <span class="keyword">null</span> || System.currentTimeMillis() - date.getTime() &gt; updatePeriod()) &#123;</span><br><span class="line">                            requestService.request(pid, company, code());</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        date = lastUpdateTime(company);</span><br><span class="line">                        <span class="keyword">if</span> (date != <span class="keyword">null</span> &amp;&amp; System.currentTimeMillis() - date.getTime() &lt; updatePeriod()) &#123;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span> (System.currentTimeMillis() &gt; maxSleepMills) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> UpdateCheckException(<span class="string">"syncUpdateCheck获取锁资源等待超时"</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        TimeUnit.MILLISECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                LOGGER.error(<span class="string">"syncUpdateCheck线程wait异常导致中断:"</span> + e.getMessage());</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                redisLockService.releaseLock(tag, pid);</span><br><span class="line">                date = lastUpdateTime(company);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="Mybatis-Plus"><a href="#Mybatis-Plus" class="headerlink" title="Mybatis Plus"></a>Mybatis Plus</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mybatis-plus.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>Mybatis 增强工具，在 Mybatis 的基础上只做增强不做改变，简化开发、提高效率。</p><h3 id="Okhttp"><a href="#Okhttp" class="headerlink" title="Okhttp"></a>Okhttp</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.squareup.okhttp3<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>okhttp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;okhttp.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>高效的HTTP客户端，默认特性：</p><ul><li>支持HTTP/2，允许所有同一个主机地址的请求共享同一个socket连接</li><li>连接池减少请求延时</li><li>透明的GZIP压缩减少响应数据的大小</li><li>缓存响应内容，避免一些完全重复的请求</li></ul><h3 id="Java工具包"><a href="#Java工具包" class="headerlink" title="Java工具包"></a>Java工具包</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.hutool<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hutool-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hutool.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>Hutool是一个Java工具包类库，对文件、流、加密解密、转码、正则、线程、XML等JDK方法进行封装，组成各种Util工具类，文档地址：<a href="https://www.hutool.cn/" rel="external nofollow noopener noreferrer" target="_blank">https://www.hutool.cn/</a></p><h3 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;锁实现&quot;&gt;&lt;a href=&quot;#锁实现&quot; class=&quot;headerlink&quot; title=&quot;锁实现&quot;&gt;&lt;/a&gt;锁实现&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;sp
+        &lt;h3 id=&quot;Lombok&quot;&gt;&lt;a href=&quot;#Lombok&quot; class=&quot;headerlink&quot; title=&quot;Lombok&quot;&gt;&lt;/a&gt;Lombok&lt;/h3&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte
       
     
     </summary>
     
-      <category term="框架" scheme="https://yaoyinglong.github.io/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="Maven" scheme="https://yaoyinglong.github.io/categories/Maven/"/>
     
     
-      <category term="分布式锁" scheme="https://yaoyinglong.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"/>
+      <category term="Maven" scheme="https://yaoyinglong.github.io/tags/Maven/"/>
     
   </entry>
   
