@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>字节码指令 | YingLong</title>
+    
+    
+        <meta name="keywords" content="JVM">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Java虚拟机指令是由一个字节长度、代表某种特定操作含义的数字操作码Opcode以及跟随其后的零至多个代表此操作所需参数操作数Operands而构成。但由于Java虚拟机采用面向操作数栈而不是寄存器的架构，所以大多数指令只有一个操作码。 字节码指令集是一种具有鲜明特点、优劣势突出的指令集架构，由于操作码长度为一个字节即0~255，故指令的操作码总数不超过256条； Class文件格式放弃了编译后代">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字节码指令">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/字节码指令/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="Java虚拟机指令是由一个字节长度、代表某种特定操作含义的数字操作码Opcode以及跟随其后的零至多个代表此操作所需参数操作数Operands而构成。但由于Java虚拟机采用面向操作数栈而不是寄存器的架构，所以大多数指令只有一个操作码。 字节码指令集是一种具有鲜明特点、优劣势突出的指令集架构，由于操作码长度为一个字节即0~255，故指令的操作码总数不超过256条； Class文件格式放弃了编译后代">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-10T02:26:34.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字节码指令">
+<meta name="twitter:description" content="Java虚拟机指令是由一个字节长度、代表某种特定操作含义的数字操作码Opcode以及跟随其后的零至多个代表此操作所需参数操作数Operands而构成。但由于Java虚拟机采用面向操作数栈而不是寄存器的架构，所以大多数指令只有一个操作码。 字节码指令集是一种具有鲜明特点、优劣势突出的指令集架构，由于操作码长度为一个字节即0~255，故指令的操作码总数不超过256条； Class文件格式放弃了编译后代">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+
+        
+        
+        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>
+                
+                    <li class="file active"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM4/">国密SM4</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM2/">国密SM2</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/Java中调用Groovy脚本/">Java中调用Groovy脚本</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Maven/Maven加密JAR包/">Maven加密JAR包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven个性化打包/">Maven个性化打包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven Assembly标签全解/">Maven Assembly标签全解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA实用插件/">IDEA实用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/Win实用工具/">Win实用工具</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>
+                
+            </ul>
+        
+    </div>
+    <script>
+        $(document).ready(function () {
+            var iconFolderOpenClass = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({duration: 100});
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({duration: 100});
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    subtrees.slideUp({duration: 100});
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({duration: 100});
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if (expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({duration: 100});
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({duration: 100});
+                    icon.addClass(iconAllExpandClass);
+                }
+            });
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/VM/字节码指令" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/VM/">VM</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Java/VM/字节码指令/">
+            <time datetime="2018-02-07T16:00:00.000Z" itemprop="datePublished">2018-02-08</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            字节码指令
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><strong><code>Java</code>虚拟机指令</strong>是由<strong>一个字节长度</strong>、<strong>代表某种特定操作含义的数字操作码<code>Opcode</code></strong>以及跟随其后的<strong>零至多个代表此操作所需参数操作数<code>Operands</code></strong>而构成。但由于Java虚拟机<strong>采用面向操作数栈</strong>而不是寄存器的架构，所以<strong>大多数指令</strong>只有一个<strong>操作码</strong>。</p>
+<p><strong>字节码指令集</strong>是一种具有<strong>鲜明特点</strong>、<strong>优劣势突出</strong>的指令集架构，由于<strong>操作码长度</strong>为一个字节即<strong><code>0~255</code></strong>，故指令的操作码<strong>总数不超过<code>256</code>条</strong>；</p>
+<p><strong><code>Class</code></strong>文件格式<strong>放弃了编译后代码的操作数长度对齐</strong>，虚拟机处理<strong>超过一个字节</strong>的数据时，需在<strong>运行时从字节中重建具体数据的结构</strong>，如果将16位长度的无符号整数使用两个无符号字节<strong><code>byte1、byte1</code></strong>存储，其值为<strong><code>(byte1 &lt;&lt; 8) | byte2</code></strong>。放弃操作数长度对齐，可以<strong>省略</strong>很多<strong>填充</strong>和<strong>间隔符号</strong>，但在某种程度上会导致<strong>解释执行字节码时损失一些性能</strong>。</p>
+<p><strong>不考虑异常处理</strong>的情况下，Java虚拟机的<strong>解释器</strong>可使用一下伪代码为最基本的执行模型来理解：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    自动计算PC寄存器的值加<span class="number">1</span>;</span><br><span class="line">    根据PC寄存器指示位置，从字节码流中取出操作码;</span><br><span class="line">    <span class="keyword">if</span> ( 字节码存在操作数 ) 从字节码流中取出操作数;</span><br><span class="line">    执行操作码所定义的操作;</span><br><span class="line">&#125; where ( 字节码流长度 &gt; <span class="number">0</span> );</span><br></pre></td></tr></table></figure></p>
+<h3 id="字节码与数据类型"><a href="#字节码与数据类型" class="headerlink" title="字节码与数据类型"></a>字节码与数据类型</h3><p>Java虚拟机指令集中，大多数指令都包含其<strong>基本操作</strong>所对应的<strong>数据类型信息</strong>。大部分与数据类型相关的字节码指令，它们的<strong>操作码助记符</strong>中有<strong>特殊字符</strong>表示<strong>服务的数据类型</strong>：<code>i</code>代表<code>int</code>、<code>l</code>代表<code>long</code>、<code>s</code>代表<code>short</code>、<code>b</code>代表<code>byte</code>、<code>c</code>代表<code>char</code>、<code>f</code>代表<code>float</code>、<code>d</code>代表<code>double</code>、<code>a</code>代表<code>reference</code>；但也有指令助记符种没有指名操作类型字母，如<strong><code>arraylength</code>操作数为数组类型的对象</strong>、<strong><code>goto</code>无条件跳转指令</strong>。</p>
+<p>虚拟机指令集对于<strong>特定操作</strong>只提供了<strong>有限的类型相关指令</strong>去支持，指令集将会被设计成<strong>非完全独立</strong>的，即<strong>并非</strong>每种数据类型和每一种操作都有对应的指令。有<strong>一些单独的指令</strong>可以在必要的时候用来将一些<strong>不支撑的数据类型</strong>转换为<strong>可被支撑的类型</strong>。</p>
+<p><strong>大部分</strong>指令都<strong>没有</strong>支撑整数类型<strong><code>byte、char、short</code></strong>甚至<strong>没有任何指令支撑<code>boolean</code>类型</strong>。编译器会在<strong>编译期</strong>或<strong>运行期</strong>将<strong><code>byte</code></strong>和<strong><code>short</code></strong>类型的数据<strong>带符号扩展</strong>为相应的<strong><code>int</code>类型数据</strong>，在c处理<strong><code>boolean、byte、short、char</code></strong>类型的数组时，也会<strong>转换为</strong>使用对应的<strong><code>int</code>类型字节码指令</strong>来处理。</p>
+<h3 id="加载和存储指令"><a href="#加载和存储指令" class="headerlink" title="加载和存储指令"></a>加载和存储指令</h3><p><strong>加载</strong>和<strong>存储</strong>指令用于将数据在<strong>栈帧中</strong>的<strong>局部变量表</strong>和<strong>操作数栈</strong>之间来回传输，<strong>存储数据</strong>的<strong>操作数栈</strong>和<strong>局部变量表</strong>主要由<strong>加载</strong>和<strong>存储</strong>指令进行操作，<strong>少数访问对象字段或数组元素</strong>指令也会向<strong>操作数栈</strong>传输数据。</p>
+<ul>
+<li><strong>将局部变量加载到操作栈：<code>iload</code>、<code>iload_&lt;n&gt;</code>、<code>lload</code>、<code>lload_&lt;n&gt;</code>、<code>fload</code>、<code>fload_&lt;n&gt;</code>、<code>dload</code>、<code>dload_&lt;n&gt;</code>、<code>aload</code>、<code>aload_&lt;n&gt;</code></strong></li>
+<li>将数据从<strong>操作数栈</strong>存储到<strong>局部变量表</strong>：<strong><code>istore</code>、<code>istore_&lt;n&gt;</code>、<code>lstore</code>、<code>lstore_&lt;n&gt;</code>、<code>fstore</code>、<code>fstore_&lt;n&gt;</code>、<code>dstore</code>、<code>dstore_&lt;n&gt;</code>、<code>astore</code>、<code>astore_&lt;n&gt;</code></strong></li>
+<li>将<strong>常量</strong>加载到<strong>操作数栈</strong>：<strong><code>bipush</code>、<code>sipush</code>、<code>ldc</code>、<code>ldc_w</code>、<code>ldc2_w</code>、<code>aconst_null</code>、<code>iconst_m1</code>、<code>iconst_&lt;i&gt;</code>、<code>lconst_&lt;l&gt;</code>、<code>fconst_&lt;f&gt;</code>、<code>dconst_&lt;d&gt;</code></strong></li>
+<li><strong>扩充局部变量表访问索引</strong>：<strong><code>wide</code></strong>。</li>
+</ul>
+<p>带有尖括号结尾的指令，指令助记符代表一组指令。</p>
+<h4 id="运算指令"><a href="#运算指令" class="headerlink" title="运算指令"></a>运算指令</h4><p>运算指令用于对两个<strong>操作数栈</strong>上的值进行某种<strong>特定运算</strong>，并把结果重新存入<strong>操作数栈顶</strong>。大体上算数指令分<strong>整型数据运算指令</strong>和<strong>浮点数据运算指令</strong>，<strong>整数</strong>与<strong>浮点数</strong>的算术指令在<strong>溢出</strong>和<strong>被零除</strong>时<strong>有各自不同的行为表现</strong>。</p>
+<ul>
+<li><strong>加法指令：<code>iadd</code>、<code>ladd</code>、<code>fadd</code>、<code>dadd</code></strong></li>
+<li><strong>减法指令：<code>isub</code>、<code>lsub</code>、<code>fsub</code>、<code>dsub</code></strong></li>
+<li><strong>乘法指令：<code>imul</code>、<code>lmul</code>、<code>fmul</code>、<code>dmul</code></strong></li>
+<li><strong>除法指令：<code>idiv</code>、<code>ldiv</code>、<code>fdiv</code>、<code>ddiv</code></strong></li>
+<li><strong>求余指令：<code>irem</code>、<code>lrem</code>、<code>frem</code>、<code>drem</code></strong></li>
+<li><strong>取反指令：<code>ineg</code>、<code>lneg</code>、<code>fneg</code>、<code>dneg</code></strong></li>
+<li><strong>位移指令：<code>ishl</code>、<code>ishr</code>、<code>iushr</code>、<code>lshl</code>、<code>lshr</code>、<code>lushr</code></strong></li>
+<li><strong>按位或指令：<code>ior</code>、<code>lor</code></strong></li>
+<li><strong>按位与指令：<code>iand</code>、<code>land</code></strong></li>
+<li><strong>按位异或指令：<code>ixor</code>、<code>lxor</code></strong></li>
+<li><strong>局部变量自增指令：<code>iinc</code></strong></li>
+<li><strong>比较指令：<code>dcmpg</code>、<code>dcmpl</code>、<code>fcmpg</code>、<code>fcmpl</code>、<code>lcmp</code></strong></li>
+</ul>
+<p>数据运算<strong>可能会导致溢出</strong>，虚拟机规范没有明确定义整数数据溢出的具体运算结果，仅规定了在处理整数数据时，只有<strong>除法指令</strong>和<strong>求余指令</strong>中出现<strong>除数为零</strong>时会抛出<strong><code>ArithmeticException</code>异常</strong>，其余任何<strong>整型</strong>数运算场景都不应该抛出<strong>运行时异常</strong>。</p>
+<p>Java虚拟机<strong>处理浮点数</strong>时必须<strong>完全支持<code>IEEE 754</code></strong>中定义的<strong>非正规浮点数值</strong>和<strong>逐级下溢</strong>的运算规则，所有运算结果都必须<strong>舍入到适当精度</strong>，<strong>非精确</strong>的结果必须<strong>舍入</strong>为可被表示的<strong>最接近的精确值</strong>，若两种可表示形式与该<strong>值一样接近</strong>，将<strong>优先选择最低有效位为零的</strong>。将浮点数转换成整数时，使用的<strong>向零舍入模式</strong>，舍入结果会导致<strong>数字被截断</strong>，小数部分有<strong>效字节</strong>都会<strong>被丢弃掉</strong>。Java虚拟机在<strong>处理浮点数</strong>运算时<strong>不会抛出任何运行时异常</strong>。</p>
+<p>对<strong><code>long</code>类型</strong>的数值进行比较时，虚拟机采用<strong>带符号</strong>的比较方式，而<strong>浮点数</strong>值比较采用<strong>无符号</strong>比较方法。</p>
+<h3 id="类型转换指令"><a href="#类型转换指令" class="headerlink" title="类型转换指令"></a>类型转换指令</h3><p>类型转换指令能将<strong>两种不同数值类型进行相互转换</strong>，一般用于实现<strong>用户代码中显示类型转换操作</strong>，或用来<strong>处理字节码指令集中数据类型相关指令无法与数据类型一一对应</strong>的问题。</p>
+<p>虚拟机<strong>直接支持</strong>以下数值类型的<strong>宽化类型转换</strong>，即<strong>小范围类型</strong>向<strong>大范围类型</strong>的<strong>安全转换</strong>，转换时<strong>无需显示的转换指令</strong>。</p>
+<ul>
+<li><strong><code>int</code>类型到<code>long</code>、<code>float</code>、<code>double</code>类型</strong></li>
+<li><strong><code>long</code>类型到<code>float</code>、<code>double</code>类型</strong></li>
+<li><strong><code>float</code>类型到<code>double</code>类型</strong></li>
+</ul>
+<p>处理<strong>窄化类型转换</strong>时，<strong>必须显示使用转换指令</strong>来完成，转换指令包括<strong><code>i2b</code>、<code>i2c</code>、<code>i2s</code>、<code>l2i</code>、<code>f2i</code>、<code>f2l</code>、<code>d2i</code>、<code>d2l</code>、<code>d2f</code></strong>。窄化类型转换可能导致类型转换结果产生<strong>不同正负号、不同数量级、精度丢失</strong>等情况。</p>
+<p><strong><code>int</code></strong>或<strong><code>long</code></strong>类型<strong>窄化转换</strong>为整数类型T时，仅仅简单地<strong>丢弃除最低位N个字节以外的内容</strong>，但这也<strong>将导致转换结果与输入值有不同正负号</strong>。</p>
+<p>将<strong>浮点值窄化转换</strong>为整数类型T时，将遵循以下转换规则：</p>
+<ul>
+<li>若<strong>浮点值为<code>NaN</code></strong>，转换结果为<strong><code>int</code></strong>或<strong><code>long</code></strong>类型的<strong><code>0</code></strong></li>
+<li>若浮点值<strong>非无穷大</strong>，浮点值使用<strong>向零舍入模式取整</strong>，若获得整数值<strong>在目标类型<code>int</code>或<code>long</code>的表示范围内</strong>，转换结果就是该值</li>
+<li>否则，将<strong>根据该值的符号</strong>，转换为<strong><code>int</code></strong>或<strong><code>long</code></strong>所能表示的<strong>最大或最小正数</strong></li>
+</ul>
+<p><strong><code>double</code></strong>类型到<strong><code>float</code></strong>类型的<strong>窄化转换</strong>，向<strong>最接近数舍入模式舍入</strong>得到一个可使用<strong><code>float</code></strong>类型表示的数字，若转换结果<strong>绝对值太小</strong>，返回<strong><code>float</code></strong>类型的<strong>正负零</strong>；若<strong>绝对值太大</strong>，将返回<strong><code>float</code></strong>类型的<strong>正负无穷大</strong>；<strong><code>double</code></strong>类型<strong><code>NoN</code></strong>将按规定转换为<strong><code>float</code></strong>类型的<strong><code>NaN</code></strong>值。</p>
+<p>尽管数据类型窄化转换可能发生<strong>上限溢出、下限溢出、精度丢失</strong>等情况，但虚拟机规范中规定<strong>数值类型窄化转换指令</strong>永远不可能导致虚拟机抛出<strong>运行时异常</strong>。</p>
+<h3 id="操作数栈管理指令"><a href="#操作数栈管理指令" class="headerlink" title="操作数栈管理指令"></a>操作数栈管理指令</h3><p>虚拟机提供了以下用于<strong>直接操作操作数栈</strong>的指令：</p>
+<ul>
+<li>将操作数栈<strong>栈顶一个或两个元素出栈</strong>：<strong><code>pop</code>、<code>pop2</code></strong></li>
+<li><strong>复制栈顶一个或两个数值并将复制值或双份复制值重新压入栈顶：<code>dup</code>、<code>dup2</code>、<code>dup_x1</code>、<code>dup2_x1</code>、<code>dup_x2</code>、<code>dup2_x2</code></strong></li>
+<li><strong>将栈顶两个数值互换：<code>swap</code></strong></li>
+</ul>
+<h3 id="控制转移指令"><a href="#控制转移指令" class="headerlink" title="控制转移指令"></a>控制转移指令</h3><p>控制转移指令可以让Java虚拟机<strong>有条件</strong>或<strong>无条件</strong>从<strong>指定位置指令</strong>继续执行程序，<strong>而不是控制转移指令的下一条指令</strong>，可以认为控制转移指令就是在<strong>有条件</strong>或<strong>无条件</strong>地<strong>修改PC寄存器的值</strong>。</p>
+<ul>
+<li><strong>条件分支：<code>ifeq</code>、<code>iflt</code>、<code>ifle</code>、<code>ifgt</code>、<code>ifge</code>、<code>ifnull</code>、<code>ifnonull</code>、<code>if_icmpeg</code>、<code>if_icmpne</code>、<code>if_icmplt</code>、<code>if_icmpgt</code>、<code>if_icmple</code>、<code>if_acmpeg</code>、<code>if_acmpne</code></strong></li>
+<li><strong>复合条件分支：<code>tableswitch</code>、<code>lookupswitch</code></strong></li>
+<li><strong>无条件分支：<code>goto</code>、<code>goto_w</code>、<code>jsr</code>、<code>jsr_w</code>、<code>ret</code></strong></li>
+</ul>
+<p>虚拟机<strong>有专门的指令集</strong>用来处理<strong><code>int</code></strong>和<strong><code>reference</code></strong>类型的<strong>条件分支比较操作</strong>，也<strong>有专门的指令用来检测null值</strong>。</p>
+<p>对于<strong><code>boolean</code>、<code>byte</code>、<code>char</code>、<code>short</code></strong>等类型的<strong>条件分支比较</strong>操作，<strong>都使用<code>int</code>类型的比较指令来完成</strong>，而<strong><code>long</code>、<code>float</code>、<code>double</code></strong>类型的<strong>条件分支比较</strong>操作，则<strong>执行相应类型的比较运算指令</strong>，运算指令会返回一个<strong>整型值到操作数栈中</strong>，随后<strong>再执行<code>int</code>类型的条件分支比较操作来完成整个分支跳转</strong>。<strong>各种类型的比较最终都会转化为<code>int</code>类型的比较操作</strong>，所以虚拟机提供的<strong><code>int</code></strong>类型的<strong>条件分支指令最丰富最强大</strong>。</p>
+<h3 id="方法调用和返回指令"><a href="#方法调用和返回指令" class="headerlink" title="方法调用和返回指令"></a>方法调用和返回指令</h3><ul>
+<li><strong><code>invokevirtual</code></strong>指令用于<strong>调用对象的实例方法</strong>，根据对象实际类型进行分派（虚方法分派）</li>
+<li><strong><code>invokeinterface</code></strong>指令用于<strong>调用接口方法</strong>，运行时搜索一个实现了这个接口方法的对象，<strong>找出最合适的方法进行调用</strong></li>
+<li><strong><code>invokespecial</code></strong>指令用于<strong>调用一些特殊处理的实例方法</strong>，包括<strong>实例初始化方法、私有方法、父类方法</strong></li>
+<li><strong><code>invokestatic</code></strong>指令用于<strong>调用类方法</strong>，即<strong><code>static</code></strong>方法</li>
+<li><strong><code>invokedynamic</code></strong>指令用于<strong>在运行时动态解析出调用点限定符所引用的方法</strong>，并执行该方法</li>
+</ul>
+<p>前4条调用指令<strong>分派逻辑都固化在虚拟机内部</strong>，而<strong><code>invokedynamic</code>指令分派逻辑是由用户所设定的引导方法决定的</strong>。</p>
+<p><strong>方法调用指令</strong>与<strong>数据类型无关</strong>，而<strong>方法返回指令</strong>是<strong>根据返回值的类型区分</strong>的，包括<strong><code>ireturn</code></strong>（返回值是<strong><code>boolean</code>、<code>byte</code>、<code>char</code>、<code>short</code>、<code>int</code></strong>类型时使用）、<strong><code>lreturn</code>、<code>freturn</code>、<code>dreturn</code>、<code>areturn</code></strong>，以及<strong><code>return</code>指令供<code>void</code>方法、实例初始化方法、类和接口的类初始化方法使用</strong>。</p>
+<h3 id="异常处理指令"><a href="#异常处理指令" class="headerlink" title="异常处理指令"></a>异常处理指令</h3><p>程序中<strong>通过<code>throw</code>语句显示抛出异常</strong>的操作都<strong>由<code>athrow</code>指令来实现</strong>，除throw显示抛出异常外，虚拟机规范还规定了许多<strong>运行时异常</strong>会在其他Java虚拟机指令检测到异状况时<strong>自动抛出</strong>。虚拟机中<strong><code>catch</code>语句处理异常不是由字节码指令</strong>来实现的，而是<strong>采用异常表来完成</strong>的。</p>
+<h3 id="同步指令"><a href="#同步指令" class="headerlink" title="同步指令"></a>同步指令</h3><p>虚拟机支持<strong>方法级的同步</strong>和<strong>方法内部一段指令序列的同步</strong>，两种同步都使用<strong>管程<code>Monitor</code>来支持</strong>的。</p>
+<p><strong>方法级的同步是隐式的，无须通过字节码指令来控制</strong>，它<strong>实现在方法调用</strong>和<strong>返回操作</strong>之中。虚拟机可以从<strong>方法常量池</strong>的<strong>方法结构中</strong>的<strong><code>ACC_SYNCHRONIZED</code>访问标志</strong>得知方法<strong>是否声明未同步方法</strong>。当方法调用时，调用的指令将会<strong>检查方法的<code>ACC_SYNCHRONIZED</code>访问标志</strong>是否被设置，若被设置，执行线程就要求<strong>先成功持有管程<code>Monitor</code></strong>，然后才能执行方法，最后当方法执行完成，<strong>无论是否正常完成都释放管程<code>Monitor</code></strong>，方法执行期间，执行线程持有了<strong>管程<code>Monitor</code></strong>，其他任何线程都无法再获得同一个<strong>管程<code>Monitor</code></strong>。若同步方法<strong>执行期间抛出异常</strong>，且方法<strong>内部无法处理异常</strong>，同步方法所持有的<strong>管程<code>Monitor</code></strong>将在<strong>异常抛到同步方法外时自动释放</strong>。</p>
+<p><strong>同步一段指令集序列</strong>通常是通过<strong><code>synchronized</code>语句块</strong>来完成，<strong>虚拟机的指令集使用<code>monitorenter</code>和<code>monitorexit</code>两条指令来支持<code>synchronized</code>关键字的语义，正确实现<code>synchronized</code>关键字</strong>需要<strong><code>Javac</code>编译器</strong>和<strong><code>Java</code>虚拟机</strong>共同协作支持，编译器必须保证方法通过任何方式完成，方法中调用过的<strong>每条<code>monitorenter</code>指令</strong>都必须执行其<strong>对应的<code>monitorexit</code>指令</strong>，<strong>无论该方法是否正常结束</strong>。</p>
+<p><strong>为了保证方法异常完成时<code>monitorenter</code>和<code>monitorexit</code>指令能正确配对执行，编译器会自动产生一个异常处理器，且声明可处理的所有异常，来执行<code>monitorexit</code>指令</strong>。</p>
+<blockquote>
+<p><strong>虚拟机两种主要的实现方式</strong>：</p>
+<ul>
+<li>将输入的<strong><code>Java</code>虚拟机代码</strong>在<strong>加载</strong>或<strong>执行</strong>时<strong>翻译成另一种虚拟机指令集</strong> </li>
+<li>将输入的<strong><code>Java</code>虚拟机代码</strong>在<strong>加载</strong>或<strong>执行</strong>时<strong>翻译成宿主机<code>CPU</code>的本地指令集</strong>，即<strong><code>JIT</code>代码生成技术</strong></li>
+</ul>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Java/VM/类加载的时机/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    类加载的时机
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Java/VM/属性表集合/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">属性表集合</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2020 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

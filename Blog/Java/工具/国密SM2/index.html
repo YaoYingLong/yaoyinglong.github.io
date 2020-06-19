@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>国密SM2 | YingLong</title>
+    
+    
+        <meta name="keywords" content="国密，SM2">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="SM2为非对称加密，基于ECC 椭圆曲线密码机制。该算法已公开。由于该算法基于ECC，故其签名速度与秘钥生成速度都快于RSA。ECC 256位（SM2采用的就是ECC 256位的一种）安全强度比RSA 2048位高，但运算速度快于RSA。 Maven配置： 1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.bouncycastle&amp;lt;/groupId&amp;g">
+<meta name="keywords" content="国密，SM2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="国密SM2">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/工具/国密SM2/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="SM2为非对称加密，基于ECC 椭圆曲线密码机制。该算法已公开。由于该算法基于ECC，故其签名速度与秘钥生成速度都快于RSA。ECC 256位（SM2采用的就是ECC 256位的一种）安全强度比RSA 2048位高，但运算速度快于RSA。 Maven配置： 1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.bouncycastle&amp;lt;/groupId&amp;g">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-06-19T01:57:33.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="国密SM2">
+<meta name="twitter:description" content="SM2为非对称加密，基于ECC 椭圆曲线密码机制。该算法已公开。由于该算法基于ECC，故其签名速度与秘钥生成速度都快于RSA。ECC 256位（SM2采用的就是ECC 256位的一种）安全强度比RSA 2048位高，但运算速度快于RSA。 Maven配置： 1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.bouncycastle&amp;lt;/groupId&amp;g">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+
+        
+        
+        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM4/">国密SM4</a></li>
+                
+                    <li class="file active"><a href="/Blog/Java/工具/国密SM2/">国密SM2</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/Java中调用Groovy脚本/">Java中调用Groovy脚本</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Maven/Maven加密JAR包/">Maven加密JAR包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven个性化打包/">Maven个性化打包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven Assembly标签全解/">Maven Assembly标签全解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA实用插件/">IDEA实用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/Win实用工具/">Win实用工具</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>
+                
+            </ul>
+        
+    </div>
+    <script>
+        $(document).ready(function () {
+            var iconFolderOpenClass = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({duration: 100});
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({duration: 100});
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    subtrees.slideUp({duration: 100});
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({duration: 100});
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if (expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({duration: 100});
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({duration: 100});
+                    icon.addClass(iconAllExpandClass);
+                }
+            });
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/工具/国密SM2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/工具/">工具</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/国密，SM2/">国密，SM2</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Java/工具/国密SM2/">
+            <time datetime="2019-10-27T16:00:00.000Z" itemprop="datePublished">2019-10-28</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            国密SM2
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><code>SM2</code>为<strong>非对称</strong>加密，基于<code>ECC</code> 椭圆曲线密码机制。该算法已公开。由于该算法基于<code>ECC</code>，故其签名速度与秘钥生成速度都<strong>快于RSA</strong>。<code>ECC 256</code>位（<code>SM2</code>采用的就是<code>ECC 256</code>位的一种）<strong>安全强度比RSA 2048位高</strong>，但运算速度<strong>快于RSA</strong>。</p>
+<p><code>Maven</code>配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.bouncycastle<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>bcpkix-jdk15on<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="特别关注"><a href="#特别关注" class="headerlink" title="特别关注"></a>特别关注</h3><p>对于<code>SM2</code>加解密，需要注意三点，首先需要注意加密处理的<strong>密文顺序</strong>，关于<strong>密钥的使用</strong>，以及<strong>加解密的HEX转码</strong>问题。</p>
+<h5 id="加密处理的密文顺序"><a href="#加密处理的密文顺序" class="headerlink" title="加密处理的密文顺序"></a>加密处理的密文顺序</h5><ul>
+<li>注意约定<code>C1</code>、<code>C2</code>、<code>C3</code>的拼装顺序（参照下面加密相关的代码内容，示例顺序为：<code>C1+C2+C3</code>）</li>
+</ul>
+<h5 id="密钥的使用"><a href="#密钥的使用" class="headerlink" title="密钥的使用"></a>密钥的使用</h5><ul>
+<li>有的生成的公钥是带<code>04</code>前缀，有的是不带的。在使用时最对实际情况进行<code>04</code>的截取或补充（示例是带<code>04</code>的）</li>
+<li>有的生成的私钥前缀带有<code>00</code>，有的是不带<code>00</code>的，在使用时最对实际情况进行<code>00</code>的截取或补充（示例是不带<code>00</code>的）</li>
+</ul>
+<h5 id="HEX转码问题"><a href="#HEX转码问题" class="headerlink" title="HEX转码问题"></a>HEX转码问题</h5><ul>
+<li><code>SM2</code>加解密过程中会多次进行<code>HEX</code>的编码何解码，调试时需要注意</li>
+<li>在进行<code>HEX</code>编码时，注意中文的编码格式</li>
+</ul>
+<h3 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h3><p><code>Cipher</code>代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cipher</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ct;</span><br><span class="line">    <span class="keyword">private</span> ECPoint p2;</span><br><span class="line">    <span class="keyword">private</span> SM3Digest sm3keybase;</span><br><span class="line">    <span class="keyword">private</span> SM3Digest sm3c3;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] key;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span> keyOff;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Cipher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ct = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">this</span>.key = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">32</span>];</span><br><span class="line">        <span class="keyword">this</span>.keyOff = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Reset</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sm3keybase = <span class="keyword">new</span> SM3Digest();</span><br><span class="line">        <span class="keyword">this</span>.sm3c3 = <span class="keyword">new</span> SM3Digest();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] publicKeyX = HexUtil.byteConvert32Bytes(p2.getX().toBigInteger());</span><br><span class="line">        <span class="keyword">this</span>.sm3keybase.update(publicKeyX, <span class="number">0</span>, publicKeyX.length);</span><br><span class="line">        <span class="keyword">this</span>.sm3c3.update(publicKeyX, <span class="number">0</span>, publicKeyX.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] publicKeyY = HexUtil.byteConvert32Bytes(p2.getY().toBigInteger());</span><br><span class="line">        <span class="keyword">this</span>.sm3keybase.update(publicKeyY, <span class="number">0</span>, publicKeyY.length);</span><br><span class="line">        <span class="keyword">this</span>.ct = <span class="number">1</span>;</span><br><span class="line">        NextKey();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">NextKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SM3Digest sm3keycur = <span class="keyword">new</span> SM3Digest(<span class="keyword">this</span>.sm3keybase);</span><br><span class="line">        sm3keycur.update((<span class="keyword">byte</span>) (ct &gt;&gt; <span class="number">24</span> &amp; <span class="number">0xff</span>));</span><br><span class="line">        sm3keycur.update((<span class="keyword">byte</span>) (ct &gt;&gt; <span class="number">16</span> &amp; <span class="number">0xff</span>));</span><br><span class="line">        sm3keycur.update((<span class="keyword">byte</span>) (ct &gt;&gt; <span class="number">8</span> &amp; <span class="number">0xff</span>));</span><br><span class="line">        sm3keycur.update((<span class="keyword">byte</span>) (ct &amp; <span class="number">0xff</span>));</span><br><span class="line">        sm3keycur.doFinal(key, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">this</span>.keyOff = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.ct++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ECPoint <span class="title">Init_enc</span><span class="params">(SM2 sm2, ECPoint userKey)</span> </span>&#123;</span><br><span class="line">        AsymmetricCipherKeyPair key = sm2.ecc_key_pair_generator.generateKeyPair();</span><br><span class="line">        ECPrivateKeyParameters ecpriv = (ECPrivateKeyParameters) key.getPrivate();</span><br><span class="line">        ECPublicKeyParameters ecpub = (ECPublicKeyParameters) key.getPublic();</span><br><span class="line">        BigInteger k = ecpriv.getD();</span><br><span class="line">        ECPoint c1 = ecpub.getQ();</span><br><span class="line">        <span class="keyword">this</span>.p2 = userKey.multiply(k);</span><br><span class="line">        Reset();</span><br><span class="line">        <span class="keyword">return</span> c1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Encrypt</span><span class="params">(<span class="keyword">byte</span>[] data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sm3c3.update(data, <span class="number">0</span>, data.length);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (keyOff == key.length) &#123;</span><br><span class="line">                NextKey();</span><br><span class="line">            &#125;</span><br><span class="line">            data[i] ^= key[keyOff++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Init_dec</span><span class="params">(BigInteger userD, ECPoint c1)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.p2 = c1.multiply(userD);</span><br><span class="line">        Reset();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Decrypt</span><span class="params">(<span class="keyword">byte</span>[] data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (keyOff == key.length) &#123;</span><br><span class="line">                NextKey();</span><br><span class="line">            &#125;</span><br><span class="line">            data[i] ^= key[keyOff++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.sm3c3.update(data, <span class="number">0</span>, data.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Dofinal</span><span class="params">(<span class="keyword">byte</span>[] c3)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] publicKeyY = HexUtil.byteConvert32Bytes(p2.getY().toBigInteger());</span><br><span class="line">        <span class="keyword">this</span>.sm3c3.update(publicKeyY, <span class="number">0</span>, publicKeyY.length);</span><br><span class="line">        <span class="keyword">this</span>.sm3c3.doFinal(c3, <span class="number">0</span>);</span><br><span class="line">        Reset();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>SM2</code>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SM2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String[] ECC_PARAM = &#123;</span><br><span class="line">            <span class="string">"FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF"</span>,</span><br><span class="line">            <span class="string">"FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFC"</span>,</span><br><span class="line">            <span class="string">"28E9FA9E9D9F5E344D5A9E4BCF6509A7F39789F515AB8F92DDBCBD414D940E93"</span>,</span><br><span class="line">            <span class="string">"FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF7203DF6B21C6052B53BBF40939D54123"</span>,</span><br><span class="line">            <span class="string">"32C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7"</span>,</span><br><span class="line">            <span class="string">"BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A0"</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> BigInteger ecc_p;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> BigInteger ecc_a;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> BigInteger ecc_b;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> BigInteger ecc_n;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> BigInteger ecc_gx;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> BigInteger ecc_gy;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ECCurve ecc_curve;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ECPoint ecc_point_g;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ECDomainParameters ecc_bc_spec;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ECKeyPairGenerator ecc_key_pair_generator;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ECFieldElement ecc_gx_fieldelement;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ECFieldElement ecc_gy_fieldelement;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SM2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ecc_p = <span class="keyword">new</span> BigInteger(ECC_PARAM[<span class="number">0</span>], <span class="number">16</span>);</span><br><span class="line">        <span class="keyword">this</span>.ecc_a = <span class="keyword">new</span> BigInteger(ECC_PARAM[<span class="number">1</span>], <span class="number">16</span>);</span><br><span class="line">        <span class="keyword">this</span>.ecc_b = <span class="keyword">new</span> BigInteger(ECC_PARAM[<span class="number">2</span>], <span class="number">16</span>);</span><br><span class="line">        <span class="keyword">this</span>.ecc_n = <span class="keyword">new</span> BigInteger(ECC_PARAM[<span class="number">3</span>], <span class="number">16</span>);</span><br><span class="line">        <span class="keyword">this</span>.ecc_gx = <span class="keyword">new</span> BigInteger(ECC_PARAM[<span class="number">4</span>], <span class="number">16</span>);</span><br><span class="line">        <span class="keyword">this</span>.ecc_gy = <span class="keyword">new</span> BigInteger(ECC_PARAM[<span class="number">5</span>], <span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.ecc_gx_fieldelement = <span class="keyword">new</span> Fp(<span class="keyword">this</span>.ecc_p, <span class="keyword">this</span>.ecc_gx);</span><br><span class="line">        <span class="keyword">this</span>.ecc_gy_fieldelement = <span class="keyword">new</span> Fp(<span class="keyword">this</span>.ecc_p, <span class="keyword">this</span>.ecc_gy);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.ecc_curve = <span class="keyword">new</span> ECCurve.Fp(<span class="keyword">this</span>.ecc_p, <span class="keyword">this</span>.ecc_a, <span class="keyword">this</span>.ecc_b);</span><br><span class="line">        <span class="keyword">this</span>.ecc_point_g = <span class="keyword">new</span> ECPoint.Fp(<span class="keyword">this</span>.ecc_curve, <span class="keyword">this</span>.ecc_gx_fieldelement, <span class="keyword">this</span>.ecc_gy_fieldelement);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.ecc_bc_spec = <span class="keyword">new</span> ECDomainParameters(<span class="keyword">this</span>.ecc_curve, <span class="keyword">this</span>.ecc_point_g, <span class="keyword">this</span>.ecc_n);</span><br><span class="line"></span><br><span class="line">        ECKeyGenerationParameters ecc_ecgenparam;</span><br><span class="line">        ecc_ecgenparam = <span class="keyword">new</span> ECKeyGenerationParameters(<span class="keyword">this</span>.ecc_bc_spec, <span class="keyword">new</span> SecureRandom());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.ecc_key_pair_generator = <span class="keyword">new</span> ECKeyPairGenerator();</span><br><span class="line">        <span class="keyword">this</span>.ecc_key_pair_generator.init(ecc_ecgenparam);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SM2 <span class="title">Instance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SM2();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>SM2Utils</code>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SM2Utils</span> </span>&#123;</span><br><span class="line">    <span class="comment">//生成随机秘钥对</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateKeyPair</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SM2 sm2 = SM2.Instance();</span><br><span class="line">        AsymmetricCipherKeyPair key = sm2.ecc_key_pair_generator.generateKeyPair();</span><br><span class="line">        ECPrivateKeyParameters ecpriv = (ECPrivateKeyParameters) key.getPrivate();</span><br><span class="line">        ECPublicKeyParameters ecpub = (ECPublicKeyParameters) key.getPublic();</span><br><span class="line">        BigInteger privateKey = ecpriv.getD();</span><br><span class="line">        ECPoint publicKey = ecpub.getQ();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"公钥: "</span> + ByteUtils.toHexString(publicKey.getEncoded()));</span><br><span class="line">        System.out.println(<span class="string">"私钥: "</span> + ByteUtils.toHexString(privateKey.toByteArray()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//数据加密</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encrypt</span><span class="params">(String publicKey, String plainText)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(publicKey) || StringUtils.isBlank(plainText)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] publicKeyBytes = ByteUtils.fromHexString(publicKey);</span><br><span class="line">        <span class="keyword">byte</span>[] plainTextBytes = ByteUtils.fromHexString(plainText);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] source = <span class="keyword">new</span> <span class="keyword">byte</span>[plainTextBytes.length];</span><br><span class="line">        System.arraycopy(plainTextBytes, <span class="number">0</span>, source, <span class="number">0</span>, plainTextBytes.length);</span><br><span class="line"></span><br><span class="line">        Cipher cipher = <span class="keyword">new</span> Cipher();</span><br><span class="line">        SM2 sm2 = SM2.Instance();</span><br><span class="line">        ECPoint userKey = sm2.ecc_curve.decodePoint(publicKeyBytes);</span><br><span class="line">        ECPoint c1 = cipher.Init_enc(sm2, userKey);</span><br><span class="line"></span><br><span class="line">        cipher.Encrypt(source);</span><br><span class="line">        <span class="keyword">byte</span>[] c3 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">32</span>];</span><br><span class="line">        cipher.Dofinal(c3);</span><br><span class="line">        <span class="comment">//C1 C2 C3拼装成加密字串</span></span><br><span class="line">        <span class="keyword">return</span> ByteUtils.toHexString(c1.getEncoded()) + ByteUtils.toHexString(source) + ByteUtils.toHexString(c3);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//数据解密</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] decrypt(String privateKey, String cipherText) &#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(privateKey) || StringUtils.isBlank(cipherText)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] privateKeyBytes = ByteUtils.fromHexString(privateKey);</span><br><span class="line">        <span class="keyword">byte</span>[] cipherTextBytes = ByteUtils.fromHexString(cipherText);</span><br><span class="line">        <span class="comment">//加密字节数组转换为十六进制的字符串 长度变为encryptedData.length * 2</span></span><br><span class="line">        String data = ByteUtils.toHexString(cipherTextBytes);</span><br><span class="line">        <span class="comment">/***分解加密字串</span></span><br><span class="line"><span class="comment">         * （C1 = C1标志位2位 + C1实体部分128位 = 130）</span></span><br><span class="line"><span class="comment">         * （C3 = C3实体部分64位  = 64）</span></span><br><span class="line"><span class="comment">         * （C2 = encryptedData.length * 2 - C1长度  - C2长度）</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">byte</span>[] c1Bytes = ByteUtils.fromHexString(data.substring(<span class="number">0</span>, <span class="number">130</span>));</span><br><span class="line">        <span class="keyword">int</span> c2Len = cipherTextBytes.length - <span class="number">97</span>;</span><br><span class="line">        <span class="keyword">byte</span>[] c2 = ByteUtils.fromHexString(data.substring(<span class="number">130</span>, <span class="number">130</span> + <span class="number">2</span> * c2Len));</span><br><span class="line">        <span class="keyword">byte</span>[] c3 = ByteUtils.fromHexString(data.substring(<span class="number">130</span> + <span class="number">2</span> * c2Len, <span class="number">194</span> + <span class="number">2</span> * c2Len));</span><br><span class="line"></span><br><span class="line">        SM2 sm2 = SM2.Instance();</span><br><span class="line">        BigInteger userD = <span class="keyword">new</span> BigInteger(<span class="number">1</span>, privateKeyBytes);</span><br><span class="line">        <span class="comment">//通过C1实体字节来生成ECPoint</span></span><br><span class="line">        ECPoint c1 = sm2.ecc_curve.decodePoint(c1Bytes);</span><br><span class="line">        Cipher cipher = <span class="keyword">new</span> Cipher();</span><br><span class="line">        cipher.Init_dec(userD, c1);</span><br><span class="line">        cipher.Decrypt(c2);</span><br><span class="line">        cipher.Dofinal(c3);</span><br><span class="line">        <span class="comment">//返回解密结果</span></span><br><span class="line">        <span class="keyword">return</span> c2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Java/工具/国密SM4/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    国密SM4
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Maven/Maven Assembly标签全解/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Maven Assembly标签全解</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2020 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

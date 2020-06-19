@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>类加载过程 | YingLong</title>
+    
+    
+        <meta name="keywords" content="JVM">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="加载加载阶段虚拟机要完成3件事：通过类的全限定名来获取定义此类得二进制字节流；将字节流所代表的静态存储结构转化为方法区的运行时数据；在内存中生成一个代表该类的java.lang.Class对象，作为方法区这个类的各种数据访问入口； 虚拟机没有明确规定二进制字节流要从哪里获取，怎样获取，相对于类加载过程的其他阶段，一个非数组类加载阶段中获取类二进制字节流的动作是开发人员可控性最强的，加载阶段既可以使">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类加载过程">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/VM/类加载过程/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="加载加载阶段虚拟机要完成3件事：通过类的全限定名来获取定义此类得二进制字节流；将字节流所代表的静态存储结构转化为方法区的运行时数据；在内存中生成一个代表该类的java.lang.Class对象，作为方法区这个类的各种数据访问入口； 虚拟机没有明确规定二进制字节流要从哪里获取，怎样获取，相对于类加载过程的其他阶段，一个非数组类加载阶段中获取类二进制字节流的动作是开发人员可控性最强的，加载阶段既可以使">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-10T02:26:34.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类加载过程">
+<meta name="twitter:description" content="加载加载阶段虚拟机要完成3件事：通过类的全限定名来获取定义此类得二进制字节流；将字节流所代表的静态存储结构转化为方法区的运行时数据；在内存中生成一个代表该类的java.lang.Class对象，作为方法区这个类的各种数据访问入口； 虚拟机没有明确规定二进制字节流要从哪里获取，怎样获取，相对于类加载过程的其他阶段，一个非数组类加载阶段中获取类二进制字节流的动作是开发人员可控性最强的，加载阶段既可以使">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+
+        
+        
+        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>
+                
+                    <li class="file active"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM4/">国密SM4</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM2/">国密SM2</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/Java中调用Groovy脚本/">Java中调用Groovy脚本</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Maven/Maven加密JAR包/">Maven加密JAR包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven个性化打包/">Maven个性化打包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven Assembly标签全解/">Maven Assembly标签全解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA实用插件/">IDEA实用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/Win实用工具/">Win实用工具</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>
+                
+            </ul>
+        
+    </div>
+    <script>
+        $(document).ready(function () {
+            var iconFolderOpenClass = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({duration: 100});
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({duration: 100});
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    subtrees.slideUp({duration: 100});
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({duration: 100});
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if (expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({duration: 100});
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({duration: 100});
+                    icon.addClass(iconAllExpandClass);
+                }
+            });
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Java/VM/类加载过程" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/VM/">VM</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Java/VM/类加载过程/">
+            <time datetime="2018-03-15T16:00:00.000Z" itemprop="datePublished">2018-03-16</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            类加载过程
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><p><strong>加载</strong>阶段虚拟机要完成<strong><code>3</code></strong>件事：通过类的<strong>全限定名</strong>来获取定义此类得<strong>二进制字节流</strong>；将字节流所代表的<strong>静态存储结构</strong>转化为<strong>方法区</strong>的<strong>运行时数据</strong>；在<strong>内存中生成</strong>一个代表该类的<strong><code>java.lang.Class</code></strong>对象，作为<strong>方法区</strong>这个类的<strong>各种数据访问入口</strong>；</p>
+<p>虚拟机<strong>没有明确规定</strong>二进制字节流要<strong>从哪里获取</strong>，<strong>怎样获取</strong>，相对于类加载过程的其他阶段，一个<strong>非数组类</strong>加载阶段中<strong>获取类二进制字节流</strong>的动作是开发人员<strong>可控性最强</strong>的，加载阶段既可以使用<strong>系统提供</strong>的<strong>引导类加载器</strong>来完成，也可以由<strong>自定义的类加载器</strong>来控制字节流的获取方式。一些典型的使用场景如下：</p>
+<ul>
+<li>从<strong>ZIP包中读取</strong>，<strong><code>JAR</code>、<code>EAR</code>、<code>WAR</code></strong>格式的基础</li>
+<li>从<strong>网络中获取</strong>，例：<strong><code>Applet</code></strong></li>
+<li><strong>动态代理</strong>，<strong><code>java.lang.reflect.Proxy</code></strong></li>
+<li>由其<strong>他文件生成</strong>，例：由<strong><code>JSP</code>生成对应的<code>Class</code>类</strong></li>
+<li>从<strong>数据库中读取</strong>，例：<strong>中间件服务器</strong>可选择把程序安装到数据库中来完成在<strong>集群间的发布</strong></li>
+</ul>
+<p>但数组类有所不同，<strong>数组类本身不通过类加载器创建</strong>，而是由<strong>虚拟机直接创建</strong>，但数组类<strong>与类加载器任然关系很密切</strong>，数组类的<strong>元素类型</strong>最终是要<strong>靠类加载器去创建</strong>。数组类的创建过程遵循以下规则：</p>
+<ul>
+<li>若数组的<strong><a href="#组件类型：数组去掉一个维度得类型">组件类型</a></strong>是<strong>引用类型</strong>，则<strong>递归</strong>采用<strong>加载过程</strong>加载该组件类型，数组在<strong>加载该组件类型</strong>的<strong>类加载器</strong>的<strong>类名称空间上被标识</strong></li>
+<li>若数组的<strong>组件类型不是引用类型</strong>，虚拟机会<strong>将数组标记为与引导类加载器关联</strong></li>
+<li>数组类的<strong>可见性</strong>与其<strong>组件类型一致</strong>，若组件类型<strong>不是引用类型</strong>，数组类的<strong>可见性默认为<code>public</code></strong></li>
+</ul>
+<p>虚拟机<strong>外部二进制字节流</strong>在<strong>加载阶段完成后</strong>按照虚拟机所需的格式<strong>存储在方法区</strong>，然后在内存中<strong>实例化</strong>一个<strong><code>java.lang.Class</code>类的对象</strong>，但并<strong>没有明确规定</strong>是<strong>在<code>Java</code>堆中</strong>，对于<strong><code>HotSpot</code>虚拟机</strong>而言，<strong><code>Class</code>对象</strong>虽然是对象，但存储在<strong>方法区</strong>中，该对象将作为程序<strong>访问方法区</strong>中的这些<strong>类型数据</strong>的<strong>外部接口</strong>。</p>
+<p><strong>加载阶段</strong>与<strong>连接阶段</strong>的部分内容是<strong>交叉进行</strong>的，例如<strong>一部分字节码文件格式校验</strong>，加载阶段尚未完成，连接阶段可能就已经开始，但这些夹在加载阶段之中进行的动作任然属于连接阶段内容，两个阶段的<strong>开始时间</strong>任然<strong>保持</strong>着<strong>固定</strong>的<strong>先后顺序</strong>。</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p><strong>验证</strong>是<strong>连接阶段</strong>的第一步，目的是为了<strong>确保Class文件</strong>的<strong>字节流</strong>中包含的信息<strong>符合</strong>当前虚拟机要求，且<strong>不会危害虚拟机</strong>自身安全。</p>
+<p><strong><code>Class</code>文件</strong>并<strong>不一定</strong>要求用<strong><code>Java</code>源码编译</strong>而来，可以使用<strong>任何途径</strong>产生，甚至包括<strong>十六进制编辑器</strong>直接编写来产生Class文件，虚拟机如果不检测输入的<strong>字节流</strong>，很可能会载入有害的字节流而<strong>导致系统崩溃</strong>。</p>
+<p><strong>验证阶段</strong>的<strong>工作量</strong>在虚拟机的<strong>类加载子系统</strong>中占了<strong>相当大的一部分</strong>，若验证到输入的字节流<strong>不符合<code>Class</code>文件格式</strong>的约束，虚拟机会抛出一个<strong><code>java.lang.VerifyError</code></strong>异常或其子类异常，验证阶段大致会完成4个阶段的检验动作：<strong>文件格式验证</strong>、<strong>元数据验证</strong>、<strong>字节码验证</strong>、<strong>符号引用验证</strong>。</p>
+<p>对虚拟机<strong>类加载机制</strong>来说，<strong>验证阶段</strong>是一个<strong>非常重要</strong>但<strong>不是一定必要</strong>的阶段，对程序<strong>运行期</strong>没有影响，若所运行的全部代码都已被反复使用和验证过，在<strong>实施阶段</strong>可以使用<strong><code>-XVerify:none</code></strong>参数来关闭大部分类验证措施，以<strong>缩短</strong>虚拟机类<strong>加载</strong>的时间。</p>
+<h5 id="文件格式验证"><a href="#文件格式验证" class="headerlink" title="文件格式验证"></a>文件格式验证</h5><p>验证<strong>字节流</strong>是否符合<strong><code>Class</code>文件格式</strong>的规范，且能被<strong>当前版本</strong>的虚拟机处理，包括是否以<strong>魔数<code>0xCAFEBABE</code></strong>开头，<strong>主次版本号</strong>是否在<strong>当前</strong>虚拟机<strong>处理范围</strong>内，检查常量池常量<strong><code>tag</code>标志</strong>的是否有<strong>不被支持的常量类型</strong>，指向常量的各种<strong>索引值</strong>中是否有指向<strong>不存在常量</strong>或<strong>不符合类型</strong>的常量，<strong><code>CONSTANT_Utf8_info</code>型常量</strong>中是否有<strong>不符合<code>UTF8</code>编码</strong>的数据，<strong><code>Class</code>文件</strong>中<strong>各个部分</strong>及<strong>文件本身</strong>是否有<strong>被删除</strong>的或<strong>附加</strong>的其他信息，等等。</p>
+<p>该阶段<strong>主要目的</strong>是保证输入的<strong>字节流能正确地解析并存储于方法区中</strong>，格式上<strong>符合描述一个<code>Java</code>类型信息</strong>的要求，该阶段的验证时<strong>基于二进制字节流</strong>进行的，只有<strong>通过</strong>了该阶段的验证，字节流才会进入<strong>内存</strong>的<strong>方法区</strong>进行存储，<strong>后面的3个验证阶段都是基于方法区的存储结构进行的，不会再直接操作字节流</strong>。</p>
+<h5 id="元数据验证"><a href="#元数据验证" class="headerlink" title="元数据验证"></a>元数据验证</h5><p>该阶段对<strong>字节码描述</strong>的信息进行<strong>语义分析</strong>，包括验证<strong>类是否有父类</strong>，类的<strong>父类</strong>是否<strong>继承</strong>了<strong><a href="#不允许被继承的类：被fianl修饰的类">不允许被继承的类</a></strong>，<strong>类是不是抽象类</strong>、是否<strong>实现</strong>了其<strong>父类</strong>或<strong>接口</strong>中<strong>要求实现</strong>的<strong>所有方法</strong>，<strong><a href="#类的字段、方法是否与父类产生矛盾：覆盖了父类的final字段，或者出现不符合规则的方法重载">类的字段、方法是否与父类产生矛盾</a></strong>。</p>
+<p>该阶段的<strong>主要目的</strong>是对类的<strong>元数据信息</strong>进行<strong>语义校验</strong>，保证<strong>不存在不符合</strong>Java语言规范的<strong>元数据信息</strong>。</p>
+<h5 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h5><p><strong>字节码验证</strong>是整个验证阶段过程中<strong>最复杂</strong>的阶段，主要目的是通过<strong>数据流</strong>和<strong>控制流</strong>分析，确定程序<strong>语义是否合法</strong>且<strong>符合逻辑</strong>，在<strong>元数据验证阶段</strong>对元数据信息中的<strong>数据类型</strong>做完校验后，<strong>字节码验证阶段</strong>将对类的<strong>方法体</strong>进行<strong>校验分析</strong>，保证<strong>被校验类的方法</strong>在<strong>运行时</strong>不会做出危害虚拟机安全的事件，保证<strong>任意时刻操作数栈</strong>的<strong>数据类型</strong>与<strong>指令代码序列</strong>都能配合工作，不会出现在操作栈放置<strong><code>int</code></strong>类型的数据，使用时按<strong><code>long</code></strong>类型来加载入<strong>本地变量表</strong>；保证<strong>跳转指令</strong>不会跳转到<strong>方法体以外</strong>的字节码指令上；保证<strong>方法体</strong>中<strong>类型转换</strong>是有效的；</p>
+<p>即使<strong>方法体通过了字节码验证</strong>，也<strong>不能明确</strong>其<strong>一定</strong>就是<strong>安全</strong>的，<strong>通过程序</strong>去<strong>校验程序逻辑</strong>是无法做到绝对准确的，不能通过程序准确地检测出程序是否能在<strong>有限时间内结束运行</strong>。</p>
+<p><strong>数据流验证复杂性高</strong>，为了<strong>避免</strong>过多的<strong>时间</strong>消耗在<strong>字节码验证阶段</strong>，<strong><code>JDK1.6</code></strong>之后<strong><code>Javac</code>编译器</strong>和<strong><code>Java</code>虚拟机</strong>中进行了<strong>优化</strong>，给<strong>方法体</strong>的<strong><code>Code</code>属性</strong>的<strong>属性表中</strong>增加了一项名为<strong><code>StackMapTable</code>属性</strong>，<strong><code>StackMapTable</code>属性</strong>描述了<strong>方法体</strong>中<strong>所有基本块</strong>开始时<strong>本地变量表</strong>和<strong>操作栈</strong>应有的<strong>状态</strong>，在<strong>字节码验证期间</strong>，就<strong>不需要</strong>根据<strong>程序推导</strong>这些<strong>状态</strong>的合法性，只需要<strong>检查<code>StackMapTable</code>属性</strong>中的<strong>记录</strong>是否合法。</p>
+<p>理论上<strong><code>StackMapTable</code>属性</strong>也<strong>存在错误</strong>或<strong>被篡改的可能</strong>，在<strong><code>JDK1.6</code></strong>的<strong><code>HotSpot</code></strong>虚拟机中提供<strong><code>-XX:-UseSplitVerifier</code></strong>选项类<strong>关闭这项优化</strong>，或使用<strong><code>-XX:+FailOverToOldVerifier</code></strong>参数来要求在<strong>类型校验失败</strong>时<strong>退回</strong>到<strong>旧的类型推导方式</strong>进行校验，<strong><code>JDK1.7</code></strong>后对于<strong>主版本号</strong>大于<strong><code>50</code></strong>的<strong><code>Class</code></strong>文件，只能使用<strong>类型检查</strong>来完成<strong>数据流分析校验</strong>，<strong>不允许</strong>退回到<strong>类型推导</strong>的校验方式。</p>
+<h5 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h5><p><strong>符号引用验证</strong>发生在虚拟机<strong>将符号引用转化为直接引用</strong>的时候，该转化动作将在<strong>连接的第三阶段——解析阶段</strong>中发生，符号引用验证可看做是对<strong><a href="#类自身以外的信息：例如常量池中各种符号引用">类自身以外的信息</a></strong>进行<strong>匹配性校验</strong>，包括<strong>符号引用</strong>中通过<strong>字符串</strong>来描述的<strong>全限定名</strong>是否能找到对应的类，在<strong>指定的类中</strong>是否存在<strong>符合方法的字段描述符</strong>以及<strong>简单名称所描述</strong>的<strong>方法</strong>和<strong>字段</strong>，<strong>符号引用中的类、字段、方法的访问权限</strong>是否可被<strong>当前类</strong>访问。</p>
+<p>符号引用验证的<strong>目的是确保解析动作能正常执行</strong>，若无法通过符号引用验证，将抛出<strong><code>java.lang.IncompatibleClassChangeError</code></strong>异常的子类，</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p><strong>准备阶段</strong>是<strong>正式</strong>为<strong>类变量分配内存</strong>并<strong>设置</strong>类变量<strong>初始值</strong>的阶段，<strong>类变量</strong>使用的<strong>内存</strong>都在<strong>方法区</strong>中进行分配。这个时候进行内存分配的<strong>仅包括被<code>static</code>修饰的类变量</strong>，<strong>不包括实例变量</strong>，实例变量将会在<strong>对象实例化</strong>时随对象一起分配在<strong>堆</strong>中，且这里所说的初始值<strong>通常情况</strong>下是<strong>数据类型</strong>的<strong>零值</strong>，例如一个类变量定义为：<strong><code>public static int value = 123;</code></strong>则变量在<strong>准备阶段</strong>后的<strong>初始值</strong>为<strong><code>0</code></strong>而不是<strong><code>123</code></strong>,把<strong><code>value</code></strong>赋值为<strong><code>123</code></strong>的<strong><code>putstatic</code></strong>指令是<strong>程序被编译后</strong>，存放于<strong>类构造器<code>&lt;clinit&gt;()</code>方法中</strong>，把<strong><code>value</code></strong>赋值为<strong><code>123</code></strong>的动作将在<strong>初始化阶段</strong>执行。</p>
+<p>若<strong>类字段属性表</strong>中存在<strong><code>ConstantValue</code>属性</strong>，在<strong>准备阶段</strong>变量<strong><code>value</code></strong>会被<strong>初始化为<code>ConstantValue</code>属性所指定的值</strong>，如<strong><code>public static final int value = 123;</code></strong>编译时<strong><code>Javac</code></strong>将会为<strong><code>value</code></strong>生成<strong><code>ConstantValue</code>属性</strong>，在<strong>准备阶段</strong>虚拟机会根据<strong><code>ConstantValue</code>属性</strong>的<strong>设置</strong>将<strong><code>value</code></strong>赋值为<strong><code>123</code></strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">零值</th>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">零值</th>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">零值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>int</code></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><code>boolean</code></td>
+<td style="text-align:center">false</td>
+<td style="text-align:center"><code>char</code></td>
+<td style="text-align:center">‘\u0000’</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>long</code></td>
+<td style="text-align:center">0L</td>
+<td style="text-align:center"><code>float</code></td>
+<td style="text-align:center">0.0f</td>
+<td style="text-align:center"><code>reference</code></td>
+<td style="text-align:center">null</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>short</code></td>
+<td style="text-align:center">(short)0</td>
+<td style="text-align:center"><code>double</code></td>
+<td style="text-align:center">0.0d</td>
+<td style="text-align:center"><code>byte</code></td>
+<td style="text-align:center">(byte)0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p><strong>解析阶段</strong>是虚拟机将<strong>常量池</strong>内的<strong>符号引用</strong>替换为<strong>直接引用</strong>的过程。</p>
+<p><strong>符号引用</strong>在<strong><code>Class</code></strong>文件中以<strong><code>CONSTANT_Class_info</code></strong>、<strong><code>CONSTANT_Fieldref_info</code></strong>、<strong><code>CONSTANT_Methodref_info</code></strong>等类型的<strong>常量</strong>出现，<strong>符号引用</strong>以一组<strong>符号</strong>来<strong>描述所引用的目标</strong>，<strong>符号</strong>可以是<strong>任意形式</strong>的<strong>字面量</strong>，只要使用时能<strong>无歧义定位到目标</strong>，<strong>符号引用</strong>与<strong>虚拟机实现的内存布局无关</strong>，<strong>引用目标</strong>并<strong>不一定</strong>已经<strong>加载</strong>到<strong>内存</strong>中，各种虚拟机实现的<strong>内存布局</strong>各<strong>不相同</strong>，但<strong>能接受的符号引用</strong>必须<strong>一致</strong>，因为<strong>符号引用</strong>的<strong>字面量形式</strong>明确定义在<strong><code>Java</code></strong>虚拟机规范的<strong><code>Class</code></strong>文件格式中。</p>
+<p><strong>直接引用</strong>可以<strong>直接指向目标</strong>的<strong>指针</strong>、<strong>相对偏移量</strong>或是能<strong>间接定位</strong>到目标的<strong>句柄</strong>。<strong>直接引用</strong>与虚拟机实现<strong>内存布局相关</strong>，如果<strong>存在直接引用</strong>，则<strong>引用的目标必定已存在内存中</strong>。</p>
+<p>虚拟机规范中并未规定<strong>解析阶</strong>段发生的<strong>具体时间</strong>，只要求在执行<strong><code>anewarray</code>、<code>checkcast</code>、<code>getfield</code>、<code>getstatic</code>、<code>instanceof</code>、<code>invokedynamic</code>、<code>invokeinterface</code>、<code>invokespecial</code>、<code>invokestatic</code>、<code>invokevirtual</code>、<code>ldc</code>、<code>ldc_w</code>、<code>multianewarray</code>、<code>new</code>、<code>putstatic</code></strong>这<strong><code>16</code></strong>条用于<strong>操作符号引用</strong>的<strong>字节码指令</strong>之前，先对它们所使用的<strong>符号引用</strong>进行<strong>解析</strong>，虚拟机实现可以<strong>根据需求</strong>来判断是在<strong>类加载器加载</strong>时对<strong>常量池</strong>中的<strong>符号引用解析</strong>，还是等到<strong>符号引用</strong>将要被<strong>使用前</strong>才去<strong>解析</strong>。</p>
+<p>对<strong>同一个符号引用</strong>进行<strong>多次解析</strong>，<strong>除<code>invokedynamic</code>指令外</strong>，虚拟机可以对<strong>第一次解析的结果</strong>进行<strong>缓存</strong>，在<strong>运行时常量池</strong>中<strong>记录直接引用</strong>，并把<strong>常量标识</strong>为<strong>已解析</strong>状态，从而<strong>避免解析动作重复进行</strong>，无论是否真正执行多次解析动作，虚拟机需要保证在<strong>同一实体</strong>中，若一个<strong>符号引用</strong>之前<strong>已经被成功解析</strong>过，则<strong>后续的引用解析</strong>请求<strong>应当一直成功</strong>，反之亦然。</p>
+<p>而<strong><code>invokedynamic</code>指令</strong>目的是用于<strong>动态语言</strong>支持，其所对应的<strong>引用</strong>称为<strong>动态调用点限定符</strong>，动态的<strong>含义</strong>是指<strong>必须等到程序实际运行到这条指令</strong>的时候，<strong>解析</strong>动作才进行，且其<strong>解析结果</strong>对于其他<strong><code>invokedynamic</code></strong>指令并<strong>不生效</strong>。<strong>其余可触发解析指令</strong>都是<strong>静态</strong>的。</p>
+<h5 id="类或接口的解析"><a href="#类或接口的解析" class="headerlink" title="类或接口的解析"></a>类或接口的解析</h5><p>将<strong>从未解析</strong>过的<strong>符号引用</strong>解析为<strong>类</strong>或<strong>接口</strong>的<strong>直接引用</strong>，虚拟机完成<strong>整个解析</strong>过程需要<strong>三个</strong>步骤：</p>
+<ul>
+<li>若<strong>符号引用</strong>所<strong>指向</strong>的<strong>类</strong>或<strong>接口</strong>为<strong>非数组</strong>类型，则虚拟机将会将<strong>符号引用</strong>的<strong>全限定名</strong>传递给<strong>当前类</strong>的<strong>类加载器</strong>去<strong>加载</strong>这个<strong>类</strong>或<strong>接口</strong>，加载过程中，由于<strong>元数据验证</strong>、<strong>字节码验证</strong>的需要，可能<strong>触发</strong>其他相关类的加载，如加载该类的父类或实现的接口。若<strong>加载过程</strong>出现<strong>任何异常</strong>，<strong>解析</strong>过程将<strong>失败</strong>。</li>
+<li>若<strong>符号引用</strong>所<strong>指向</strong>的<strong>类</strong>或<strong>接口</strong>为<strong>数组</strong>类型，且数组<strong>元素类型</strong>为<strong>对象</strong>，即<strong>符号引用</strong>的<strong>描述符</strong>类似<strong><code>[Ljava.lang.Integer</code></strong>的形式，将按照上面的规则<strong>加载</strong>数组<strong>元素类型</strong>，若<strong>符号引用</strong>的<strong>描述符</strong>为<strong><code>[Ljava.lang.Integer</code></strong>，则<strong>加载</strong>元素的<strong>类型</strong>为<strong><code>java.lang.Integer</code></strong>，接着<strong>由虚拟机生成</strong>一个<strong>代表此数组维度</strong>和<strong>元素</strong>的<strong>数组对象</strong>。</li>
+<li>若前面的步骤<strong>未出现任何异常</strong>，则<strong>符号引用</strong>所<strong>指向</strong>的<strong>类</strong>或<strong>接口</strong>在虚拟机中<strong>实际上</strong>已经<strong>成为</strong>一个<strong>有效</strong>的<strong>类</strong>或<strong>接口</strong>，在<strong>解析完成之前</strong>需要进行<strong>符号引用验证</strong>，确认<strong>当前类</strong>是否具有对<strong>符号引用</strong>所<strong>指向</strong>的<strong>类</strong>或<strong>接口</strong>的<strong>访问权限</strong>。若<strong>不具备</strong>将抛出<strong><code>java.lang.IllegalAccessError</code></strong>异常。</li>
+</ul>
+<h5 id="字段解析"><a href="#字段解析" class="headerlink" title="字段解析"></a>字段解析</h5><p>解析一个<strong>未被解析</strong>过的<strong>字段符号引用</strong>，将对<strong>字段表</strong>内<strong><code>class_index</code></strong>项中索引的<strong><code>CONSTANT_Class_info</code></strong>符号引用进行解析，也就是<strong>字段所属</strong>的<strong>类或接口</strong>的<strong>符号引用</strong>。若解析该类或接口符号引用的过程<strong>出现任何异常</strong>，<strong>都将导致</strong>字段符号引用<strong>解析失败</strong>。</p>
+<p>若<strong>解析成功</strong>，虚拟机将按照以下步骤对该<strong>字段所属的类或接口</strong>进行<strong>字段搜索</strong>。若查找过程返回<strong>直接引用</strong>成功，还将对字段进行<strong>权限验证</strong>，若<strong>不具备访问权限</strong>，将抛出<strong><code>java.lang.IllegalAccessError</code></strong>异常。</p>
+<ul>
+<li>若<strong>字段所属的类或接口</strong>本身包含的<strong>简单名称</strong>和<strong>字段描述符</strong>都与目标字段匹配，则返回该字段的<strong>直接引用</strong>，查找结束。</li>
+<li>若<strong>字段所属的类或接口</strong>中实现了<strong>接口</strong>，将按照<strong>继承关系从下往上递归搜索</strong>各个接口和它的父接口，若接口中包含的<strong>简单名称</strong>和<strong>字段描述符</strong>都与目标字段匹配，则返回该字段的<strong>直接引用</strong>，查找结束。</li>
+<li>若<strong>字段所属的类或接口非<code>java.lang.Object</code></strong>，将按照<strong>继承关系从下往上递归搜索</strong>其父类，若父类中包含的<strong>简单名称</strong>和<strong>字段描述符</strong>都与目标字段匹配，则返回该字段的<strong>直接引用</strong>，查找结束。</li>
+<li>否则查找<strong>失败</strong>，抛出<strong><code>java.lang.NoSuchFieldError</code></strong>异常</li>
+</ul>
+<p>实际应用中，虚拟机编译器实现比上述规范要求<strong>更加严格</strong>，若有同名字段同时出现在字段所属的类或接口的接口和父类中，或同时出现在自己和父类的多个接口中，编译器将<strong>拒绝编译</strong>。</p>
+<h5 id="类方法解析"><a href="#类方法解析" class="headerlink" title="类方法解析"></a>类方法解析</h5><p><strong>类方法解析</strong>需先<strong>解析</strong>出<strong>类方法表</strong>的<strong><code>class_index</code></strong>项中索引的方法所属的<strong>类或接口</strong>的<strong>符号引用</strong>，若<strong>解析成功</strong>将按照如下步骤进行类方法<strong>搜索</strong>：</p>
+<ul>
+<li><strong>类方法</strong>和<strong>接口方法符号引用</strong>的<strong>常量类型定义是分开</strong>的，若在<strong>类方法表</strong>中发现<strong><code>class_index</code></strong>中索引的<strong>方法所属为接口</strong>，将抛出<strong><code>java.lang.IncompatibleClassChangeError</code></strong>异常。</li>
+<li>在<strong>类方法所属的类或接口</strong>中查找是否有<strong>简单名称</strong>和<strong>描述符</strong>都与目标相匹配的方法，若有则返回该方法的<strong>直接引用</strong>，查找结束。</li>
+<li>在<strong>类方法所属的类或接口</strong>实现的列表及它们的<strong>父类接口</strong>中<strong>递归</strong>查找是否有<strong>简单名称</strong>和<strong>描述符</strong>都与目标相<strong>匹配</strong>的方法，若存在<strong>匹配</strong>的方法则说明该类是一个<strong>抽象类</strong>，查找结束，抛出<strong><code>java.lang.AbstractMethodError</code></strong>异常。</li>
+<li>否则，方法查找失败，抛出<strong><code>java.lang.NoSuchMethodError</code></strong>异常。</li>
+</ul>
+<p>若查找过程成功返回了<strong>直接引用</strong>，将会对该方法进行<strong>权限验证</strong>，若不具备<strong>访问权限</strong>，将抛出<strong><code>java.lang.IllegalAccessError</code></strong>异常。</p>
+<h5 id="接口方法解析"><a href="#接口方法解析" class="headerlink" title="接口方法解析"></a>接口方法解析</h5><p><strong>接口方法</strong>解析需<strong>先解析</strong>出<strong>接口方法表</strong>的<strong><code>class_index</code></strong>项中<strong>索引的方法所属的类或接口的符号引用</strong>，若解析成功将按照如下步骤进行<strong>类方法搜索</strong>：</p>
+<ul>
+<li>若在<strong>接口方法</strong>中发现<strong><code>class_index</code></strong>中的<strong>索引的方法所属为类而非接口</strong>，将抛出<strong><code>java.lang.IncompatibleClassChangeError</code></strong>异常。</li>
+<li>在<strong>接口方法所属的类或接口</strong>中查找是否有<strong>简单名称</strong>和<strong>描述符</strong>都与目标相<strong>匹配</strong>的方法，若有则返回该方法的<strong>直接引用</strong>，查找结束。</li>
+<li>在<strong>接口方法所属的类或接口</strong>的<strong>父接口</strong>中<strong>递归查找</strong>，直到查找完<strong><code>java.lang.Object</code></strong>类为止，看是否有<strong>简单名称</strong>和<strong>描述符</strong>都与目标相<strong>匹配</strong>的方法，若有则返回该方法的<strong>直接引用</strong>，查找结束。</li>
+<li>否则，方法<strong>查找失败</strong>，抛出<strong><code>java.lang.NoSuchMethodError</code></strong>异常。</li>
+</ul>
+<p>接口中所有方法<strong>默认</strong>都是<strong><code>public</code></strong>，故<strong>不存在访问权限</strong>问题，故<strong>接口方法符号解析</strong>应该<strong>不会</strong>抛出<strong><code>java.lang.IllegalAccessError</code></strong>异常。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p><strong>初始化阶段</strong>才<strong>真正</strong>开始执行<strong>类中定义</strong>的<strong>Java程序代码</strong>或者说是<strong>字节码</strong>，除加载阶段用户应用程序能通过<strong>自定义类加载器</strong>参与外，<strong>其余动作完全由虚拟机主导和控制</strong>。</p>
+<p>在<strong>准备阶段</strong>变量<strong>已经赋值系统要求的初始值</strong>，在初始化阶段是执行<strong>类构造器<code>&lt;clinit&gt;()</code></strong>方法的过程，<strong>主观计划</strong>去初始化<strong>类变量</strong>和<strong>其他资源</strong>。</p>
+<p><strong><code>&lt;clinit&gt;()</code></strong>方法是由<strong>编译器自动收集</strong>类中所有<strong>变量</strong>的<strong>赋值动作</strong>和静态语句块<strong><code>static{}</code></strong>中的语句<strong>合并</strong>产生的，编译器<strong>收集顺序</strong>是由语句在<strong>源文件</strong>中<strong>出现顺序</strong>决定的，<strong>静态语句块</strong>只能<strong>访问</strong>到定义在<strong>静态语句块之前的变量</strong>，定义在<strong>其后的变量</strong>，在<strong>静态语句块可以赋值</strong>，<strong>但不能访问</strong>。</p>
+<p><strong><code>&lt;clinit&gt;()</code></strong>方法与<strong>实例构造器</strong>不同，它<strong>不需要显示调用父类构造器</strong>，虚拟机会保证<strong>子类<code>&lt;clinit&gt;()</code></strong>方法<strong>执行前</strong>，<strong>父类<code>&lt;clinit&gt;()</code></strong>方法<strong>已执行完毕</strong>。故虚拟机中<strong>第一个</strong>被执行的<strong><code>&lt;clinit&gt;()</code></strong>方法的类肯定是<strong><code>java.lang.Object</code></strong>。</p>
+<p>由于父类的<strong><code>&lt;clinit&gt;()</code></strong>方法先执行，故<strong>父类中定义的静态语句块要优先于子类的变量赋值操作</strong>。</p>
+<p><strong><code>&lt;clinit&gt;()</code></strong>方法对于类或接口<strong>并非是必需</strong>的，若类中<strong>无静态语句块</strong>，也<strong>无对变量的赋值操作</strong>，编译器将<strong>不会</strong>为该类生成<strong><code>&lt;clinit&gt;()</code></strong>方法。</p>
+<p>接口中不能使用<strong>静态语句块</strong>，但任然有<strong>变量初始化</strong>的<strong>赋值操作</strong>，故<strong>接口和类</strong>一样都会生成<strong><code>&lt;clinit&gt;()</code></strong>方法，但<strong>执行接口</strong>的<strong><code>&lt;clinit&gt;()</code></strong>方法<strong>不需要先执行父接口</strong>的<strong><code>&lt;clinit&gt;()</code></strong>方法，只有<strong>父接口</strong>中定义的变量<strong>使用时才会初始化</strong>。<strong>接口的实现类</strong>在初始化时也<strong>不会执行接口</strong>的<strong><code>&lt;clinit&gt;()</code></strong>方法。</p>
+<p>虚拟机会保证一个类的<strong><code>&lt;clinit&gt;()</code></strong>方法<strong>在多线程环境中被正确枷锁、同步</strong>，若<strong>多个线程同时去初始化一个类</strong>，<strong>只会有一个线程</strong>去执行该类的<strong><code>&lt;clinit&gt;()</code></strong>方法，其他线程都需要<strong>阻塞等待</strong>，直到活动线程执行<strong><code>&lt;clinit&gt;()</code></strong>方法方法完毕。</p>
+<h6 id="组件类型：数组去掉一个维度得类型"><a href="#组件类型：数组去掉一个维度得类型" class="headerlink" title="组件类型：数组去掉一个维度得类型"></a>组件类型：数组去掉一个维度得类型</h6><h6 id="类必须与类加载器一起确定唯一性"><a href="#类必须与类加载器一起确定唯一性" class="headerlink" title="类必须与类加载器一起确定唯一性"></a>类必须与类加载器一起确定唯一性</h6><h6 id="不允许被继承的类：被fianl修饰的类"><a href="#不允许被继承的类：被fianl修饰的类" class="headerlink" title="不允许被继承的类：被fianl修饰的类"></a>不允许被继承的类：被<code>fianl</code>修饰的类</h6><h6 id="类的字段、方法是否与父类产生矛盾：覆盖了父类的final字段，或者出现不符合规则的方法重载"><a href="#类的字段、方法是否与父类产生矛盾：覆盖了父类的final字段，或者出现不符合规则的方法重载" class="headerlink" title="类的字段、方法是否与父类产生矛盾：覆盖了父类的final字段，或者出现不符合规则的方法重载"></a>类的字段、方法是否与父类产生矛盾：覆盖了父类的<code>final</code>字段，或者出现不符合规则的方法重载</h6><h6 id="类自身以外的信息：例如常量池中各种符号引用"><a href="#类自身以外的信息：例如常量池中各种符号引用" class="headerlink" title="类自身以外的信息：例如常量池中各种符号引用"></a>类自身以外的信息：例如常量池中各种符号引用</h6>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Java/VM/类加载器/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    类加载器
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/Java/VM/类加载的时机/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">类加载的时机</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2020 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

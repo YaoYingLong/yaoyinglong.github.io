@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>Maven Assembly标签全解 | YingLong</title>
+    
+    
+        <meta name="keywords" content="Maven,Assembly">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta name="keywords" content="Maven,Assembly">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven Assembly标签全解">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Maven/Maven Assembly标签全解/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-28T08:26:50.504Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven Assembly标签全解">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+
+        
+        
+        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM4/">国密SM4</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM2/">国密SM2</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/Java中调用Groovy脚本/">Java中调用Groovy脚本</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Maven/Maven加密JAR包/">Maven加密JAR包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven个性化打包/">Maven个性化打包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>
+                
+                    <li class="file active"><a href="/Blog/Maven/Maven Assembly标签全解/">Maven Assembly标签全解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA实用插件/">IDEA实用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/Win实用工具/">Win实用工具</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>
+                
+            </ul>
+        
+    </div>
+    <script>
+        $(document).ready(function () {
+            var iconFolderOpenClass = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({duration: 100});
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({duration: 100});
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    subtrees.slideUp({duration: 100});
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({duration: 100});
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if (expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({duration: 100});
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({duration: 100});
+                    icon.addClass(iconAllExpandClass);
+                }
+            });
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-Maven/Maven Assembly标签全解" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Maven/">Maven</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Assembly/">Assembly</a>, <a class="tag-link" href="/tags/Maven/">Maven</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/Maven/Maven Assembly标签全解/">
+            <time datetime="2019-10-27T16:00:00.000Z" itemprop="datePublished">2019-10-28</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Maven Assembly标签全解
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br><span class="line">758</span><br><span class="line">759</span><br><span class="line">760</span><br><span class="line">761</span><br><span class="line">762</span><br><span class="line">763</span><br><span class="line">764</span><br><span class="line">765</span><br><span class="line">766</span><br><span class="line">767</span><br><span class="line">768</span><br><span class="line">769</span><br><span class="line">770</span><br><span class="line">771</span><br><span class="line">772</span><br><span class="line">773</span><br><span class="line">774</span><br><span class="line">775</span><br><span class="line">776</span><br><span class="line">777</span><br><span class="line">778</span><br><span class="line">779</span><br><span class="line">780</span><br><span class="line">781</span><br><span class="line">782</span><br><span class="line">783</span><br><span class="line">784</span><br><span class="line">785</span><br><span class="line">786</span><br><span class="line">787</span><br><span class="line">788</span><br><span class="line">789</span><br><span class="line">790</span><br><span class="line">791</span><br><span class="line">792</span><br><span class="line">793</span><br><span class="line">794</span><br><span class="line">795</span><br><span class="line">796</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">assembly</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/ASSEMBLY/2.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        设置此程序集的标识。这是来自此项目的特定文件组合的符号名称。此外，除了用于通过将生成的归档的值附加到组合包以明确命名组合包之外，该ID在部署时用作工件的分类器。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        (许多） 指定程序集的格式。通过目标参数而不是在这里指定格式通常会更好。例如，允许不同的配置文件生成不同类型的档案。</span></span><br><span class="line"><span class="comment">        可以提供多种格式，装配体插件将生成每种所需格式的档案。部署项目时，所有指定的文件格式也将被部署。</span></span><br><span class="line"><span class="comment">        通过在&lt;format&gt;子元素中提供以下值之一来指定格式：</span></span><br><span class="line"><span class="comment">        “zip” - 创建一个ZIP文件格式</span></span><br><span class="line"><span class="comment">        “tar” - 创建一个TAR格式</span></span><br><span class="line"><span class="comment">        “tar.gz”或“tgz” - 创建一个gzip'd TAR格式</span></span><br><span class="line"><span class="comment">        “tar.bz2”或“tbz2” - 创建一个bzip'd TAR格式</span></span><br><span class="line"><span class="comment">        “tar.snappy” - 创建一个灵活的TAR格式</span></span><br><span class="line"><span class="comment">        “tar.xz”或“txz” - 创建一个xz'd TAR格式</span></span><br><span class="line"><span class="comment">        “jar” - 创建一个JAR格式</span></span><br><span class="line"><span class="comment">        “dir” - 创建分解的目录格式</span></span><br><span class="line"><span class="comment">        “战争” - 创建一个WAR格式</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">formats</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        在最终归档中包含一个基本目录。例如，如果您正在创建一个名为“your-app”的程序集，则将includeBaseDirectory设置为true将创建一个包含此基本目录的归档文件。</span></span><br><span class="line"><span class="comment">        如果此选项设置为false，则创建的存档将其内容解压缩到当前目录。</span></span><br><span class="line"><span class="comment">        默认值是：true。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">includeBaseDirectory</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        设置生成的程序集归档的基本目录。如果没有设置，并且includeBaseDirectory == true，则将使用$ &#123;project.build.finalName&#125;。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">baseDirectory</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        在最终档案中包含一个网站目录。项目的站点目录位置由Assembly Plugin的siteDirectory参数确定。</span></span><br><span class="line"><span class="comment">        默认值是：false。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">includeSiteDirectory</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        （许多） 从常规归档流中过滤各种容器描述符的组件集合，因此可以将它们聚合然后添加。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;ContainerDescriptorHandlerConfig&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">containerDescriptorHandlers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            配置文件头部的过滤器，以启用各种类型的描述符片段（如components.xml，web.xml等）的聚合。</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">containerDescriptorHandler</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                处理程序的plexus角色提示，用于从容器中查找。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">handlerName</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                处理程序的配置选项。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--DOM--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">containerDescriptorHandler</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">containerDescriptorHandlers</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        （许多） 指定在程序集中包含哪些模块文件。moduleSet是通过提供一个或多个&lt;moduleSet&gt;子元素来指定的。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;ModuleSet&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">moduleSets</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            moduleSet表示一个或多个在项目的pom.xml中存在的&lt;module&gt;项目。这使您可以包含属于项目&lt;modules&gt;的源代码或二进制文件。</span></span><br><span class="line"><span class="comment">            注意：从命令行使用&lt;moduleSets&gt;时，需要先通过“mvn package assembly：assembly”来传递包阶段。这个bug计划由Maven 2.1解决。</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">moduleSet</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                如果设置为true，则该插件将包含当前反应堆中的所有项目，以便在此ModuleSet中进行处理。这些将被 纳入/排除(includes/excludes) 规则。（从2.2开始）</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useAllReactorProjects</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                如果设置为false，则该插件将从该ModuleSet中排除子模块的处理。否则，它将处理所有子模块，每个子模块都要遵守包含/排除规则。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：true。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includeSubModules</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;include&gt;子元素时，它们定义一组包含的项目坐标。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组要排除的项目工件坐标。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                当存在这个时，插件将在生成的程序集中包含这个集合中包含的模块的源文件。</span></span><br><span class="line"><span class="comment">                包含用于在程序集中包含项目模块的源文件的配置选项。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--ModuleSources--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">sources</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    在计算受该集合影响的文件时，是否应该使用标准排除模式，例如那些匹配CVS和Subversion元数据文件的排除模式。为了向后兼容，默认值是true。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    默认值是：true。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">useDefaultExcludes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    设置输出目录相对于程序集根目录的根目录。例如，“日志”将把指定的文件放在日志目录中。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 当&lt;include&gt;子元素存在时，它们定义一组要包含的文件和目录。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组要排除的文件和目录。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                    例如，值0644转换为用户读写，组和其他只读。默认值是0644</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）[Format: (User)(Group)(Other) ] 其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                    例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 指定包含在程序集中的每个包含模块的哪些文件组。fileSet通过提供一个或多个&lt;fileSet&gt;子元素来指定。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;FileSet&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">fileSets</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        fileSet允许将文件组包含到程序集中。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">fileSet</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            在计算受该集合影响的文件时，是否应该使用标准排除模式，例如那些匹配CVS和Subversion元数据文件的排除模式。为了向后兼容，默认值是true。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            默认值是：true。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">useDefaultExcludes</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            设置输出目录相对于程序集根目录的根目录。例如，“日志”将把指定的文件放在日志目录中。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            （许多） 当&lt;include&gt;子元素存在时，它们定义一组要包含的文件和目录。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组要排除的文件和目录。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                            例如，值0644转换为用户读写，组和其他只读。默认值是0644.</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                            例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            设置模块目录的绝对或相对位置。例如，“src / main / bin”会选择定义这个依赖关系的项目的这个子目录。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">directory</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            设置此文件集中文件的行结束符。有效值：</span></span><br><span class="line"><span class="comment">                            “keep” - 保留所有的行结束</span></span><br><span class="line"><span class="comment">                            “unix” - 使用Unix风格的行尾（即“\ n”）</span></span><br><span class="line"><span class="comment">                            “lf” - 使用一个换行符结束符（即“\ n”）</span></span><br><span class="line"><span class="comment">                            “dos” - 使用DOS / Windows风格的行尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                            “windows” - 使用DOS / Windows风格的行尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                            “crlf” - 使用回车，换行符结尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">lineEnding</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            是否在复制文件时过滤符号，使用构建配置中的属性。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            默认值是：false。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">filtered</span>/&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">fileSet</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">fileSets</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    指定模块的finalName是否应该添加到应用于它的任何fileSets的outputDirectory值。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    默认值是：true。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includeModuleDirectory</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    指定是否应从应用于该模块的文件集中排除当前模块下方的子模块目录。如果仅仅意味着复制与此ModuleSet匹配的确切模块列表的源，忽略（或单独处理）当前目录下目录中存在的模块，这可能会很有用。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    默认值是：true。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludeSubModuleDirectories</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    设置此程序集中包含的所有模块基本目录的映射模式。注意：只有在includeModuleDirectory == true的情况下才会使用此字段。</span></span><br><span class="line"><span class="comment">                    缺省值是在 2.2-beta-1中是$ &#123;artifactId&#125;，以及后续版本中是$ &#123;module.artifactId&#125;。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    默认值是：$ &#123;module.artifactId&#125;。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">outputDirectoryMapping</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">sources</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    如果存在，插件将在生成的程序集中包含来自该组的所包含模块的二进制文件。</span></span><br><span class="line"><span class="comment">                    包含用于将项目模块的二进制文件包含在程序集中的配置选项。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--ModuleBinaries--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">binaries</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    设置输出目录相对于程序集根目录的根目录。例如，“log”会将指定的文件放在归档根目录下的日志目录中。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 当存在&lt;include&gt;子元素时，它们定义一组要包含的工件坐标。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                    工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                    另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组依赖项工件坐标以排除。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                    工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                    另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                    例如，值0644转换为用户读写，组和其他只读。默认值是0644</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）[Format: (User)(Group)(Other) ] 其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                    例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    指定时，attachmentClassifier将使汇编器查看附加到模块的工件，而不是主工程工件。如果能够找到与指定分类符匹配的附件，则会使用它; 否则，会抛出异常。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">attachmentClassifier</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    如果设置为true，插件将包含这里包含的项目模块的直接和传递依赖关系。否则，它将只包含模块包。</span></span><br><span class="line"><span class="comment">                    默认值是：true。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includeDependencies</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;DependencySet&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">dependencySets</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        依赖关系集允许在程序集中包含和排除项目依赖关系。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">dependencySet</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                设置输出目录相对于程序集根目录的根目录。例如，“log”会将指定的文件放在归档根目录下的日志目录中。</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            （许多） 当存在&lt;include&gt;子元素时，它们定义一组要包含的工件坐标。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                            工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                            另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组依赖项工件坐标以排除。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                            工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                            另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                            例如，值0644转换为用户读写，组和其他只读。默认值是0644</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）[Format: (User)(Group)(Other) ] 其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                            例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            如果指定为true，那么在程序集创建过程中任何用于过滤实际构件的包含/排除模式都将导致构建失败，并显示错误。这是为了强调过时的包含或排除，或者表示程序集描述符配置不正确。（从2.2开始）</span></span><br><span class="line"><span class="comment">                            默认值是：false。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">useStrictFiltering</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            为此程序集中包含的所有依赖项设置映射模式。（从2.2-beta-2开始； 2.2-beta-1使用$ &#123;artifactId&#125; - $ &#123;version&#125; $ &#123;dashClassifier？&#125;。$ &#123;extension&#125;作为默认值）。</span></span><br><span class="line"><span class="comment">                            默认值是：$ &#123;artifact.artifactId&#125; - $ &#123;artifact.version&#125; $ &#123;dashClassifier？&#125;。$ &#123;artifact.extension&#125;。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">outputFileNameMapping</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            如果设置为true，则此属性将所有依赖项解包到指定的输出目录中。设置为false时，依赖关系将被包含为档案（jar）。只能解压jar，zip，tar.gz和tar.bz压缩文件。</span></span><br><span class="line"><span class="comment">                            默认值是：false。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">unpack</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            允许指定包含和排除以及过滤选项，以指定从相关性工件解压缩的项目。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">unpackOptions</span>&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                （许多） 文件和/或目录模式的集合，用于匹配将在解压缩时从归档文件中包含的项目。每个项目被指定为&lt;include&gt; some / path &lt;/ include&gt;（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                （许多） 用于匹配项目的文件和/或目录模式的集合，在解压缩时将其从归档文件中排除。每个项目被指定为&lt;exclude&gt; some / path &lt;/ exclude&gt;（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                是否使用构建配置中的属性过滤从档案中解压缩的文件中的符号。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                                默认值是：false。</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">filtered</span>/&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                设置文件的行尾。（从2.2开始）有效值：</span></span><br><span class="line"><span class="comment">                                “keep” - 保留所有的行结束</span></span><br><span class="line"><span class="comment">                                “unix” - 使用Unix风格的行结尾</span></span><br><span class="line"><span class="comment">                                “lf” - 使用单个换行符结束符</span></span><br><span class="line"><span class="comment">                                “dos” - 使用DOS风格的行尾</span></span><br><span class="line"><span class="comment">                                “ crlf ” - 使用Carraige返回，换行符结束</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">lineEnding</span>/&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                在计算受该集合影响的文件时，是否应该使用标准排除模式，例如那些匹配CVS和Subversion元数据文件的排除模式。为了向后兼容，默认值是true。（从2.2开始）</span></span><br><span class="line"><span class="comment">                                默认值是：true。</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">useDefaultExcludes</span>/&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                                允许指定解压档案时使用的编码，支持指定编码的unarchiver。如果未指定，将使用归档程序默认值。Archiver默认值通常代表理智（modern）的values。</span></span><br><span class="line"><span class="comment">                            --&gt;</span></span><br><span class="line">                            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">encoding</span>/&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">unpackOptions</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            为此dependencySet设置依赖项范围。</span></span><br><span class="line"><span class="comment">                            默认值是：runtime。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">scope</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            确定当前项目构建过程中产生的工件是否应该包含在这个依赖集中。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            默认值是：true。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">useProjectArtifact</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            确定当前项目构建过程中产生的附件是否应该包含在这个依赖集中。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            默认值是：false。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">useProjectAttachments</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            确定是否将传递依赖项包含在当前依赖项集的处理中。如果为true，那么include / excludes / useTransitiveFiltering将应用于传递依赖项构件以及主项目依赖项构件。</span></span><br><span class="line"><span class="comment">                            如果为false，则useTransitiveFiltering无意义，并且包含/排除仅影响项目的直接依赖关系。</span></span><br><span class="line"><span class="comment">                            默认情况下，这个值是真的。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                            默认值是：true。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">useTransitiveDependencies</span>/&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                            确定此依赖项集中的包含/排除模式是否将应用于给定工件的传递路径。</span></span><br><span class="line"><span class="comment">                            如果为真，并且当前工件是由包含或排除模式匹配的另一个工件引入的传递依赖性，则当前工件具有与其相同的包含/排除逻辑。</span></span><br><span class="line"><span class="comment">                            默认情况下，此值为false，以保持与2.1版的向后兼容性。这意味着包含/排除仅仅直接应用于当前的工件，而不应用于传入的工件。（从2.2-beta-1）</span></span><br><span class="line"><span class="comment">                            默认值为：false。</span></span><br><span class="line"><span class="comment">                        --&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">useTransitiveFiltering</span>/&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">dependencySet</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">dependencySets</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    如果设置为true，则此属性将所有模块包解包到指定的输出目录中。当设置为false时，模块包将作为归档（jar）包含在内。</span></span><br><span class="line"><span class="comment">                    默认值是：true。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">unpack</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    允许指定包含和排除以及过滤选项，以指定从相关性工件解压缩的项目。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">unpackOptions</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        （许多） 文件和/或目录模式的集合，用于匹配将在解压缩时从归档文件中包含的项目。每个项目被指定为&lt;include&gt; some / path &lt;/ include&gt;（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        （许多） 用于匹配项目的文件和/或目录模式的集合，在解压缩时将其从归档文件中排除。每个项目被指定为&lt;exclude&gt; some / path &lt;/ exclude&gt;（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        是否使用构建配置中的属性过滤从档案中解压缩的文件中的符号。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                        默认值是：false。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">filtered</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        设置文件的行尾。（从2.2开始）有效值：</span></span><br><span class="line"><span class="comment">                        “keep” - 保留所有的行结束</span></span><br><span class="line"><span class="comment">                        “unix” - 使用Unix风格的行结尾</span></span><br><span class="line"><span class="comment">                        “lf” - 使用单个换行符结束符</span></span><br><span class="line"><span class="comment">                        “dos” - 使用DOS风格的行尾</span></span><br><span class="line"><span class="comment">                        “ crlf ” - 使用Carraige返回，换行符结束</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">lineEnding</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        在计算受该集合影响的文件时，是否应该使用标准排除模式，例如那些匹配CVS和Subversion元数据文件的排除模式。为了向后兼容，默认值是true。（从2.2开始）</span></span><br><span class="line"><span class="comment">                        默认值是：true。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">useDefaultExcludes</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        允许指定解压档案时使用的编码，支持指定编码的unarchiver。如果未指定，将使用归档程序默认值。Archiver默认值通常代表理智（modern）的values。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">encoding</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">unpackOptions</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    设置此程序集中包含的所有非UNPACKED依赖关系的映射模式。（由于2.2-beta-2; 2.2-beta-1使用$ &#123;artifactId&#125; - $ &#123;version&#125; $ &#123;dashClassifier？&#125;。$ &#123;extension&#125;作为默认值）注意：如果dependencySet指定unpack == true，则outputFileNameMapping将不要使用; 在这些情况下，使用outputDirectory。有关可用于outputFileNameMapping参数的条目的更多详细信息，请参阅插件FAQ。</span></span><br><span class="line"><span class="comment">                    默认值是：$ &#123;module.artifactId&#125; - $ &#123;module.version&#125; $ &#123;dashClassifier？&#125;。$ &#123;module.extension&#125;。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">outputFileNameMapping</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">binaries</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">moduleSet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">moduleSets</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        （许多） 指定在程序集中包含哪些文件组。fileSet通过提供一个或多个&lt;fileSet&gt;子元素来指定。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;FileSet&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fileSets</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            fileSet允许将文件组包含到程序集中。</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">fileSet</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                在计算受该集合影响的文件时，是否应该使用标准排除模式，例如那些匹配CVS和Subversion元数据文件的排除模式。为了向后兼容，默认值是true。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：true。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useDefaultExcludes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置输出目录相对于程序集根目录的根目录。例如，“日志”将把指定的文件放在日志目录中。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当&lt;include&gt;子元素存在时，它们定义一组要包含的文件和目录。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组要排除的文件和目录。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                例如，值0644转换为用户读写，组和其他只读。默认值是0644.</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置模块目录的绝对或相对位置。例如，“src / main / bin”会选择定义这个依赖关系的项目的这个子目录。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置此文件集中文件的行结束符。有效值：</span></span><br><span class="line"><span class="comment">                “keep” - 保留所有的行结束</span></span><br><span class="line"><span class="comment">                “unix” - 使用Unix风格的行尾（即“\ n”）</span></span><br><span class="line"><span class="comment">                “lf” - 使用一个换行符结束符（即“\ n”）</span></span><br><span class="line"><span class="comment">                “dos” - 使用DOS / Windows风格的行尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                “windows” - 使用DOS / Windows风格的行尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                “crlf” - 使用回车，换行符结尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">lineEnding</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                是否在复制文件时过滤符号，使用构建配置中的属性。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtered</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">fileSet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">fileSets</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        （许多） 指定在程序集中包含哪些单个文件。通过提供一个或多个&lt;file&gt;子元素来指定文件。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;FileItem&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">files</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            一个文件允许单个文件包含选项来更改不受fileSets支持的目标文件名。</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置要包含在程序集中的文件的模块目录的绝对路径或相对路径。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">source</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置输出目录相对于程序集根目录的根目录。例如，“日志”将把指定的文件放在日志目录中。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                在outputDirectory中设置目标文件名。默认是与源文件相同的名称。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">destName</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                与UNIX权限类似，设置所包含文件的文件模式。这是一个八卦价值。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                例如，值0644转换为用户读写，组和其他只读。默认值是0644</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置此文件中文件的行结束符。有效值是：</span></span><br><span class="line"><span class="comment">                “keep” - 保留所有的行结束</span></span><br><span class="line"><span class="comment">                “unix” - 使用Unix风格的行尾（即“\ n”）</span></span><br><span class="line"><span class="comment">                “lf” - 使用一个换行符结束符（即“\ n”）</span></span><br><span class="line"><span class="comment">                “dos” - 使用DOS / Windows风格的行尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                “windows” - 使用DOS / Windows风格的行尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">                “crlf” - 使用回车，换行符结尾（即“\ r \ n”）</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">lineEnding</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置是否确定文件是否被过滤。</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtered</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">files</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;DependencySet&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencySets</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            依赖关系集允许在程序集中包含和排除项目依赖关系。</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencySet</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    设置输出目录相对于程序集根目录的根目录。例如，“log”会将指定的文件放在归档根目录下的日志目录中。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;include&gt;子元素时，它们定义一组要包含的工件坐标。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组依赖项工件坐标以排除。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                例如，值0644转换为用户读写，组和其他只读。默认值是0644</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）[Format: (User)(Group)(Other) ] 其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                如果指定为true，那么在程序集创建过程中任何用于过滤实际构件的包含/排除模式都将导致构建失败，并显示错误。这是为了强调过时的包含或排除，或者表示程序集描述符配置不正确。（从2.2开始）</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useStrictFiltering</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                为此程序集中包含的所有依赖项设置映射模式。（从2.2-beta-2开始； 2.2-beta-1使用$ &#123;artifactId&#125; - $ &#123;version&#125; $ &#123;dashClassifier？&#125;。$ &#123;extension&#125;作为默认值）。</span></span><br><span class="line"><span class="comment">                默认值是：$ &#123;artifact.artifactId&#125; - $ &#123;artifact.version&#125; $ &#123;dashClassifier？&#125;。$ &#123;artifact.extension&#125;。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputFileNameMapping</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                如果设置为true，则此属性将所有依赖项解包到指定的输出目录中。设置为false时，依赖关系将被包含为档案（jar）。只能解压jar，zip，tar.gz和tar.bz压缩文件。</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">unpack</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                允许指定包含和排除以及过滤选项，以指定从相关性工件解压缩的项目。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">unpackOptions</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 文件和/或目录模式的集合，用于匹配将在解压缩时从归档文件中包含的项目。每个项目被指定为&lt;include&gt; some / path &lt;/ include&gt;（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    （许多） 用于匹配项目的文件和/或目录模式的集合，在解压缩时将其从归档文件中排除。每个项目被指定为&lt;exclude&gt; some / path &lt;/ exclude&gt;（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    是否使用构建配置中的属性过滤从档案中解压缩的文件中的符号。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                    默认值是：false。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">filtered</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    设置文件的行尾。（从2.2开始）有效值：</span></span><br><span class="line"><span class="comment">                    “keep” - 保留所有的行结束</span></span><br><span class="line"><span class="comment">                    “unix” - 使用Unix风格的行结尾</span></span><br><span class="line"><span class="comment">                    “lf” - 使用单个换行符结束符</span></span><br><span class="line"><span class="comment">                    “dos” - 使用DOS风格的行尾</span></span><br><span class="line"><span class="comment">                    “crlf ” - 使用Carraige返回，换行符结束</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">lineEnding</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    在计算受该集合影响的文件时，是否应该使用标准排除模式，例如那些匹配CVS和Subversion元数据文件的排除模式。为了向后兼容，默认值是true。（从2.2开始）</span></span><br><span class="line"><span class="comment">                    默认值是：true。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">useDefaultExcludes</span>/&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    允许指定解压档案时使用的编码，支持指定编码的unarchiver。如果未指定，将使用归档程序默认值。Archiver默认值通常代表理智（modern）的values。</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">encoding</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">unpackOptions</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                为此dependencySet设置依赖项范围。</span></span><br><span class="line"><span class="comment">                默认值是：runtime。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                确定当前项目构建过程中产生的工件是否应该包含在这个依赖集中。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：true。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useProjectArtifact</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                确定当前项目构建过程中产生的附件是否应该包含在这个依赖集中。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useProjectAttachments</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                确定是否将传递依赖项包含在当前依赖项集的处理中。如果为true，那么include / excludes / useTransitiveFiltering将应用于传递依赖项构件以及主项目依赖项构件。</span></span><br><span class="line"><span class="comment">                如果为false，则useTransitiveFiltering无意义，并且包含/排除仅影响项目的直接依赖关系。</span></span><br><span class="line"><span class="comment">                默认情况下，这个值是真的。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：true。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useTransitiveDependencies</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                确定此依赖项集中的包含/排除模式是否将应用于给定工件的传递路径。</span></span><br><span class="line"><span class="comment">                如果为真，并且当前工件是由包含或排除模式匹配的另一个工件引入的传递依赖性，则当前工件具有与其相同的包含/排除逻辑。</span></span><br><span class="line"><span class="comment">                默认情况下，此值为false，以保持与2.1版的向后兼容性。这意味着包含/排除仅仅直接应用于当前的工件，而不应用于传入的工件。（从2.2-beta-1）</span></span><br><span class="line"><span class="comment">                默认值为：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useTransitiveFiltering</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencySet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencySets</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        定义要包含在程序集中的Maven仓库。可用于存储库中的工件是项目的依赖工件。创建的存储库包含所需的元数据条目，并且还包含sha1和md5校验和。这对创建将被部署到内部存储库的档案很有用。</span></span><br><span class="line"><span class="comment">        注意：目前，只有来自中央存储库的工件才被允许。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;Repository&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                设置输出目录相对于程序集根目录的根目录。例如，“log”会将指定的文件放在归档根目录下的日志目录中。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;include&gt;子元素时，它们定义一组包含的项目坐标。如果不存在，则&lt;includes&gt;表示所有有效值。</span></span><br><span class="line"><span class="comment">                工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 当存在&lt;exclude&gt;子元素时，它们定义一组要排除的项目工件坐标。如果不存在，则&lt;excludes&gt;不表示排除。</span></span><br><span class="line"><span class="comment">                工件坐标可以以简单的groupId：artifactId形式给出，或者可以以groupId：artifactId：type [：classifier]：version的形式完全限定。</span></span><br><span class="line"><span class="comment">                另外，可以使用通配符，如*：maven- *</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                    与UNIX权限类似，设置所包含文件的文件模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                    例如，值0644转换为用户读写，组和其他只读。默认值是0644</span></span><br><span class="line"><span class="comment">                --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                与UNIX权限类似，设置包含的目录的目录模式。这是一个 OCTAL VALUE。格式：（用户）（组）（其他）[Format: (User)(Group)(Other) ] 其中每个组件是Read = 4，Write = 2和Execute = 1的总和。</span></span><br><span class="line"><span class="comment">                例如，值0755转换为用户读写，Group和其他只读。默认值是0755.</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directoryMode</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                如果设置为true，则此属性将触发创建存储库元数据，这将允许存储库用作功能性远程存储库。</span></span><br><span class="line"><span class="comment">                默认值是：false。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--boolean--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includeMetadata</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                （许多） 指定要将一组工件与指定的版本对齐。groupVersionAlignment通过提供一个或多个&lt;groupVersionAlignment&gt;子元素来指定。</span></span><br><span class="line"><span class="comment">                允许一组工件与指定的版本对齐。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--List&lt;GroupVersionAlignment&gt;--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupVersionAlignments</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupVersionAlignment</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        要为其对齐版本的工件的groupId。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">id</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        您想要将该组对齐的版本。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">version</span>/&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                        （许多） 当存在&lt;exclude&gt;子元素时，它们定义要排除的构件的artifactIds。如果不存在，则&lt;excludes&gt;不表示排除。排除是通过提供一个或多个&lt;exclude&gt;子元素来指定的。</span></span><br><span class="line"><span class="comment">                    --&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">excludes</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">groupVersionAlignment</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">groupVersionAlignments</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">                指定此存储库中包含的工件的范围。（从2.2-beta-1开始）</span></span><br><span class="line"><span class="comment">                默认值是：runtime。</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--string--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        （许多） 指定要包含在程序集中的共享组件xml文件位置。指定的位置必须相对于描述符的基本位置。</span></span><br><span class="line"><span class="comment">        如果描述符是通过类路径中的&lt;descriptorRef /&gt;元素找到的，那么它指定的任何组件也将在类路径中找到。</span></span><br><span class="line"><span class="comment">        如果通过路径名通过&lt;descriptor /&gt;元素找到，则此处的值将被解释为相对于项目basedir的路径。</span></span><br><span class="line"><span class="comment">        当找到多个componentDescriptors时，它们的内容被合并。检查 描述符组件 了解更多信息。</span></span><br><span class="line"><span class="comment">        componentDescriptor通过提供一个或多个&lt;componentDescriptor&gt;子元素来指定。</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--List&lt;String&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">componentDescriptors</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">assembly</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/Blog/Java/工具/国密SM2/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    国密SM2
+                
+            </div>
+        </a>
+    
+    
+        <a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Spring线程池跨线程数据共享</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2020 
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
