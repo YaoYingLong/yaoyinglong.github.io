@@ -1,8 +1,8 @@
-(function($){
+(function ($) {
     var toTop = ($('#sidebar').height() - $(window).height()) + 60;
     // Caption
-    $('.article-entry').each(function(i) {
-        $(this).find('img').each(function() {
+    $('.article-entry').each(function (i) {
+        $(this).find('img').each(function () {
             if (this.alt && !(!!$.prototype.justifiedGallery && $(this).parent('.justified-gallery').length)) {
                 $(this).after('<span class="caption">' + this.alt + '</span>');
             }
@@ -17,7 +17,7 @@
         var options = {
             selector: '.gallery-item',
         };
-        $('.article-entry').each(function(i, entry) {
+        $('.article-entry').each(function (i, entry) {
             lightGallery(entry, options);
         });
         lightGallery($('.article-gallery')[0], options);
@@ -45,7 +45,7 @@
     if ($('#sidebar').length) {
         $(document).on('scroll', function () {
             if ($(document).width() >= 800) {
-                if(($(this).scrollTop() > toTop) && ($(this).scrollTop() > 0)) {
+                if (($(this).scrollTop() > toTop) && ($(this).scrollTop() > 0)) {
                     $('#toTop').fadeIn();
                     $('#toTop').css('left', $('#sidebar').offset().left);
                 } else {
@@ -55,15 +55,15 @@
                 $('#toTop').fadeOut();
             }
         }).on('click', '#toTop', function () {
-            $('body, html').animate({ scrollTop: 0 }, 600);
+            $('body, html').animate({scrollTop: 0}, 600);
         });
     }
-    
+
     // Task lists in markdown
-    $('ul > li').each(function() {
+    $('ul > li').each(function () {
         var taskList = {
             field: this.textContent.substring(0, 2),
-            check: function(str) {
+            check: function (str) {
                 var re = new RegExp(str);
                 return this.field.match(re);
             }
@@ -72,12 +72,14 @@
         var checked = taskList.check(string[1][0]);
         var unchecked = taskList.check(string[0]);
         var $current = $(this);
+
         function update(str, check) {
             var click = ["disabled", ""];
             $current.html($current.html().replace(
-              str, "<input type='checkbox' " + check + " " + click[1] + " >")
+                str, "<input type='checkbox' " + check + " " + click[1] + " >")
             )
         }
+
         if (checked || unchecked) {
             this.classList.add("task-list");
             if (checked) {

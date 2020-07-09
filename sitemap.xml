@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/Golang/Go%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2020-07-09T10:12:41.298Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/%E6%A1%86%E6%9E%B6/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/Maven%E7%BC%96%E8%AF%91%E5%90%8E%E6%96%87%E4%BB%B6%E6%8D%9F%E5%9D%8F/</loc>
     
     <lastmod>2020-07-07T03:37:41.145Z</lastmod>
@@ -16,21 +23,14 @@
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Golang/Go%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2020-07-06T02:43:52.374Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E6%9C%89%E5%85%B3%E4%BA%8E%E4%BD%A0/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%B9%BD%E9%BB%98%E6%84%9F/</loc>
     
     <lastmod>2020-07-03T02:40:20.846Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%B9%BD%E9%BB%98%E6%84%9F/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E6%9C%89%E5%85%B3%E4%BA%8E%E4%BD%A0/</loc>
     
     <lastmod>2020-07-03T02:40:20.846Z</lastmod>
     
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%92%8C%E5%A5%B3%E5%AD%A9%E5%AD%90%E7%9B%B8%E5%A4%84/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%90%8E%E6%82%94%E8%8D%AF/</loc>
     
     <lastmod>2020-07-03T02:40:20.845Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%90%8E%E6%82%94%E8%8D%AF/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%92%8C%E5%A5%B3%E5%AD%A9%E5%AD%90%E7%9B%B8%E5%A4%84/</loc>
     
     <lastmod>2020-07-03T02:40:20.845Z</lastmod>
     
@@ -429,14 +429,14 @@
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B8%B8%E7%94%A8/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B1%9E%E6%80%A7/</loc>
     
     <lastmod>2019-04-10T02:26:34.431Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B1%9E%E6%80%A7/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/Maven/Maven%E5%B8%B8%E7%94%A8/</loc>
     
     <lastmod>2019-04-10T02:26:34.431Z</lastmod>
     
@@ -548,14 +548,14 @@
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/VM/OutOfMemoryError%E5%BC%82%E5%B8%B8/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/Java/VM/Minor&Major&Full%20GC/</loc>
     
     <lastmod>2019-04-10T02:26:34.420Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/VM/Minor&Major&Full%20GC/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/Java/VM/OutOfMemoryError%E5%BC%82%E5%B8%B8/</loc>
     
     <lastmod>2019-04-10T02:26:34.420Z</lastmod>
     
@@ -569,14 +569,14 @@
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/VM/JVM%E5%86%85%E5%AD%98%E6%B1%A0/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/Java/VM/HotSpot%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2019-04-10T02:26:34.419Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/VM/HotSpot%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/Java/VM/JVM%E5%86%85%E5%AD%98%E6%B1%A0/</loc>
     
     <lastmod>2019-04-10T02:26:34.419Z</lastmod>
     
