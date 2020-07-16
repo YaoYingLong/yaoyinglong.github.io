@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E8%87%AA%E5%BA%A6/</loc>
+    
+    <lastmod>2020-07-16T10:10:20.301Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/</loc>
+    
+    <lastmod>2020-07-16T10:10:20.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E6%83%85%E5%95%86/</loc>
+    
+    <lastmod>2020-07-16T10:10:20.300Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/Golang/Go%E5%9F%BA%E7%A1%80/</loc>
     
-    <lastmod>2020-07-14T01:45:08.478Z</lastmod>
+    <lastmod>2020-07-16T09:56:56.831Z</lastmod>
     
   </url>
   
@@ -103,13 +124,6 @@
     <loc>https://yaoyinglong.github.io/Blog/Maven/Maven%E4%B8%AA%E6%80%A7%E5%8C%96%E6%89%93%E5%8C%85/</loc>
     
     <lastmod>2020-06-19T01:57:28.310Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E8%87%AA%E5%BA%A6/</loc>
-    
-    <lastmod>2020-06-19T01:57:12.130Z</lastmod>
     
   </url>
   
