@@ -74,8 +74,8 @@
   
   <entry>
     <title>Go基础</title>
-    <link href="https://yaoyinglong.github.io/Blog/Golang/Go%E5%9F%BA%E7%A1%80/"/>
-    <id>https://yaoyinglong.github.io/Blog/Golang/Go基础/</id>
+    <link href="https://yaoyinglong.github.io/Blog/Go/Go%E5%9F%BA%E7%A1%80/"/>
+    <id>https://yaoyinglong.github.io/Blog/Go/Go基础/</id>
     <published>2020-07-02T16:00:00.000Z</published>
     <updated>2020-07-16T09:56:56.831Z</updated>
     
@@ -90,7 +90,7 @@
     
     </summary>
     
-      <category term="Golang" scheme="https://yaoyinglong.github.io/categories/Golang/"/>
+      <category term="Go" scheme="https://yaoyinglong.github.io/categories/Go/"/>
     
     
       <category term="Go" scheme="https://yaoyinglong.github.io/tags/Go/"/>
