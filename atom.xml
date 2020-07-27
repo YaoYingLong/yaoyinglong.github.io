@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyinglong.github.io/"/>
-  <updated>2020-07-07T03:14:46.820Z</updated>
+  <updated>2020-07-26T09:45:19.919Z</updated>
   <id>https://yaoyinglong.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试准备大纲</title>
+    <link href="https://yaoyinglong.github.io/Blog/Interview/%E5%A4%A7%E7%BA%B2/"/>
+    <id>https://yaoyinglong.github.io/Blog/Interview/大纲/</id>
+    <published>2020-07-25T16:00:00.000Z</published>
+    <updated>2020-07-26T09:45:19.919Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><ul><li><code>AOP</code></li><li><code>IOC</code></li><li>源码</li><li><code>SpringBoot</code></li><li><code>SpringCloud</code></li></ul><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul><li>常见面试笔试内容</li></ul><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul><li>树（前序遍历、中序遍历、后序遍历、层序遍历）</li><li>图（广度优先遍历BFS、深度优先遍历DFS）</li><li><code>leetcode</code>题（<strong>前期每周5道，中期每周10道，后期每周15道</strong>）</li><li>常见排序总结</li></ul><h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ul><li>6大基本原则（<strong>一周</strong>）</li><li>23种设计模式（<strong>一周5个</strong>）</li><li>设计模式对比</li></ul><h3 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h3><ul><li><code>JVM</code></li><li>源码</li><li>多线程</li></ul><h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><ul><li><code>RabbitMQ</code></li><li>常见面试笔试内容</li></ul><h3 id="Reids"><a href="#Reids" class="headerlink" title="Reids"></a>Reids</h3><ul><li>常见面试笔试内容</li></ul><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ul><li>常用命令</li></ul><h3 id="Go"><a href="#Go" class="headerlink" title="Go"></a>Go</h3><ul><li>常见面试笔试内容</li></ul><h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><ul><li>常见面试笔试内容</li></ul><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Spring&quot;&gt;&lt;a href=&quot;#Spring&quot; class=&quot;headerlink&quot; title=&quot;Spring&quot;&gt;&lt;/a&gt;Spring&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;AOP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IOC&lt;/code&gt;&lt;/li&gt;
+
+      
+    
+    </summary>
+    
+      <category term="hide" scheme="https://yaoyinglong.github.io/categories/hide/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计基本原则</title>
+    <link href="https://yaoyinglong.github.io/Blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/"/>
+    <id>https://yaoyinglong.github.io/Blog/设计模式/设计基本原则/</id>
+    <published>2020-07-25T16:00:00.000Z</published>
+    <updated>2020-07-26T10:11:29.795Z</updated>
+    
+    <content type="html"><![CDATA[<p>6大设计基本原则：<strong>单一职责原则</strong>、<strong>里氏替换原则</strong>、<strong>依赖倒置原则</strong>、<strong>接口隔离原则</strong>、<strong>迪米特法则</strong>、<strong>开闭原则</strong></p><h3 id="单一职责原则SRP"><a href="#单一职责原则SRP" class="headerlink" title="单一职责原则SRP"></a>单一职责原则SRP</h3><p>​    单一职责原则提出了一个编写程序的标准，用<strong>职责</strong>或<strong>变化原因</strong>来衡量接口或类设计得是否优良，但职责和变化原因都是不可度量得，因项目和环境而异。单一职责适用于<strong>接口、类、方法</strong>。</p><p><strong>定义</strong>：应该<strong>有且仅有一个原因引起类的变更</strong>。</p><p><strong>优点</strong>：<strong>类复杂性降低</strong>，实现<strong>职责清晰明确</strong>；<strong>可读性高</strong>；<strong>可维护性高</strong>；<strong>变更引起的风险低</strong>；</p><h3 id="里氏替换原则LSP"><a href="#里氏替换原则LSP" class="headerlink" title="里氏替换原则LSP"></a>里氏替换原则LSP</h3><p><strong>定义</strong>：<strong>每一个类型为<code>S</code>的对象<code>s</code>，都有类型为<code>T</code>的对象<code>t</code>，使得以<code>T</code>定义的所有程序<code>P</code>在所有的对象<code>s</code>都代替成<code>t</code>时，程序<code>P</code>的行为无变化，则类型<code>S</code>时类型<code>T</code>的子类；所有引用基类的地方必须能透明的使用其子类的对象。</strong></p><ul><li><strong>子类必须完全实现父类的方法</strong>：若子类<strong>不能完全实现父类方法</strong>，或某些方法在子类种已<strong>发生畸变</strong>，建议断开父子继承关系。</li><li><strong>子类可以有自己的个性</strong>：子类出现的地方父类未必能出现</li><li><strong>覆盖或实现父类方法时输入参数可以被放大</strong></li><li><strong>覆写或实现父类的方法时输出结果可以被缩小</strong></li></ul><p>在类中调用其他类时<strong>务必使用父类或接口</strong>，否则即是违背<code>LSP</code>原则。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;6大设计基本原则：&lt;strong&gt;单一职责原则&lt;/strong&gt;、&lt;strong&gt;里氏替换原则&lt;/strong&gt;、&lt;strong&gt;依赖倒置原则&lt;/strong&gt;、&lt;strong&gt;接口隔离原则&lt;/strong&gt;、&lt;strong&gt;迪米特法则&lt;/strong&gt;、&lt;strong&gt;开
+      
+    
+    </summary>
+    
+      <category term="设计模式" scheme="https://yaoyinglong.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="https://yaoyinglong.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>HBase依赖冲突</title>
@@ -455,59 +506,6 @@
     
     
       <category term="算法，排序" scheme="https://yaoyinglong.github.io/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java中调用Groovy脚本</title>
-    <link href="https://yaoyinglong.github.io/Blog/Java/%E5%B7%A5%E5%85%B7/Java%E4%B8%AD%E8%B0%83%E7%94%A8Groovy%E8%84%9A%E6%9C%AC/"/>
-    <id>https://yaoyinglong.github.io/Blog/Java/工具/Java中调用Groovy脚本/</id>
-    <published>2019-12-24T16:00:00.000Z</published>
-    <updated>2019-12-26T07:48:30.432Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>Groovy</code>是构建在<code>JVM</code>上的一个轻量级动态语言，其是<code>Java</code>实现的，与<code>Java</code>语法类是，能很好的与<code>Java</code>代码结合，及扩展现有代码。</p><p><code>Java</code>在语音动态性方面只能通过反射，且参数传递格式很严格不是很灵活，而<code>Groovy</code>是构建在<code>JVM</code>上的一个轻量级动态语言，其是<code>Java</code>实现的，与<code>Java</code>语法类是，能很好的与<code>Java</code>代码结合，及动态扩展现有代码。</p><p><code>Java</code>中可以通过<strong><code>GroovyScriptEngine</code></strong>、<strong><code>GroovyClassLoader</code></strong>、<strong><code>GroovyShell</code></strong>、<strong><code>ScriptEngineManager</code></strong>等方式调用<code>Groovy</code>，以及在实际项目中的运用。<code>Maven</code>依赖：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.groovy<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>groovy-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;groovy.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="GroovyScriptEngine"><a href="#GroovyScriptEngine" class="headerlink" title="GroovyScriptEngine"></a>GroovyScriptEngine</h3><p>从指定的位置（文件系统，URL，数据库等）加载<code>Groovy</code>脚本，并且随着脚本变化而重新加载。在相互关联的多个脚本情况下使用<code>GroovyScriptEngine</code>更好些。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GroovyScriptEngine engine = <span class="keyword">new</span> GroovyScriptEngine(<span class="string">"src/test/resources/groovy/"</span>);</span><br><span class="line"></span><br><span class="line">Map&lt;String, Object&gt; param = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">param.put(<span class="string">"id"</span>, <span class="string">"KKKKKKKKKKKKKK"</span>);</span><br><span class="line">param.put(<span class="string">"aa"</span>, <span class="number">45</span>);</span><br><span class="line">Binding binding = <span class="keyword">new</span> Binding(param);</span><br><span class="line">Object result = engine.run(<span class="string">"Mixed.groovy"</span>, binding);</span><br></pre></td></tr></table></figure><h3 id="GroovyClassLoader"><a href="#GroovyClassLoader" class="headerlink" title="GroovyClassLoader"></a>GroovyClassLoader</h3><p><code>GroovyClassLoader</code>是一个定制的类装载器，负责解释加载<code>Java</code>类中用到的<code>Groovy</code>类。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GroovyClassLoader loader = <span class="keyword">new</span> GroovyClassLoader();</span><br><span class="line">Class aClass = loader.parseClass(<span class="keyword">new</span> File(<span class="string">"src/test/resources/groovy/Mixed.groovy"</span>));</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    GroovyObject instance = (GroovyObject) aClass.newInstance();</span><br><span class="line">    Object result = instance.invokeMethod(<span class="string">"Mixed"</span>, <span class="keyword">new</span> Object[]&#123;<span class="string">"KKKKKKKKKKKKKK"</span>, <span class="number">45</span>&#125;);</span><br><span class="line">     System.out.println(result);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">     e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="GroovyShell"><a href="#GroovyShell" class="headerlink" title="GroovyShell"></a>GroovyShell</h3><p><code>GroovyShell</code>允许在<code>Java</code>类甚至<code>Groovy</code>类中求任意Groovy表达式的值。可用<code>Binding</code>对象输入参数给表达式，并最终通过<code>GroovyShell</code>返回<code>Groovy</code>表达式的计算结果。多用于推求独立的脚本或表达式。</p><p>即使使用<code>GroovyShell</code>也有多种实现方式，使用<code>invokeMethod</code>方法调用：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GroovyShell loader = <span class="keyword">new</span> GroovyShell();</span><br><span class="line">Script script = loader.parse(<span class="keyword">new</span> File(<span class="string">"src/test/resources/groovy/Mixed.groovy"</span>));</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Object result = script.invokeMethod(<span class="string">"Mixed"</span>, <span class="keyword">new</span> Object[]&#123;<span class="string">"KKKKKKKKKKKKKK"</span>, <span class="number">45</span>&#125;);</span><br><span class="line">    System.out.println(result);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>通过<code>GroovyShell</code>得<code>evaluate</code>方式直接调用脚本：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; param = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">param.put(<span class="string">"id"</span>, <span class="string">"KKKKKKKKKKKKKK"</span>);</span><br><span class="line">param.put(<span class="string">"aa"</span>, <span class="number">45</span>);</span><br><span class="line">param.put(<span class="string">"bb"</span>, <span class="number">55L</span>);</span><br><span class="line">param.put(<span class="string">"cc"</span>, <span class="number">9.9999</span>);</span><br><span class="line">Binding binding = <span class="keyword">new</span> Binding(param);</span><br><span class="line">GroovyShell loader = <span class="keyword">new</span> GroovyShell(binding);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Object result = loader.evaluate(<span class="string">"return id + (aa + bb + cc)"</span>);</span><br><span class="line">    System.out.println(result);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>通过<code>InvokerHelper</code>类来调用：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; param = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">param.put(<span class="string">"id"</span>, <span class="string">"KKKKKKKKKKKKKK"</span>);</span><br><span class="line">param.put(<span class="string">"aa"</span>, <span class="number">45</span>);</span><br><span class="line">param.put(<span class="string">"bb"</span>, <span class="number">55L</span>);</span><br><span class="line">param.put(<span class="string">"cc"</span>, <span class="number">9.9999</span>);</span><br><span class="line">Binding binding = <span class="keyword">new</span> Binding(param);</span><br><span class="line"></span><br><span class="line">GroovyShell shell = <span class="keyword">new</span> GroovyShell();</span><br><span class="line">Script script = shell.parse(<span class="keyword">new</span> File(<span class="string">"src/test/resources/groovy/Mixed.groovy"</span>));</span><br><span class="line"></span><br><span class="line">Object result = InvokerHelper.createScript(script.getClass(), binding).run();</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure><p>还可以通过<code>GroovyShell</code>来直接<code>parse</code>脚本内容：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; param = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">param.put(<span class="string">"id"</span>, <span class="string">"KKKKKKKKKKKKKK"</span>);</span><br><span class="line">param.put(<span class="string">"aa"</span>, <span class="number">45</span>);</span><br><span class="line">param.put(<span class="string">"bb"</span>, <span class="number">55L</span>);</span><br><span class="line">param.put(<span class="string">"cc"</span>, <span class="number">9.9999</span>);</span><br><span class="line">Binding binding = <span class="keyword">new</span> Binding(param);</span><br><span class="line"></span><br><span class="line">GroovyShell shell = <span class="keyword">new</span> GroovyShell();</span><br><span class="line">Script script = shell.parse(<span class="string">"def Mixed(String id, int aa, Long bb, double cc) &#123;\n"</span> +</span><br><span class="line">                    <span class="string">"    return id + (aa + bb + cc)\n"</span> +</span><br><span class="line">                    <span class="string">"&#125;\n"</span> +</span><br><span class="line">                    <span class="string">"Mixed(id, aa, bb, cc)"</span>);</span><br><span class="line"></span><br><span class="line">Object result = InvokerHelper.createScript(script.getClass(), binding).run();</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure><h3 id="ScriptEngineManager"><a href="#ScriptEngineManager" class="headerlink" title="ScriptEngineManager"></a>ScriptEngineManager</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ScriptEngineManager manager = <span class="keyword">new</span> ScriptEngineManager();</span><br><span class="line">ScriptEngine engine = manager.getEngineByName(<span class="string">"groovy"</span>);</span><br><span class="line"></span><br><span class="line">Bindings binding = engine.createBindings();</span><br><span class="line">binding.put(<span class="string">"id"</span>, <span class="string">"KKKKKKKKKKKKKK"</span>);</span><br><span class="line">binding.put(<span class="string">"aa"</span>, <span class="number">45</span>);</span><br><span class="line">binding.put(<span class="string">"bb"</span>, <span class="number">55L</span>);</span><br><span class="line">binding.put(<span class="string">"cc"</span>, <span class="number">9.9999</span>);</span><br><span class="line"></span><br><span class="line">Object result = engine.eval(<span class="string">"return id + (aa + bb + cc)"</span>, binding);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure><h3 id="集成常见问题"><a href="#集成常见问题" class="headerlink" title="集成常见问题"></a>集成常见问题</h3><h5 id="使用GroovyShell的parse方法导致perm区爆满的问题"><a href="#使用GroovyShell的parse方法导致perm区爆满的问题" class="headerlink" title="使用GroovyShell的parse方法导致perm区爆满的问题"></a>使用GroovyShell的parse方法导致perm区爆满的问题</h5><p>若应用中内嵌Groovy引擎，会动态执行传入的表达式并返回执行结果，而<code>Groovy</code>每执行一次脚本，都会生成一个脚本对应的<code>class</code>对象，并<code>new</code>一个<code>InnerLoader</code>去加载这个对象，而<code>InnerLoader</code>和脚本对象都无法在gc的时候被回收运行一段时间后将<code>perm</code>占满，一直触发<code>fullgc</code>。</p><p>对于同一个<code>Groovy</code>脚本，<code>Groovy</code>执行引擎都会不同的命名，且命名与时间戳有关。当传入text时，<code>class</code>对象的命名规则为：<code>&quot;script&quot; + System.currentTimeMillis() + Math.abs(text.hashCode()) + &quot;.groovy&quot;</code>。这就导致就算<code>Groovy</code>脚本未发生任何变化，每次执行<code>parse</code>方法都会新生成一个脚本对应的<code>class</code>对象，且由<code>GroovyClassLoader</code>进行加载，不断增大<code>perm</code>区。</p><p><code>JVM</code>中的<code>Class</code>只有满足以下三个条件，才能被<code>GC</code>回收，也就是该<code>Class</code>被卸载：</p><ul><li><p>该类所有的实例都已经被<code>GC</code>，也就是<code>JVM</code>中不存在该<code>Class</code>的任何实例；</p></li><li><p>加载该类的<code>ClassLoader</code>已经被<code>GC</code>；</p></li><li>该类的<code>java.lang.Class</code>对象没有在任何地方被引用，如不能在任何地方通过反射访问该类的方法。</li></ul><p>在<code>GroovyClassLoader</code>代码中有一个<code>class</code>对象的缓存，每次编译脚本时都会在<code>Map</code>中缓存这个对象，即：<code>setClassCacheEntry(clazz)</code>。每次<code>groovy</code>编译脚本后，都会缓存该脚本的<code>Class</code>对象，下次编译该脚本时，会优先从缓存中读取，这样节省掉编译的时间。这个缓存的<code>Map</code>由<code>GroovyClassLoader</code>持有，<code>key</code>是脚本的类名，这就导致每个脚本对应的<code>class</code>对象都存在引用，无法被<code>GC</code>清理掉。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;code&gt;Groovy&lt;/code&gt;是构建在&lt;code&gt;JVM&lt;/code&gt;上的一个轻量级动态语言，其是&lt;code&gt;Java&lt;/code&gt;实现的，与&lt;code&gt;Java&lt;/code&gt;语法类是，能很好的与&lt;code&gt;Java&lt;/code&gt;代码结合，及扩展现有代码。&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://yaoyinglong.github.io/categories/Java/"/>
-    
-      <category term="工具" scheme="https://yaoyinglong.github.io/categories/Java/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Groovy" scheme="https://yaoyinglong.github.io/tags/Groovy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>国债逆回购</title>
-    <link href="https://yaoyinglong.github.io/Blog/%E7%90%86%E8%B4%A2/%E5%9B%BD%E5%80%BA%E9%80%86%E5%9B%9E%E8%B4%AD/"/>
-    <id>https://yaoyinglong.github.io/Blog/理财/国债逆回购/</id>
-    <published>2019-12-09T16:00:00.000Z</published>
-    <updated>2019-12-10T03:23:41.248Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="购买技巧"><a href="#购买技巧" class="headerlink" title="购买技巧"></a>购买技巧</h3><ul><li>每到年中，年底，长的节假日前，国债逆回购利息都会比较高</li><li>国债逆回购收益最高一般出现在节假日前的第二天，一般是周四，此时逆回购收益是最高的</li><li>每年1月初的市场资金面通常会比较宽松</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;购买技巧&quot;&gt;&lt;a href=&quot;#购买技巧&quot; class=&quot;headerlink&quot; title=&quot;购买技巧&quot;&gt;&lt;/a&gt;购买技巧&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;每到年中，年底，长的节假日前，国债逆回购利息都会比较高&lt;/li&gt;
-&lt;li&gt;国债逆回购收益最高一般出现在节假日前的
-      
-    
-    </summary>
-    
-      <category term="hide" scheme="https://yaoyinglong.github.io/categories/hide/"/>
-    
     
   </entry>
   
