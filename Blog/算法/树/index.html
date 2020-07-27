@@ -9,18 +9,18 @@
         YingLong</title>
     
     
-        <meta name="keywords" content="算法">
+        <meta name="keywords" content="算法,树">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="特点 每个节点有零个火多个子节点； 没有父节点的节点称为根节点； 每个非根节点有且仅有一个父节点； 除了根节点以外，每个子节点都可分为多个不相交的子树；  术语 节点的度：一个节点含有的子树的个数称为该节点的度； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 子节点：一个节点含有的子树的根节点称为该节">
-<meta name="keywords" content="算法">
+<meta name="keywords" content="算法,树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/算法/树/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="特点 每个节点有零个火多个子节点； 没有父节点的节点称为根节点； 每个非根节点有且仅有一个父节点； 除了根节点以外，每个子节点都可分为多个不相交的子树；  术语 节点的度：一个节点含有的子树的个数称为该节点的度； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 子节点：一个节点含有的子树的根节点称为该节">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-06-22T03:34:18.140Z">
+<meta property="og:updated_time" content="2020-07-27T09:58:26.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树">
 <meta name="twitter:description" content="特点 每个节点有零个火多个子节点； 没有父节点的节点称为根节点； 每个非根节点有且仅有一个父节点； 除了根节点以外，每个子节点都可分为多个不相交的子树；  术语 节点的度：一个节点含有的子树的个数称为该节点的度； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 子节点：一个节点含有的子树的根节点称为该节">
@@ -524,9 +524,9 @@
         
                     </li>
                 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             算法
                         </a>
@@ -547,6 +547,8 @@
             </ul>
         
                     </li>
+                
+                    <li class="file active"><a href="/Blog/算法/树/">树</a></li>
                 
             </ul>
         
@@ -651,13 +653,13 @@
                         
     <div class="article-category">
         <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/hide/">hide</a>
+        <a class="article-category-link" href="/categories/算法/">算法</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/算法/">算法</a>
+        <a class="tag-link" href="/tags/树/">树</a>, <a class="tag-link" href="/tags/算法/">算法</a>
     </div>
 
                         
@@ -722,6 +724,15 @@
 </ul>
 </li>
 </ul>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    TreeNode leftNode;</span><br><span class="line">    TreeNode rightNode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(treeNode);</span><br><span class="line">    preorder(treeNode.leftNode);</span><br><span class="line">    preorder(treeNode.rightNode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inorder(treeNode.leftNode);</span><br><span class="line">    System.out.println(treeNode);</span><br><span class="line">    inorder(treeNode.rightNode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backorder</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    backorder(treeNode.leftNode);</span><br><span class="line">    backorder(treeNode.rightNode);</span><br><span class="line">    System.out.println(treeNode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="层序遍历-广度优先遍历"><a href="#层序遍历-广度优先遍历" class="headerlink" title="层序遍历|广度优先遍历"></a>层序遍历|广度优先遍历</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">bfs</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; lists = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> lists;</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    queue.offer(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        TreeNode tree = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (tree.leftNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            queue.offer(tree.leftNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tree.rightNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            queue.offer(tree.rightNode);</span><br><span class="line">        &#125;</span><br><span class="line">        lists.add(tree.value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lists;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="深度遍历"><a href="#深度遍历" class="headerlink" title="深度遍历"></a>深度遍历</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">dfs</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; lists = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> lists;</span><br><span class="line">    &#125;</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode tree = stack.pop();</span><br><span class="line">        <span class="keyword">if</span> (tree.rightNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(tree.rightNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tree.leftNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(tree.leftNode);</span><br><span class="line">        &#125;</span><br><span class="line">        lists.add(tree.value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lists;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="平衡二叉树-AVL树"><a href="#平衡二叉树-AVL树" class="headerlink" title="平衡二叉树|AVL树"></a>平衡二叉树|AVL树</h3><p><strong>左子树上的所有节点的值都比根节点的值小</strong>，而<strong>右子树上的所有节点的值都比根节点的值大</strong>，且<strong>左子树与右子树的高度差最大为<code>1</code></strong>。平衡二叉树是在二叉排序树的基础上发展而来的，平衡二叉树<strong>满足所有二叉排序（搜索）树</strong>的性质。</p>
+<h3 id="二叉搜索树-二叉排序树"><a href="#二叉搜索树-二叉排序树" class="headerlink" title="二叉搜索树|二叉排序树"></a>二叉搜索树|二叉排序树</h3><p>左子树上所有节点的值均小于根节点的值，而右子树上所有结点的值均大于根节点的值。<strong>插入的序列越接近有序，生成的二叉搜索树就越像一个链表</strong>，为了避免二叉搜索树变成链表，故引入了<strong>平衡二叉树</strong>，即让树的结构看起来尽量均匀，左右子树的节点数尽量一样多。</p>
+<p>生成平衡二叉树时，先按照生成二叉搜索树的方法构造二叉树，再根据插入的导致二叉树不平衡的节点位置进行调整，有<strong><code>LL</code>左旋</strong>、<strong><code>RR</code>右旋</strong>、<strong><code>LR</code>先左旋后右旋</strong>、<strong><code>RL</code>先右旋后左旋</strong>四种调整方式。</p>
 
         </div>
         

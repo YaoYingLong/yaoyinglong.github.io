@@ -4,26 +4,21 @@
     <meta charset="utf-8">
     
     <title>
-        Java8时间及日期 |
+        Tag: 树 |
         
         YingLong</title>
     
     
-        <meta name="keywords" content="Java8">
+        <meta name="keywords" content="YingLong">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="旧的日期类是可变且线程不安全的，Java8中引入了一套全新的日期API，java.time包中的类是不可变且线程安全。 LocalDatejava.time.LocalDate是用来表示日期的，不包含具体的时间，默认按照yyyy-MM-dd格式。  获取当前日期：LocalDate.now() 根据年月日构建日期：LocalDate.of(2018, 01, 30) 字符串转换日期：LocalDa">
-<meta name="keywords" content="Java8">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java8时间及日期">
-<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/基础/时间及日期总结/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="YingLong">
+<meta property="og:url" content="https://yaoyinglong.github.io/tags/树/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="旧的日期类是可变且线程不安全的，Java8中引入了一套全新的日期API，java.time包中的类是不可变且线程安全。 LocalDatejava.time.LocalDate是用来表示日期的，不包含具体的时间，默认按照yyyy-MM-dd格式。  获取当前日期：LocalDate.now() 根据年月日构建日期：LocalDate.of(2018, 01, 30) 字符串转换日期：LocalDa">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-14T08:17:28.139Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java8时间及日期">
-<meta name="twitter:description" content="旧的日期类是可变且线程不安全的，Java8中引入了一套全新的日期API，java.time包中的类是不可变且线程安全。 LocalDatejava.time.LocalDate是用来表示日期的，不包含具体的时间，默认按照yyyy-MM-dd格式。  获取当前日期：LocalDate.now() 根据年月日构建日期：LocalDate.of(2018, 01, 30) 字符串转换日期：LocalDa">
+<meta name="twitter:title" content="YingLong">
     
 
     
@@ -210,9 +205,9 @@
         
                     </li>
                 
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             Java
                         </a>
@@ -270,16 +265,16 @@
         
                     </li>
                 
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             基础
                         </a>
                         
             <ul class="unstyled" id="tree">
                 
-                    <li class="file active"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
                 
                     <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
                 
@@ -643,143 +638,50 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main"><article id="post-Java/基础/时间及日期总结" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+        <section id="main">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-tag"></i></span>
+        <h1 class="title">#树</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/基础/">基础</a>
-    </div>
+    
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/Blog/算法/树/">树</a>
+        </h1>
+    
 
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Java8/">Java8</a>
-    </div>
-
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Blog/Java/基础/时间及日期总结/">
-            <time datetime="2019-05-21T16:00:00.000Z" itemprop="datePublished">2019-05-22</time>
+        <a href="/Blog/算法/树/">
+            <time datetime="2020-06-21T16:00:00.000Z" itemprop="datePublished">2020-06-22</time>
         </a>
     </div>
 
 
-                        
-                    </div>
-                
-                
-    
-        <h1 class="article-title" itemprop="name">
-            Java8时间及日期
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-            
                     
-            
-            
-                <p>旧的日期类是可变且线程不安全的，<strong><code>Java8</code></strong>中引入了一套全新的日期<strong><code>API</code></strong>，<strong><code>java.time</code></strong>包中的类是不可变且线程安全。</p>
-<h3 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h3><p><strong><code>java.time.LocalDate</code></strong>是用来表示日期的，不包含具体的时间，默认按照<strong><code>yyyy-MM-dd</code></strong>格式。</p>
-<ul>
-<li>获取当前日期：<code>LocalDate.now()</code></li>
-<li>根据年月日构建日期：<code>LocalDate.of(2018, 01, 30)</code></li>
-<li>字符串转换日期：<code>LocalDate.parse(&quot;2018-01-30&quot;)</code>，也可以自定义格式，如：<code>LocalDate.parse(&quot;2018年01月30日&quot;, DateTimeFormatter.ofPattern(&quot;uuuu年MM月dd日&quot;))</code></li>
-<li>本月第一天：<code>localDate.with(TemporalAdjusters.firstDayOfMonth())</code></li>
-<li>本月第二天：<code>localDate.withDayOfMonth(2)</code></li>
-<li>本月最后一天：<code>localDate.with(TemporalAdjusters.lastDayOfMonth())</code></li>
-<li>明天：<code>localDate.plusDays(1L)</code></li>
-<li>昨天：<code>localDate.minusDays(1L)</code></li>
-<li>获取本年第120天：<code>localDate.withDayOfYear(120)</code></li>
-<li>计算两个日期间的天数：<code>localDate.until(localDate1, ChronoUnit.DAYS)</code></li>
-<li>计算两个日期间的周数：<code>localDate.until(localDate1, ChronoUnit.WEEKS)</code></li>
-</ul>
-<h3 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h3><p><strong><code>LocalTime</code></strong>与<strong><code>LocalDate</code></strong>相反，其仅表示时间，不包含日期。</p>
-<ul>
-<li>获取当前时间（包含毫秒数）：<code>LocalTime.now()</code></li>
-<li>构建指定时间：<code>LocalTime.of(12, 15, 30)</code></li>
-<li>获取指定时间（不包含毫秒数）：<code>localTime.withNano(0)</code></li>
-<li>字符串转为时间<ul>
-<li><code>LocalTime.parse(&quot;12:15:30&quot;)</code></li>
-<li><code>LocalTime.parse(&quot;12:15:30.233&quot;)</code></li>
-<li><code>LocalTime.parse(&quot;12:15&quot;)</code></li>
-<li><code>LocalTime.parse(&quot;12时15分30秒&quot;, DateTimeFormatter.ofPattern(&quot;HH时mm分ss秒&quot;))</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h3><p><strong><code>LocalDateTime</code></strong>和旧的<strong><code>java.util.Date</code></strong>类是，既包含日期，又包含时间，且经常与<strong><code>DateTimeFormatter</code></strong>一起使用。</p>
-<ul>
-<li>获取当前年月日时分秒：<code>LocalDateTime.now()</code></li>
-<li>通过<strong><code>LocalDate</code></strong>和<strong><code>LocalTime</code></strong>构建：<code>LocalDateTime.of(LocalDate.now(), LocalTime.now())</code></li>
-</ul>
-<h3 id="时间差"><a href="#时间差" class="headerlink" title="时间差"></a>时间差</h3><p>计算相差的天数：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getDaysBetween</span><span class="params">(LocalDate firstDate, LocalDate secondDate)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (firstDate == secondDate) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (firstDate == <span class="keyword">null</span>) &#123;</span><br><span class="line">        firstDate = LocalDate.now();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (secondDate == <span class="keyword">null</span>) &#123;</span><br><span class="line">        secondDate = LocalDate.now();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.abs(firstDate.toEpochDay() - secondDate.toEpochDay());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>计算相差的小时数：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getHoursBetween</span><span class="params">(LocalDateTime firstDate, LocalDateTime secondDate)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (firstDate == secondDate) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (firstDate == <span class="keyword">null</span>) &#123;</span><br><span class="line">        firstDate = LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (secondDate == <span class="keyword">null</span>) &#123;</span><br><span class="line">        secondDate = LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line">    Long diffHours = Math.abs(Duration.between(firstDate, secondDate).toHours());</span><br><span class="line">    <span class="keyword">return</span> diffHours;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Date与JAVA8时间类互转"><a href="#Date与JAVA8时间类互转" class="headerlink" title="Date与JAVA8时间类互转"></a>Date与JAVA8时间类互转</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Date与Instant的相互转化</span></span><br><span class="line">Instant instant  = Instant.now();</span><br><span class="line">Date date = Date.from(instant);</span><br><span class="line">Instant instant2 = date.toInstant();</span><br><span class="line">        </span><br><span class="line"><span class="comment">//Date转为LocalDateTime</span></span><br><span class="line">Date date2 = <span class="keyword">new</span> Date();</span><br><span class="line">LocalDateTime localDateTime2 = LocalDateTime.ofInstant(date2.toInstant(), ZoneId.systemDefault());</span><br><span class="line">        </span><br><span class="line"><span class="comment">//LocalDateTime转Date</span></span><br><span class="line">LocalDateTime localDateTime3 = LocalDateTime.now();</span><br><span class="line">Instant instant3 = localDateTime3.atZone(ZoneId.systemDefault()).toInstant();</span><br><span class="line">Date date3 = Date.from(instant);</span><br><span class="line"></span><br><span class="line"><span class="comment">//LocalDate转Date</span></span><br><span class="line"><span class="comment">//因为LocalDate不包含时间，所以转Date时，会默认转为当天的起始时间，00:00:00</span></span><br><span class="line">LocalDate localDate4 = LocalDate.now();</span><br><span class="line">Instant instant4 = localDate4.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();</span><br><span class="line">Date date4 = Date.from(instant);</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-    <footer class="article-footer">
-    </footer>
+    <div class="article-category">
+        <i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/算法/">算法</a>
     </div>
-</article>
 
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/树/">树</a>, <a class="tag-link" href="/tags/算法/">算法</a>
+    </div>
 
-    
-    <nav id="article-nav">
-        
-            <a href="/Blog/框架/Spring/Hystrix总结/" id="article-nav-newer" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-                    
-                        Hystrix总结
-                    
                 </div>
-            </a>
-        
-        
-            <a href="/Blog/Java/VM/方法调用/" id="article-nav-older" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">方法调用</div>
-            </a>
-        
-    </nav>
-
-
-
-
-
+            </div>
+        </div>
     
-    
-
-
-
-
-    <!-- baidu url auto push script -->
-    <script type="text/javascript">
-        !function () {
-            var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi, r = window.location.href,
-                o = document.referrer;
-            if (!e.test(r)) {
-                var n = "//api.share.baidu.com/s.gif";
-                o ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
-                var t = new Image;
-                t.src = n
-            }
-        }(window);
-    </script>
+</div>
 </section>
     </div>
     <footer id="footer">

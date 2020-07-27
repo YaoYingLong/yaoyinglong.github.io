@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E6%A0%91/</loc>
+    
+    <lastmod>2020-07-27T09:58:26.841Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/Go/Go%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2020-07-27T01:43:53.095Z</lastmod>
@@ -89,13 +96,6 @@
     <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E5%92%8C%E5%A5%B3%E5%AD%A9%E5%AD%90%E7%9B%B8%E5%A4%84/</loc>
     
     <lastmod>2020-07-03T02:40:20.845Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E6%A0%91/</loc>
-    
-    <lastmod>2020-06-22T03:34:18.140Z</lastmod>
     
   </url>
   
