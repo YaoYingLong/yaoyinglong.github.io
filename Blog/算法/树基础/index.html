@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>
+        树基础 |
+        
+        YingLong</title>
+    
+    
+        <meta name="keywords" content="算法,树">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="特点 每个节点有零个或多个子节点； 没有父节点的节点称为根节点； 每个非根节点有且仅有一个父节点； 除了根节点以外，每个子节点都可分为多个不相交的子树；  术语 节点的度：一个节点含有的子树的个数称为该节点的度，二叉树的度为2； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 子节点：一个节点含有的子树">
+<meta name="keywords" content="算法,树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树基础">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/算法/树基础/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="特点 每个节点有零个或多个子节点； 没有父节点的节点称为根节点； 每个非根节点有且仅有一个父节点； 除了根节点以外，每个子节点都可分为多个不相交的子树；  术语 节点的度：一个节点含有的子树的个数称为该节点的度，二叉树的度为2； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 子节点：一个节点含有的子树">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-07-28T06:07:38.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树基础">
+<meta name="twitter:description" content="特点 每个节点有零个或多个子节点； 没有父节点的节点称为根节点； 每个非根节点有且仅有一个父节点； 除了根节点以外，每个子节点都可分为多个不相交的子树；  术语 节点的度：一个节点含有的子树的个数称为该节点的度，二叉树的度为2； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 子节点：一个节点含有的子树">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+    
+        <form class="search-form">
+            <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+            <button type="submit" class="search-form-submit"></button>
+        </form>
+        <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: '/',
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+    <div class="outer">
+        
+        
+            <aside id="sidebar">
+    
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+
+        
+        
+        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Go
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Go/Go基础/">Go基础</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/工具/Java中调用Groovy脚本/">Java中调用Groovy脚本</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM2/">国密SM2</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM4/">国密SM4</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Maven/Maven加密JAR包/">Maven加密JAR包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven个性化打包/">Maven个性化打包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven Assembly标签全解/">Maven Assembly标签全解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Python/Excel文件数据抽取/">Excel文件数据抽取</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA实用插件/">IDEA实用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/Win实用工具/">Win实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            常见问题
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/常见问题/HBase依赖冲突/">HBase依赖冲突</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/常见问题/Maven编译后文件损坏/">Maven编译后文件损坏</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/算法/二叉搜索树/">二叉搜索树</a></li>
+                
+                    <li class="file"><a href="/Blog/算法/平衡二叉树/">平衡二叉树</a></li>
+                
+                    <li class="file active"><a href="/Blog/算法/树基础/">树基础</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/设计模式/设计基本原则/">设计基本原则</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>
+                
+            </ul>
+        
+    </div>
+    <script>
+        $(document).ready(function () {
+            var iconFolderOpenClass = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({duration: 100});
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({duration: 100});
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    subtrees.slideUp({duration: 100});
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({duration: 100});
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if (expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({duration: 100});
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({duration: 100});
+                    icon.addClass(iconAllExpandClass);
+                }
+            });
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+        
+        <section id="main"><article id="post-算法/树基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+        <i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/树/">树</a>, <a class="tag-link" href="/tags/算法/">算法</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/算法/树基础/">
+            <time datetime="2020-06-21T16:00:00.000Z" itemprop="datePublished">2020-06-22</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            树基础
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            
+                    
+            
+            
+                <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>每个节点有<strong>零个</strong>或<strong>多个</strong>子节点；</li>
+<li>没有父节点的节点称为<strong>根节点</strong>；</li>
+<li>每个<strong>非根节点</strong>有且<strong>仅有一个</strong>父节点；</li>
+<li>除了根节点以外，<strong>每个子节点都可分为多个不相交的子树</strong>；</li>
+</ul>
+<h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ul>
+<li><strong>节点的度</strong>：一个节点含有的子树的个数称为该节点的度，<strong>二叉树的度为2</strong>；</li>
+<li><strong>树的度</strong>：一棵树中，最大的节点的度称为树的度；</li>
+<li><strong>叶节点或终端节点</strong>：度为零的节点；</li>
+<li><strong>父节点</strong>：若一个节点含有子节点，则这个节点称为其子节点的父节点；</li>
+<li><strong>子节点</strong>：一个节点含有的子树的根节点称为该节点的子节点；</li>
+<li><strong>兄弟节点</strong>：具有<strong>相同父节点</strong>的节点互称为兄弟节点；</li>
+<li><strong>节点的层次</strong>：从根开始定义起，<strong>根为第<code>1</code>层</strong>，根的子节点为第2层，以此类推；</li>
+<li><strong>树的高度或深度</strong>：树中节点的<strong>最大层次</strong>；</li>
+<li><strong>堂兄弟节点</strong>：父节点在同一层的节点互为堂兄弟；</li>
+<li><strong>节点的祖先</strong>：从根到该节点所经分支上的所有节点；</li>
+<li><strong>子孙</strong>：以某节点为根的子树中任一节点都称为该节点的子孙。</li>
+<li><strong>森林</strong>：由<code>m（m&gt;=0）</code>棵互不相交的树的集合称为森林；</li>
+</ul>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><strong>无序树</strong>：树中任意节点的子节点之间没有顺序关系，这种树称为无序树，也称为<strong>自由树</strong>；</li>
+<li><strong>有序树</strong>：树中任意节点的子节点之间有顺序关系，这种树称为有序树；<ul>
+<li><strong>二叉树</strong>：每个节点最多含有两个子树的树称为二叉树；<ul>
+<li><strong>完全二叉树</strong>：对于一颗二叉树，假设其深度为<code>d(d&gt;1)</code>。除了第<code>d</code>层外，其它各层的节点数目均已达最大值，且第<code>d</code>层所有节点<strong>从左向右连续地紧密排列</strong>，这样的二叉树被称为完全二叉树，其中<strong>满二叉树</strong>的定义是所有叶节点都在最底层的完全二叉树;</li>
+<li><strong>平衡二叉树</strong>（<code>AVL</code>树，<strong>红黑树</strong>是该树的一种）：<strong>当且仅当任何节点的两棵子树的高度差不大于1</strong>的二叉树，<code>SGI</code>/<code>STL</code>的<code>set</code>/<code>map</code>底层都是用<strong>红黑树</strong>实现的；</li>
+<li><strong>排序二叉树</strong>（<strong>二叉查找树</strong>（英语：<code>Binary Search Tree</code>），也称<strong>二叉搜索树</strong>、<strong>有序二叉树</strong>）；</li>
+</ul>
+</li>
+<li><strong>霍夫曼树</strong>（用于信息编码）：<strong>带权路径最短的二叉树</strong>称为哈夫曼树或<strong>最优二叉树</strong>；</li>
+<li><strong>B树</strong>：一种<strong>对读写操作进行优化的自平衡的二叉查找树</strong>，能够保持数据有序，拥有多余两个子树。</li>
+</ul>
+</li>
+</ul>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><p>​    二叉树的遍历分为<strong>广度优先遍历</strong>和<strong>深度优先遍历</strong>，广度优先遍历又叫<strong>层序遍历</strong>，从上往下每一层<strong>从左到右</strong>依次访问节点；深度优先遍历可细分为<strong>先序遍历</strong>、<strong>中序遍历</strong>、<strong>后续遍历</strong>；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    TreeNode leftNode;</span><br><span class="line">    TreeNode rightNode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h5><p>对任一子树，先访问根，然后遍历其左子树，最后遍历其右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(treeNode);</span><br><span class="line">    preorder(treeNode.leftNode);</span><br><span class="line">    preorder(treeNode.rightNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderDfs</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode tree = stack.pop();</span><br><span class="line">        System.out.println(tree);</span><br><span class="line">        <span class="keyword">if</span> (tree.rightNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(tree.rightNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tree.leftNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(tree.leftNode);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h5><p>对任一子树，先遍历其左子树，然后访问根，最后遍历其右子树。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inorder(treeNode.leftNode);</span><br><span class="line">    System.out.println(treeNode);</span><br><span class="line">    inorder(treeNode.rightNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrderDfs</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    stack.push(root);</span><br><span class="line">    TreeNode currentNode = root;</span><br><span class="line">    <span class="keyword">while</span> (currentNode != <span class="keyword">null</span> &amp;&amp; !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">while</span> (currentNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(currentNode);</span><br><span class="line">            currentNode = currentNode.leftNode;</span><br><span class="line">        &#125;</span><br><span class="line">        currentNode = stack.pop();</span><br><span class="line">        System.out.print(currentNode);</span><br><span class="line">        currentNode = currentNode.rightNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h5><p>对任一子树，先遍历其左子树，然后遍历其右子树，最后访问根。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backorder</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    backorder(treeNode.leftNode);</span><br><span class="line">    backorder(treeNode.rightNode);</span><br><span class="line">    System.out.println(treeNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backOrderDfs</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(root);</span><br><span class="line">        TreeNode currentNode = root;</span><br><span class="line">        TreeNode rightNode = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (currentNode != <span class="keyword">null</span> &amp;&amp; !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (currentNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(currentNode);</span><br><span class="line">                currentNode = currentNode.leftNode;</span><br><span class="line">            &#125;</span><br><span class="line">            currentNode = stack.pop();</span><br><span class="line">            <span class="keyword">while</span> (currentNode.rightNode == <span class="keyword">null</span> || currentNode.rightNode == rightNode) &#123;</span><br><span class="line">                System.out.print(currentNode);</span><br><span class="line">                rightNode = currentNode;</span><br><span class="line">                <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                currentNode = stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(currentNode);</span><br><span class="line">            currentNode = currentNode.rightNode;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="层序遍历-广度优先遍历"><a href="#层序遍历-广度优先遍历" class="headerlink" title="层序遍历|广度优先遍历"></a>层序遍历|广度优先遍历</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">bfs</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; lists = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> lists;</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    queue.offer(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        TreeNode tree = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (tree.leftNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            queue.offer(tree.leftNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (tree.rightNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">            queue.offer(tree.rightNode);</span><br><span class="line">        &#125;</span><br><span class="line">        lists.add(tree.value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lists;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h3><p>计算二叉树的深度可以通过后序遍历和层序遍历计算二叉树的深度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(maxDepth(root.leftNode), maxDepth(root.rightNode)) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> maxDepth = <span class="number">0</span>;</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        maxDepth++;</span><br><span class="line">        <span class="keyword">int</span> len = queue.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            TreeNode treeNode = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (treeNode.leftNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.add(treeNode.leftNode);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (treeNode.rightNode != <span class="keyword">null</span>) &#123;</span><br><span class="line">                queue.add(treeNode.rightNode);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxDepth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二叉树的直径"><a href="#二叉树的直径" class="headerlink" title="二叉树的直径"></a>二叉树的直径</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> diameter = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">diameter</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    depth(root);</span><br><span class="line">    <span class="keyword">return</span> diameter;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left = depth(treeNode.leftNode);</span><br><span class="line">    <span class="keyword">int</span> right = depth(treeNode.rightNode);</span><br><span class="line">    diameter = Math.max(left + right, diameter);</span><br><span class="line">    <span class="keyword">return</span> Math.max(left, right) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+    <footer class="article-footer">
+    </footer>
+    </div>
+</article>
+
+
+    
+
+
+
+
+    
+    
+
+
+
+
+    <!-- baidu url auto push script -->
+    <script type="text/javascript">
+        !function () {
+            var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi, r = window.location.href,
+                o = document.referrer;
+            if (!e.test(r)) {
+                var n = "//api.share.baidu.com/s.gif";
+                o ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+                var t = new Image;
+                t.src = n
+            }
+        }(window);
+    </script>
+</section>
+    </div>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2020
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+    
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+</div>
+</body>
