@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="左子树上所有节点的值均小于根节点的值，而右子树上所有结点的值均大于根节点的值。插入的序列越接近有序，生成的二叉搜索树就越像一个链表，为了避免二叉搜索树变成链表，故引入了平衡二叉树，即让树的结构看起来尽量均匀，左右子树的节点数尽量一样多。 生成平衡二叉树时，先按照生成二叉搜索树的方法构造二叉树，再根据插入的导致二叉树不平衡的节点位置进行调整，有LL左旋、RR右旋、LR先左旋后右旋、RL先右旋后左旋四">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-30T09:18:15.773Z">
+<meta property="og:updated_time" content="2020-08-03T01:29:01.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉搜索树">
 <meta name="twitter:description" content="左子树上所有节点的值均小于根节点的值，而右子树上所有结点的值均大于根节点的值。插入的序列越接近有序，生成的二叉搜索树就越像一个链表，为了避免二叉搜索树变成链表，故引入了平衡二叉树，即让树的结构看起来尽量均匀，左右子树的节点数尽量一样多。 生成平衡二叉树时，先按照生成二叉搜索树的方法构造二叉树，再根据插入的导致二叉树不平衡的节点位置进行调整，有LL左旋、RR右旋、LR先左旋后右旋、RL先右旋后左旋四">
@@ -554,6 +554,8 @@
                 
                     <li class="file"><a href="/Blog/算法/树基础/">树基础</a></li>
                 
+                    <li class="file"><a href="/Blog/算法/时间&空间复杂/">时间&空间复杂</a></li>
+                
             </ul>
         
                     </li>
@@ -698,6 +700,8 @@
 <p>生成平衡二叉树时，先按照生成二叉搜索树的方法构造二叉树，再根据插入的导致二叉树不平衡的节点位置进行调整，有<strong><code>LL</code>左旋</strong>、<strong><code>RR</code>右旋</strong>、<strong><code>LR</code>先左旋后右旋</strong>、<strong><code>RL</code>先右旋后左旋</strong>四种调整方式。</p>
 <h3 id="将树转换成链表"><a href="#将树转换成链表" class="headerlink" title="将树转换成链表"></a>将树转换成链表</h3><p><code>cursor</code>只是做一个引用传递，不断的将节点的<code>right</code>节点更新，然后将当前游标置为新节点。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TreeNode cursor;</span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">increasingBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    TreeNode ans = <span class="keyword">new</span> TreeNode(<span class="number">0</span>);</span><br><span class="line">    cursor = ans;</span><br><span class="line">    inorder(root);</span><br><span class="line">    <span class="keyword">return</span> ans.right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inorder(node.left);</span><br><span class="line">    node.left = <span class="keyword">null</span>;</span><br><span class="line">    cursor.right = node;</span><br><span class="line">    cursor = node;</span><br><span class="line">    inorder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二叉搜索树降序遍历"><a href="#二叉搜索树降序遍历" class="headerlink" title="二叉搜索树降序遍历"></a>二叉搜索树降序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">convertBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    convertBST(root.right);</span><br><span class="line">    System.out.println(root);</span><br><span class="line">    convertBST(root.left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
         </div>
         
     <footer class="article-footer">

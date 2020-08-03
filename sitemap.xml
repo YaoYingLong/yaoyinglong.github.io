@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E6%A0%91%E5%9F%BA%E7%A1%80/</loc>
     
-    <lastmod>2020-07-30T09:18:15.773Z</lastmod>
+    <lastmod>2020-08-03T01:29:26.226Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E6%A0%91%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</loc>
     
-    <lastmod>2020-07-30T02:40:31.772Z</lastmod>
+    <lastmod>2020-08-03T01:29:01.571Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82/</loc>
+    
+    <lastmod>2020-08-01T11:15:13.083Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/Interview/%E5%A4%A7%E7%BA%B2/</loc>
+    
+    <lastmod>2020-08-01T05:17:24.303Z</lastmod>
     
   </url>
   
@@ -40,13 +54,6 @@
     <loc>https://yaoyinglong.github.io/Blog/Go/Go%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2020-07-27T11:36:21.998Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/Interview/%E5%A4%A7%E7%BA%B2/</loc>
-    
-    <lastmod>2020-07-26T09:45:19.919Z</lastmod>
     
   </url>
   
