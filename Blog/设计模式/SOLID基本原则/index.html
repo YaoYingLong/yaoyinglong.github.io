@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>
+        SOLID基本原则 |
+        
+        YingLong</title>
+    
+    
+        <meta name="keywords" content="设计模式">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="6大设计基本原则：单一职责原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特法则、开闭原则 单一职责原则SRP​    单一职责原则提出了一个编写程序的标准，用职责或变化原因来衡量接口或类设计得是否优良，但职责和变化原因都是不可度量得，因项目和环境而异。单一职责适用于接口、类、方法。 定义：应该有且仅有一个原因引起类的变更。 优点：类复杂性降低，实现职责清晰明确；可读性高；可维护性高；变更引起">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SOLID基本原则">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/设计模式/SOLID基本原则/index.html">
+<meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="6大设计基本原则：单一职责原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特法则、开闭原则 单一职责原则SRP​    单一职责原则提出了一个编写程序的标准，用职责或变化原因来衡量接口或类设计得是否优良，但职责和变化原因都是不可度量得，因项目和环境而异。单一职责适用于接口、类、方法。 定义：应该有且仅有一个原因引起类的变更。 优点：类复杂性降低，实现职责清晰明确；可读性高；可维护性高；变更引起">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-08-25T07:54:00.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SOLID基本原则">
+<meta name="twitter:description" content="6大设计基本原则：单一职责原则、里氏替换原则、依赖倒置原则、接口隔离原则、迪米特法则、开闭原则 单一职责原则SRP​    单一职责原则提出了一个编写程序的标准，用职责或变化原因来衡量接口或类设计得是否优良，但职责和变化原因都是不可度量得，因项目和环境而异。单一职责适用于接口、类、方法。 定义：应该有且仅有一个原因引起类的变更。 优点：类复杂性降低，实现职责清晰明确；可读性高；可维护性高；变更引起">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">YingLong</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+    
+        <form class="search-form">
+            <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+            <button type="submit" class="search-form-submit"></button>
+        </form>
+        <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: '/',
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+    <div class="outer">
+        
+        
+            <aside id="sidebar">
+    
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+
+        
+        
+        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DB
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL/">MySQL常用总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Git
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Git/GIt基本概念/">Git基本概念</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/GIt常用命令/">Git常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Git/分支管理理解/">分支管理理解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Go
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Go/Go基础/">Go基础</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            VM
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/VM/HotSpot收集算法实现/">HotSpot收集算法实现</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/JVM内存池/">JVM内存池</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/内存非配与回收策略/">内存分配与回收策略</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Java内存区域/">Java内存区域</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Minor&Major&Full GC/">Minor&Major&Full GC</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/OutOfMemoryError异常/">OOM异常实验</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集算法/">垃圾收集算法</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/堆中对象分配&布局&访问/">堆中对象分配&布局&访问</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/对象是否存活/">对象是否存活</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载的时机/">类加载的时机</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/运行时栈帧结构/">运行时栈帧结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/垃圾收集器/">垃圾收集器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/方法调用/">方法调用</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/字节码指令/">字节码指令</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/理解GC日志/">理解GC日志</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载器/">类加载器</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/Class文件结构/">Class文件结构</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/属性表集合/">属性表集合</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/VM/类加载过程/">类加载过程</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/基础/lambda常用总结/">lambda常用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/多线程/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全/">线程安全</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/多线程/线程安全实现方式/">线程安全实现方式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            工具
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Java/工具/Java中调用Groovy脚本/">Java中调用Groovy脚本</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM2/">国密SM2</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/工具/国密SM4/">国密SM4</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用命令/">Linux常用命令</a></li>
+                
+                    <li class="file"><a href="/Blog/Linux/Linux常用技巧/">Linux常用技巧</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Maven/Maven加密JAR包/">Maven加密JAR包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven基础/">Maven基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用/">Maven常用</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven属性/">Maven属性</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用工具/">Maven常用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件编写/">Maven插件编写</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven生命周期/">Maven生命周期</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven个性化打包/">Maven个性化打包</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven仓库/">Maven仓库</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven插件基础/">Maven插件基础</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven聚合与继承/">Maven聚合与继承</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven常用插件/">Maven常用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven标签全解/">Maven标签全解</a></li>
+                
+                    <li class="file"><a href="/Blog/Maven/Maven Assembly标签全解/">Maven Assembly标签全解</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Python/Excel文件数据抽取/">Excel文件数据抽取</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/Test/IT测试总结/">IT测试总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/JMeter日常总结/">JMeter日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/LoadRunner日常总结/">LoadRunner日常总结</a></li>
+                
+                    <li class="file"><a href="/Blog/Test/UT测试总结/">UT测试总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议族
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/协议族/TCPIP四层&五层模型/">TCP/IP四层&五层模型</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/网络基础知识/">网络基础知识</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/以太网/">以太网</a></li>
+                
+                    <li class="file"><a href="/Blog/协议族/地址解析协议/">地址解析协议ARP</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂记
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA实用插件/">IDEA实用插件</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/IDEA快捷的使用/">IDEA的快捷使用</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/Win实用工具/">Win实用工具</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/XSD使用总结/">XSD实用总结</a></li>
+                
+                    <li class="file"><a href="/Blog/杂记/SonarQube配置总结/">SonarQube配置总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/IoC容器/">IoC容器</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring整体架构/">Spring整体架构</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring知识点/">Spring知识点</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            常见问题
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/框架/常见问题/HBase依赖冲突/">HBase依赖冲突</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/常见问题/Maven编译后文件损坏/">Maven编译后文件损坏</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/算法/二叉搜索树/">二叉搜索树</a></li>
+                
+                    <li class="file"><a href="/Blog/算法/平衡二叉树/">平衡二叉树</a></li>
+                
+                    <li class="file"><a href="/Blog/算法/时间&空间复杂/">时间&空间复杂</a></li>
+                
+                    <li class="file"><a href="/Blog/算法/树基础/">树基础</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file active"><a href="/Blog/设计模式/SOLID基本原则/">SOLID基本原则</a></li>
+                
+                    <li class="file"><a href="/Blog/设计模式/设计模式概览/">设计模式概览</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/index/">Welcome YingLong's Blog</a></li>
+                
+            </ul>
+        
+    </div>
+    <script>
+        $(document).ready(function () {
+            var iconFolderOpenClass = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({duration: 100});
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({duration: 100});
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    subtrees.slideUp({duration: 100});
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({duration: 100});
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if (expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({duration: 100});
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({duration: 100});
+                    icon.addClass(iconAllExpandClass);
+                }
+            });
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+        
+        <section id="main"><article id="post-设计模式/SOLID基本原则" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+        <i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/设计模式/">设计模式</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/设计模式/SOLID基本原则/">
+            <time datetime="2020-07-25T16:00:00.000Z" itemprop="datePublished">2020-07-26</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            SOLID基本原则
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            
+                    
+            
+            
+                <p>6大设计基本原则：<strong>单一职责原则</strong>、<strong>里氏替换原则</strong>、<strong>依赖倒置原则</strong>、<strong>接口隔离原则</strong>、<strong>迪米特法则</strong>、<strong>开闭原则</strong></p>
+<h3 id="单一职责原则SRP"><a href="#单一职责原则SRP" class="headerlink" title="单一职责原则SRP"></a>单一职责原则SRP</h3><p>​    单一职责原则提出了一个编写程序的标准，用<strong>职责</strong>或<strong>变化原因</strong>来衡量接口或类设计得是否优良，但职责和变化原因都是不可度量得，因项目和环境而异。单一职责适用于<strong>接口、类、方法</strong>。</p>
+<p><strong>定义</strong>：应该<strong>有且仅有一个原因引起类的变更</strong>。</p>
+<p><strong>优点</strong>：<strong>类复杂性降低</strong>，实现<strong>职责清晰明确</strong>；<strong>可读性高</strong>；<strong>可维护性高</strong>；<strong>变更引起的风险低</strong>；</p>
+<h3 id="里氏替换原则LSP"><a href="#里氏替换原则LSP" class="headerlink" title="里氏替换原则LSP"></a>里氏替换原则LSP</h3><p><strong>定义</strong>：<strong>每一个类型为<code>S</code>的对象<code>s</code>，都有类型为<code>T</code>的对象<code>t</code>，使得以<code>T</code>定义的所有程序<code>P</code>在所有的对象<code>s</code>都代替成<code>t</code>时，程序<code>P</code>的行为无变化，则类型<code>S</code>是类型<code>T</code>的子类；所有引用基类的地方必须能透明的使用其子类的对象。</strong></p>
+<ul>
+<li><strong>子类必须完全实现父类的方法</strong>：若子类<strong>不能完全实现父类方法</strong>，或某些方法在子类种已<strong>发生畸变</strong>，建议断开父子继承关系。</li>
+<li><strong>子类可以有自己的个性</strong>：子类出现的地方父类未必能出现</li>
+<li><strong>覆盖或实现父类方法时输入参数可以被放大</strong></li>
+<li><strong>覆写或实现父类的方法时输出结果可以被缩小</strong></li>
+</ul>
+<p>在类中调用其他类时<strong>务必使用父类或接口</strong>，否则即是违背<code>LSP</code>原则。</p>
+<h3 id="依赖倒置原则DIP"><a href="#依赖倒置原则DIP" class="headerlink" title="依赖倒置原则DIP"></a>依赖倒置原则DIP</h3><p>​    采用依赖倒置原则可以减少类间的耦合性，提高系统的稳定性，降低并行开发引起的风险，提高代码的可读性和可维护性。可以通过依赖倒置原则涉及的接口或抽象类对实现类进行约束，可减少需求变化引起的工作量剧增的情况，可让维护人员轻松地扩展和维护，<strong>是实现开闭原则的重要途径</strong>。TDD测试驱动开发模式就是依赖倒置原则的最高级应用。</p>
+<p><strong>定义</strong>：<strong>高层模块不应该依赖底层模块两者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象</strong>；</p>
+<p>表现：模块间依赖通过抽象发生，实现类之间不发生直接的依赖关系，其依赖关系是通过接口或抽象类产生；接口和抽象类不依赖于实现类；实现类依赖接口或抽象类；</p>
+<p>依赖的三种写法：</p>
+<ul>
+<li>构造函数传递依赖对象，也叫构造函数注入</li>
+<li>Setter方法传递依赖对象，也叫Setter依赖注入</li>
+<li>接口声明依赖对象，也叫接口注入</li>
+</ul>
+<p>依赖倒置原则的本质就是通过抽象（接口或抽象类）使各个类或模块的实现彼此独立，不互相影响，实现模块间的松耦合。</p>
+<ul>
+<li>每个类尽量都有接口或抽象类，或抽象类和接口两者都具备</li>
+<li>变量的表面类型尽量是接口或抽象类</li>
+<li>任何类都不应该从具体类派生</li>
+<li>尽量不要覆写基类的方法</li>
+<li>结合里氏替换原则使用</li>
+</ul>
+<h3 id="接口隔离原则ISP"><a href="#接口隔离原则ISP" class="headerlink" title="接口隔离原则ISP"></a>接口隔离原则ISP</h3><p>定义：<strong>客户端不应该依赖它不需要的接口；类间的依赖关系应该建立在最小的接口上。建立单一的接口，不要建立臃肿庞大的接口</strong>；</p>
+<ul>
+<li>接口尽量小</li>
+<li>接口要高内聚：提高接口、类、模块的处理能力，减少对外的交互</li>
+<li>定制服务，单独为一个个体提供优良的服务</li>
+<li>接口设计要有限度</li>
+</ul>
+<p><strong>根据接口隔离原则拆分接口时，首先必须满足单一职责原则。</strong>接口和类尽量使用原子接口或原子类来组装。</p>
+<ul>
+<li>一个接口只服务玉一个子模块或业务</li>
+<li>通过业务逻辑压缩接口中的public方法</li>
+<li>已经被污染的接口，尽量去修改，若变更风险较大，则采用适配器模式进行转化处理</li>
+<li>了解环境，拒绝盲从</li>
+</ul>
+<h3 id="迪米特法则LD"><a href="#迪米特法则LD" class="headerlink" title="迪米特法则LD"></a>迪米特法则LD</h3><p>也称<strong>最少知识原则</strong>：一个对象应该对其他对象有最少的了解，<strong>对需要耦合或调用的类知道越少越好</strong>。</p>
+<ul>
+<li><strong>只和朋友交流</strong>：类与类间的关系是<strong>建立在类之间而不是方法间</strong>，一个方法<strong>尽量不引入一个类中不存在的对象</strong></li>
+<li>朋友间也是有距离的：<strong>尽量不对外公布太多<code>public</code>方法和非静态得<code>public</code>变量，尽量内敛</strong></li>
+<li>是自己的就是自己的：若一个方法放在本类中，即<strong>不增加类间关系</strong>，也<strong>对本类不产生负面影响</strong>，那就放置在本类中。</li>
+<li>谨慎使用<code>Serializable</code></li>
+</ul>
+<p>两个对象之间的耦合就成为朋友关系，朋友关系类型很多如组合、聚合、依赖等。</p>
+<p><strong>注</strong>：朋友类的定义，出现在<strong>成员变量</strong>、<strong>方法输入输出参数</strong>中的类称为成员朋友类，出现在<strong>方法体内部的类不属于朋友类</strong>。</p>
+<p>迪米尔法则要求类羞涩一点，<strong>尽量不对外公布太多<code>public</code>方法和非静态得<code>public</code>变量，尽量内敛</strong>，多使用<code>private</code>、<code>package-private</code>、<code>protected</code>等访问权限。类公开的<code>public</code>属性或方法越多，修改时涉及得面也就越大，变更引起得风险扩散也就越大。迪米特法则核心观念是类间解耦、弱耦合。</p>
+<p>缺点：会产生大量中转或跳转类，导致系统的复杂性提高，同时也为维护带来了难度。使用时请反复权衡，既做到让结构清晰，又做到高内聚底耦合。</p>
+<h3 id="开闭原则OCP"><a href="#开闭原则OCP" class="headerlink" title="开闭原则OCP"></a>开闭原则OCP</h3><p>一个软件实体如类、模块和函数应该<strong>对扩展开放</strong>，<strong>对修改关闭</strong>。应该<strong>通过扩展来实现变化</strong>，<strong>而不是通过修改已有代码来实现变化</strong>。</p>
+<p>开闭原则对扩展开放，对修改关闭，<strong>并不意味着不做任何修改</strong>，底层模块的变更，必然要有更高层模块进行耦合。</p>
+<p>可把变化大致分为三类：</p>
+<ul>
+<li><strong>逻辑变化</strong>：可以通过修改原有类中的方法来完成，前提是所有依赖或者关联类都按照相同的逻辑处理。</li>
+<li><strong>子模块变化</strong>：底层模块变化必然引起高层模块变化，因此<strong>通过扩展完成变化时，高层模块修改是必然的</strong>。</li>
+<li>可见视图变化</li>
+</ul>
+<p>开闭原则是<strong>最基础</strong>的一个原则，<strong>前五个原则都是开闭原则的具体形态</strong>，前五个原则就是<strong>指导设计的工具和方法</strong>，而<strong>开闭原则才是精神领袖</strong>。</p>
+<h5 id="开闭原则对测试的影响"><a href="#开闭原则对测试的影响" class="headerlink" title="开闭原则对测试的影响"></a>开闭原则对测试的影响</h5><p>在比较重要的方法，测试方法都会很多，可能测试逻辑都很复杂，若要通过修改修改一个方法或多个方法来完成变化，基本上测试用例都得重新写。所以需要通过扩展来实现业务逻辑而不是修改。</p>
+<h5 id="开闭原则可以提高复用性"><a href="#开闭原则可以提高复用性" class="headerlink" title="开闭原则可以提高复用性"></a>开闭原则可以提高复用性</h5><p>在面向对象设计中，所有的逻辑都是从<strong>原子逻辑</strong>组合而来，而不是在一个类中独立实现一个业务逻辑。颗粒度越小，被复用的可能性就越大。避免相同的逻辑分撒在多个角落，缩小颗粒度，直到一个逻辑不可再拆分为止。</p>
+<h5 id="开闭原则可以提高可维护性"><a href="#开闭原则可以提高可维护性" class="headerlink" title="开闭原则可以提高可维护性"></a>开闭原则可以提高可维护性</h5><h5 id="面向对象开发的要求"><a href="#面向对象开发的要求" class="headerlink" title="面向对象开发的要求"></a>面向对象开发的要求</h5><h4 id="开闭原则应用"><a href="#开闭原则应用" class="headerlink" title="开闭原则应用"></a>开闭原则应用</h4><h5 id="抽象约束"><a href="#抽象约束" class="headerlink" title="抽象约束"></a>抽象约束</h5><p>通过<strong>接口</strong>或<strong>抽象类</strong>可以<strong>约束一组可能变化的行为</strong>，并<strong>且能够实现对扩展开放</strong>：</p>
+<ul>
+<li>通过接口或抽象类约束扩展，<strong>对扩展边界限定</strong>，不允许出现在接口或抽象类中不存在的public方法</li>
+<li>参数类型、引用对象尽量使用接口或抽象类，而不是实现类</li>
+<li>抽象层尽量保持稳定</li>
+</ul>
+<h5 id="元数据（metadata）控制模块行为"><a href="#元数据（metadata）控制模块行为" class="headerlink" title="元数据（metadata）控制模块行为"></a>元数据（metadata）控制模块行为</h5><p>尽量使用元数据来控制程序行为，减少重复开发，如<code>login</code>方法中提供的先检查<code>IP</code>地址是否在允许访问的列表中，然后在确定是否需要到数据库中验证密码，表达的极致其实就是控制反转，如<code>Spring</code>的<code>IoC</code>容器。</p>
+<p>注：元数据是用来描述环境和数据的数据，通俗的说就是配置参数。</p>
+<h5 id="制定项目章程"><a href="#制定项目章程" class="headerlink" title="制定项目章程"></a>制定项目章程</h5><p>对于项目来说约定优于配置。</p>
+<h5 id="封装变化"><a href="#封装变化" class="headerlink" title="封装变化"></a>封装变化</h5><p>对变化的封装：将相同的变化封装到一个接口或抽象类中，将不同的变化封装到不同的接口或抽象类中，不应该有两个不同的变化出现在同一个接口或抽象类中。</p>
+<p>封装变化，也就是受保护的变化，找出预计有变化或不稳定的点。</p>
+
+        </div>
+        
+    <footer class="article-footer">
+    </footer>
+    </div>
+</article>
+
+
+    
+    <nav id="article-nav">
+        
+        
+            <a href="/Blog/框架/常见问题/HBase依赖冲突/" id="article-nav-older" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">HBase依赖冲突</div>
+            </a>
+        
+    </nav>
+
+
+
+
+
+    
+    
+
+
+
+
+    <!-- baidu url auto push script -->
+    <script type="text/javascript">
+        !function () {
+            var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi, r = window.location.href,
+                o = document.referrer;
+            if (!e.test(r)) {
+                var n = "//api.share.baidu.com/s.gif";
+                o ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+                var t = new Image;
+                t.src = n
+            }
+        }(window);
+    </script>
+</section>
+    </div>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            YaoYingLong &copy; 2020
+            <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a> -->
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+        </div>
+    </div>
+</footer>
+    
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+
+
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+</div>
+</body>
