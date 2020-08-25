@@ -4,21 +4,26 @@
     <meta charset="utf-8">
     
     <title>
-        Category: 框架 |
+        MySQL基础 |
         
         YingLong</title>
     
     
-        <meta name="keywords" content="YingLong">
+        <meta name="keywords" content="MySQL">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="YingLong">
-<meta property="og:url" content="https://yaoyinglong.github.io/categories/框架/index.html">
+    <meta name="description" content="事务基本特征ACID四种隔离级别数据库三范式">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL基础">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/DB/MySQL基础/index.html">
 <meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="事务基本特征ACID四种隔离级别数据库三范式">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-08-25T09:25:46.388Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YingLong">
+<meta name="twitter:title" content="MySQL基础">
+<meta name="twitter:description" content="事务基本特征ACID四种隔离级别数据库三范式">
     
 
     
@@ -156,16 +161,16 @@
         
             <ul class="unstyled" id="tree">
                 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             DB
                         </a>
                         
             <ul class="unstyled" id="tree">
                 
-                    <li class="file"><a href="/Blog/DB/MySQL基础/">MySQL基础</a></li>
+                    <li class="file active"><a href="/Blog/DB/MySQL基础/">MySQL基础</a></li>
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
@@ -654,198 +659,105 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-folder"></i></span>
-        <h1 class="title">框架</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        <section id="main"><article id="post-DB/MySQL基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/框架/Spring/Spring知识点/">Spring知识点</a>
-        </h1>
-    
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+        <i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/DB/">DB</a>
+    </div>
 
-                <div class="article-meta">
-                    
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/MySQL/">MySQL</a>
+    </div>
+
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Blog/框架/Spring/Spring知识点/">
-            <time datetime="2020-08-23T16:00:00.000Z" itemprop="datePublished">2020-08-24</time>
+        <a href="/Blog/DB/MySQL基础/">
+            <time datetime="2020-08-24T16:00:00.000Z" itemprop="datePublished">2020-08-25</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/框架/Spring/">Spring</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                        
+                    </div>
+                
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/框架/Spring/IoC容器/">IoC容器</a>
+        <h1 class="article-title" itemprop="name">
+            MySQL基础
         </h1>
     
 
-                <div class="article-meta">
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            
                     
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/Blog/框架/Spring/IoC容器/">
-            <time datetime="2020-08-15T16:00:00.000Z" itemprop="datePublished">2020-08-16</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/框架/Spring/">Spring</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/IoC/">IoC</a>, <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
-                </div>
-            </div>
+            
+            
+                <h3 id="事务基本特征ACID"><a href="#事务基本特征ACID" class="headerlink" title="事务基本特征ACID"></a>事务基本特征ACID</h3><h3 id="四种隔离级别"><a href="#四种隔离级别" class="headerlink" title="四种隔离级别"></a>四种隔离级别</h3><h3 id="数据库三范式"><a href="#数据库三范式" class="headerlink" title="数据库三范式"></a>数据库三范式</h3>
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/框架/Spring/Spring整体架构/">Spring整体架构</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/Blog/框架/Spring/Spring整体架构/">
-            <time datetime="2020-08-11T16:00:00.000Z" itemprop="datePublished">2020-08-12</time>
-        </a>
+        
+    <footer class="article-footer">
+    </footer>
     </div>
+</article>
 
 
+    
+    <nav id="article-nav">
+        
+            <a href="/Blog/设计模式/设计模式概览/" id="article-nav-newer" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Newer</strong>
+                <div class="article-nav-title">
                     
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/框架/Spring/">Spring</a>
-    </div>
-
+                        设计模式概览
                     
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
                 </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/框架/常见问题/HBase依赖冲突/">HBase依赖冲突</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/Blog/框架/常见问题/HBase依赖冲突/">
-            <time datetime="2020-07-05T16:00:00.000Z" itemprop="datePublished">2020-07-06</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/框架/常见问题/">常见问题</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/HBase/">HBase</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/框架/常见问题/Maven编译后文件损坏/">Maven编译后文件损坏</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/Blog/框架/常见问题/Maven编译后文件损坏/">
-            <time datetime="2020-07-05T16:00:00.000Z" itemprop="datePublished">2020-07-06</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/框架/常见问题/">常见问题</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Maven/">Maven</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-</div>
-
-    <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/categories/框架/page/2/">2</a><a class="page-number" href="/categories/框架/page/3/">3</a><a class="extend next" rel="next" href="/categories/框架/page/2/">Next &raquo;</a>
+            </a>
+        
+        
+            <a href="/Blog/框架/Spring/Spring知识点/" id="article-nav-older" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">Spring知识点</div>
+            </a>
+        
     </nav>
+
+
+
+
+
+    
+    
+
+
+
+
+    <!-- baidu url auto push script -->
+    <script type="text/javascript">
+        !function () {
+            var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi, r = window.location.href,
+                o = document.referrer;
+            if (!e.test(r)) {
+                var n = "//api.share.baidu.com/s.gif";
+                o ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+                var t = new Image;
+                t.src = n
+            }
+        }(window);
+    </script>
 </section>
     </div>
     <footer id="footer">
