@@ -69,6 +69,32 @@
   </entry>
   
   <entry>
+    <title>JVM整体概览</title>
+    <link href="https://yaoyinglong.github.io/Blog/Java/JVM%E6%95%B4%E4%BD%93%E6%A6%82/"/>
+    <id>https://yaoyinglong.github.io/Blog/Java/JVM整体概/</id>
+    <published>2020-08-24T16:00:00.000Z</published>
+    <updated>2020-08-25T10:18:18.327Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="../../../../images/JVM/JVM整体概览.png" alt="JVM整体概览"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;../../../../images/JVM/JVM整体概览.png&quot; alt=&quot;JVM整体概览&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://yaoyinglong.github.io/categories/Java/"/>
+    
+    
+      <category term="JVM" scheme="https://yaoyinglong.github.io/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Spring知识点</title>
     <link href="https://yaoyinglong.github.io/Blog/%E6%A1%86%E6%9E%B6/Spring/Spring%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
     <id>https://yaoyinglong.github.io/Blog/框架/Spring/Spring知识点/</id>
@@ -512,31 +538,6 @@
 &lt;li&gt;索引实战与优化&lt;/li&gt;
 &lt;/ol&gt;
 
-      
-    
-    </summary>
-    
-      <category term="hide" scheme="https://yaoyinglong.github.io/categories/hide/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Spring常面问题</title>
-    <link href="https://yaoyinglong.github.io/Blog/Interview/Spring%E5%B8%B8%E9%9D%A2%E9%97%AE%E9%A2%98/"/>
-    <id>https://yaoyinglong.github.io/Blog/Interview/Spring常面问题/</id>
-    <published>2020-06-18T16:00:00.000Z</published>
-    <updated>2020-08-10T01:33:13.843Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？）</p><p>2、Spring Boot Starter是什么？</p><p>3、如何自定义Spring Boot Starter？（如何扩展Spring Boot）</p><p>4、Spring Boot的自动装配原理是什么？（源码分析哦）</p><p>5、Spring Boot的启动流程是什么？</p><p>6、有没有看过Spring Boot源码？你觉得最神奇的地方是什么？</p><p>7、Spring为什么用“三级缓存”去解决循环依赖？</p><p>8、Spring中Bean的生命周期有哪些步骤？</p><p>9、什么是BeanDefinition？它为什么非常重要？</p><p>10、什么是Bean的后置处理器？</p><p>11、什么是Bean工厂的后置处理器？</p><p>12、什么是BeanFactory？它与ApplicationContext的区别？</p><p>13、什么是FactoryBean？它与BeanFactory的区别？</p><p>14、@Import、@Component、@Bean的区别是什么？</p><p>15、什么是ImportBeanDefinitionRegistrar？它的作用是什么？</p><p>16、springboot零配置的原理</p><p>17、springboot如何做到内嵌tomcat</p><p>18、springboot启动流程原理</p><p>19、常见面试考点SPI规范讲解</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？）&lt;/p&gt;
-&lt;p&gt;2、Spring Boot Starter是什么？&lt;/p&gt;
-&lt;p&gt;3、如何自定义Spring Boot Starter？（如何扩展Spring B
       
     
     </summary>
