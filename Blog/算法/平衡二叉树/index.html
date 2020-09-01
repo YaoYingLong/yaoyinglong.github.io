@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="平衡二叉树是一种特殊的二叉排序树，每个节点左子树和右子树高度差至多等于1。 将二叉树上节点左子树深度减去右子树深度的值称为平衡因子BF，平衡二叉树上所有节点的平衡因子只可能是1，-1，0。 距离插入节点最近且平衡因子绝对值大于1的节点为根的子树，称为最小不平衡子树。 构建平衡二叉树时，每插入一个节点时，先检查是否因插入而破坏树的平衡性，若是则找出最小不平衡树，在保持二叉排序树特性的前提下，调整最小">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-04T10:51:40.242Z">
+<meta property="og:updated_time" content="2020-09-01T06:58:42.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡二叉树">
 <meta name="twitter:description" content="平衡二叉树是一种特殊的二叉排序树，每个节点左子树和右子树高度差至多等于1。 将二叉树上节点左子树深度减去右子树深度的值称为平衡因子BF，平衡二叉树上所有节点的平衡因子只可能是1，-1，0。 距离插入节点最近且平衡因子绝对值大于1的节点为根的子树，称为最小不平衡子树。 构建平衡二叉树时，每插入一个节点时，先检查是否因插入而破坏树的平衡性，若是则找出最小不平衡树，在保持二叉排序树特性的前提下，调整最小">
@@ -543,21 +543,6 @@
                         
             <ul class="unstyled" id="tree">
                 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            排序
-                        </a>
-                        
-            <ul class="unstyled" id="tree">
-                
-                    <li class="file"><a href="/Blog/算法/排序/冒泡排序/">冒泡排序</a></li>
-                
-            </ul>
-        
-                    </li>
-                
                     <li class="file"><a href="/Blog/算法/二叉搜索树/">二叉搜索树</a></li>
                 
                     <li class="file active"><a href="/Blog/算法/平衡二叉树/">平衡二叉树</a></li>
@@ -565,6 +550,8 @@
                     <li class="file"><a href="/Blog/算法/时间&空间复杂/">时间&空间复杂</a></li>
                 
                     <li class="file"><a href="/Blog/算法/树基础/">树基础</a></li>
+                
+                    <li class="file"><a href="/Blog/算法/排序算法/">排序算法</a></li>
                 
             </ul>
         
@@ -721,6 +708,16 @@
 <h3 id="有序数组转换成AVL"><a href="#有序数组转换成AVL" class="headerlink" title="有序数组转换成AVL"></a>有序数组转换成<code>AVL</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">sortedArrayToBST</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> toBstTraversalLeft(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 总是选择中间位置左边的数字作为根节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">toBstTraversalLeft</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(nums[mid]);</span><br><span class="line">    root.left = toBstTraversalLeft(nums, left, mid - <span class="number">1</span>);</span><br><span class="line">    root.right = toBstTraversalLeft(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 总是选择中间位置右边的数字作为根节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">toBstTraversalRight</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(nums[mid]);</span><br><span class="line">    root.left = toBstTraversalRight(nums, left, mid - <span class="number">1</span>);</span><br><span class="line">    root.right = toBstTraversalRight(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择任意一个中间位置数字作为根节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">toBstTraversalRandom</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right + <span class="keyword">new</span> Random().nextInt(<span class="number">2</span>)) / <span class="number">2</span>;</span><br><span class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(nums[mid]);</span><br><span class="line">    root.left = toBstTraversalRandom(nums, left, mid - <span class="number">1</span>);</span><br><span class="line">    root.right = toBstTraversalRandom(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="平衡二叉树判定"><a href="#平衡二叉树判定" class="headerlink" title="平衡二叉树判定"></a>平衡二叉树判定</h3><p>对二叉树做<strong>后序遍历</strong>，从底至顶返回子树深度，若判定某子树不是平衡树则 直接向上返回：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBalanced</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> recur(treeNode) != -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">recur</span><span class="params">(TreeNode treeNode)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (treeNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> leftDepth = recur(treeNode.leftNode);</span><br><span class="line">    <span class="keyword">if</span> (leftDepth == -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> rightDepth = recur(treeNode.rightNode);</span><br><span class="line">    <span class="keyword">if</span> (rightDepth == -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.abs(leftDepth - rightDepth) &lt; <span class="number">2</span> ? Math.max(leftDepth, rightDepth) + <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><p>B树属于多叉树又名<strong>平衡多路查找树</strong>，<strong>数据库索引</strong>技术里大量使用者<code>B</code>树和<code>B+</code>树的数据结构。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树是一种含有红黑结点并能自平衡的二叉查找树。</p>
+<ul>
+<li>每个节点要么是黑色，要么是红色</li>
+<li>根节点是黑色</li>
+<li>每个叶子节点（null）是黑色</li>
+<li>每个红色结点的两个子结点一定都是黑色</li>
+<li>任意一结点到每个叶子结点的路径都包含数量相同的黑结点</li>
+<li>如果一个结点存在黑子结点，那么该结点肯定有两个子结点</li>
+</ul>
 
         </div>
         
