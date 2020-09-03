@@ -4,23 +4,26 @@
     <meta charset="utf-8">
     
     <title>
-        Synchronized总结 |
+        位运算 |
         
         YingLong</title>
     
     
-        <meta name="keywords" content="Synchronized">
+        <meta name="keywords" content="位运算">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Synchronized">
+    <meta name="description" content="字节、字、位、比特1位 = 1比特， 1字节 = 8位，1字=2字节， 1Byte=8bit 1B = 8bit， 1KB = 1024B 位：计算机最小存储单位，简记为b，也成为比特bit，计算机中用0和1来表示数据，一个0或1就代表1位。 比特（bit）：也是二进制数字中的位，信息量的最小单位。 字节（Byte）：计算存储容量的计量单位，一个字节等于八位。习惯上用B表示。 字：计算机进行数据处">
+<meta name="keywords" content="位运算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Synchronized总结">
-<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/基础/Synchronized总结/index.html">
+<meta property="og:title" content="位运算">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/基础/位运算/index.html">
 <meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="字节、字、位、比特1位 = 1比特， 1字节 = 8位，1字=2字节， 1Byte=8bit 1B = 8bit， 1KB = 1024B 位：计算机最小存储单位，简记为b，也成为比特bit，计算机中用0和1来表示数据，一个0或1就代表1位。 比特（bit）：也是二进制数字中的位，信息量的最小单位。 字节（Byte）：计算存储容量的计量单位，一个字节等于八位。习惯上用B表示。 字：计算机进行数据处">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-03T01:44:51.605Z">
+<meta property="og:updated_time" content="2020-09-03T03:18:47.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Synchronized总结">
+<meta name="twitter:title" content="位运算">
+<meta name="twitter:description" content="字节、字、位、比特1位 = 1比特， 1字节 = 8位，1字=2字节， 1Byte=8bit 1B = 8bit， 1KB = 1024B 位：计算机最小存储单位，简记为b，也成为比特bit，计算机中用0和1来表示数据，一个0或1就代表1位。 比特（bit）：也是二进制数字中的位，信息量的最小单位。 字节（Byte）：计算存储容量的计量单位，一个字节等于八位。习惯上用B表示。 字：计算机进行数据处">
     
 
     
@@ -282,13 +285,11 @@
                 
                     <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
                 
-                    <li class="file active"><a href="/Blog/Java/基础/Synchronized总结/">Synchronized总结</a></li>
-                
                     <li class="file"><a href="/Blog/Java/基础/ConcurrentHashMap源码分析/">ConcurrentHashMap源码分析</a></li>
                 
-                    <li class="file"><a href="/Blog/Java/基础/Volatile源码分析/">Volatile源码分析</a></li>
-                
                     <li class="file"><a href="/Blog/Java/基础/HashMap源码分析/">HashMap源码分析</a></li>
+                
+                    <li class="file active"><a href="/Blog/Java/基础/位运算/">位运算</a></li>
                 
             </ul>
         
@@ -659,7 +660,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main"><article id="post-Java/基础/Synchronized总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Java/基础/位运算" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -675,14 +676,14 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Synchronized/">Synchronized</a>
+        <a class="tag-link" href="/tags/位运算/">位运算</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Blog/Java/基础/Synchronized总结/">
-            <time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished">2019-09-02</time>
+        <a href="/Blog/Java/基础/位运算/">
+            <time datetime="2019-09-02T16:00:00.000Z" itemprop="datePublished">2019-09-03</time>
         </a>
     </div>
 
@@ -693,7 +694,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Synchronized总结
+            位运算
         </h1>
     
 
@@ -706,7 +707,62 @@
                     
             
             
-                
+                <h3 id="字节、字、位、比特"><a href="#字节、字、位、比特" class="headerlink" title="字节、字、位、比特"></a>字节、字、位、比特</h3><p>1位 = 1比特， 1字节 = 8位，1字=2字节， <code>1Byte=8bit 1B = 8bit</code>， <code>1KB = 1024B</code></p>
+<p><strong>位</strong>：计算机最小存储单位，简记为<strong><code>b</code></strong>，也成为<strong>比特<code>bit</code></strong>，计算机中用<code>0</code>和<code>1</code>来表示数据，一个<code>0</code>或<code>1</code>就代表<code>1</code>位。</p>
+<p><strong>比特（<code>bit</code>）</strong>：也是二进制数字中的位，信息量的最小单位。</p>
+<p><strong>字节（<code>Byte</code>）</strong>：计算存储容量的计量单位，<strong>一个字节等于八位</strong>。习惯上用<strong><code>B</code></strong>表示。</p>
+<p><strong>字</strong>：计算机进行数据处理时，一次存取、加工和传送的数据长度称为字（<code>word</code>），一个字通常由一个或多个（一般是字节的整数位）字节构成。如286微机的字由2个字节组成；486微机的字由4个字节组成。</p>
+<h3 id="位移运算"><a href="#位移运算" class="headerlink" title="位移运算"></a>位移运算</h3><p>Java中有三个位移运算：</p>
+<ul>
+<li><code>&lt;&lt;：左移</code>：正数高位丢弃，低位补0，负数符号位保持不变</li>
+<li><code>&gt;&gt;：右移</code>：正数低位丢弃，高位补0；负数高位补1</li>
+<li><code>&gt;&gt;&gt;：无符号右移</code>：低位丢弃，高位补0，符号位也会跟着一起移动</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="number">2</span> &lt;&lt; <span class="number">1</span>);     <span class="comment">// 4</span></span><br><span class="line">System.out.println(<span class="number">2</span> &gt;&gt; <span class="number">1</span>);     <span class="comment">// 1</span></span><br><span class="line">System.out.println(<span class="number">2</span> &gt;&gt;&gt; <span class="number">1</span>);    <span class="comment">// 1</span></span><br><span class="line">System.out.println(-<span class="number">2</span> &lt;&lt; <span class="number">1</span>);    <span class="comment">// -4</span></span><br><span class="line">System.out.println(-<span class="number">2</span> &gt;&gt; <span class="number">1</span>);    <span class="comment">// -1</span></span><br><span class="line">System.out.println(-<span class="number">2</span> &gt;&gt;&gt; <span class="number">1</span>);   <span class="comment">// 2147483647</span></span><br></pre></td></tr></table></figure>
+<h3 id="原码、反码、补码"><a href="#原码、反码、补码" class="headerlink" title="原码、反码、补码"></a>原码、反码、补码</h3><p><strong>原码</strong>，利用二进制中的第一位来表示符号位，<code>0</code>表示正数，<code>1</code>表示负数。</p>
+<p><strong>反码</strong>，正数的反码和原码一样，负数的反码就是在原码的基础上符号位保持不变，其他位取反。</p>
+<p><strong>补码</strong>，补码是为了解决反码的问题，<strong>正数的补码和原码、反码一样</strong>，<strong>负数的补码就是反码<code>+1</code></strong>。</p>
+<table>
+<thead>
+<tr>
+<th>十进制</th>
+<th>原码</th>
+<th>反码</th>
+<th>补码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0000 0010</td>
+<td>0000 0010</td>
+<td>0000 0010</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>1000 0010</td>
+<td>1111 1101</td>
+<td>1111 1110</td>
+</tr>
+</tbody>
+</table>
+<p>计算机在进行运算时是不会去管符号位的，计算时用到的时补码，让符号位也参与运算，最后将运算得到的结果再转换成源码即可。</p>
+<h3 id="负数位移运算"><a href="#负数位移运算" class="headerlink" title="负数位移运算"></a>负数位移运算</h3><p>-2用原码表示为<code>10000000 00000000 00000000 00000010</code></p>
+<p>-2用反码表示为<code>11111111 11111111 11111111 11111101</code></p>
+<p>-2用补码表示为<code>11111111 11111111 11111111 11111110</code></p>
+<p><code>-2 &lt;&lt; 1</code>，表示<code>-2</code>的补码左移一位后为<code>11111111 11111111 11111111 11111100</code>，该补码对应的反码为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111111 11111111 11111111 11111100</span><br><span class="line">- 1</span><br><span class="line">= 11111111 11111111 11111111 11111011</span><br></pre></td></tr></table></figure>
+<p>该反码对应的原码为：符号位不变，其他位取反，为<code>10000000 00000000 00000000 00000100</code>，表示-4。所以<code>-2 &lt;&lt; 1 = -4</code>。</p>
+<p><code>-2 &gt;&gt; 1</code>，表示<code>-2</code>的补码右移一位后（高位补1）为<code>11111111 11111111 11111111 11111111</code>，该补码对应的反码为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111111 11111111 11111111 11111111</span><br><span class="line">- 1</span><br><span class="line">= 11111111 11111111 11111111 11111110</span><br></pre></td></tr></table></figure>
+<p>该反码对应的原码为：符号位不变，其他位取反，为<code>10000000 00000000 00000000 00000001</code>，表示-1。所以<code>-2 &gt;&gt; 1 = -1</code>。</p>
+<h3 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h3><p>在<strong>对补码进行移动时，符号位是固定不动的</strong>，而无符号右移是指在进行移动时，<strong>符号位也会跟着一起移动</strong>。比如<code>-2 &gt;&gt;&gt; 1</code>。</p>
+<p>-2用原码表示为<code>10000000 00000000 00000000 00000010</code></p>
+<p>-2用反码表示为<code>11111111 11111111 11111111 11111101</code></p>
+<p>-2用补码表示为<code>11111111 11111111 11111111 11111110</code></p>
+<p>-2的补码右移1位为：<code>01111111 11111111 11111111 11111111</code></p>
+<p>右移后的补码对应的反码、原码为：<code>01111111 11111111 11111111 11111111</code> ，因为现在的符号位为0表示正数，正数的原、反、补码都相同，所以<code>-2 &gt;&gt;&gt; 1 = 2147483647</code></p>
+
         </div>
         
     <footer class="article-footer">
