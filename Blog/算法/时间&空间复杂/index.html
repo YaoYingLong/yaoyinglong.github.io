@@ -12,19 +12,19 @@
         <meta name="keywords" content="算法">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="时间复杂度常见的时间复杂度：  O(1)：常数复杂度  O(log n)：对数复杂度  O(n)：线性时间复杂度  O(n^2)：平方  O(n^3)：立方  O(2^n)：指数  O(n!)：阶乘    O(log n)12for (int i = 0; i &amp;lt; n; i++) &amp;#123;&amp;#125; O(n^2)1234for (int i = 0; i &amp;lt; n; i++) &amp;#">
+    <meta name="description" content="时间复杂度常见的时间复杂度：O(1)：常数复杂度，O(log n)：对数复杂度，O(n)：线性时间复杂度，O(n^2)：平方，O(n^3)：立方，O(2^n)：指数，O(n!)：阶乘。  O(log n)12for (int i = 0; i &amp;lt; n; i++) &amp;#123;&amp;#125; O(n^2)1234for (int i = 0; i &amp;lt; n; i++) &amp;#123;    f">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="时间&amp;空间复杂">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/算法/时间&空间复杂/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="时间复杂度常见的时间复杂度：  O(1)：常数复杂度  O(log n)：对数复杂度  O(n)：线性时间复杂度  O(n^2)：平方  O(n^3)：立方  O(2^n)：指数  O(n!)：阶乘    O(log n)12for (int i = 0; i &amp;lt; n; i++) &amp;#123;&amp;#125; O(n^2)1234for (int i = 0; i &amp;lt; n; i++) &amp;#">
+<meta property="og:description" content="时间复杂度常见的时间复杂度：O(1)：常数复杂度，O(log n)：对数复杂度，O(n)：线性时间复杂度，O(n^2)：平方，O(n^3)：立方，O(2^n)：指数，O(n!)：阶乘。  O(log n)12for (int i = 0; i &amp;lt; n; i++) &amp;#123;&amp;#125; O(n^2)1234for (int i = 0; i &amp;lt; n; i++) &amp;#123;    f">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="e:/Blog/source/images/算法/时间复杂度曲线.png">
-<meta property="og:updated_time" content="2020-09-03T08:17:03.353Z">
+<meta property="og:updated_time" content="2020-09-07T01:22:32.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时间&amp;空间复杂">
-<meta name="twitter:description" content="时间复杂度常见的时间复杂度：  O(1)：常数复杂度  O(log n)：对数复杂度  O(n)：线性时间复杂度  O(n^2)：平方  O(n^3)：立方  O(2^n)：指数  O(n!)：阶乘    O(log n)12for (int i = 0; i &amp;lt; n; i++) &amp;#123;&amp;#125; O(n^2)1234for (int i = 0; i &amp;lt; n; i++) &amp;#">
+<meta name="twitter:description" content="时间复杂度常见的时间复杂度：O(1)：常数复杂度，O(log n)：对数复杂度，O(n)：线性时间复杂度，O(n^2)：平方，O(n^3)：立方，O(2^n)：指数，O(n!)：阶乘。  O(log n)12for (int i = 0; i &amp;lt; n; i++) &amp;#123;&amp;#125; O(n^2)1234for (int i = 0; i &amp;lt; n; i++) &amp;#123;    f">
 <meta name="twitter:image" content="e:/Blog/source/images/算法/时间复杂度曲线.png">
     
 
@@ -176,6 +176,12 @@
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
+                    <li class="file"><a href="/Blog/DB/MySQL事务/">MySQL事务</a></li>
+                
+                    <li class="file"><a href="/Blog/DB/MySQL锁机制/">MySQL锁机制</a></li>
+                
+                    <li class="file"><a href="/Blog/DB/索引的原理与使用/">索引的原理与使用</a></li>
+                
             </ul>
         
                     </li>
@@ -288,6 +294,10 @@
                     <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
                 
                     <li class="file"><a href="/Blog/Java/基础/位运算/">位运算</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/HashMap源码分析JDK8/">HashMap源码分析JDK8</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/HashMap源码分析JDK7/">HashMap源码分析JDK7</a></li>
                 
             </ul>
         
@@ -699,23 +709,7 @@
                     
             
             
-                <h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>常见的时间复杂度：</p>
-<ul>
-<li><p><code>O(1)</code>：常数复杂度</p>
-</li>
-<li><p><code>O(log n)</code>：对数复杂度</p>
-</li>
-<li><p><code>O(n)</code>：线性时间复杂度</p>
-</li>
-<li><p><code>O(n^2)</code>：平方</p>
-</li>
-<li><p><code>O(n^3)</code>：立方</p>
-</li>
-<li><p><code>O(2^n)</code>：指数</p>
-</li>
-<li><p><code>O(n!)</code>：阶乘</p>
-</li>
-</ul>
+                <h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>常见的时间复杂度：<code>O(1)</code>：常数复杂度，<code>O(log n)</code>：对数复杂度，<code>O(n)</code>：线性时间复杂度，<code>O(n^2)</code>：平方，<code>O(n^3)</code>：立方，<code>O(2^n)</code>：指数，<code>O(n!)</code>：阶乘。</p>
 <p><img src="E:\Blog\source\images\算法\时间复杂度曲线.png" alt></p>
 <h5 id="O-log-n"><a href="#O-log-n" class="headerlink" title="O(log n)"></a>O(log n)</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="O-n-2"><a href="#O-n-2" class="headerlink" title="O(n^2)"></a>O(n^2)</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

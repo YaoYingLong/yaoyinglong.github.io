@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="字节、字、位、比特1位 = 1比特， 1字节 = 8位，1字=2字节， 1Byte=8bit 1B = 8bit， 1KB = 1024B 位：计算机最小存储单位，简记为b，也成为比特bit，计算机中用0和1来表示数据，一个0或1就代表1位。 比特（bit）：也是二进制数字中的位，信息量的最小单位。 字节（Byte）：计算存储容量的计量单位，一个字节等于八位。习惯上用B表示。 字：计算机进行数据处">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-03T03:18:47.477Z">
+<meta property="og:updated_time" content="2020-09-07T08:24:58.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位运算">
 <meta name="twitter:description" content="字节、字、位、比特1位 = 1比特， 1字节 = 8位，1字=2字节， 1Byte=8bit 1B = 8bit， 1KB = 1024B 位：计算机最小存储单位，简记为b，也成为比特bit，计算机中用0和1来表示数据，一个0或1就代表1位。 比特（bit）：也是二进制数字中的位，信息量的最小单位。 字节（Byte）：计算存储容量的计量单位，一个字节等于八位。习惯上用B表示。 字：计算机进行数据处">
@@ -174,6 +174,12 @@
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
+                    <li class="file"><a href="/Blog/DB/MySQL事务/">MySQL事务</a></li>
+                
+                    <li class="file"><a href="/Blog/DB/MySQL锁机制/">MySQL锁机制</a></li>
+                
+                    <li class="file"><a href="/Blog/DB/索引的原理与使用/">索引的原理与使用</a></li>
+                
             </ul>
         
                     </li>
@@ -286,6 +292,10 @@
                     <li class="file"><a href="/Blog/Java/基础/时间及日期总结/">Java8时间及日期</a></li>
                 
                     <li class="file active"><a href="/Blog/Java/基础/位运算/">位运算</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/HashMap源码分析JDK8/">HashMap源码分析JDK8</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/基础/HashMap源码分析JDK7/">HashMap源码分析JDK7</a></li>
                 
             </ul>
         
@@ -752,6 +762,11 @@
 <p>-2用补码表示为<code>11111111 11111111 11111111 11111110</code></p>
 <p>-2的补码右移1位为：<code>01111111 11111111 11111111 11111111</code></p>
 <p>右移后的补码对应的反码、原码为：<code>01111111 11111111 11111111 11111111</code> ，因为现在的符号位为0表示正数，正数的原、反、补码都相同，所以<code>-2 &gt;&gt;&gt; 1 = 2147483647</code></p>
+<h4 id="（取反运算）"><a href="#（取反运算）" class="headerlink" title="~（取反运算）"></a>~（取反运算）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>：    <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">00000101</span></span><br><span class="line">~<span class="number">5</span>：   <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111010</span> <span class="comment">// 补码形式</span></span><br><span class="line">       <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111001</span> <span class="comment">// 反码</span></span><br><span class="line">       <span class="number">10000000</span> <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">00000110</span> <span class="comment">// 原码</span></span><br></pre></td></tr></table></figure>
+<h3 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h3><h5 id="交换内容"><a href="#交换内容" class="headerlink" title="交换内容"></a>交换内容</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    a ^= b;</span><br><span class="line">    b ^= a;</span><br><span class="line">    a ^= b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="判断奇偶"><a href="#判断奇偶" class="headerlink" title="判断奇偶"></a>判断奇偶</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(a &amp; <span class="number">1</span>) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h5 id="求平均数"><a href="#求平均数" class="headerlink" title="求平均数"></a>求平均数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">average</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x &amp; y) + ((x ^ y) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="获取大于等于i的最接近的2的幂"><a href="#获取大于等于i的最接近的2的幂" class="headerlink" title="获取大于等于i的最接近的2的幂"></a>获取大于等于<code>i</code>的最接近的<code>2</code>的幂</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取数据二进制的最高位，低位全部置0</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">highestOneBit</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">1</span>);</span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">2</span>);</span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">4</span>);</span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">8</span>);</span><br><span class="line">    i |= (i &gt;&gt; <span class="number">16</span>);</span><br><span class="line">    <span class="keyword">return</span> i - (i &gt;&gt;&gt; <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">highestOneBit((number - <span class="number">1</span>) &lt;&lt; <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = cap - <span class="number">1</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">2</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">4</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">8</span>;</span><br><span class="line">    n |= n &gt;&gt;&gt; <span class="number">16</span>;</span><br><span class="line">    <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -764,11 +779,11 @@
     
     <nav id="article-nav">
         
-            <a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/" id="article-nav-newer" class="article-nav-link-wrap">
+            <a href="/Blog/DB/索引的原理与使用/" id="article-nav-newer" class="article-nav-link-wrap">
                 <strong class="article-nav-caption">Newer</strong>
                 <div class="article-nav-title">
                     
-                        Spring线程池跨线程数据共享
+                        索引的原理与使用
                     
                 </div>
             </a>
