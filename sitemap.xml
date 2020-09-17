@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/ThreadLocal%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2020-09-17T10:02:31.149Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E6%A1%86%E6%9E%B6/Spring/Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    
+    <lastmod>2020-09-16T12:08:00.692Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/Java/%E5%9F%BA%E7%A1%80/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</loc>
     
     <lastmod>2020-09-10T02:28:19.649Z</lastmod>
@@ -75,13 +89,6 @@
     <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82/</loc>
     
     <lastmod>2020-09-07T01:22:32.512Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/ThreadLocal%E5%8E%9F%E7%90%86/</loc>
-    
-    <lastmod>2020-09-03T08:25:30.984Z</lastmod>
     
   </url>
   
