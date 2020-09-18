@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     
     <title>
-        Volatile源码分析 |
+        Volatile原理 |
         
         YingLong</title>
     
@@ -12,15 +12,18 @@
         <meta name="keywords" content="Volatile,并发">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Volatile,并发">
+    <meta name="description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。">
+<meta name="keywords" content="Volatile,并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Volatile源码分析">
-<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/并发/Volatile源码分析/index.html">
+<meta property="og:title" content="Volatile原理">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/并发/Volatile原理/index.html">
 <meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-03T08:23:10.313Z">
+<meta property="og:updated_time" content="2020-09-18T09:23:58.005Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Volatile源码分析">
+<meta name="twitter:title" content="Volatile原理">
+<meta name="twitter:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。">
     
 
     
@@ -209,9 +212,9 @@
         
                     </li>
                 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             Java
                         </a>
@@ -315,9 +318,9 @@
         
                     </li>
                 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             并发
                         </a>
@@ -331,6 +334,8 @@
                     <li class="file"><a href="/Blog/Java/并发/线程安全实现方式/">线程安全实现方式</a></li>
                 
                     <li class="file"><a href="/Blog/Java/并发/ThreadLocal原理/">ThreadLocal原理</a></li>
+                
+                    <li class="file active"><a href="/Blog/Java/并发/Volatile原理/">Volatile原理</a></li>
                 
             </ul>
         
@@ -657,7 +662,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main"><article id="post-Java/并发/Volatile源码分析" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Java/并发/Volatile原理" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -667,7 +672,7 @@
                         
     <div class="article-category">
         <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/hide/">hide</a>
+        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/并发/">并发</a>
     </div>
 
                         
@@ -679,7 +684,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Blog/Java/并发/Volatile源码分析/">
+        <a href="/Blog/Java/并发/Volatile原理/">
             <time datetime="2019-09-01T16:00:00.000Z" itemprop="datePublished">2019-09-02</time>
         </a>
     </div>
@@ -691,7 +696,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Volatile源码分析
+            Volatile原理
         </h1>
     
 
@@ -704,7 +709,9 @@
                     
             
             
-                
+                <p>在说<code>Volatile</code>原理前先熟悉一下相关的基本概念<strong><a href="../原子性、可见性、有序性">原子性、可见性、有序性</a></strong></p>
+<h3 id="Volatile原理"><a href="#Volatile原理" class="headerlink" title="Volatile原理"></a>Volatile原理</h3><p><code>Volatile</code>是<code>Java</code>提供的一种<strong>稍弱</strong>的<strong>同步机制</strong>，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是<strong>共享</strong>的，不会将该变量上的操作与其他内存操作一起<strong>重排序</strong>。<code>volatile</code>变量<strong>不会被缓存在寄存器</strong>或<strong>对其他处理器不可见的地方</strong>，读取<code>volatile</code>变量时总返回最新写入的值。</p>
+
         </div>
         
     <footer class="article-footer">
@@ -716,10 +723,19 @@
     
     <nav id="article-nav">
         
+            <a href="/Blog/Java/并发/ThreadLocal原理/" id="article-nav-newer" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Newer</strong>
+                <div class="article-nav-title">
+                    
+                        ThreadLocal原理
+                    
+                </div>
+            </a>
         
-            <a href="/Blog/Java/并发/ThreadLocal原理/" id="article-nav-older" class="article-nav-link-wrap">
+        
+            <a href="/Blog/杂记/Win实用工具/" id="article-nav-older" class="article-nav-link-wrap">
                 <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">ThreadLocal原理</div>
+                <div class="article-nav-title">Win实用工具</div>
             </a>
         
     </nav>
