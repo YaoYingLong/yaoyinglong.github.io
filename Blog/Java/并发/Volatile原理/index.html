@@ -12,18 +12,20 @@
         <meta name="keywords" content="Volatile,并发">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。">
+    <meta name="description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
 <meta name="keywords" content="Volatile,并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Volatile原理">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/并发/Volatile原理/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。">
+<meta property="og:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-18T09:23:58.005Z">
+<meta property="og:image" content="https://yaoyinglong.github.io/images/Java/多线程数据读写模型.png">
+<meta property="og:updated_time" content="2020-09-21T05:25:33.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile原理">
-<meta name="twitter:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。">
+<meta name="twitter:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
+<meta name="twitter:image" content="https://yaoyinglong.github.io/images/Java/多线程数据读写模型.png">
     
 
     
@@ -711,6 +713,11 @@
             
                 <p>在说<code>Volatile</code>原理前先熟悉一下相关的基本概念<strong><a href="../原子性、可见性、有序性">原子性、可见性、有序性</a></strong></p>
 <h3 id="Volatile原理"><a href="#Volatile原理" class="headerlink" title="Volatile原理"></a>Volatile原理</h3><p><code>Volatile</code>是<code>Java</code>提供的一种<strong>稍弱</strong>的<strong>同步机制</strong>，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是<strong>共享</strong>的，不会将该变量上的操作与其他内存操作一起<strong>重排序</strong>。<code>volatile</code>变量<strong>不会被缓存在寄存器</strong>或<strong>对其他处理器不可见的地方</strong>，读取<code>volatile</code>变量时总返回最新写入的值。</p>
+<p>访问<code>volatile</code>变量时<strong>不会执行加锁操作</strong>，<code>volatile</code>变量是一种比<code>sychronized</code>关键字<strong>更轻量级的同步机制</strong>。对非<code>volatile</code>变量进行读写时，每个线程先<strong>从内存拷贝变量到<code>CPU</code>缓存中</strong>。若计算机有多个<code>CPU</code>，每个线程可能在不同的<code>CPU</code>上被处理，每个线程可以<strong>拷贝到不同的<code>CPU cache</code>中</strong>。声明<code>volatile</code>变量时，<code>JVM</code>保证每次读变量都从主内存中读取，<strong>跳过<code>CPU cache</code>这一步</strong>。</p>
+<p><img src="../../../../../images/Java/多线程数据读写模型.png" alt></p>
+<p><code>volatile</code> 保证变量对所有线程的<strong>可见性</strong>，当一个线程修改了这个变量的值，<code>volatile</code> 保证了<strong>新值能立即同步到主内存</strong>，以及<strong>每次使用前立即从主内存刷新</strong>。</p>
+<p><code>volatile</code> 禁止指令重排序，<code>volatile</code>修饰的变量，赋值后多执行了一个<code>load addl $0x0, (%esp)</code>操作，该操作相当于一个<strong>内存屏障</strong>，指令重排序时<strong>不能把后面的指令重排序到内存屏障之前的位置</strong>，只有一个CPU访问内存时，不需要内存屏障。</p>
+<p><code>volatile</code> 的<strong>读性能消耗</strong>与普通变量几乎相同，但<strong>写操作稍慢</strong>，因为它需要在本地代码中插入许多<strong>内存屏障指令</strong>来保证处理器不发生乱序执行。</p>
 
         </div>
         
