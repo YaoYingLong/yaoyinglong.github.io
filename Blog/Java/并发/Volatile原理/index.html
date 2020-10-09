@@ -21,7 +21,7 @@
 <meta property="og:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/Java/多线程数据读写模型.png">
-<meta property="og:updated_time" content="2020-09-25T08:01:54.491Z">
+<meta property="og:updated_time" content="2020-09-27T01:57:40.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile原理">
 <meta name="twitter:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
@@ -586,6 +586,8 @@
                 
                     <li class="file"><a href="/Blog/设计模式/设计模式概览/">设计模式概览</a></li>
                 
+                    <li class="file"><a href="/Blog/设计模式/单例模式/">单例模式</a></li>
+                
             </ul>
         
                     </li>
@@ -715,9 +717,17 @@
 <h3 id="Volatile原理"><a href="#Volatile原理" class="headerlink" title="Volatile原理"></a>Volatile原理</h3><p><code>Volatile</code>是<code>Java</code>提供的一种<strong>稍弱</strong>的<strong>同步机制</strong>，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是<strong>共享</strong>的，不会将该变量上的操作与其他内存操作一起<strong>重排序</strong>。<code>volatile</code>变量<strong>不会被缓存在寄存器</strong>或<strong>对其他处理器不可见的地方</strong>，读取<code>volatile</code>变量时总返回最新写入的值。</p>
 <p>访问<code>volatile</code>变量时<strong>不会执行加锁操作</strong>，<code>volatile</code>变量是一种比<code>sychronized</code>关键字<strong>更轻量级的同步机制</strong>。对非<code>volatile</code>变量进行读写时，每个线程先<strong>从内存拷贝变量到<code>CPU</code>缓存中</strong>。若计算机有多个<code>CPU</code>，每个线程可能在不同的<code>CPU</code>上被处理，每个线程可以<strong>拷贝到不同的<code>CPU cache</code>中</strong>。声明<code>volatile</code>变量时，<code>JVM</code>保证每次读变量都从主内存中读取，<strong>跳过<code>CPU cache</code>这一步</strong>。</p>
 <p><img src="../../../../../images/Java/多线程数据读写模型.png" alt></p>
+<p><strong><code>Volatile</code>保证当前<code>CPU</code>缓存、其他<code>CPU</code>缓存、主内存、工作内存间的数据一致及读写逻辑代码的有序执行</strong>。</p>
 <p><code>volatile</code> 保证变量对所有线程的<strong>可见性</strong>，当一个线程修改了这个变量的值，<code>volatile</code> 保证了<strong>新值能立即同步到主内存</strong>，以及<strong>每次使用前立即从主内存刷新</strong>。<strong>可见性</strong>只能保证每次读取的是最新的值，但<code>volatile</code>没办法保证对变量操作的<strong>原子性</strong>。</p>
 <p><code>volatile</code> 禁止指令重排序，<code>volatile</code>修饰的变量，赋值后多执行了一个<code>load addl $0x0, (%esp)</code>操作，该操作相当于一个<strong>内存屏障</strong>，指令重排序时<strong>不能把后面的指令重排序到内存屏障之前的位置</strong>，只有一个CPU访问内存时，不需要内存屏障。</p>
 <p><code>volatile</code> 的<strong>读性能消耗</strong>与普通变量几乎相同，但<strong>写操作稍慢</strong>，因为它需要在本地代码中插入许多<strong>内存屏障指令</strong>来保证处理器不发生乱序执行。</p>
+<h3 id="C和C"><a href="#C和C" class="headerlink" title="C和C++"></a>C和C++</h3><p>在<code>C</code>和<code>C++</code>中的<code>volatile</code>作用：<strong>优化无效代码、禁止指令重排序、直接完成简单运算、读写都走内存不走寄存器</strong>。<code>volatile</code>是通过<code>lock</code>指令触发了<strong>读写屏障</strong>，通过<strong><code>MESI</code>缓存一致性协议</strong>从而实现了<strong>当前<code>CPU</code>、其他<code>CPU</code>和主存之间的一致性</strong>。</p>
+<h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><p><strong>编译器屏障</strong>：在解决<strong>编译乱序</strong>问题时，需要使用<strong><code>barrier()</code>编译屏障</strong>，在<code>code</code>中使用<code>barrier()</code>可以<strong>阻止编译器对该<code>code</code>的编译优化</strong>，可以<strong>防止编译屏障之前的<code>code</code>和编译屏障之后的<code>code</code>出现编译乱序</strong>。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#definebarrier() _asm_ _volatile_("": : :"memory")</span><br></pre></td></tr></table></figure>
+<p><strong><code>CPU</code>屏障</strong>：是为了解决缓存一致性问题，分为<strong>锁总线（<code>ifence</code>、<code>sfence</code>、<code>mfence</code>）</strong>和<strong>锁缓存（<code>lock</code>）</strong>，锁总线的方式已被淘汰。锁缓存其实是通过<strong><code>MESI</code>缓存一致性协议</strong>来完成的。</p>
+<p><strong><code>JVM</code>中的四种内存屏障</strong>：<code>storeload</code>、<code>storestore</code>、<code>loadload</code>、<code>loadstore</code></p>
+<p><strong>注</strong>：<code>32</code>位机<code>32</code>根总线、<code>64</code>位机<code>64</code>根总线，<code>ifence</code>写、<code>sfence</code>写、<code>mfence</code>读写</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>使用volatile必须具备2个条件：对变量的写操作不依赖于当前值，该变量没有包含在具有其他变量的不变式中。</p>
 
         </div>
         
