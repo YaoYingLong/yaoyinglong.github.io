@@ -12,19 +12,19 @@
         <meta name="keywords" content="Volatile,并发">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
+    <meta name="description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理关键字Volatile是Java虚拟机提供的最轻量级的同步机制，当一个变量被定义为volatile后，其将具备两种特性：保证此变量对所有线程的可见性，静止指令重排序。 在某些情况下volatile的同步机制的性能确实优于锁，但虚拟机对锁进行了许多消除和优化。很难量化认为volatile比synchroni">
 <meta name="keywords" content="Volatile,并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Volatile原理">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/并发/Volatile原理/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
+<meta property="og:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理关键字Volatile是Java虚拟机提供的最轻量级的同步机制，当一个变量被定义为volatile后，其将具备两种特性：保证此变量对所有线程的可见性，静止指令重排序。 在某些情况下volatile的同步机制的性能确实优于锁，但虚拟机对锁进行了许多消除和优化。很难量化认为volatile比synchroni">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/Java/多线程数据读写模型.png">
-<meta property="og:updated_time" content="2020-10-09T07:42:56.485Z">
+<meta property="og:updated_time" content="2020-10-09T08:01:36.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volatile原理">
-<meta name="twitter:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理Volatile是Java提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是共享的，不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或对其他处理器不可见的地方，读取volatile变量时总返回最新写入的值。 访问volat">
+<meta name="twitter:description" content="在说Volatile原理前先熟悉一下相关的基本概念原子性、可见性、有序性 Volatile原理关键字Volatile是Java虚拟机提供的最轻量级的同步机制，当一个变量被定义为volatile后，其将具备两种特性：保证此变量对所有线程的可见性，静止指令重排序。 在某些情况下volatile的同步机制的性能确实优于锁，但虚拟机对锁进行了许多消除和优化。很难量化认为volatile比synchroni">
 <meta name="twitter:image" content="https://yaoyinglong.github.io/images/Java/多线程数据读写模型.png">
     
 
@@ -338,6 +338,8 @@
                     <li class="file"><a href="/Blog/Java/并发/ThreadLocal原理/">ThreadLocal原理</a></li>
                 
                     <li class="file active"><a href="/Blog/Java/并发/Volatile原理/">Volatile原理</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/并发/Java内存模型与线程/">Java内存模型</a></li>
                 
             </ul>
         
@@ -689,7 +691,7 @@
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/Blog/Java/并发/Volatile原理/">
-            <time datetime="2020-10-05T16:00:00.000Z" itemprop="datePublished">2020-10-06</time>
+            <time datetime="2019-10-05T16:00:00.000Z" itemprop="datePublished">2019-10-06</time>
         </a>
     </div>
 
@@ -714,21 +716,44 @@
             
             
                 <p>在说<code>Volatile</code>原理前先熟悉一下相关的基本概念<strong><a href="../原子性、可见性、有序性">原子性、可见性、有序性</a></strong></p>
-<h3 id="Volatile原理"><a href="#Volatile原理" class="headerlink" title="Volatile原理"></a>Volatile原理</h3><p><code>Volatile</code>是<code>Java</code>提供的一种<strong>稍弱</strong>的<strong>同步机制</strong>，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是<strong>共享</strong>的，不会将该变量上的操作与其他内存操作一起<strong>重排序</strong>。<code>volatile</code>变量<strong>不会被缓存在寄存器</strong>或<strong>对其他处理器不可见的地方</strong>，读取<code>volatile</code>变量时总返回最新写入的值。</p>
+<h3 id="Volatile原理"><a href="#Volatile原理" class="headerlink" title="Volatile原理"></a>Volatile原理</h3><p>关键字<code>Volatile</code>是<code>Java</code>虚拟机提供的<strong>最轻量级</strong>的<strong>同步机制</strong>，当一个变量被定义为volatile后，其将具备<strong>两种特性</strong>：保证此变量对<strong>所有线程</strong>的<strong>可见性</strong>，<strong>静止指令重排序</strong>。</p>
+<p>在<strong>某些情况</strong>下<code>volatile</code>的同步机制的<strong>性能确实优于锁</strong>，但虚拟机<strong>对锁进行了许多消除和优化</strong>。很难量化认为<code>volatile</code>比<code>synchronized</code>快多少；即便如此大多数场景下volatile总开销仍然要比锁低。</p>
+<p><code>volatile</code>自己与自己比较，<code>volatile</code> 的<strong>读性能消耗</strong>与普通变量几乎相同，但<strong>写操作稍慢</strong>，因为它需要在本地代码中插入许多<strong>内存屏障指令</strong>来保证处理器不发生乱序执行。</p>
+<p>在<strong><code>volatile</code>与锁之间选择</strong>的<strong>唯一依据</strong>仅仅是<strong><code>volatile</code>语义能否满足使用场景的需求</strong>。</p>
+<p><strong><code>Volatile</code>保证当前<code>CPU</code>缓存、其他<code>CPU</code>缓存、主内存、工作内存间的数据一致及读写逻辑代码的有序执行</strong>。</p>
+<h4 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h4><p><code>volatile</code>变量在<strong>各个线程的工作内存中不存在一致性问题</strong>，在各个线程的工作内存中，<code>volatile</code>变量<strong>也可以存在不一致</strong>的情况，但由于<strong>每次使用之前都要刷新</strong>，执行引擎看不到不一致的情况，因此可以认为不存在一致性问题。但<code>Java</code>中的<strong>运算并非原子操作</strong>，导致<code>volatile</code>变量的<strong>运算</strong>在<strong>并发</strong>下一样是<strong>不安全</strong>的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THREAD_COUNT = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span> race = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    race++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Thread[] threads = <span class="keyword">new</span> Thread[THREAD_COUNT];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; THREAD_COUNT; i++) &#123;</span><br><span class="line">        threads[i] = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i1 = <span class="number">0</span>; i1 &lt; <span class="number">10000</span>; i1++) &#123;</span><br><span class="line">                    increase();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread().getId() + <span class="string">" completed"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        threads[i].start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (Thread.activeCount() &gt; <span class="number">2</span>) &#123;</span><br><span class="line">        Thread.yield();</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(race);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>若正确并发最后结果应为<code>200000</code>，但实际运行结果基本上为160000多一点。问题出在<code>race++</code>，<code>increase()</code>方法的字节码可以看到，<code>race++</code>是由<code>4</code>条字节码指令完成的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>;</span><br><span class="line">  Code:</span><br><span class="line">     0: getstatic     #2                  // Field race:I</span><br><span class="line">     <span class="number">3</span>: iconst_1</span><br><span class="line">     <span class="number">4</span>: iadd</span><br><span class="line">     5: putstatic     #2                  // Field race:I</span><br><span class="line">     <span class="number">8</span>: <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<p>题外话，这里使用的是<code>Thread.activeCount() &gt; 2</code>而不是<code>Thread.activeCount() &gt; 1</code>是因为我使用的是<code>IDEA</code>，<code>IDEA</code>是用得<strong>反射</strong>，所以还有一个<strong><code>monitor</code>监控线程</strong>。但是在<code>Java</code>和<code>Eclipse</code>中是<code>1</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ThreadGroup[name=main,maxpri=<span class="number">10</span>]</span><br><span class="line">    Thread[main,<span class="number">5</span>,main]</span><br><span class="line">    Thread[Monitor Ctrl-Break,<span class="number">5</span>,main]</span><br></pre></td></tr></table></figure>
+<p>使用字节码来分析并发问题，仍不严谨，因为即使编译出来只有一条字节码指令，也并不意味执行这条指令就是一个原子操作。一条字节码指令在解释执行时，解释器将要<strong>运行许多行代码</strong>才能实现它的语意，若是编译执行，一条字节码指令也可能转化成<strong>若干本地机器码指令</strong>，可以通过使用<strong><code>-XX:+PrintAssembly</code></strong>参数输出<strong>反汇编</strong>来分析会更加严谨。</p>
 <p>访问<code>volatile</code>变量时<strong>不会执行加锁操作</strong>，<code>volatile</code>变量是一种比<code>sychronized</code>关键字<strong>更轻量级的同步机制</strong>。对非<code>volatile</code>变量进行读写时，每个线程先<strong>从内存拷贝变量到<code>CPU</code>缓存中</strong>。若计算机有多个<code>CPU</code>，每个线程可能在不同的<code>CPU</code>上被处理，每个线程可以<strong>拷贝到不同的<code>CPU cache</code>中</strong>。声明<code>volatile</code>变量时，<code>JVM</code>保证每次读变量都从主内存中读取，<strong>跳过<code>CPU cache</code>这一步</strong>。</p>
 <p><img src="../../../../../images/Java/多线程数据读写模型.png" alt></p>
-<p><strong><code>Volatile</code>保证当前<code>CPU</code>缓存、其他<code>CPU</code>缓存、主内存、工作内存间的数据一致及读写逻辑代码的有序执行</strong>。</p>
 <p><code>volatile</code> 保证变量对所有线程的<strong>可见性</strong>，当一个线程修改了这个变量的值，<code>volatile</code> 保证了<strong>新值能立即同步到主内存</strong>，以及<strong>每次使用前立即从主内存刷新</strong>。<strong>可见性</strong>只能保证每次读取的是最新的值，但<code>volatile</code>没办法保证对变量操作的<strong>原子性</strong>。</p>
-<p><code>volatile</code> 禁止指令重排序，<code>volatile</code>修饰的变量，赋值后多执行了一个<code>load addl $0x0, (%esp)</code>操作，该操作相当于一个<strong>内存屏障</strong>，指令重排序时<strong>不能把后面的指令重排序到内存屏障之前的位置</strong>，只有一个CPU访问内存时，不需要内存屏障。</p>
-<p><code>volatile</code> 的<strong>读性能消耗</strong>与普通变量几乎相同，但<strong>写操作稍慢</strong>，因为它需要在本地代码中插入许多<strong>内存屏障指令</strong>来保证处理器不发生乱序执行。</p>
+<h4 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h4><p>若定义<code>initialized</code>变量没有使用<code>volatile</code>修饰，可能会由于<strong>指令重排序优化</strong>，导致A线程中最后一句<code>initialized = true</code>被提前执行。从而导致B线程中使用的配置信息可能出错。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Map configOptions;</span><br><span class="line"><span class="keyword">char</span>[] configText;</span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">boolean</span> initialized = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线程A中执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(String fileName)</span> </span>&#123;</span><br><span class="line">    configOptions = <span class="keyword">new</span> HashMap();</span><br><span class="line">    configText = readConfigFile(fileName);</span><br><span class="line">    processConfigOptions(configText, configOptions);</span><br><span class="line">    initialized = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线程B中执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (!initialized) &#123;</span><br><span class="line">        Thread.sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    doSomethingWithConfig();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>volatile</code> 禁止指令重排序</strong>，<code>volatile</code>修饰的变量，赋值后多执行了一个<strong><code>lock addl $0x0, (%esp)</code></strong>操作，该操作相当于一个<strong>内存屏障</strong>，指令重排序时<strong>不能把后面的指令重排序到内存屏障之前的位置</strong>，只有一个CPU访问内存时，不需要<strong>内存屏障</strong>。<code>lock</code>的作用是使得本<code>CPU</code>的<code>Cache</code>写入内存，该写入操作也会引起别的<code>CPU</code>或别的内核无效化其<code>Cache</code>。所以通过该操作可让<code>volatile</code>变量的修改对其他<code>CPU</code>立即可见。</p>
+<p>从硬件架构上讲，指令重排序是指CPU采用了允许将多条指令不按程序规定的顺序分开发送给个相应电路单元处理。但并不是说指令任意重排，CPU需要能正确处理指令依赖情况以保障程序能得出正确额的执行结果。<strong><code>lock addl $0x0, (%esp)</code></strong>指令<strong>把修改同步到内存</strong>，意味着所有之前的操作都已经执行完成，这样便形成了<strong>指令重排序无法越过内存屏障的效果</strong>。</p>
+<h3 id="volatile变量内存交互操作"><a href="#volatile变量内存交互操作" class="headerlink" title="volatile变量内存交互操作"></a>volatile变量内存交互操作</h3><p><code>T</code>表示一个线程，<code>V</code>、<code>W</code>表示两个volatile变量，在进行<code>read</code>、<code>load</code>、<code>use</code>、<code>assign</code>、<code>store</code>、<code>write</code>操作时满足如下规则：</p>
+<p><strong>该规则要求在工作内存中，每次使用V前都必须先从主内存刷新最新的值，用于保证能看见其他线程对变量V所做的修改后的值</strong>。只有当线程T对变量V执行的前一个操作是load时，线程T才能对变量V执行use操作；且仅当线程T对变量V执行的最后一个操作时use时，线程T才能对变量V执行load操作。线程T对变量V的use操作可以认为是和线程T对变量V的load、read操作相关联，必须连续译器出现。</p>
+<p><strong>该规则要求在工作内存中，每次修改V后都必须立即同步回主内存中，用于保证其他线程可以看到自己对变量V所作的修改</strong>。仅当线程T对变量V执行的前一个操作时assign时，先吃T才能对变量V执行store操作；且仅当线程T对变量V的执行的最后一个操作是store时，线程T才能对变量V执行assign操作。线程T对变量V的assign操作可以认为是和线程T对变量V的store、write操作相关联，必须连续译器出现。</p>
+<p><strong>该规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同</strong>。若动作A是线程T对变量V实施的use或assign操作，动作F是和动作A相关联的load或store操作，动作P是和动作F相应的对变量V的read或write操作；若动作B是线程T对变量W实施的use或assign操作，动作Q是和动作G相关联的load或store操作，动作Q是和动作G相应的对变量W的read或write操作；若A优于B则P优于Q。</p>
 <h3 id="C和C"><a href="#C和C" class="headerlink" title="C和C++"></a>C和C++</h3><p>在<code>C</code>和<code>C++</code>中的<code>volatile</code>作用：<strong>优化无效代码、禁止指令重排序、直接完成简单运算、读写都走内存不走寄存器</strong>。<code>volatile</code>是通过<code>lock</code>指令触发了<strong>读写屏障</strong>，通过<strong><code>MESI</code>缓存一致性协议</strong>从而实现了<strong>当前<code>CPU</code>、其他<code>CPU</code>和主存之间的一致性</strong>。</p>
 <h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><p><strong>编译器屏障</strong>：在解决<strong>编译乱序</strong>问题时，需要使用<strong><code>barrier()</code>编译屏障</strong>，在<code>code</code>中使用<code>barrier()</code>可以<strong>阻止编译器对该<code>code</code>的编译优化</strong>，可以<strong>防止编译屏障之前的<code>code</code>和编译屏障之后的<code>code</code>出现编译乱序</strong>。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#definebarrier() _asm_ _volatile_("": : :"memory")</span><br></pre></td></tr></table></figure>
 <p><strong><code>CPU</code>屏障</strong>：是为了解决缓存一致性问题，分为<strong>锁总线（<code>ifence</code>、<code>sfence</code>、<code>mfence</code>）</strong>和<strong>锁缓存（<code>lock</code>）</strong>，锁总线的方式已被淘汰。锁缓存其实是通过<strong><code>MESI</code>缓存一致性协议</strong>来完成的。</p>
 <p><strong><code>JVM</code>中的四种内存屏障</strong>：<code>storeload</code>、<code>storestore</code>、<code>loadload</code>、<code>loadstore</code></p>
 <p><strong>注</strong>：<code>32</code>位机<code>32</code>根总线、<code>64</code>位机<code>64</code>根总线，<code>ifence</code>写、<code>sfence</code>写、<code>mfence</code>读写</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>使用volatile必须具备2个条件：对变量的写操作不依赖于当前值，该变量没有包含在具有其他变量的不变式中。</p>
-
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>符合以下两条运算场景：</p>
+<ul>
+<li>运算结果<strong>不依赖变量的当前值</strong>，或能够确保只有<strong>单一线程修改变量的值</strong>。</li>
+<li>变量不需要与<strong>其他的状态变量共同参与不变约束</strong></li>
+</ul>
+<p>当<code>shutdown()</code>方法被调用时，能保证所以<strong>线程中执行</strong>的<code>doWork()</code>方法都<strong>立即停止</strong>下来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">boolean</span> shutdownRequested;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    shutdownRequested = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (!shutdownRequested) &#123;</span><br><span class="line">        <span class="comment">// do stuff</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>双锁检查单例模式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Singleton singleton;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(singleton == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">            <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</span><br><span class="line">                singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> singleton;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         
     <footer class="article-footer">
@@ -740,20 +765,15 @@
     
     <nav id="article-nav">
         
-            <a href="/Blog/设计模式/单例模式/" id="article-nav-newer" class="article-nav-link-wrap">
+            <a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/" id="article-nav-newer" class="article-nav-link-wrap">
                 <strong class="article-nav-caption">Newer</strong>
                 <div class="article-nav-title">
                     
-                        单例模式
+                        Spring线程池跨线程数据共享
                     
                 </div>
             </a>
         
-        
-            <a href="/Blog/Java/基础/动态代理/" id="article-nav-older" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">动态代理</div>
-            </a>
         
     </nav>
 

@@ -63,20 +63,44 @@
   </entry>
   
   <entry>
-    <title>Volatile原理</title>
-    <link href="https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Volatile%E5%8E%9F%E7%90%86/"/>
-    <id>https://yaoyinglong.github.io/Blog/Java/并发/Volatile原理/</id>
+    <title>Java与线程</title>
+    <link href="https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Java%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://yaoyinglong.github.io/Blog/Java/并发/Java与线程/</id>
     <published>2020-10-05T16:00:00.000Z</published>
-    <updated>2020-10-09T07:42:56.485Z</updated>
+    <updated>2020-10-09T07:49:50.555Z</updated>
     
-    <content type="html"><![CDATA[<p>在说<code>Volatile</code>原理前先熟悉一下相关的基本概念<strong><a href="../原子性、可见性、有序性">原子性、可见性、有序性</a></strong></p><h3 id="Volatile原理"><a href="#Volatile原理" class="headerlink" title="Volatile原理"></a>Volatile原理</h3><p><code>Volatile</code>是<code>Java</code>提供的一种<strong>稍弱</strong>的<strong>同步机制</strong>，用来确保将变量的更新操作通知到其他线程，编译器与运行时都会注意到该变量是<strong>共享</strong>的，不会将该变量上的操作与其他内存操作一起<strong>重排序</strong>。<code>volatile</code>变量<strong>不会被缓存在寄存器</strong>或<strong>对其他处理器不可见的地方</strong>，读取<code>volatile</code>变量时总返回最新写入的值。</p><p>访问<code>volatile</code>变量时<strong>不会执行加锁操作</strong>，<code>volatile</code>变量是一种比<code>sychronized</code>关键字<strong>更轻量级的同步机制</strong>。对非<code>volatile</code>变量进行读写时，每个线程先<strong>从内存拷贝变量到<code>CPU</code>缓存中</strong>。若计算机有多个<code>CPU</code>，每个线程可能在不同的<code>CPU</code>上被处理，每个线程可以<strong>拷贝到不同的<code>CPU cache</code>中</strong>。声明<code>volatile</code>变量时，<code>JVM</code>保证每次读变量都从主内存中读取，<strong>跳过<code>CPU cache</code>这一步</strong>。</p><p><img src="../../../../../images/Java/多线程数据读写模型.png" alt></p><p><strong><code>Volatile</code>保证当前<code>CPU</code>缓存、其他<code>CPU</code>缓存、主内存、工作内存间的数据一致及读写逻辑代码的有序执行</strong>。</p><p><code>volatile</code> 保证变量对所有线程的<strong>可见性</strong>，当一个线程修改了这个变量的值，<code>volatile</code> 保证了<strong>新值能立即同步到主内存</strong>，以及<strong>每次使用前立即从主内存刷新</strong>。<strong>可见性</strong>只能保证每次读取的是最新的值，但<code>volatile</code>没办法保证对变量操作的<strong>原子性</strong>。</p><p><code>volatile</code> 禁止指令重排序，<code>volatile</code>修饰的变量，赋值后多执行了一个<code>load addl $0x0, (%esp)</code>操作，该操作相当于一个<strong>内存屏障</strong>，指令重排序时<strong>不能把后面的指令重排序到内存屏障之前的位置</strong>，只有一个CPU访问内存时，不需要内存屏障。</p><p><code>volatile</code> 的<strong>读性能消耗</strong>与普通变量几乎相同，但<strong>写操作稍慢</strong>，因为它需要在本地代码中插入许多<strong>内存屏障指令</strong>来保证处理器不发生乱序执行。</p><h3 id="C和C"><a href="#C和C" class="headerlink" title="C和C++"></a>C和C++</h3><p>在<code>C</code>和<code>C++</code>中的<code>volatile</code>作用：<strong>优化无效代码、禁止指令重排序、直接完成简单运算、读写都走内存不走寄存器</strong>。<code>volatile</code>是通过<code>lock</code>指令触发了<strong>读写屏障</strong>，通过<strong><code>MESI</code>缓存一致性协议</strong>从而实现了<strong>当前<code>CPU</code>、其他<code>CPU</code>和主存之间的一致性</strong>。</p><h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><p><strong>编译器屏障</strong>：在解决<strong>编译乱序</strong>问题时，需要使用<strong><code>barrier()</code>编译屏障</strong>，在<code>code</code>中使用<code>barrier()</code>可以<strong>阻止编译器对该<code>code</code>的编译优化</strong>，可以<strong>防止编译屏障之前的<code>code</code>和编译屏障之后的<code>code</code>出现编译乱序</strong>。</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#definebarrier() _asm_ _volatile_("": : :"memory")</span><br></pre></td></tr></table></figure><p><strong><code>CPU</code>屏障</strong>：是为了解决缓存一致性问题，分为<strong>锁总线（<code>ifence</code>、<code>sfence</code>、<code>mfence</code>）</strong>和<strong>锁缓存（<code>lock</code>）</strong>，锁总线的方式已被淘汰。锁缓存其实是通过<strong><code>MESI</code>缓存一致性协议</strong>来完成的。</p><p><strong><code>JVM</code>中的四种内存屏障</strong>：<code>storeload</code>、<code>storestore</code>、<code>loadload</code>、<code>loadstore</code></p><p><strong>注</strong>：<code>32</code>位机<code>32</code>根总线、<code>64</code>位机<code>64</code>根总线，<code>ifence</code>写、<code>sfence</code>写、<code>mfence</code>读写</p><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>使用volatile必须具备2个条件：对变量的写操作不依赖于当前值，该变量没有包含在具有其他变量的不变式中。</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="线程的实现"><a href="#线程的实现" class="headerlink" title="线程的实现"></a>线程的实现</h3><h4 id="使用内核实现"><a href="#使用内核实现" class="headerlink" title="使用内核实现"></a>使用内核实现</h4><h4 id="使用用户线程实现"><a href="#使用用户线程实现" class="headerlink" title="使用用户线程实现"></a>使用用户线程实现</h4><h4 id="使用用户线程加轻量级进程混合实现"><a href="#使用用户线程加轻量级进程混合实现" class="headerlink" title="使用用户线程加轻量级进程混合实现"></a>使用用户线程加轻量级进程混合实现</h4><h4 id="Java线程的实现"><a href="#Java线程的实现" class="headerlink" title="Java线程的实现"></a>Java线程的实现</h4><h3 id="Java线程调度"><a href="#Java线程调度" class="headerlink" title="Java线程调度"></a>Java线程调度</h3><h3 id="状态转换"><a href="#状态转换" class="headerlink" title="状态转换"></a>状态转换</h3>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;在说&lt;code&gt;Volatile&lt;/code&gt;原理前先熟悉一下相关的基本概念&lt;strong&gt;&lt;a href=&quot;../原子性、可见性、有序性&quot;&gt;原子性、可见性、有序性&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Volatile原理&quot;&gt;&lt;a href=&quot;#Volatil
+        &lt;h3 id=&quot;线程的实现&quot;&gt;&lt;a href=&quot;#线程的实现&quot; class=&quot;headerlink&quot; title=&quot;线程的实现&quot;&gt;&lt;/a&gt;线程的实现&lt;/h3&gt;&lt;h4 id=&quot;使用内核实现&quot;&gt;&lt;a href=&quot;#使用内核实现&quot; class=&quot;headerlink&quot; title=&quot;使
+      
+    
+    </summary>
+    
+      <category term="hide" scheme="https://yaoyinglong.github.io/categories/hide/"/>
+    
+    
+      <category term="并发" scheme="https://yaoyinglong.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java内存模型</title>
+    <link href="https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://yaoyinglong.github.io/Blog/Java/并发/Java内存模型与线程/</id>
+    <published>2020-09-26T16:00:00.000Z</published>
+    <updated>2020-10-09T07:49:50.555Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="硬件效率与一致性"><a href="#硬件效率与一致性" class="headerlink" title="硬件效率与一致性"></a>硬件效率与一致性</h3><p>计算机的<strong>存储设备</strong>与<strong>处理器的运算速度</strong>有<strong>几个数量级</strong>的差距，所以现代计算机系统都不得不加入一层读写速度尽可能接近处理器运算速度的<strong>高速缓存</strong>来作为<strong>内存</strong>与<strong>处理器</strong>之间的缓冲：<strong>将运算需要使用到的数据复制到缓存中</strong>，让运算能快速进行，<strong>当运算结束后再从缓存中将数据同步回内存之中</strong>。</p><p>基于高速缓存的存储交互很好的解决了<strong>处理器与内存的速度矛盾</strong>，但也引入了一个新的问题：<strong>缓存一致性</strong>。在多处理器系统中，每个处理器都有自己的高速缓存，又<strong>共享同一主内存</strong>，多个处理器的运算任务都涉及<strong>同一块</strong>主内存区域时，<strong>可能导致各自的缓存数据不一致</strong>。</p><p>为了解决<strong>缓存数据一致性</strong>问题，需要各个处理器访问缓存时都遵循一些<strong>协议</strong>，如：<code>MSI</code>、<code>MESI</code>、<code>MOSI</code>、<code>Synapse</code>、<code>Firefly</code>、<code>Dragon Protocol</code>等。</p><p><img src="../../../../../images/Java/处理器、高速缓存、主内存间的交互关系.jpg" alt="处理器、高速缓存、主内存间的交互关系"></p><p>除了增加高速缓存外，为了使处理器内部的运算单元尽可能被充分利用，处理器可能会对输入的代码进行<strong>乱序执行优化</strong>，即<strong>指令重排序</strong>，处理器会在<strong>计算之后将乱序执行的结果重组</strong>，<strong>保证该结果与顺序执行的结果是一致的</strong>，但不保证程序中各个语句计算的先后顺序与输入的代码中的顺序一致。</p><p><code>Java</code>虚拟机的即时编译器中也有类似的<strong>指令重排序优化</strong>。</p><h3 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h3><h4 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h4><p><code>Java</code>虚拟机中试图定义一种<strong><code>Java</code>内存模型<code>JMM</code></strong>来<strong>屏蔽</strong>各种<strong>硬件</strong>和<strong>操作系统</strong>的<strong>内存访问差异</strong>。<code>C/C++</code>语言是直接使用物理硬件和操作系统的内存模型，由于不同平台上内存模型的差异，可能导致不同平台上并发访问出错。</p><p><strong><code>Java</code>内存模型的主要目标是定义程序中各个变量的访问规则</strong>，即在虚拟机中<strong>将变量存储到内存</strong>和<strong>从内存中取出变量</strong>这样的底层细节。这里说的变量包括：<strong>实例字段</strong>、<strong>静态字段</strong>、<strong>构成数组对象的元素</strong>，不包括：<strong>局部变量</strong>、<strong>方法参数</strong>。因为局部变量和方法参数是<strong>线程私有</strong>的。</p><p><code>Java</code>内存模型并<strong>没有限制执行引擎使用处理器</strong>的<strong>特定寄存器</strong>或<strong>缓存</strong>来和<strong>主内存</strong>交互，也<strong>没有限制即时编译器进行调整代码执行顺序</strong>这类优化措施。</p><p><code>Java</code>内存模型<strong>规定</strong>了所有的<strong>变量都存储在主内存</strong>（虚拟机内存中的一部分）中，每条线程有自己的工作内存，线程的<strong>工作内存</strong>中保存了被该线程使用到的变量的<strong>主内存副本拷贝</strong>，线程对变量的<strong>所有操作都必须在工作内存中进行</strong>，<strong>不能直接读写主内存中的变量</strong>。不同的线程间也无法直接访问对方的工作内存中的变量，线程间变量值得传递均需要通过主内存来完成。</p><p>注：<strong>拷贝副本</strong>，事实上并<strong>不会完全复制一份对象</strong>拷贝出来，该<strong>对象的引用</strong>、<strong>对象中某个在线程访问到的字段</strong>是有可能存在拷贝的，但<strong>不会有虚拟机实现成把整个对象拷贝一次</strong>。</p><p><img src="../../../../../images/Java/线程、主内存、工作内存三者交互关系.jpg" alt="线程、主内存、工作内存三者交互关系"></p><p>注：若<strong>局部变量</strong>是一个<code>reference</code>类型，它引用的对象在堆中可被各个线程共享，但<code>reference</code>本身在Java栈的局部变量表中，是线程私有的。</p><h4 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h4><p>Java内存模型中定义了以下<code>8</code>种操作来完成<strong>主内存</strong>与<strong>工作内存</strong>之间的具体<strong>交互协议</strong>，虚拟机实现时必须保证每一种操作都是<strong>原子</strong>的、不可再分的。</p><table><thead><tr><th>操作</th><th>作用域</th><th>完成的工作</th></tr></thead><tbody><tr><td><strong><code>lock</code></strong>（<strong>锁定</strong>）</td><td><strong>主</strong>内存变量</td><td>把一个变量标识为一条<strong>线程独占状态</strong></td></tr><tr><td><strong><code>unlock</code></strong>（<strong>解锁</strong>）</td><td><strong>主</strong>内存变量</td><td>把一个<strong>处于锁定状态的变量释放出来</strong>，释放后才可被其他线程锁定</td></tr><tr><td><strong><code>read</code></strong>（<strong>读取</strong>）</td><td><strong>主</strong>内存变量</td><td>把一个变量的值<strong>从主内存传输到线程的工作内存</strong>中</td></tr><tr><td><strong><code>load</code></strong>（<strong>载入</strong>）</td><td><strong>工作</strong>内存变量</td><td>把<strong><code>read</code></strong>操作从主内存中得到的变量值放入工作内存的<strong>变量副本</strong>中</td></tr><tr><td><strong><code>use</code></strong>（<strong>使用</strong>）</td><td><strong>工作</strong>内存变量</td><td>把工作内存中变量值传递给执行引擎</td></tr><tr><td><strong><code>assign</code></strong>（<strong>赋值</strong>）</td><td><strong>工作</strong>内存变量</td><td><strong>把从执行引擎接收到的值赋给工作内存的变量</strong></td></tr><tr><td><strong><code>store</code></strong>（<strong>存储</strong>）</td><td><strong>工作</strong>内存变量</td><td>把工作内存中一个变量的值传递到主内存中</td></tr><tr><td><strong><code>write</code></strong>（<strong>写入</strong>）</td><td><strong>主</strong>内存变量</td><td>把<strong><code>store</code></strong>操作从工作内存中得到的变量值放入主内存的变量中</td></tr></tbody></table><p>若把一个变量<strong>从主内存复制到工作内存</strong>，需要<strong>顺序</strong>执行<strong><code>read</code></strong>和<strong><code>load</code></strong>操作。若要将变量从<strong>工作内存同步回主内存</strong>，需<strong>顺序</strong>执行<strong><code>store</code></strong>和<strong><code>write</code></strong>操作。<code>Java</code>内存模型只要求上述两个操作必须顺序执行，而<strong>没有保证是连续执行</strong>。</p><p><code>Java</code>内存模型规定了在执行上述<code>8</code>种操作时必须满足以下规则：</p><ul><li><strong>不允许</strong><code>read</code>和<code>load</code>、<code>store</code>和<code>write</code>操作之一<strong>单独出现</strong>，即<strong>不允许</strong>一个变量<strong>从主内存读取了但工作内存不接受</strong>，或<strong>从工作内存发起回写但主内存不接受</strong>的情况出现。</li><li><strong>不允许线程丢弃它最近的<code>assign</code>操作</strong>，即变量<strong>在工作内存中改变了之后必须把它同步回主内存</strong>。</li><li><strong>不允许</strong>线程无原因地（<strong>未发生任何<code>assign</code>操作</strong>）把数据从线程<strong>工作内存同步回主内存</strong>。</li><li>一个<strong>新变量只能在主内存中诞生</strong>，<strong>不允许工作内存</strong>中直接使用一个<strong>未被初始化</strong>（<code>load</code>或<code>assign</code>）的变量。即对一个变量实施<code>use</code>、<code>store</code>操作之前，必须先执行过了<code>assign</code>和<code>load</code>操作。</li><li>一个变量同一时刻<strong>只允许一条线程</strong>对其进行<code>lock</code>操作，但<code>lock</code>操作<strong>可以被同一条线程重复执行多次</strong>，多次执行<code>lock</code>后，只有<strong>执行相同次数</strong>的<code>unlock</code>操作，变量才会被解锁。</li><li>若对一个变量执行<code>lock</code>操作，将会<strong>清空工作内存中此变量的值</strong>，在执行引擎使用这个变量钱，需要<strong>重新执行<code>load</code>或<code>assign</code>操作初始化变量</strong>的值。</li><li>若变量<strong>事先没有被<code>lock</code>操作锁定，不允许对它执行<code>unlock</code>操作</strong>，也<strong>不允许<code>unlock</code></strong>一个被其<strong>他线程锁定</strong>的变量。</li><li><strong>对变量执行<code>unlock</code>操作之前，必须先把此变量同步回主内存中</strong>。</li></ul><h3 id="先行发生原则"><a href="#先行发生原则" class="headerlink" title="先行发生原则"></a>先行发生原则</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;硬件效率与一致性&quot;&gt;&lt;a href=&quot;#硬件效率与一致性&quot; class=&quot;headerlink&quot; title=&quot;硬件效率与一致性&quot;&gt;&lt;/a&gt;硬件效率与一致性&lt;/h3&gt;&lt;p&gt;计算机的&lt;strong&gt;存储设备&lt;/strong&gt;与&lt;strong&gt;处理器的运算速度&lt;/st
       
     
     </summary>
@@ -86,9 +110,7 @@
       <category term="并发" scheme="https://yaoyinglong.github.io/categories/Java/%E5%B9%B6%E5%8F%91/"/>
     
     
-      <category term="Volatile" scheme="https://yaoyinglong.github.io/tags/Volatile/"/>
-    
-      <category term="并发" scheme="https://yaoyinglong.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
+      <category term="JVM，线程" scheme="https://yaoyinglong.github.io/tags/JVM%EF%BC%8C%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
@@ -525,32 +547,6 @@
       <category term="树" scheme="https://yaoyinglong.github.io/tags/%E6%A0%91/"/>
     
       <category term="AVL" scheme="https://yaoyinglong.github.io/tags/AVL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面试准备大纲</title>
-    <link href="https://yaoyinglong.github.io/Blog/Interview/%E5%A4%A7%E7%BA%B2/"/>
-    <id>https://yaoyinglong.github.io/Blog/Interview/大纲/</id>
-    <published>2020-07-25T16:00:00.000Z</published>
-    <updated>2020-08-01T05:17:24.303Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><ul><li><code>AOP</code></li><li><code>IOC</code></li><li>源码</li><li><code>SpringBoot</code></li><li><code>SpringCloud</code></li></ul><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul><li>常见面试笔试内容</li></ul><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul><li>树（前序遍历、中序遍历、后序遍历、层序遍历）<ul><li>二叉搜索树</li><li>平衡二叉树（AVL树）</li><li>红黑树</li></ul></li><li>图（广度优先遍历BFS、深度优先遍历DFS）</li><li><code>leetcode</code>题（<strong>前期每周5道，中期每周10道，后期每周15道</strong>）</li><li>常见排序总结</li><li>复杂度分析：了解常见时间复杂度，建立复杂度和数据规模之间的概念，理解均摊复杂度分析</li><li>数组<ul><li>双索引技术</li><li>对撞指针—浮动窗口</li></ul></li><li>查找表<ul><li>map</li><li>set</li><li>unordered_map</li><li>unordered_set</li></ul></li><li>链表<ul><li>虚拟头结点</li><li>双指针</li></ul></li><li>栈<ul><li>非递归算法</li><li>深入系统栈，模拟系统递归调用</li></ul></li><li>队列<ul><li>广度优先遍历</li></ul></li><li>回溯<ul><li>回溯算法</li><li>排序问题-组合问题</li><li>Floodfill</li></ul></li><li>动态规划<ul><li>记忆化搜索</li><li>重叠子问题和问题的无后效性</li><li>背包问题</li><li>LIS，LCS问题分析</li></ul></li><li>贪心算法：避过陷阱</li></ul><h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ul><li>6大基本原则（<strong>一周</strong>）</li><li>23种设计模式（<strong>一周5个</strong>）</li><li>设计模式对比</li></ul><h3 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h3><ul><li><code>JVM</code></li><li>源码</li><li>多线程</li></ul><h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><ul><li><code>RabbitMQ</code></li><li>常见面试笔试内容</li></ul><h3 id="Reids"><a href="#Reids" class="headerlink" title="Reids"></a>Reids</h3><ul><li>常见面试笔试内容</li></ul><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ul><li>常用命令</li></ul><h3 id="Go"><a href="#Go" class="headerlink" title="Go"></a>Go</h3><ul><li>常见面试笔试内容</li></ul><h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><ul><li>常见面试笔试内容</li></ul><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Spring&quot;&gt;&lt;a href=&quot;#Spring&quot; class=&quot;headerlink&quot; title=&quot;Spring&quot;&gt;&lt;/a&gt;Spring&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;AOP&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;IOC&lt;/code&gt;&lt;/li&gt;
-
-      
-    
-    </summary>
-    
-      <category term="hide" scheme="https://yaoyinglong.github.io/categories/hide/"/>
-    
     
   </entry>
   
