@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="单例模式的核心代码就是将构造方法私有化，只有一个实例，自己负责创建自己的对象，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。 懒汉式实例在使用时才去创建，用的时候才去检查有没有实例。有线程安全和线程不安全两种写法，区别就是synchronized关键字。下面这种写法存在线程安全问题，在并发获取实例时，可能会存在创建多个实例的情况。 123456789101112public c">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-09T07:18:49.754Z">
+<meta property="og:updated_time" content="2020-10-09T07:37:51.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式">
 <meta name="twitter:description" content="单例模式的核心代码就是将构造方法私有化，只有一个实例，自己负责创建自己的对象，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。 懒汉式实例在使用时才去创建，用的时候才去检查有没有实例。有线程安全和线程不安全两种写法，区别就是synchronized关键字。下面这种写法存在线程安全问题，在并发获取实例时，可能会存在创建多个实例的情况。 123456789101112public c">
@@ -711,7 +711,7 @@
                     
             
             
-                <p>单例模式的核心代码就是将构造方法私有化，只有一个实例，自己负责创建自己的对象，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。</p>
+                <p>单例模式的核心代码就是将<strong>构造方法私有化</strong>，只有一个实例，自己负责创建自己的对象，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。</p>
 <h3 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h3><p>实例在使用时才去创建，用的时候才去检查有没有实例。有线程安全和线程不安全两种写法，区别就是<code>synchronized</code>关键字。下面这种写法存在线程安全问题，在并发获取实例时，可能会存在创建多个实例的情况。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LazySingleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> LazySingleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">LazySingleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LazySingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> LazySingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h3><p>在类加载时实例被创建。实现简单且没有线程安全的问题，可能在还不需要此实例的时候就已经把实例创建出来了，浪费内存空间，没起到<code>lazy loading</code>的效果。</p>
@@ -735,9 +735,9 @@
     <nav id="article-nav">
         
         
-            <a href="/Blog/设计模式/设计模式概览/" id="article-nav-older" class="article-nav-link-wrap">
+            <a href="/Blog/Java/并发/Volatile原理/" id="article-nav-older" class="article-nav-link-wrap">
                 <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">设计模式概览</div>
+                <div class="article-nav-title">Volatile原理</div>
             </a>
         
     </nav>
