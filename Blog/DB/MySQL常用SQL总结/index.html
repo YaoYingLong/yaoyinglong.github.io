@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="查看索引1show index from compliance_page_info; 创建联合唯一性索引1234567alter table compliance_page_info add unique index unique_index_name(uuid, type);alter table compliance_page_info add unique unique_index_name">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-25T09:26:12.195Z">
+<meta property="og:updated_time" content="2020-10-15T06:30:56.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL常用SQL总结">
 <meta name="twitter:description" content="查看索引1show index from compliance_page_info; 创建联合唯一性索引1234567alter table compliance_page_info add unique index unique_index_name(uuid, type);alter table compliance_page_info add unique unique_index_name">
@@ -329,6 +329,8 @@
                 
                     <li class="file"><a href="/Blog/Java/并发/原子性、可见性、有序性/">原子性、可见性、有序性</a></li>
                 
+                    <li class="file"><a href="/Blog/Java/并发/Synchronized总结/">Synchronized总结</a></li>
+                
                     <li class="file"><a href="/Blog/Java/并发/线程安全/">线程安全</a></li>
                 
                     <li class="file"><a href="/Blog/Java/并发/线程安全实现方式/">线程安全实现方式</a></li>
@@ -546,6 +548,8 @@
                 
                     <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
                 
+                    <li class="file"><a href="/Blog/框架/Redis总结/">Redis总结</a></li>
+                
             </ul>
         
                     </li>
@@ -721,7 +725,8 @@
 <h6 id="查询数据库表结构"><a href="#查询数据库表结构" class="headerlink" title="查询数据库表结构"></a>查询数据库表结构</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> column_name, column_type, is_nullable, column_key, column_default, extra, column_comment</span><br><span class="line"><span class="keyword">from</span> information_schema.columns</span><br><span class="line"><span class="keyword">where</span> table_schema = <span class="string">'ent_compliance'</span>  		<span class="comment">#表所在数据库</span></span><br><span class="line">  <span class="keyword">and</span> table_name = <span class="string">'third_page_info'</span> ; 		<span class="comment">#你要查的表</span></span><br></pre></td></tr></table></figure>
 <h5 id="删除重复数据"><a href="#删除重复数据" class="headerlink" title="删除重复数据"></a>删除重复数据</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必须多嵌套一层select否则MySQL报错</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> update_log <span class="keyword">where</span> <span class="keyword">id</span> <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">  <span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(<span class="keyword">id</span>) <span class="keyword">from</span> update_log <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">uuid</span>, did_or_page, <span class="keyword">type</span>) b</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <h5 id="正则-amp-字符长度查询"><a href="#正则-amp-字符长度查询" class="headerlink" title="正则&amp;字符长度查询"></a>正则&amp;字符长度查询</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> update_log <span class="keyword">where</span> <span class="keyword">LENGTH</span>(did_or_page) &gt; <span class="number">30</span> <span class="keyword">or</span> did_or_page REGEXP <span class="string">'[0-9]+'</span>;</span><br></pre></td></tr></table></figure>
-<h5 id="将一个表中的字段更新到另一表中"><a href="#将一个表中的字段更新到另一表中" class="headerlink" title="将一个表中的字段更新到另一表中"></a>将一个表中的字段更新到另一表中</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> asset_certificate a, base_static_data b</span><br><span class="line">  <span class="keyword">set</span> a.certificate_type = b.code_value, a.certificate_authority = b.extend_value</span><br><span class="line"><span class="keyword">where</span> a.certificate_type_code = b.code_name</span><br><span class="line">      <span class="keyword">and</span> a.certificate_type <span class="keyword">in</span> (<span class="string">'null'</span>, <span class="string">'-'</span>, <span class="string">''</span>) <span class="keyword">or</span> a.certificate_type <span class="keyword">is</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="将一个表中的字段更新到另一表中"><a href="#将一个表中的字段更新到另一表中" class="headerlink" title="将一个表中的字段更新到另一表中"></a>将一个表中的字段更新到另一表中</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> asset_certificate a, base_static_data b</span><br><span class="line">  <span class="keyword">set</span> a.certificate_type = b.code_value, a.certificate_authority = b.extend_value</span><br><span class="line"><span class="keyword">where</span> a.certificate_type_code = b.code_name</span><br><span class="line">  <span class="keyword">and</span> a.certificate_type <span class="keyword">in</span> (<span class="string">'null'</span>, <span class="string">'-'</span>, <span class="string">''</span>) <span class="keyword">or</span> a.certificate_type <span class="keyword">is</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="关联更新"><a href="#关联更新" class="headerlink" title="关联更新"></a>关联更新</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> old_product op, new_product np </span><br><span class="line"><span class="keyword">set</span> np.category = op <span class="keyword">category</span></span><br><span class="line"><span class="keyword">where</span> op.name = np.name</span><br></pre></td></tr></table></figure>
 
         </div>
         
