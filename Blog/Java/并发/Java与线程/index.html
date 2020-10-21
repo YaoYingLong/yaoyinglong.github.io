@@ -12,22 +12,22 @@
         <meta name="keywords" content="并发">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="线程的实现线程是CPU调度的基本单位，是比进程更轻量级的调度执行单位，线程可以把进程的资源分配和执行调度分开，各个线程既可以共享进程资源（内存地址、文件I/O），又可以独立调度。 主流操作系统都提供了线程实现，Java提供了在不同硬件和操作系统平台下对线程操作的同一处理，每个已经执行start()且还未结束的Thread类的实例代表一个线程。且Thread类所有关键方法都被声明为Native。在J">
+    <meta name="description" content="线程的实现线程是CPU调度的基本单位，是比进程更轻量级的调度执行单位，线程可以把进程的资源分配和执行调度分开，各个线程既可以共享进程资源（内存地址、文件I/O），又可以独立调度。 主流操作系统都提供了线程实现，Java提供了在不同硬件和操作系统平台下对线程操作的统一处理，每个已经执行start()且还未结束的Thread类的实例代表一个线程。且Thread类所有关键方法都被声明为Native。在J">
 <meta name="keywords" content="并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java与线程">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/并发/Java与线程/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="线程的实现线程是CPU调度的基本单位，是比进程更轻量级的调度执行单位，线程可以把进程的资源分配和执行调度分开，各个线程既可以共享进程资源（内存地址、文件I/O），又可以独立调度。 主流操作系统都提供了线程实现，Java提供了在不同硬件和操作系统平台下对线程操作的同一处理，每个已经执行start()且还未结束的Thread类的实例代表一个线程。且Thread类所有关键方法都被声明为Native。在J">
+<meta property="og:description" content="线程的实现线程是CPU调度的基本单位，是比进程更轻量级的调度执行单位，线程可以把进程的资源分配和执行调度分开，各个线程既可以共享进程资源（内存地址、文件I/O），又可以独立调度。 主流操作系统都提供了线程实现，Java提供了在不同硬件和操作系统平台下对线程操作的统一处理，每个已经执行start()且还未结束的Thread类的实例代表一个线程。且Thread类所有关键方法都被声明为Native。在J">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/Java/轻量级进程与内核线程之间11的关系.jpg">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/Java/进程与用户线程之间1比N的关系.jpg">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/Java/用户线程与轻量级进程间的N比M的关系.jpg">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/Java/线程状态转换关系.png">
-<meta property="og:updated_time" content="2020-10-20T14:11:45.780Z">
+<meta property="og:updated_time" content="2020-10-21T02:18:38.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java与线程">
-<meta name="twitter:description" content="线程的实现线程是CPU调度的基本单位，是比进程更轻量级的调度执行单位，线程可以把进程的资源分配和执行调度分开，各个线程既可以共享进程资源（内存地址、文件I/O），又可以独立调度。 主流操作系统都提供了线程实现，Java提供了在不同硬件和操作系统平台下对线程操作的同一处理，每个已经执行start()且还未结束的Thread类的实例代表一个线程。且Thread类所有关键方法都被声明为Native。在J">
+<meta name="twitter:description" content="线程的实现线程是CPU调度的基本单位，是比进程更轻量级的调度执行单位，线程可以把进程的资源分配和执行调度分开，各个线程既可以共享进程资源（内存地址、文件I/O），又可以独立调度。 主流操作系统都提供了线程实现，Java提供了在不同硬件和操作系统平台下对线程操作的统一处理，每个已经执行start()且还未结束的Thread类的实例代表一个线程。且Thread类所有关键方法都被声明为Native。在J">
 <meta name="twitter:image" content="https://yaoyinglong.github.io/images/Java/轻量级进程与内核线程之间11的关系.jpg">
     
 
@@ -725,13 +725,8 @@
             
             
                 <h3 id="线程的实现"><a href="#线程的实现" class="headerlink" title="线程的实现"></a>线程的实现</h3><p>线程是<strong><code>CPU</code>调度</strong>的<strong>基本单位</strong>，是比进程更轻量级的<strong>调度执行单位</strong>，线程可以把进程的<strong>资源分配</strong>和<strong>执行调度</strong>分开，各个线程既可以共享进程资源（内存地址、文件<code>I/O</code>），又可以独立调度。</p>
-<p>主流操作系统都提供了线程实现，<code>Java</code>提供了在不同硬件和操作系统平台下对线程操作的同一处理，每个已经执行<code>start()</code>且还未结束的<code>Thread</code>类的实例代表一个线程。且Thread类所有关键方法都被声明为<code>Native</code>。在Java中<code>Native</code>方法意味着该方法没有使用或无法使用平台无关的手段实现，也可能为了执行效率而使用<code>Native</code>方法，通常最高效的手段是平台相关的手段。</p>
-<p>实现线程主要有<code>3</code>种方式：</p>
-<ul>
-<li><strong>使用内核线程实现</strong></li>
-<li><strong>使用用户线程实现</strong></li>
-<li><strong>使用用户线程加轻量级进程混合实现</strong></li>
-</ul>
+<p>主流操作系统都提供了线程实现，<code>Java</code>提供了在不同硬件和操作系统平台下对线程操作的统一处理，每个已经执行<code>start()</code>且还未结束的<code>Thread</code>类的实例代表一个线程。且<code>Thread</code>类所有关键方法都被声明为<code>Native</code>。在<code>Java</code>中<code>Native</code>方法意味着该方法没有使用或无法使用平台无关的手段实现，也可能为了执行效率而使用<code>Native</code>方法，通常最高效的手段是平台相关的手段。</p>
+<p>实现线程主要有<code>3</code>种方式：<strong>使用内核线程实现</strong>、<strong>使用用户线程实现</strong>、<strong>使用用户线程加轻量级进程混合实现</strong></p>
 <h5 id="使用内核实现"><a href="#使用内核实现" class="headerlink" title="使用内核实现"></a>使用内核实现</h5><p><strong><code>KTL</code>内核线程</strong>是直接由操作系统<strong>内核直接支持的线程</strong>，由<strong>内核</strong>来完成线程切换，内核通过<strong>操作调度器</strong>对线程进行调度，并负责将线程的任务<strong>映射到各个处理器上</strong>。每个内核线程可视为内核的一个<strong>分身</strong>。</p>
 <p>程序<strong>一般不会</strong>使用<strong>内核线程</strong>，而是去使用内核线程的一种高级接口<strong>轻量级进程<code>LWP</code></strong>。<strong>轻量级进程</strong>就是通常意义上所说的<strong>线程</strong>，<strong>每个轻量级进程都由一个内核线程支持</strong>，这种关系称为<strong>一对一线程模型</strong>。</p>
 <p><img src="../../../../../images/Java/轻量级进程与内核线程之间11的关系.jpg" alt="轻量级进程与内核线程之间1:1的关系"></p>
@@ -783,6 +778,15 @@
 
     
     <nav id="article-nav">
+        
+            <a href="/Blog/Java/并发/Synchronized总结/" id="article-nav-newer" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Newer</strong>
+                <div class="article-nav-title">
+                    
+                        Synchronized总结
+                    
+                </div>
+            </a>
         
         
             <a href="/Blog/框架/Redis总结/" id="article-nav-older" class="article-nav-link-wrap">
