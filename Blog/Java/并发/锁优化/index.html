@@ -12,18 +12,18 @@
         <meta name="keywords" content="多线程，Thread">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="自旋锁与自适应自旋锁消除锁粗化轻量级锁偏向锁">
+    <meta name="description" content="高效并发是从JDK1.5到JDK1.6的一个重要改进，HotSpot虚拟机为了在线程之间更高效地共享数据，以及解决竞争问题，从而提高程序的执行效率在该版本上花费了大量精力去实现各种锁优化技术，如适应性自旋、锁消除、锁粗化、轻量级锁和偏向锁等。 自旋锁与自适应自旋互斥同步对性能最大的影响是阻塞的实现，挂起线程和恢复线程的操作都需要转入内核态中完成，这会给操作系统的并发性能带来很大的压力。在许多应用上">
 <meta name="keywords" content="多线程，Thread">
 <meta property="og:type" content="article">
 <meta property="og:title" content="锁优化">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/Java/并发/锁优化/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="自旋锁与自适应自旋锁消除锁粗化轻量级锁偏向锁">
+<meta property="og:description" content="高效并发是从JDK1.5到JDK1.6的一个重要改进，HotSpot虚拟机为了在线程之间更高效地共享数据，以及解决竞争问题，从而提高程序的执行效率在该版本上花费了大量精力去实现各种锁优化技术，如适应性自旋、锁消除、锁粗化、轻量级锁和偏向锁等。 自旋锁与自适应自旋互斥同步对性能最大的影响是阻塞的实现，挂起线程和恢复线程的操作都需要转入内核态中完成，这会给操作系统的并发性能带来很大的压力。在许多应用上">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-26T12:32:25.429Z">
+<meta property="og:updated_time" content="2020-10-22T03:34:54.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="锁优化">
-<meta name="twitter:description" content="自旋锁与自适应自旋锁消除锁粗化轻量级锁偏向锁">
+<meta name="twitter:description" content="高效并发是从JDK1.5到JDK1.6的一个重要改进，HotSpot虚拟机为了在线程之间更高效地共享数据，以及解决竞争问题，从而提高程序的执行效率在该版本上花费了大量精力去实现各种锁优化技术，如适应性自旋、锁消除、锁粗化、轻量级锁和偏向锁等。 自旋锁与自适应自旋互斥同步对性能最大的影响是阻塞的实现，挂起线程和恢复线程的操作都需要转入内核态中完成，这会给操作系统的并发性能带来很大的压力。在许多应用上">
     
 
     
@@ -695,7 +695,7 @@
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/Blog/Java/并发/锁优化/">
-            <time datetime="2018-09-20T16:00:00.000Z" itemprop="datePublished">2018-09-21</time>
+            <time datetime="2020-10-21T16:00:00.000Z" itemprop="datePublished">2020-10-22</time>
         </a>
     </div>
 
@@ -719,7 +719,13 @@
                     
             
             
-                <h3 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h3><h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3><h3 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h3><h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3>
+                <p><strong>高效并发</strong>是从<code>JDK1.5</code>到<code>JDK1.6</code>的一个重要改进，<code>HotSpot</code>虚拟机为了<strong>在线程之间更高效地共享数据</strong>，以及<strong>解决竞争问题</strong>，从而<strong>提高程序的执行效率</strong>在该版本上花费了大量精力去<strong>实现各种锁优化技术</strong>，如<strong>适应性自旋</strong>、<strong>锁消除</strong>、<strong>锁粗化</strong>、<strong>轻量级锁</strong>和<strong>偏向锁</strong>等。</p>
+<h3 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h3><p><strong>互斥同步</strong>对<strong>性能最大的影响</strong>是<strong>阻塞的实现</strong>，<strong>挂起线程</strong>和<strong>恢复线程</strong>的操作都需要转入<strong>内核态</strong>中完成，这会给操作系统的并发性能带来很大的压力。在许多应用上，<strong>共享数据的锁定状态只会持续很短一段时间</strong>，为了这段时间去<strong>挂起</strong>和<strong>恢复</strong>线程<strong>并不值得</strong>。</p>
+<p>两个或以上的线程同时并行执行，可以让后面请求锁的那个线程<strong>不放弃处理器执行时间</strong>，而是<strong>执行一个忙循环</strong>，也就是所谓的<strong>自旋</strong>，看看<strong>持有锁</strong>的线程<strong>是否会很快就释放锁</strong>，这项技术就是所谓的<strong>自旋锁</strong>。</p>
+<p><strong>自旋锁</strong>在<code>JDK1.4.2</code>中引入但<strong>默认关闭</strong>，使用<code>-XX:UseSpinning</code>参数开启，<strong><code>JDK1.6</code>默认开启</strong>自旋锁。自旋等待不能代替阻塞，自旋等待本身虽然避免了线程切换的开销，但<strong>还是要占用处理器时间</strong>，若锁被占用的时间<strong>很短</strong>，<strong>自旋等待的效果会非常好</strong>，若锁被占用的时间<strong>很长</strong>，自旋等待的线程只会白白消耗处理器资源，<strong>反而带来性能上的浪费</strong>。</p>
+<p><strong>自旋等待的时间</strong>是有一定的<strong>限度</strong>，若自旋<strong>超过了限定的次数</strong>仍然<strong>没有成功获得锁</strong>，就<strong>使用传统的方式挂起线程</strong>。<strong>自旋次数默认为<code>10</code>次</strong>，可使用参数<strong><code>-XX:PreBlockSpin</code></strong>来更改。</p>
+<p>JDK1.6引入了自适应的自旋锁，自适应意味着自旋的时间不再固定，而是由<strong>前一次</strong>在<strong>同一个锁上</strong>的<strong>自旋时间</strong>及<strong>锁的拥有者的状态来</strong>决定。若在同一个锁对象上，<strong>上一次是通过自旋等待获得的锁</strong>，且持有锁的<strong>线程正在运行中</strong>，则虚拟机将<strong>认为这次自旋锁也很有可能再次成功</strong>，进而它将<strong>运行自旋等待持续相对更长的时间</strong>。且若对于某个锁，通过自旋的方式<strong>很少成功获得过锁</strong>，则在以后要获取该锁时将可能<strong>省略自旋过程</strong>，以<strong>避免浪费处理器资源</strong>。</p>
+<h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3><h3 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h3><h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3>
         </div>
         
     <footer class="article-footer">
@@ -731,15 +737,11 @@
     
     <nav id="article-nav">
         
-            <a href="/Blog/Java/并发/线程安全实现方式/" id="article-nav-newer" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-                    
-                        线程安全实现方式
-                    
-                </div>
-            </a>
         
+            <a href="/Blog/Java/并发/Synchronized总结/" id="article-nav-older" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">Synchronized总结</div>
+            </a>
         
     </nav>
 

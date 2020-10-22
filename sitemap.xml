@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Volatile%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2020-10-22T05:17:31.681Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/%E9%94%81%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2020-10-22T03:34:54.221Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Synchronized%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2020-10-21T07:14:51.460Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Java%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
     
     <lastmod>2020-10-21T02:18:38.121Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Volatile%E5%8E%9F%E7%90%86/</loc>
-    
-    <lastmod>2020-10-20T10:48:55.187Z</lastmod>
     
   </url>
   
@@ -124,13 +131,6 @@
     <loc>https://yaoyinglong.github.io/Blog/%E8%87%AA%E5%BA%A6/%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/</loc>
     
     <lastmod>2020-09-29T12:34:30.651Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/%E9%94%81%E4%BC%98%E5%8C%96/</loc>
-    
-    <lastmod>2020-09-26T12:32:25.429Z</lastmod>
     
   </url>
   
