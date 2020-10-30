@@ -12,21 +12,21 @@
         <meta name="keywords" content="设计模式">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="工厂模式用于封装和管理对象的创建，是一种创建模式。 简单工厂模式简单工厂模式仅简单的对不同类对象的创建进行了层简单的封装。  抽象手机类 123public interface Phone &amp;#123;    void make();&amp;#125; 小米手机类 123456public class MiPhone implements Phone &amp;#123;    @Override    pub">
+    <meta name="description" content="工厂模式用于创建的接口，让子类决定实例化哪一个类，工厂方法使一个类的实例化延迟到子类。工厂模式用于封装和管理对象的创建，是一种创建模式。工厂模式是典型的解耦框架，在需要灵活的、可扩展的框架时可以采用工厂模式，可以用在异构项目中，可以使用在测试驱动的开发框架下。 工厂模式有很多扩展，且与其他模式结合使用威力更大，可将其缩小为简单工厂模式，可升级为多个工厂类，可替代单例模式，可延迟初始化。 简单工厂模">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工厂模式">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/设计模式/工厂模式/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="工厂模式用于封装和管理对象的创建，是一种创建模式。 简单工厂模式简单工厂模式仅简单的对不同类对象的创建进行了层简单的封装。  抽象手机类 123public interface Phone &amp;#123;    void make();&amp;#125; 小米手机类 123456public class MiPhone implements Phone &amp;#123;    @Override    pub">
+<meta property="og:description" content="工厂模式用于创建的接口，让子类决定实例化哪一个类，工厂方法使一个类的实例化延迟到子类。工厂模式用于封装和管理对象的创建，是一种创建模式。工厂模式是典型的解耦框架，在需要灵活的、可扩展的框架时可以采用工厂模式，可以用在异构项目中，可以使用在测试驱动的开发框架下。 工厂模式有很多扩展，且与其他模式结合使用威力更大，可将其缩小为简单工厂模式，可升级为多个工厂类，可替代单例模式，可延迟初始化。 简单工厂模">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/设计模式/简单工厂模式UML.png">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/设计模式/工厂方法模式UML.png">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/设计模式/抽象工厂模式UML.png">
-<meta property="og:updated_time" content="2020-10-23T08:35:34.212Z">
+<meta property="og:updated_time" content="2020-10-26T13:16:52.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工厂模式">
-<meta name="twitter:description" content="工厂模式用于封装和管理对象的创建，是一种创建模式。 简单工厂模式简单工厂模式仅简单的对不同类对象的创建进行了层简单的封装。  抽象手机类 123public interface Phone &amp;#123;    void make();&amp;#125; 小米手机类 123456public class MiPhone implements Phone &amp;#123;    @Override    pub">
+<meta name="twitter:description" content="工厂模式用于创建的接口，让子类决定实例化哪一个类，工厂方法使一个类的实例化延迟到子类。工厂模式用于封装和管理对象的创建，是一种创建模式。工厂模式是典型的解耦框架，在需要灵活的、可扩展的框架时可以采用工厂模式，可以用在异构项目中，可以使用在测试驱动的开发框架下。 工厂模式有很多扩展，且与其他模式结合使用威力更大，可将其缩小为简单工厂模式，可升级为多个工厂类，可替代单例模式，可延迟初始化。 简单工厂模">
 <meta name="twitter:image" content="https://yaoyinglong.github.io/images/设计模式/简单工厂模式UML.png">
     
 
@@ -346,6 +346,8 @@
                     <li class="file"><a href="/Blog/Java/并发/Volatile原理/">Volatile原理</a></li>
                 
                     <li class="file"><a href="/Blog/Java/并发/Java与线程/">Java与线程</a></li>
+                
+                    <li class="file"><a href="/Blog/Java/并发/锁优化/">锁优化</a></li>
                 
                     <li class="file"><a href="/Blog/Java/并发/Java内存模型与线程/">Java内存模型</a></li>
                 
@@ -727,7 +729,8 @@
                     
             
             
-                <p>工厂模式用于封装和管理对象的创建，是一种创建模式。</p>
+                <p>工厂模式用于创建的接口，让子类决定实例化哪一个类，工厂方法<strong>使一个类的实例化延迟到子类</strong>。工厂模式用于封装和管理对象的创建，是一种创建模式。工厂模式是<strong>典型的解耦框架</strong>，在需要<strong>灵活的</strong>、<strong>可扩展</strong>的框架时可以采用工厂模式，可以用在<strong>异构项目</strong>中，可以使用在测试驱动的开发框架下。</p>
+<p>工厂模式有很多扩展，且与其他模式结合使用威力更大，可将其<strong>缩小为简单工厂模式</strong>，可<strong>升级为多个工厂类</strong>，可<strong>替代单例模式</strong>，可<strong>延迟初始化</strong>。</p>
 <h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>简单工厂模式仅简单的对不同类对象的创建进行了层简单的封装。</p>
 <p><img src="../../../../images/设计模式/简单工厂模式UML.png" alt="简单工厂模式UML"></p>
 <p>抽象手机类</p>
@@ -742,6 +745,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PhoneFactory factory = <span class="keyword">new</span> PhoneFactory();</span><br><span class="line">Phone product = factory.makePhone(<span class="string">"XiaoMi"</span>);</span><br><span class="line">product.make();</span><br></pre></td></tr></table></figure>
 <h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p>工厂方法模式将生成具体产品的任务分发给具体的产品工厂，其实就是将工厂抽象化。</p>
 <p><img src="../../../../images/设计模式/工厂方法模式UML.png" alt="工厂方法模式UML"></p>
+<p>工厂方法模式的优点是有<strong>良好的封装性</strong>，<strong>代码结构清晰</strong>，<strong>降低了模块间的耦合</strong>，<strong>扩展性好</strong>，<strong>屏蔽了产品类</strong>。</p>
 <p>工厂抽象类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">    <span class="function">Phone <span class="title">makePhone</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>小米手机工厂类</p>
@@ -749,8 +753,8 @@
 <p>华为手机工厂类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HwPhoneFactory</span> <span class="keyword">implements</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">makePhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HwPhone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>调用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AbstractFactory factoryA = <span class="keyword">new</span> MiPhoneFactory();</span><br><span class="line">factoryA.makePhone();</span><br><span class="line">AbstractFactory factoryB = <span class="keyword">new</span> HwPhoneFactory();</span><br><span class="line">factoryB.makePhone();</span><br></pre></td></tr></table></figure>
-<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p>抽象工厂模式通过在<code>AbstarctFactory</code>中增加创建产品的接口，并在具体子工厂中实现新加产品的创建。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AbstractFactory factoryA = <span class="keyword">new</span> MiPhoneFactory();</span><br><span class="line">factoryA.makePhone();</span><br><span class="line">AbstractFactory factoryB = <span class="keyword">new</span> HwPhoneFactory(); </span><br><span class="line">factoryB.makePhone();</span><br></pre></td></tr></table></figure>
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p>为创建一组相关或相互依赖的对象提供一个接口，而且无须指定他们的具体类。抽象工厂模式通过在<code>AbstarctFactory</code>中增加创建产品的接口，并在具体子工厂中实现新加产品的创建。</p>
 <p><img src="../../../../images/设计模式/抽象工厂模式UML.png" alt="抽象工厂模式UML"></p>
 <p>定义PC产品接口</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">make</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -787,6 +791,11 @@
                 </div>
             </a>
         
+        
+            <a href="/Blog/Java/并发/Synchronized总结/" id="article-nav-older" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">Synchronized总结</div>
+            </a>
         
     </nav>
 
