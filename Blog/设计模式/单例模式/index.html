@@ -9,18 +9,18 @@
         YingLong</title>
     
     
-        <meta name="keywords" content="设计模式">
+        <meta name="keywords" content="设计模式,单例模式">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="单例模式的核心代码就是将构造方法私有化，只有一个实例，自己负责创建自己的对象即自行实例化，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。 优点：  内存中只有一个实例，减少了内存开支，特别是一个对象需要频繁创建和销毁时。 只生成一个实例，减少了系统性能开销，当一个对象的产生需要比较多的资源时，如读取配置、产生其他依赖对象时，则可通过在应用启动时直接产生一个单例对象，永久驻留内存">
-<meta name="keywords" content="设计模式">
+<meta name="keywords" content="设计模式,单例模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单例模式">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/设计模式/单例模式/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="单例模式的核心代码就是将构造方法私有化，只有一个实例，自己负责创建自己的对象即自行实例化，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。 优点：  内存中只有一个实例，减少了内存开支，特别是一个对象需要频繁创建和销毁时。 只生成一个实例，减少了系统性能开销，当一个对象的产生需要比较多的资源时，如读取配置、产生其他依赖对象时，则可通过在应用启动时直接产生一个单例对象，永久驻留内存">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-26T12:45:19.019Z">
+<meta property="og:updated_time" content="2020-11-03T06:18:47.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式">
 <meta name="twitter:description" content="单例模式的核心代码就是将构造方法私有化，只有一个实例，自己负责创建自己的对象即自行实例化，提供一种访问其唯一对象的方式，可直接访问，不需要实例化该类的对象。 优点：  内存中只有一个实例，减少了内存开支，特别是一个对象需要频繁创建和销毁时。 只生成一个实例，减少了系统性能开销，当一个对象的产生需要比较多的资源时，如读取配置、产生其他依赖对象时，则可通过在应用启动时直接产生一个单例对象，永久驻留内存">
@@ -455,6 +455,69 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            中间件
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/IoC容器/">IoC容器</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/Spring整体架构/">Spring整体架构</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/Spring知识点/">Spring知识点</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Spring/Hystrix总结/">Hystrix总结</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            常见问题
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/中间件/常见问题/HBase依赖冲突/">HBase依赖冲突</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/常见问题/Maven编译后文件损坏/">Maven编译后文件损坏</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="file"><a href="/Blog/中间件/Redis分布式锁实现/">Redis分布式锁实现</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Redis总结/">Redis总结</a></li>
+                
+                    <li class="file"><a href="/Blog/中间件/Tomcat工作原理/">Tomcat工作原理</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             协议族
                         </a>
                         
@@ -501,69 +564,6 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
-                            框架
-                        </a>
-                        
-            <ul class="unstyled" id="tree">
-                
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            Spring
-                        </a>
-                        
-            <ul class="unstyled" id="tree">
-                
-                    <li class="file"><a href="/Blog/框架/Spring/Spring Gzip压缩/">Spring Gzip压缩</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Spring/IoC容器/">IoC容器</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Spring/Spring整体架构/">Spring整体架构</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Spring/Spring知识点/">Spring知识点</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Spring/Spring线程池跨线程数据共享/">Spring线程池跨线程数据共享</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Spring/Hystrix总结/">Hystrix总结</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Spring/SpringMvc异步/">SpringMvc异步原理及实现</a></li>
-                
-            </ul>
-        
-                    </li>
-                
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            常见问题
-                        </a>
-                        
-            <ul class="unstyled" id="tree">
-                
-                    <li class="file"><a href="/Blog/框架/常见问题/HBase依赖冲突/">HBase依赖冲突</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/常见问题/Maven编译后文件损坏/">Maven编译后文件损坏</a></li>
-                
-            </ul>
-        
-                    </li>
-                
-                    <li class="file"><a href="/Blog/框架/Redis分布式锁实现/">Redis分布式锁实现</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Tomcat工作原理/">Tomcat工作原理</a></li>
-                
-                    <li class="file"><a href="/Blog/框架/Redis总结/">Redis总结</a></li>
-                
-            </ul>
-        
-                    </li>
-                
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
                             算法
                         </a>
                         
@@ -599,6 +599,8 @@
                     <li class="file active"><a href="/Blog/设计模式/单例模式/">单例模式</a></li>
                 
                     <li class="file"><a href="/Blog/设计模式/工厂模式/">工厂模式</a></li>
+                
+                    <li class="file"><a href="/Blog/设计模式/模板方法模式/">模板方法模式</a></li>
                 
             </ul>
         
@@ -694,7 +696,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/设计模式/">设计模式</a>
+        <a class="tag-link" href="/tags/单例模式/">单例模式</a>, <a class="tag-link" href="/tags/设计模式/">设计模式</a>
     </div>
 
                         
