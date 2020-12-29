@@ -21,7 +21,7 @@
 <meta property="og:description" content="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。 了解GC和内存非配的目的是：当需要排查各种内存溢出、内存泄露问题时，当垃圾收集成为系统达到更高并发量的瓶颈时，为了更好的对这些自动化技术实施必要的监控和调节。 程序计数器、虚拟机栈、本地方法栈这三个区域是线程私有的方法结束或线程结束内存就跟着回收了；但在堆和方法区中，一个接口中的多个实现类">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yaoyinglong.github.io/images/可达性分析算法判断对象是否可回收.png">
-<meta property="og:updated_time" content="2019-06-27T09:26:09.583Z">
+<meta property="og:updated_time" content="2020-12-22T09:05:25.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象是否存活">
 <meta name="twitter:description" content="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。 了解GC和内存非配的目的是：当需要排查各种内存溢出、内存泄露问题时，当垃圾收集成为系统达到更高并发量的瓶颈时，为了更好的对这些自动化技术实施必要的监控和调节。 程序计数器、虚拟机栈、本地方法栈这三个区域是线程私有的方法结束或线程结束内存就跟着回收了；但在堆和方法区中，一个接口中的多个实现类">
@@ -171,8 +171,6 @@
                         </a>
                         
             <ul class="unstyled" id="tree">
-                
-                    <li class="file"><a href="/Blog/DB/MySQL基础/">MySQL基础</a></li>
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
@@ -753,7 +751,7 @@
 <h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>无论时通过引用计数算法还是通过可达性分析算法判断对象是否存<strong>都与引用有关</strong>。</p>
 <p>在<strong>JDK 1.2以前</strong>，如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址，就称这块内存代表着一个引用；在<strong>JDK 1.2之后</strong>，Java对引用的概念进行了扩充，将引用分为<strong>强引用、软引用、弱引用、虚引用</strong>4种，这4种引用<strong>强度依次逐渐减弱</strong>。</p>
 <p><strong>强引用</strong>在程序代码中普遍存在的，类似<code>Object obj = new Object()</code>这类的引用，<strong>只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象</strong>。</p>
-<p><strong>软引用</strong>是用来描述一些<strong>还有用但并非必要</strong>的对象。软引用关联着的对象，在系统将要发送内存溢出异常之前，将会把这些对象列进回收范围之中进行二次回收。JDK提供了<strong>SoftReference类</strong>来实现软引用。</p>
+<p><strong>软引用</strong>是用来描述一些<strong>还有用但并非必要</strong>的对象。软引用关联着的对象，在系统<strong>将要发生内存溢出异常之前</strong>，将会把这些对象列进回收范围之中进行二次回收。JDK提供了<strong>SoftReference类</strong>来实现软引用。</p>
 <p><strong>弱引用</strong>也是用来描述<strong>非必要</strong>对象，且<strong>比软引用更弱</strong>，被弱引用关联的对象<strong>只能生存到下一次垃圾收集发生之前</strong>。JDK提供了<strong>WeakReference类</strong>来实现弱引用。</p>
 <p><strong>虚引用</strong>最弱的一种引用关系，也被称为<strong>幽灵引用</strong>或<strong>幻影引用</strong>。一个对象是否有虚引用存在<strong>完全不影响其生存时间</strong>，也<strong>无法通过虚引用来获取对象的实例</strong>。为一个对象设置虚引用关联的<strong>唯一目</strong>的是能在这个对象<strong>被收集器回收时收到一个系统通知</strong>。JDK提供了<strong>Phantomeference类</strong>来实现虚引用。</p>
 <h3 id="finalize方法"><a href="#finalize方法" class="headerlink" title="finalize方法"></a>finalize方法</h3><p>即使对象不可达，也<strong>并非立即将该对象GC掉</strong>，真正宣告一个对象死亡<strong>至少需要经历两次<a href="../垃圾收集算法">标记</a>过程</strong>，若果对象在进行可达性分析后发现没有与GC Roots相连接的引用链，那它将会被第一次标记并且进行一次筛选，<strong>筛选条件是此对象是否有必要执行finalize()方法</strong>。</p>

@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="​    图可分为有向图和无向图，一般用G=(V,E)来表示图，V表示顶点，E表示通过图的边，常用邻接矩阵或者邻接表来描述一副图。图的遍历算法，根据访问节点的顺序，可分为广度优先搜索（BFS：Breadth First Search）和深度优先搜索（DFS：Depth First Search），图的存储常用邻接矩阵和邻接表。 ​    邻接矩阵是指用矩阵来表示图。它是采用矩阵来描述图中顶点之间的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-07T10:23:07.088Z">
+<meta property="og:updated_time" content="2020-12-18T06:28:11.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图基础">
 <meta name="twitter:description" content="​    图可分为有向图和无向图，一般用G=(V,E)来表示图，V表示顶点，E表示通过图的边，常用邻接矩阵或者邻接表来描述一副图。图的遍历算法，根据访问节点的顺序，可分为广度优先搜索（BFS：Breadth First Search）和深度优先搜索（DFS：Depth First Search），图的存储常用邻接矩阵和邻接表。 ​    邻接矩阵是指用矩阵来表示图。它是采用矩阵来描述图中顶点之间的">
@@ -169,8 +169,6 @@
                         </a>
                         
             <ul class="unstyled" id="tree">
-                
-                    <li class="file"><a href="/Blog/DB/MySQL基础/">MySQL基础</a></li>
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
@@ -750,7 +748,9 @@
 </ol>
 <h3 id="深度优先搜索（DFS）"><a href="#深度优先搜索（DFS）" class="headerlink" title="深度优先搜索（DFS）"></a>深度优先搜索（DFS）</h3><p>​    深度优先搜索在搜索过程中访问某个顶点后，需要<strong>递归</strong>地访问此顶点的<strong>所有未访问过的相邻顶点</strong>，和树的遍历比较类似，若初始状态是图中所有顶点均未被访问，则从某个顶点v出发，首先访问该顶点，然后依次从它的各个未被访问的邻接点出发深度优先搜索遍历图，直至图中所有和v有路径相通的顶点都被访问到。 若此时尚有其他顶点未被访问到，则另选一个未被访问的顶点作起始点，重复上述过程，直至图中所有顶点都被访问到为止。<code>DFS</code>在<strong>环监测</strong>和<strong>拓扑排序</strong>中都有不错的应用。</p>
 <h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>并查集是一种<strong>树型</strong>的数据结构，用于处理一些<strong>不相交集合</strong>的<strong>合并</strong>及<strong>查询</strong>问题。常常在使用中以<strong>森林</strong>来表示。在一些有<code>N</code>个元素的集合应用问题中，通常是在开始时让<strong>每个元素构成一个单元素的集合</strong>，然后按一定顺序将<strong>属于同一组</strong>的元素所在的<strong>集合合并</strong>，其间要<strong>反复查找</strong>一个元素在哪个集合中。</p>
-
+<p><strong>合并</strong>操作是把两个<strong>不相交的集合合并为一个集合</strong>，<strong>查询</strong>操作是查询两个元素<strong>是否在同一个集合</strong>中。最简单的并查集效率比较低，可以使用路径压缩的方法，使每个元素到根节点的路径尽可能短，最好只需要一步。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DSU</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] parent;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DSU</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; N; ++n) &#123;</span><br><span class="line">            parent[n] = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (parent[x] != x) &#123;</span><br><span class="line">            parent[x] = find(parent[x]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> parent[x] == x ? x : (parent[x] = find(parent[x]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        parent[find(x)] = find(y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3>
         </div>
         
     <footer class="article-footer">

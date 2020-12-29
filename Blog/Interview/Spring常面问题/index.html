@@ -12,17 +12,17 @@
         <meta name="keywords" content="Spring常面问题">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？） 2、Spring Boot Starter是什么？ 3、如何自定义Spring Boot Starter？（如何扩展Spring Boot） 4、Spring Boot的自动装配原理是什么？（源码分析哦） 5、Spring Boot的启动流程是什么？ 6、有没有看过Spring Boo">
+    <meta name="description" content="什么是BeanFactory？它与ApplicationContext的区别？BeanFactory可以理解为含有bean集合的工厂类， 包含了种bean的定义，以便在接收到客户端请求时将对应的bean实例化。还能在实例化对象时生成协作类之间的关系。此举将bean自身与bean客户端的配置中解放出来，还包含了bean生命周期的控制，调用客户端的初始化方法（initialization method">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring常面问题">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/Interview/Spring常面问题/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？） 2、Spring Boot Starter是什么？ 3、如何自定义Spring Boot Starter？（如何扩展Spring Boot） 4、Spring Boot的自动装配原理是什么？（源码分析哦） 5、Spring Boot的启动流程是什么？ 6、有没有看过Spring Boo">
+<meta property="og:description" content="什么是BeanFactory？它与ApplicationContext的区别？BeanFactory可以理解为含有bean集合的工厂类， 包含了种bean的定义，以便在接收到客户端请求时将对应的bean实例化。还能在实例化对象时生成协作类之间的关系。此举将bean自身与bean客户端的配置中解放出来，还包含了bean生命周期的控制，调用客户端的初始化方法（initialization method">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-10T01:33:13.843Z">
+<meta property="og:updated_time" content="2020-12-28T03:18:10.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring常面问题">
-<meta name="twitter:description" content="1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？） 2、Spring Boot Starter是什么？ 3、如何自定义Spring Boot Starter？（如何扩展Spring Boot） 4、Spring Boot的自动装配原理是什么？（源码分析哦） 5、Spring Boot的启动流程是什么？ 6、有没有看过Spring Boo">
+<meta name="twitter:description" content="什么是BeanFactory？它与ApplicationContext的区别？BeanFactory可以理解为含有bean集合的工厂类， 包含了种bean的定义，以便在接收到客户端请求时将对应的bean实例化。还能在实例化对象时生成协作类之间的关系。此举将bean自身与bean客户端的配置中解放出来，还包含了bean生命周期的控制，调用客户端的初始化方法（initialization method">
     
 
     
@@ -168,8 +168,6 @@
                         </a>
                         
             <ul class="unstyled" id="tree">
-                
-                    <li class="file"><a href="/Blog/DB/MySQL基础/">MySQL基础</a></li>
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
@@ -727,7 +725,8 @@
                     
             
             
-                <p>1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？）</p>
+                <h3 id="什么是BeanFactory？它与ApplicationContext的区别？"><a href="#什么是BeanFactory？它与ApplicationContext的区别？" class="headerlink" title="什么是BeanFactory？它与ApplicationContext的区别？"></a>什么是BeanFactory？它与ApplicationContext的区别？</h3><p><strong><code>BeanFactory</code></strong>可以理解为<strong>含有<code>bean</code>集合的工厂类</strong>， 包含了种bean的定义，以便在接收到客户端请求时将对应的bean实例化。还能在实例化对象时生成协作类之间的关系。此举将bean自身与bean客户端的配置中解放出来，还包含了bean生命周期的控制，调用客户端的初始化方法（initialization methods）和销毁方法（destruction methods）。<br>从表面上看， application context 如同 bean factory 一样具有 bean 定义、 bean 关联关系的设<br>置，根据请求分发 bean 的功能。但 applicationcontext 在此基础上还提供了其他的功能。 </p>
+<p>1、Spring Boot、Spring MVC、Spring之间的区别？（Spring Boot本质是什么？）</p>
 <p>2、Spring Boot Starter是什么？</p>
 <p>3、如何自定义Spring Boot Starter？（如何扩展Spring Boot）</p>
 <p>4、Spring Boot的自动装配原理是什么？（源码分析哦）</p>
@@ -738,7 +737,6 @@
 <p>9、什么是BeanDefinition？它为什么非常重要？</p>
 <p>10、什么是Bean的后置处理器？</p>
 <p>11、什么是Bean工厂的后置处理器？</p>
-<p>12、什么是BeanFactory？它与ApplicationContext的区别？</p>
 <p>13、什么是FactoryBean？它与BeanFactory的区别？</p>
 <p>14、@Import、@Component、@Bean的区别是什么？</p>
 <p>15、什么是ImportBeanDefinitionRegistrar？它的作用是什么？</p>
