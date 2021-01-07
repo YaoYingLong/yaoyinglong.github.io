@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E5%9B%BE%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2021-01-06T07:17:06.411Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</loc>
     
     <lastmod>2020-12-29T06:36:33.259Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://yaoyinglong.github.io/Blog/Java/VM/%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%AD%98%E6%B4%BB/</loc>
     
     <lastmod>2020-12-22T09:05:25.069Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E5%9B%BE%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2020-12-18T06:28:11.321Z</lastmod>
     
   </url>
   
