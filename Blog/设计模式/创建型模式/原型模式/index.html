@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象。用这种方式创建对象非常高效，无须知道对象创建的细节。 在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现， 通过clone的方法创建一个对象，然后由工厂方法提供给调用者。  原型模式简单程度仅次于单例模式和迭代器模式，Java中的Object类提供了浅克隆的clone()方法，具体原型类只要实现Clo">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://yaoyinglong.github.io/Blog/images/设计模式/原型模式结构图.png">
-<meta property="og:updated_time" content="2021-04-08T10:22:46.662Z">
+<meta property="og:image" content="https://yaoyinglong.github.io/images/设计模式/原型模式结构图.png">
+<meta property="og:updated_time" content="2021-04-08T10:26:12.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型模式">
 <meta name="twitter:description" content="用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象。用这种方式创建对象非常高效，无须知道对象创建的细节。 在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现， 通过clone的方法创建一个对象，然后由工厂方法提供给调用者。  原型模式简单程度仅次于单例模式和迭代器模式，Java中的Object类提供了浅克隆的clone()方法，具体原型类只要实现Clo">
-<meta name="twitter:image" content="https://yaoyinglong.github.io/Blog/images/设计模式/原型模式结构图.png">
+<meta name="twitter:image" content="https://yaoyinglong.github.io/images/设计模式/原型模式结构图.png">
     
 
     
@@ -790,7 +790,7 @@
                 <p>用一个已经创建的实例作为原型，<strong>通过复制该原型对象来创建一个和原型相同或相似的新对象</strong>。用这种方式创建对象非常高效，无须知道对象创建的细节。</p>
 <p>在实际项目中，原型模式很少单独出现，一般是和<strong>工厂方法模式</strong>一起出现， 通过<code>clone</code>的方法创建一个对象，然后由工厂方法提供给调用者。 </p>
 <p>原型模式简单程度仅次于<strong>单例模式</strong>和<strong>迭代器模式</strong>，<code>Java</code>中的<code>Object</code>类提供了浅克隆的<code>clone()</code>方法，具体原型类只要实现<strong><code>Cloneable</code></strong>接口就可实现对象的浅克隆。<code>Cloneable</code> 接口只是一个<strong>标记</strong>作用， 在<code>JVM</code>中具有这个标记的对象才有可能被拷贝。 </p>
-<p><img src="../../../images/设计模式/原型模式结构图.png" alt="原型模式结构图"></p>
+<p><img src="../../../../images/设计模式/原型模式结构图.png" alt="原型模式结构图"></p>
 <p>原型模式的克隆分为浅克隆和深克隆</p>
 <p>浅克隆：创建一个新对象，新对象的属性和原来对象完全相同，对于非基本类型属性，仍指向原有属性所指向的对象的内存地址。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thing</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Thing <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thing thing = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thing = (Thing) <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> thing;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
