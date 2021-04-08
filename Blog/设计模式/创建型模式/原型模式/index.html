@@ -4,28 +4,28 @@
     <meta charset="utf-8">
     
     <title>
-        模板方法模式 |
+        原型模式 |
         
         YingLong</title>
     
     
-        <meta name="keywords" content="设计模式，模板方法模式">
+        <meta name="keywords" content="设计模式，原型模式">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="模板方法模式非常简单应用非常广泛的模式，定义一个操作中的算法框架，而将一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。  AbstractClass叫做抽象模板，其方法分为基本方法和模板方法两类。基本方法也叫做基本操作，由子类实现的方法，且在模板方法中被调用。模板方法可以有一个或几个，用于实现对基本方法的调度，完成固定的逻辑。为了防止恶意操作，一般模板方法都使">
-<meta name="keywords" content="设计模式，模板方法模式">
+    <meta name="description" content="用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象。用这种方式创建对象非常高效，无须知道对象创建的细节。 在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现， 通过clone的方法创建一个对象，然后由工厂方法提供给调用者。  原型模式简单程度仅次于单例模式和迭代器模式，Java中的Object类提供了浅克隆的clone()方法，具体原型类只要实现Clo">
+<meta name="keywords" content="设计模式，原型模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模板方法模式">
-<meta property="og:url" content="https://yaoyinglong.github.io/Blog/设计模式/模板方法模式/index.html">
+<meta property="og:title" content="原型模式">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/设计模式/创建型模式/原型模式/index.html">
 <meta property="og:site_name" content="YingLong">
-<meta property="og:description" content="模板方法模式非常简单应用非常广泛的模式，定义一个操作中的算法框架，而将一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。  AbstractClass叫做抽象模板，其方法分为基本方法和模板方法两类。基本方法也叫做基本操作，由子类实现的方法，且在模板方法中被调用。模板方法可以有一个或几个，用于实现对基本方法的调度，完成固定的逻辑。为了防止恶意操作，一般模板方法都使">
+<meta property="og:description" content="用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象。用这种方式创建对象非常高效，无须知道对象创建的细节。 在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现， 通过clone的方法创建一个对象，然后由工厂方法提供给调用者。  原型模式简单程度仅次于单例模式和迭代器模式，Java中的Object类提供了浅克隆的clone()方法，具体原型类只要实现Clo">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://yaoyinglong.github.io/images/设计模式/模板方法模式类图.png">
-<meta property="og:updated_time" content="2020-11-03T08:49:28.322Z">
+<meta property="og:image" content="https://yaoyinglong.github.io/Blog/images/设计模式/原型模式结构图.png">
+<meta property="og:updated_time" content="2021-04-08T10:22:46.662Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="模板方法模式">
-<meta name="twitter:description" content="模板方法模式非常简单应用非常广泛的模式，定义一个操作中的算法框架，而将一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。  AbstractClass叫做抽象模板，其方法分为基本方法和模板方法两类。基本方法也叫做基本操作，由子类实现的方法，且在模板方法中被调用。模板方法可以有一个或几个，用于实现对基本方法的调度，完成固定的逻辑。为了防止恶意操作，一般模板方法都使">
-<meta name="twitter:image" content="https://yaoyinglong.github.io/images/设计模式/模板方法模式类图.png">
+<meta name="twitter:title" content="原型模式">
+<meta name="twitter:description" content="用一个已经创建的实例作为原型，通过复制该原型对象来创建一个和原型相同或相似的新对象。用这种方式创建对象非常高效，无须知道对象创建的细节。 在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现， 通过clone的方法创建一个对象，然后由工厂方法提供给调用者。  原型模式简单程度仅次于单例模式和迭代器模式，Java中的Object类提供了浅克隆的clone()方法，具体原型类只要实现Clo">
+<meta name="twitter:image" content="https://yaoyinglong.github.io/Blog/images/设计模式/原型模式结构图.png">
     
 
     
@@ -583,6 +583,21 @@
         
                     </li>
                 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            自度
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/自度/隐形眼镜攻略/"></a></li>
+                
+            </ul>
+        
+                    </li>
+                
                     <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
@@ -592,21 +607,60 @@
                         
             <ul class="unstyled" id="tree">
                 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            创建型模式
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/设计模式/创建型模式/单例模式/">单例模式</a></li>
+                
+                    <li class="file active"><a href="/Blog/设计模式/创建型模式/原型模式/">原型模式</a></li>
+                
+                    <li class="file"><a href="/Blog/设计模式/创建型模式/建造者模式/">建造者模式</a></li>
+                
+                    <li class="file"><a href="/Blog/设计模式/创建型模式/工厂模式/">工厂模式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            结构型模式
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/设计模式/结构型模式/代理模式/">代理模式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            行为型模式
+                        </a>
+                        
+            <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/设计模式/行为型模式/模板方法模式/">模板方法模式</a></li>
+                
+            </ul>
+        
+                    </li>
+                
                     <li class="file"><a href="/Blog/设计模式/SOLID基本原则/">SOLID基本原则</a></li>
                 
                     <li class="file"><a href="/Blog/设计模式/设计模式概览/">设计模式概览</a></li>
-                
-                    <li class="file"><a href="/Blog/设计模式/单例模式/">单例模式</a></li>
-                
-                    <li class="file"><a href="/Blog/设计模式/工厂模式/">工厂模式</a></li>
-                
-                    <li class="file active"><a href="/Blog/设计模式/模板方法模式/">模板方法模式</a></li>
-                
-                    <li class="file"><a href="/Blog/设计模式/建造者模式/">建造者模式</a></li>
-                
-                    <li class="file"><a href="/Blog/设计模式/代理模式/">代理模式</a></li>
-                
-                    <li class="file"><a href="/Blog/设计模式/原型模式/">原型模式</a></li>
                 
             </ul>
         
@@ -686,7 +740,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main"><article id="post-设计模式/模板方法模式" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-设计模式/创建型模式/原型模式" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -696,20 +750,20 @@
                         
     <div class="article-category">
         <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+        <a class="article-category-link" href="/categories/设计模式/">设计模式</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/设计模式/创建型模式/">创建型模式</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/设计模式，模板方法模式/">设计模式，模板方法模式</a>
+        <a class="tag-link" href="/tags/设计模式，原型模式/">设计模式，原型模式</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Blog/设计模式/模板方法模式/">
-            <time datetime="2020-11-02T16:00:00.000Z" itemprop="datePublished">2020-11-03</time>
+        <a href="/Blog/设计模式/创建型模式/原型模式/">
+            <time datetime="2021-04-07T16:00:00.000Z" itemprop="datePublished">2021-04-08</time>
         </a>
     </div>
 
@@ -720,7 +774,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            模板方法模式
+            原型模式
         </h1>
     
 
@@ -733,23 +787,29 @@
                     
             
             
-                <p><strong>模板方法模式</strong>非常简单应用非常广泛的模式，定义一个操作中的<strong>算法框架</strong>，而将一些步骤<strong>延迟到子类</strong>中。使得子类可以<strong>不改变一个算法的结构</strong>即可重定义该算法的某些特定步骤。</p>
-<p><img src="../../../../images/设计模式/模板方法模式类图.png" alt="模板方法模式类图"></p>
-<p><code>AbstractClass</code>叫做<strong>抽象模板</strong>，其方法分为<strong>基本方法</strong>和<strong>模板方法</strong>两类。<strong>基本方法</strong>也叫做基本操作，由子类实现的方法，且在模板方法中被调用。<strong>模板方法</strong>可以有一个或几个，用于实现对基本方法的调度，完成固定的逻辑。为了防止恶意操作，一般模板方法都使用<code>final</code>关键之修饰，防止被覆盖。</p>
-<p>抽象模板类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractPerson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">prepareGotoSchool</span><span class="params">()</span></span>&#123;</span><br><span class="line">        derssUp();</span><br><span class="line">        eatBreakfast();</span><br><span class="line">        tackThings();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">derssUp</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eatBreakfast</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">tackThings</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>具体的模板类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">AbstractPerson</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">derssUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"穿衣服"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">eatBreakfast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"吃妈妈做的早餐"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">tackThings</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"背书包，带上家庭作业和红领巾"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">AbstractPerson</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">derssUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"穿工作服"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">eatBreakfast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"做早饭，照顾孩子吃早饭"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">tackThings</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"带上昨天晚上准备的考卷"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>场景类的调用:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student();</span><br><span class="line">student.prepareGotoSchool();</span><br><span class="line">Teacher teacher = <span class="keyword">new</span> Teacher();</span><br><span class="line">teacher.prepareGotoSchool();</span><br></pre></td></tr></table></figure>
-<p><strong>抽象模板</strong>中的<strong>基本方法</strong>尽量设计为<code>protected</code>类型，符合<strong>迪米特法则</strong>，不需要暴露的属性或方法尽量不要设置为protected类型。实现类若非必要，尽量不要扩大父类中的访问权限。 </p>
-<p>模板方法模式可封装不变部分，扩展可变部分；可提取公共部分代码，便于维护；行为由父类控制，子类实现。但一般的设计习惯，抽象类负责声明最抽象、最一般的事物属性和方法，实现类完成具体的事物属性和方法。但是模板方法模式却颠倒了，抽象类定义了部分抽象方法，由子类实现，子类执行的结果影响了父类的结果，也就是子类对父类产生了影响，在复杂的项目中，会带来代码阅读的难度。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>多个子类有公有的方法，且逻辑基本相同时</li>
-<li>重要、复杂的算发，可以把核心算法设计为模板方法，周边的相关细节功能由各个子类实现</li>
-<li>重构时，模板方法模式时一个经常使用的模式，把相同的代码抽取到父类中，然后通过钩子函数约束其行为</li>
-</ul>
-
+                <p>用一个已经创建的实例作为原型，<strong>通过复制该原型对象来创建一个和原型相同或相似的新对象</strong>。用这种方式创建对象非常高效，无须知道对象创建的细节。</p>
+<p>在实际项目中，原型模式很少单独出现，一般是和<strong>工厂方法模式</strong>一起出现， 通过<code>clone</code>的方法创建一个对象，然后由工厂方法提供给调用者。 </p>
+<p>原型模式简单程度仅次于<strong>单例模式</strong>和<strong>迭代器模式</strong>，<code>Java</code>中的<code>Object</code>类提供了浅克隆的<code>clone()</code>方法，具体原型类只要实现<strong><code>Cloneable</code></strong>接口就可实现对象的浅克隆。<code>Cloneable</code> 接口只是一个<strong>标记</strong>作用， 在<code>JVM</code>中具有这个标记的对象才有可能被拷贝。 </p>
+<p><img src="../../../images/设计模式/原型模式结构图.png" alt="原型模式结构图"></p>
+<p>原型模式的克隆分为浅克隆和深克隆</p>
+<p>浅克隆：创建一个新对象，新对象的属性和原来对象完全相同，对于非基本类型属性，仍指向原有属性所指向的对象的内存地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thing</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Thing <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thing thing = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thing = (Thing) <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> thing;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>深克隆：创建一个新对象，属性中引用的其他对象也会被克隆，不再指向原有对象地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thing</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;String&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Thing <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thing thing = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thing = (Thing) <span class="keyword">super</span>.clone();</span><br><span class="line">            thing.arrayList = (ArrayList&lt;String&gt;)<span class="keyword">this</span>.arrayList.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> thing;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>对象的<code>clone</code>与对象内的<code>final</code>关键字是有冲突的 ，要使用<code>clone</code>方法， 类的成员变量上不要增加<code>final</code>关键字</strong>。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p><code>Java</code>自带的原型模式基于内存二进制流的复制，在性能上比直接new一个对象更加优良，特别是要在一<br>个循环体内产生大量的对象时</p>
+<p>可以使用深克隆方式保存对象的状态，使用原型模式将对象复制一份，并将其状态保存起来，简化了创建对象的过程，以便在需要的时候使用。</p>
+<p><strong>逃避构造函数的约束</strong>，直接在内存中拷贝， 构造函数是不会执行的</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>需要为每一个类都配置一个<strong><code>clone</code></strong>方法</p>
+<p>clone 方法位于类的内部，当对已有类进行改造的时候，需要修改代码，违背了开闭原则</p>
+<p>当实现深克隆时，需要编写较为复杂的代码，而且当对象之间存在多重嵌套引用时，为了实现深克隆，每一层对象对应的类都必须支持深克隆，实现起来会比较麻烦。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>对象之间相同或相似，即只是个别的几个属性不同的时候</p>
+<p>创建对象成本较大，例如初始化时间长，占用CPU太多，或者占用网络资源太多等，需要优化资源</p>
+<p>创建一个对象需要繁琐的数据准备或访问权限等，需要提高性能或者提高安全性</p>
+<p>系统中大量使用该类对象，且各个调用者都需要给它的属性重新赋值</p>
+<p>一个对象需要提供给其他对象访问， 而且各个调用者可能都需要修改其值时， 可以考虑使用原型模式拷贝多个对象供调用者使用 </p>
+<p><code>JDK</code>源码中 <code>ArrayList</code>的应用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ArrayList&lt;?&gt; v = (ArrayList&lt;?&gt;) <span class="keyword">super</span>.clone();</span><br><span class="line">        v.elementData = Arrays.copyOf(elementData, size);</span><br><span class="line">        v.modCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">        <span class="comment">// this shouldn't happen, since we are Cloneable</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         
     <footer class="article-footer">
@@ -761,19 +821,10 @@
     
     <nav id="article-nav">
         
-            <a href="/Blog/设计模式/工厂模式/" id="article-nav-newer" class="article-nav-link-wrap">
-                <strong class="article-nav-caption">Newer</strong>
-                <div class="article-nav-title">
-                    
-                        工厂模式
-                    
-                </div>
-            </a>
         
-        
-            <a href="/Blog/Java/并发/锁优化/" id="article-nav-older" class="article-nav-link-wrap">
+            <a href="/Blog/自度/隐形眼镜攻略/" id="article-nav-older" class="article-nav-link-wrap">
                 <strong class="article-nav-caption">Older</strong>
-                <div class="article-nav-title">锁优化</div>
+                <div class="article-nav-title"></div>
             </a>
         
     </nav>
