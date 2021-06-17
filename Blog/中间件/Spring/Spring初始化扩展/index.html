@@ -4,21 +4,26 @@
     <meta charset="utf-8">
     
     <title>
-        Tag: 工具 |
+        Spring初始化扩展 |
         
         YingLong</title>
     
     
-        <meta name="keywords" content="YingLong">
+        <meta name="keywords" content="Spring">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="YingLong">
-<meta property="og:url" content="https://yaoyinglong.github.io/tags/工具/index.html">
+    <meta name="description" content="经常需要在容器启动时做一些钩子动作，比如注册消息消费者，监听配置等。 容器刷新完成扩展点监听容器刷新完成扩展点ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;容器刷新成功意味着所有的Bean已初始化完成，当容器刷新之后Spring将会调用容器内所有实现了ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;的">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring初始化扩展">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/中间件/Spring/Spring初始化扩展/index.html">
 <meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="经常需要在容器启动时做一些钩子动作，比如注册消息消费者，监听配置等。 容器刷新完成扩展点监听容器刷新完成扩展点ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;容器刷新成功意味着所有的Bean已初始化完成，当容器刷新之后Spring将会调用容器内所有实现了ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;的">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-06-17T08:17:22.551Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YingLong">
+<meta name="twitter:title" content="Spring初始化扩展">
+<meta name="twitter:description" content="经常需要在容器启动时做一些钩子动作，比如注册消息消费者，监听配置等。 容器刷新完成扩展点监听容器刷新完成扩展点ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;容器刷新成功意味着所有的Bean已初始化完成，当容器刷新之后Spring将会调用容器内所有实现了ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;的">
     
 
     
@@ -446,18 +451,18 @@
         
                     </li>
                 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             中间件
                         </a>
                         
             <ul class="unstyled" id="tree">
                 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             Spring
                         </a>
@@ -478,7 +483,7 @@
                 
                     <li class="file"><a href="/Blog/中间件/Spring/Hystrix总结/">Hystrix总结</a></li>
                 
-                    <li class="file"><a href="/Blog/中间件/Spring/Spring初始化扩展/">Spring初始化扩展</a></li>
+                    <li class="file active"><a href="/Blog/中间件/Spring/Spring初始化扩展/">Spring初始化扩展</a></li>
                 
             </ul>
         
@@ -741,86 +746,129 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-tag"></i></span>
-        <h1 class="title">#工具</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        <section id="main"><article id="post-中间件/Spring/Spring初始化扩展" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/杂记/Win实用工具/">Win实用工具</a>
-        </h1>
-    
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+        <i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/中间件/">中间件</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/中间件/Spring/">Spring</a>
+    </div>
 
-                <div class="article-meta">
-                    
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>
+    </div>
+
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/Blog/杂记/Win实用工具/">
-            <time datetime="2019-07-29T16:00:00.000Z" itemprop="datePublished">2019-07-30</time>
+        <a href="/Blog/中间件/Spring/Spring初始化扩展/">
+            <time datetime="2021-06-16T16:00:00.000Z" itemprop="datePublished">2021-06-17</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/杂记/">杂记</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/工具/">工具</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                        
+                    </div>
+                
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/Blog/杂记/JAVA实用工具/">JAVA实用工具</a>
+        <h1 class="article-title" itemprop="name">
+            Spring初始化扩展
         </h1>
     
 
-                <div class="article-meta">
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            
                     
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/Blog/杂记/JAVA实用工具/">
-            <time datetime="2019-05-31T16:00:00.000Z" itemprop="datePublished">2019-06-01</time>
-        </a>
-    </div>
+            
+            
+                <p>经常需要在<strong>容器启动时做一些钩子动作</strong>，比如注册消息消费者，监听配置等。</p>
+<h2 id="容器刷新完成扩展点"><a href="#容器刷新完成扩展点" class="headerlink" title="容器刷新完成扩展点"></a>容器刷新完成扩展点</h2><h3 id="监听容器刷新完成扩展点ApplicationListener-lt-ContextRefreshedEvent-gt"><a href="#监听容器刷新完成扩展点ApplicationListener-lt-ContextRefreshedEvent-gt" class="headerlink" title="监听容器刷新完成扩展点ApplicationListener&lt;ContextRefreshedEvent&gt;"></a>监听容器刷新完成扩展点<code>ApplicationListener&lt;ContextRefreshedEvent&gt;</code></h3><p>容器刷新成功意味着所有的<code>Bean</code>已初始化完成，当容器刷新之后<code>Spring</code>将会调用容器内所有实现了<code>ApplicationListener&lt;ContextRefreshedEvent&gt;</code>的<code>Bean</code>的<code>onApplicationEvent</code>方法，应用程序可以以此达到监听容器初始化完成事件的目的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationListenerExample</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">"ApplicationListenerExample Startup"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的写法，就会造成<code>onApplicationEvent</code>方法被执行两次。因为在<code>Spring MVC</code>项目中，系统会存在两个容器，一个是<code>root ApplicationContext</code>，一个是作为<code>root ApplicationContext</code>的子容器的<code>WebApplicationContext</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationListenerExample</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (event.getApplicationContext().getParent() == <span class="keyword">null</span>) &#123;</span><br><span class="line">            log.info(<span class="string">"ApplicationListenerExample Startup"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h5><p>可以借助<code>Spring</code>以最小成本实现一个观察者模式，首先定义一个事件，然后注册一个监听器，最后发布事件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NotifyEvent</span><span class="params">(Object source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">NotifyEvent</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(NotifyEvent event)</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">"NotifyListener Startup"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListenerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> WebApplicationContext webApplicationContext;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        NotifyEvent event = <span class="keyword">new</span> NotifyEvent(<span class="string">"object"</span>);</span><br><span class="line">        webApplicationContext.publishEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SpringBoot的CommandLineRunner接口"><a href="#SpringBoot的CommandLineRunner接口" class="headerlink" title="SpringBoot的CommandLineRunner接口"></a><code>SpringBoot</code>的<code>CommandLineRunner</code>接口</h3><p>当容器上下文初始化完成之后，<code>SpringBoot</code>也会调用所有实现了<code>CommandLineRunner</code>接口的<code>run</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommandLineStartupRunner</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        log.info(<span class="string">"CommandLineStartupRunner Startup"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>多个实现了<code>CommandLineRunner</code>的<code>Bean</code>的执行顺序可以根据<code>Bean</code>上的<code>@Order</code>注解调整。其<code>run</code>方法可以接受从控制台输入的参数，跟<code>ApplicationListener&lt;ContextRefreshedEvent&gt;</code>这种扩展相比更加灵活。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar CommandLineStartupRunner.jar abc abcd</span><br></pre></td></tr></table></figure>
+<h3 id="SpringBoot的ApplicationRunner接口"><a href="#SpringBoot的ApplicationRunner接口" class="headerlink" title="SpringBoot的ApplicationRunner接口"></a><code>SpringBoot</code>的<code>ApplicationRunner</code>接口</h3><p><code>SpringBoot</code>的<code>CommandLineRunner</code>接口扩展类似，只不过接受参数是一个<code>ApplicationArguments</code>类，对控制台输入的参数提供了更好的封装，以<code>--</code>开头的被视为<strong>带选项的参数</strong>，否则是普通的参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationStartupRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        log.info(<span class="string">"ApplicationStartupRunner Startup: &#123;&#125;"</span>, args.getOptionNames());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制台输入参数示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar ApplicationStartupRunner.jar abc abcd --autho=mark verbose</span><br></pre></td></tr></table></figure>
+<h2 id="Bean初始化完成扩展点"><a href="#Bean初始化完成扩展点" class="headerlink" title="Bean初始化完成扩展点"></a><code>Bean</code>初始化完成扩展点</h2><h4 id="PostConstruct注解"><a href="#PostConstruct注解" class="headerlink" title="@PostConstruct注解"></a><code>@PostConstruct</code>注解</h4><p><code>@PostConstruct</code>注解一般放在<code>Bean</code>的方法上，被<code>@PostConstruct</code>修饰的方法会在<code>Bean</code>初始化后马上调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostConstructExample</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Environment environment;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        log.info(Arrays.asList(environment.getDefaultProfiles()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="InitializingBean接口"><a href="#InitializingBean接口" class="headerlink" title="InitializingBean接口"></a><code>InitializingBean</code>接口</h4><p><code>InitializingBean</code>的用法基本上与<code>@PostConstruct</code>一致，只不过相应的<code>Bean</code>需要实现<code>afterPropertiesSet</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitializingBeanExample</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Environment environment;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        log.info(Arrays.asList(environment.getDefaultProfiles()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Bean注解的初始化方法"><a href="#Bean注解的初始化方法" class="headerlink" title="@Bean注解的初始化方法"></a><code>@Bean</code>注解的初始化方法</h4><p>通过<code>@Bean</code>注入<code>Bean</code>的时候可以指定初始化方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitMethodExampleBean</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Environment environment;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        log.info(Arrays.asList(environment.getDefaultProfiles()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span>(initMethod=<span class="string">"init"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> InitMethodExampleBean <span class="title">initMethodExampleBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> InitMethodExampleBean();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="通过构造函数注入"><a href="#通过构造函数注入" class="headerlink" title="通过构造函数注入"></a>通过构造函数注入</h4><p><code>Spring</code>也支持通过构造函数注入，我们可以把搞事情的代码写在构造函数中，同样能达到目的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Log</span>4j2</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConstructorExampleBean</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Environment environment;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConstructorExampleBean</span><span class="params">(Environment environment)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.environment = environment;</span><br><span class="line">        log.info(Arrays.asList(environment.getDefaultProfiles()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Bean</code>初始化完成扩展点执行顺序是：<strong>构造函数注入</strong>，<strong><code>@PostConstruct</code>注解</strong>，<strong><code>InitializingBean</code>接口</strong>，<strong><code>@Bean</code>注解的初始化方法</strong>。</p>
 
-
-                    
-    <div class="article-category">
-        <i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/杂记/">杂记</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/工具/">工具</a>
-    </div>
-
-                </div>
-            </div>
         </div>
+        
+    <footer class="article-footer">
+    </footer>
+    </div>
+</article>
+
+
     
-</div>
+    <nav id="article-nav">
+        
+            <a href="/Blog/DB/分库分表/" id="article-nav-newer" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Newer</strong>
+                <div class="article-nav-title">
+                    
+                        分库分表
+                    
+                </div>
+            </a>
+        
+        
+            <a href="/Blog/设计模式/行为型模式/命令模式/" id="article-nav-older" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">命令模式</div>
+            </a>
+        
+    </nav>
+
+
+
+
+
+    
+    
+
+
+
+
+    <!-- baidu url auto push script -->
+    <script type="text/javascript">
+        !function () {
+            var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi, r = window.location.href,
+                o = document.referrer;
+            if (!e.test(r)) {
+                var n = "//api.share.baidu.com/s.gif";
+                o ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+                var t = new Image;
+                t.src = n
+            }
+        }(window);
+    </script>
 </section>
     </div>
     <footer id="footer">
