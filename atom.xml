@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyinglong.github.io/"/>
-  <updated>2021-04-28T07:22:05.807Z</updated>
+  <updated>2021-06-17T06:32:16.932Z</updated>
   <id>https://yaoyinglong.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分库分表</title>
+    <link href="https://yaoyinglong.github.io/Blog/DB/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/"/>
+    <id>https://yaoyinglong.github.io/Blog/DB/分库分表/</id>
+    <published>2021-06-16T16:00:00.000Z</published>
+    <updated>2021-06-17T06:32:16.932Z</updated>
+    
+    <content type="html"><![CDATA[<p>中大型项目中，一旦遇到数据量比较大，都知道对数据进行拆分，有<strong>垂直拆分</strong>和<strong>水平拆分</strong>两种。</p><p><strong>垂直拆分</strong>：从业务角度拆分多个库。</p><p><strong>水平拆分</strong>：同一个业务数据量大，进行水平拆分。</p><h3 id="分库分表方案"><a href="#分库分表方案" class="headerlink" title="分库分表方案"></a>分库分表方案</h3><p><strong><code>hash</code>取模</strong>和<strong><code>range</code>范围</strong>方案是分库分表方案中常用的方案；分库分表方案<strong>最主要</strong>就是<strong>路由算法</strong>，把路由的<code>key</code>按照指定的算法进行路由存放。</p><h4 id="hash取模方案"><a href="#hash取模方案" class="headerlink" title="hash取模方案"></a>hash取模方案</h4><p><strong><code>hash</code></strong>的方案就是对指定的<strong>路由key</strong>对<strong>分表总数进行取模</strong>，可以参考<strong><code>HashMap</code></strong>源码。</p><p><strong>优点</strong>：是可以<strong>将数据均匀放到各个分表中</strong>，<strong>不会出现热点问题</strong>。</p><p><strong>缺点</strong>：是数据<strong>迁移</strong>和<strong>扩容</strong>会比较困难。因为若之前分表是4，现在分表变成了8，由于取模基数变化导致之前的数据可能会找不到。要解决这样的问题，就需要将之前的数据重新按照新的取模基数做hash方案把数据进行迁移，放到新规划的分表中。但是对某些不允许停机做数据迁移的业务就会非常痛苦。</p><h4 id="range范围方案"><a href="#range范围方案" class="headerlink" title="range范围方案"></a>range范围方案</h4><p>range方案比较简单，就是<strong>把一定范围内的订单，存放到一个表中</strong>；如id=12放到0表中，id=1300万的放到1表中。设计这个方案时就是前期把表的范围设计好。通过id进行路由存放。</p><p><strong>优点</strong>：有利于将来的扩容，不需要做数据迁移。</p><p><strong>缺点</strong>：有热点问题。</p><h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><strong>hash是可以解决数据均匀的问题，range可以解决数据迁移问题</strong>，可以将两种方案结合，在<strong>一定的范围内数据均匀</strong>，每次扩容肯定会<strong>先设计好这次扩容的范围大小</strong>，只要<strong>保证这次的范围内的数据均匀</strong>就行了。</p><p>可以先定义一个<strong><code>group</code>组</strong>的概念，首先通过范围range定位是哪个group组，然后根据hash方案定位是哪个DB，再根据range方案定位哪个Table。</p><p>例如对10进行取模，如果值为【0，1，2，3】就路由到DB_0，【4，5，6】路由到DB_1，【7，8，9】路由到DB_2。1000万以内的id都均匀的分配到DB_0，DB_1，DB_2三个数据库中的Table_0表中。</p><p><img src="../../../../images/DB/数据存储示意图.png" alt></p><p><strong>扩容</strong>的时候只需要再设计一个<strong><code>group02</code></strong>组就行了。</p><p>设计是比较简单的，就3张表，把group，DB，table之间建立好关联关系就行了。</p><p><img src="../../../../images/DB/group与DB的关系.png" alt="group与DB的关系"></p><p><img src="../../../../images/DB/table与db的关系.png" alt="table与db的关系"></p><p>在开发的时候把三张关联数据保存到缓存中。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;中大型项目中，一旦遇到数据量比较大，都知道对数据进行拆分，有&lt;strong&gt;垂直拆分&lt;/strong&gt;和&lt;strong&gt;水平拆分&lt;/strong&gt;两种。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;垂直拆分&lt;/strong&gt;：从业务角度拆分多个库。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;水平拆分
+      
+    
+    </summary>
+    
+      <category term="DB" scheme="https://yaoyinglong.github.io/categories/DB/"/>
+    
+    
+      <category term="DB" scheme="https://yaoyinglong.github.io/tags/DB/"/>
+    
+  </entry>
   
   <entry>
     <title>命令模式</title>
@@ -511,33 +538,6 @@
       <category term="Volatile" scheme="https://yaoyinglong.github.io/tags/Volatile/"/>
     
       <category term="并发" scheme="https://yaoyinglong.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java内存模型</title>
-    <link href="https://yaoyinglong.github.io/Blog/Java/%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
-    <id>https://yaoyinglong.github.io/Blog/Java/并发/Java内存模型与线程/</id>
-    <published>2020-09-26T16:00:00.000Z</published>
-    <updated>2020-10-03T10:36:02.062Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="硬件效率与一致性"><a href="#硬件效率与一致性" class="headerlink" title="硬件效率与一致性"></a>硬件效率与一致性</h3><p>计算机的<strong>存储设备</strong>与<strong>处理器的运算速度</strong>有<strong>几个数量级</strong>的差距，所以现代计算机系统都不得不加入一层读写速度尽可能接近处理器运算速度的<strong>高速缓存</strong>来作为<strong>内存</strong>与<strong>处理器</strong>之间的缓冲：<strong>将运算需要使用到的数据复制到缓存中</strong>，让运算能快速进行，<strong>当运算结束后再从缓存中将数据同步回内存之中</strong>。</p><p>基于高速缓存的存储交互很好的解决了<strong>处理器与内存的速度矛盾</strong>，但也引入了一个新的问题：<strong>缓存一致性</strong>。在多处理器系统中，每个处理器都有自己的高速缓存，又<strong>共享同一主内存</strong>，多个处理器的运算任务都涉及<strong>同一块</strong>主内存区域时，<strong>可能导致各自的缓存数据不一致</strong>。</p><p>为了解决<strong>缓存数据一致性</strong>问题，需要各个处理器访问缓存时都遵循一些<strong>协议</strong>，如：<code>MSI</code>、<code>MESI</code>、<code>MOSI</code>、<code>Synapse</code>、<code>Firefly</code>、<code>Dragon Protocol</code>等。</p><p><img src="../../../../../images/Java/处理器、高速缓存、主内存间的交互关系.jpg" alt="处理器、高速缓存、主内存间的交互关系"></p><p>除了增加高速缓存外，为了使处理器内部的运算单元尽可能被充分利用，处理器可能会对输入的代码进行<strong>乱序执行优化</strong>，即<strong>指令重排序</strong>，处理器会在<strong>计算之后将乱序执行的结果重组</strong>，<strong>保证该结果与顺序执行的结果是一致的</strong>，但不保证程序中各个语句计算的先后顺序与输入的代码中的顺序一致。</p><p><code>Java</code>虚拟机的即时编译器中也有类似的<strong>指令重排序优化</strong>。</p><h3 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h3><h4 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h4><p><code>Java</code>虚拟机中试图定义一种<strong><code>Java</code>内存模型<code>JMM</code></strong>来<strong>屏蔽</strong>各种<strong>硬件</strong>和<strong>操作系统</strong>的<strong>内存访问差异</strong>。<code>C/C++</code>语言是直接使用物理硬件和操作系统的内存模型，由于不同平台上内存模型的差异，可能导致不同平台上并发访问出错。</p><p><strong><code>Java</code>内存模型的主要目标是定义程序中各个变量的访问规则</strong>，即在虚拟机中<strong>将变量存储到内存</strong>和<strong>从内存中取出变量</strong>这样的底层细节。这里说的变量包括：<strong>实例字段</strong>、<strong>静态字段</strong>、<strong>构成数组对象的元素</strong>，不包括：<strong>局部变量</strong>、<strong>方法参数</strong>。因为局部变量和方法参数是<strong>线程私有</strong>的。</p><p><code>Java</code>内存模型并<strong>没有限制执行引擎使用处理器</strong>的<strong>特定寄存器</strong>或<strong>缓存</strong>来和<strong>主内存</strong>交互，也<strong>没有限制即时编译器进行调整代码执行顺序</strong>这类优化措施。</p><p><code>Java</code>内存模型<strong>规定</strong>了所有的<strong>变量都存储在主内存</strong>（虚拟机内存中的一部分）中，每条线程有自己的工作内存，线程的<strong>工作内存</strong>中保存了被该线程使用到的变量的<strong>主内存副本拷贝</strong>，线程对变量的<strong>所有操作都必须在工作内存中进行</strong>，<strong>不能直接读写主内存中的变量</strong>。不同的线程间也无法直接访问对方的工作内存中的变量，线程间变量值得传递均需要通过主内存来完成。</p><p>注：<strong>拷贝副本</strong>，事实上并<strong>不会完全复制一份对象</strong>拷贝出来，该<strong>对象的引用</strong>、<strong>对象中某个在线程访问到的字段</strong>是有可能存在拷贝的，但<strong>不会有虚拟机实现成把整个对象拷贝一次</strong>。</p><p><img src="../../../../../images/Java/线程、主内存、工作内存三者交互关系.jpg" alt="线程、主内存、工作内存三者交互关系"></p><p>注：若<strong>局部变量</strong>是一个<code>reference</code>类型，它引用的对象在堆中可被各个线程共享，但<code>reference</code>本身在Java栈的局部变量表中，是线程私有的。</p><h4 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h4><p>Java内存模型中定义了以下<code>8</code>种操作来完成<strong>主内存</strong>与<strong>工作内存</strong>之间的具体<strong>交互协议</strong>，虚拟机实现时必须保证每一种操作都是<strong>原子</strong>的、不可再分的。</p><table><thead><tr><th>操作</th><th>作用域</th><th>完成的工作</th></tr></thead><tbody><tr><td><strong><code>lock</code></strong>（<strong>锁定</strong>）</td><td><strong>主</strong>内存变量</td><td>把一个变量标识为一条<strong>线程独占状态</strong></td></tr><tr><td><strong><code>unlock</code></strong>（<strong>解锁</strong>）</td><td><strong>主</strong>内存变量</td><td>把一个<strong>处于锁定状态的变量释放出来</strong>，释放后才可被其他线程锁定</td></tr><tr><td><strong><code>read</code></strong>（<strong>读取</strong>）</td><td><strong>主</strong>内存变量</td><td>把一个变量的值<strong>从主内存传输到线程的工作内存</strong>中</td></tr><tr><td><strong><code>load</code></strong>（<strong>载入</strong>）</td><td><strong>工作</strong>内存变量</td><td>把<strong><code>read</code></strong>操作从主内存中得到的变量值放入工作内存的<strong>变量副本</strong>中</td></tr><tr><td><strong><code>use</code></strong>（<strong>使用</strong>）</td><td><strong>工作</strong>内存变量</td><td>把工作内存中变量值传递给执行引擎</td></tr><tr><td><strong><code>assign</code></strong>（<strong>赋值</strong>）</td><td><strong>工作</strong>内存变量</td><td><strong>把从执行引擎接收到的值赋给工作内存的变量</strong></td></tr><tr><td><strong><code>store</code></strong>（<strong>存储</strong>）</td><td><strong>工作</strong>内存变量</td><td>把工作内存中一个变量的值传递到主内存中</td></tr><tr><td><strong><code>write</code></strong>（<strong>写入</strong>）</td><td><strong>主</strong>内存变量</td><td>把<strong><code>store</code></strong>操作从工作内存中得到的变量值放入主内存的变量中</td></tr></tbody></table><p>若把一个变量<strong>从主内存复制到工作内存</strong>，需要<strong>顺序</strong>执行<strong><code>read</code></strong>和<strong><code>load</code></strong>操作。若要将变量从<strong>工作内存同步回主内存</strong>，需<strong>顺序</strong>执行<strong><code>store</code></strong>和<strong><code>write</code></strong>操作。<code>Java</code>内存模型只要求上述两个操作必须顺序执行，而<strong>没有保证是连续执行</strong>。</p><p><code>Java</code>内存模型规定了在执行上述<code>8</code>种操作时必须满足以下规则：</p><ul><li><strong>不允许</strong><code>read</code>和<code>load</code>、<code>store</code>和<code>write</code>操作之一<strong>单独出现</strong>，即<strong>不允许</strong>一个变量<strong>从主内存读取了但工作内存不接受</strong>，或<strong>从工作内存发起回写但主内存不接受</strong>的情况出现。</li><li><strong>不允许线程丢弃它最近的<code>assign</code>操作</strong>，即变量<strong>在工作内存中改变了之后必须把它同步回主内存</strong>。</li><li><strong>不允许</strong>线程无原因地（<strong>未发生任何<code>assign</code>操作</strong>）把数据从线程<strong>工作内存同步回主内存</strong>。</li><li>一个<strong>新变量只能在主内存中诞生</strong>，<strong>不允许工作内存</strong>中直接使用一个<strong>未被初始化</strong>（<code>load</code>或<code>assign</code>）的变量。即对一个变量实施<code>use</code>、<code>store</code>操作之前，必须先执行过了<code>assign</code>和<code>load</code>操作。</li><li>一个变量同一时刻<strong>只允许一条线程</strong>对其进行<code>lock</code>操作，但<code>lock</code>操作<strong>可以被同一条线程重复执行多次</strong>，多次执行<code>lock</code>后，只有<strong>执行相同次数</strong>的<code>unlock</code>操作，变量才会被解锁。</li><li>若对一个变量执行<code>lock</code>操作，将会<strong>清空工作内存中此变量的值</strong>，在执行引擎使用这个变量钱，需要<strong>重新执行<code>load</code>或<code>assign</code>操作初始化变量</strong>的值。</li><li>若变量<strong>事先没有被<code>lock</code>操作锁定，不允许对它执行<code>unlock</code>操作</strong>，也<strong>不允许<code>unlock</code></strong>一个被其<strong>他线程锁定</strong>的变量。</li><li><strong>对变量执行<code>unlock</code>操作之前，必须先把此变量同步回主内存中</strong>。</li></ul><h3 id="先行发生原则"><a href="#先行发生原则" class="headerlink" title="先行发生原则"></a>先行发生原则</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;硬件效率与一致性&quot;&gt;&lt;a href=&quot;#硬件效率与一致性&quot; class=&quot;headerlink&quot; title=&quot;硬件效率与一致性&quot;&gt;&lt;/a&gt;硬件效率与一致性&lt;/h3&gt;&lt;p&gt;计算机的&lt;strong&gt;存储设备&lt;/strong&gt;与&lt;strong&gt;处理器的运算速度&lt;/st
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://yaoyinglong.github.io/categories/Java/"/>
-    
-      <category term="并发" scheme="https://yaoyinglong.github.io/categories/Java/%E5%B9%B6%E5%8F%91/"/>
-    
-    
-      <category term="JVM，线程" scheme="https://yaoyinglong.github.io/tags/JVM%EF%BC%8C%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
