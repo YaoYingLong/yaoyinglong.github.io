@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="排序在用到Stream做排序时，如果数据存在null值就会抛出空指针异常，可能最理想的方式排除空值的内容进行排序，最后将空值的内容排在最后或者最前面。 下面的示例是使用对象的时间进行排序，如果时间为空则将其排在列表最后面： 1234List&amp;lt;Change&amp;gt; changes = changeList.stream()               .sorted(Comparator.co">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-27T09:26:09.586Z">
+<meta property="og:updated_time" content="2021-04-20T03:37:37.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lambda常用总结">
 <meta name="twitter:description" content="排序在用到Stream做排序时，如果数据存在null值就会抛出空指针异常，可能最理想的方式排除空值的内容进行排序，最后将空值的内容排在最后或者最前面。 下面的示例是使用对象的时间进行排序，如果时间为空则将其排在列表最后面： 1234List&amp;lt;Change&amp;gt; changes = changeList.stream()               .sorted(Comparator.co">
@@ -652,6 +652,10 @@
                 
                     <li class="file"><a href="/Blog/设计模式/行为型模式/模板方法模式/">模板方法模式</a></li>
                 
+                    <li class="file"><a href="/Blog/设计模式/行为型模式/中介者模式/">中介者模式</a></li>
+                
+                    <li class="file"><a href="/Blog/设计模式/行为型模式/命令模式/">命令模式</a></li>
+                
             </ul>
         
                     </li>
@@ -790,6 +794,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Change&gt; changes = changeList.stream()</span><br><span class="line">               .sorted(Comparator.comparing(</span><br><span class="line">                   Change::getDate, Comparator.nullsFirst(Date::compareTo)).reversed())</span><br><span class="line">               .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
 <h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h3><p>在很多时候会用到去重，对于实体列表的去重，在没有重写equals和hashCode方法时，要通过Lambda去重比较麻烦和不友好，因为<strong><code>Stream</code></strong>的<strong><code>distinct()</code></strong>方法不支持形如<strong><code>distinct(Change::getDid)</code></strong>这种形式的去重，我自己总结论一个稍微好一点的方式：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Change&gt; uniqueList = opList</span><br><span class="line">                .stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Change::getDid))</span><br><span class="line">                .values()</span><br><span class="line">                .stream()</span><br><span class="line">                .flatMap(list -&gt; list.stream().limit(<span class="number">1</span>))</span><br><span class="line">                .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+<h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><p><code>distinct</code>是基于<code>hashCode</code>和<code>equals</code>工作的，且不提供按照属性对对象列表进行去重的直接实现。若想要按照对象的属性，若对对象去重需要重写对象的<code>hashCode</code>方法和<code>equals</code>方法；</p>
+<p>若对对象列表进行去重，可以通过以下方法来实现，<strong><code>distinctByKey()</code></strong>方法返回一个使用<code>ConcurrentHashMap</code>来维护先前所见状态的 <code>Predicate</code>实例，结合<code>filter</code>来进行去重：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">distinctByKey</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, ?&gt; keyExtractor)</span> </span>&#123;</span><br><span class="line">        Map&lt;Object,Boolean&gt; seen = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">return</span> t -&gt; seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">list.stream().filter(distinctByKey(b -&gt; b.getName()));</span><br></pre></td></tr></table></figure>
 
         </div>
         
