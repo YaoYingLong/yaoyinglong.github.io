@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yaoyinglong.github.io/Blog/DB/MySQL%E5%9F%BA%E7%A1%80/</loc>
+    
+    <lastmod>2021-06-18T07:38:50.314Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/DB/%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2021-06-18T07:32:35.460Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yaoyinglong.github.io/Blog/DB/Innodb/</loc>
+    
+    <lastmod>2021-06-18T03:05:28.563Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yaoyinglong.github.io/Blog/%E4%B8%AD%E9%97%B4%E4%BB%B6/Spring/Spring%E5%88%9D%E5%A7%8B%E5%8C%96%E6%89%A9%E5%B1%95/</loc>
     
     <lastmod>2021-06-17T08:17:22.551Z</lastmod>
@@ -96,13 +117,6 @@
     <loc>https://yaoyinglong.github.io/Blog/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</loc>
     
     <lastmod>2020-12-29T06:36:33.259Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/DB/MySQL%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2020-12-29T06:35:45.500Z</lastmod>
     
   </url>
   
@@ -306,13 +320,6 @@
     <loc>https://yaoyinglong.github.io/Blog/%E4%B8%AD%E9%97%B4%E4%BB%B6/Spring/Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
     
     <lastmod>2020-09-15T09:57:30.277Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yaoyinglong.github.io/Blog/DB/%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
-    
-    <lastmod>2020-09-08T05:59:28.251Z</lastmod>
     
   </url>
   

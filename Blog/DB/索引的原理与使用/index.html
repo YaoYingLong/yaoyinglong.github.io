@@ -12,15 +12,18 @@
         <meta name="keywords" content="MySQL">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="MySQL">
+    <meta name="description" content="MySQL的索引使用的是B+树而不是使用的B树，因为B树不管叶子节点还是非叶子节点，都会保存数据，这样导致在非叶子节点中能保存的指针数量变少，指针少的情况下要保存大量数据，只能增加树的高度，而在查找数据时一次页的查找代表一次IO，导致IO操作变多，查询性能变低；">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="索引的原理与使用">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/DB/索引的原理与使用/index.html">
 <meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="MySQL的索引使用的是B+树而不是使用的B树，因为B树不管叶子节点还是非叶子节点，都会保存数据，这样导致在非叶子节点中能保存的指针数量变少，指针少的情况下要保存大量数据，只能增加树的高度，而在查找数据时一次页的查找代表一次IO，导致IO操作变多，查询性能变低；">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-08T05:59:28.251Z">
+<meta property="og:updated_time" content="2021-06-18T07:32:35.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="索引的原理与使用">
+<meta name="twitter:description" content="MySQL的索引使用的是B+树而不是使用的B树，因为B树不管叶子节点还是非叶子节点，都会保存数据，这样导致在非叶子节点中能保存的指针数量变少，指针少的情况下要保存大量数据，只能增加树的高度，而在查找数据时一次页的查找代表一次IO，导致IO操作变多，查询性能变低；">
     
 
     
@@ -166,6 +169,8 @@
                         </a>
                         
             <ul class="unstyled" id="tree">
+                
+                    <li class="file"><a href="/Blog/DB/MySQL基础/">MySQL基础</a></li>
                 
                     <li class="file"><a href="/Blog/DB/MySQL常用SQL总结/">MySQL常用SQL总结</a></li>
                 
@@ -790,7 +795,8 @@
                     
             
             
-                
+                <p><code>MySQL</code>的索引使用的是<strong><code>B+</code></strong>树而不是使用的<code>B</code>树，因为<strong><code>B</code>树不管叶子节点还是非叶子节点，都会保存数据</strong>，这样导致在非叶子节点中能保存的<strong>指针数量变少</strong>，指针少的情况下要保存大量数据，只能<strong>增加树的高度</strong>，而在<strong>查找数据时一次页的查找代表一次<code>IO</code></strong>，导致IO操作变多，查询性能变低；</p>
+
         </div>
         
     <footer class="article-footer">

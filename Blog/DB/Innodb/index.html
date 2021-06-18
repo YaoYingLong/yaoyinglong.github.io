@@ -4,21 +4,26 @@
     <meta charset="utf-8">
     
     <title>
-        Tag: CAS |
+        InnoDB |
         
         YingLong</title>
     
     
-        <meta name="keywords" content="YingLong">
+        <meta name="keywords" content="MySQL">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="YingLong">
-<meta property="og:url" content="https://yaoyinglong.github.io/tags/CAS/index.html">
+    <meta name="description" content="文件系统的最小单元是块，一个块的大小是4K，在文件系统中即使一个文件只有一个字节，但也不得不占4KB的磁盘空间。 InnoDB存储引擎的最小存储单元是Page页，页可用于存放数据也可用于存放键值+指针，指针大小在InnoDB源码中设置为6字节，在B+树中叶子节点存放数据，非叶子节点存放键值+指针，默认一个页的大小是16382即16K。InnoDB的所有数据文件后缀为ibd，其大小始终都是16K的整">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="InnoDB">
+<meta property="og:url" content="https://yaoyinglong.github.io/Blog/DB/Innodb/index.html">
 <meta property="og:site_name" content="YingLong">
+<meta property="og:description" content="文件系统的最小单元是块，一个块的大小是4K，在文件系统中即使一个文件只有一个字节，但也不得不占4KB的磁盘空间。 InnoDB存储引擎的最小存储单元是Page页，页可用于存放数据也可用于存放键值+指针，指针大小在InnoDB源码中设置为6字节，在B+树中叶子节点存放数据，非叶子节点存放键值+指针，默认一个页的大小是16382即16K。InnoDB的所有数据文件后缀为ibd，其大小始终都是16K的整">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-06-18T03:05:28.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YingLong">
+<meta name="twitter:title" content="InnoDB">
+<meta name="twitter:description" content="文件系统的最小单元是块，一个块的大小是4K，在文件系统中即使一个文件只有一个字节，但也不得不占4KB的磁盘空间。 InnoDB存储引擎的最小存储单元是Page页，页可用于存放数据也可用于存放键值+指针，指针大小在InnoDB源码中设置为6字节，在B+树中叶子节点存放数据，非叶子节点存放键值+指针，默认一个页的大小是16382即16K。InnoDB的所有数据文件后缀为ibd，其大小始终都是16K的整">
     
 
     
@@ -743,14 +748,108 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
         
-        <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-tag"></i></span>
-        <h1 class="title">#CAS</h1>
+        <section id="main"><article id="post-DB/Innodb" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+        <i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/hide/">hide</a>
     </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/MySQL/">MySQL</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/Blog/DB/Innodb/">
+            <time datetime="2021-06-17T16:00:00.000Z" itemprop="datePublished">2021-06-18</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+                
     
-</div>
+        <h1 class="article-title" itemprop="name">
+            InnoDB
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+            
+                    
+            
+            
+                <p>文件系统的<strong>最小单元是块</strong>，一个块的大小是<strong><code>4K</code></strong>，在文件系统中即使一个文件只有<strong>一个字节</strong>，但也不得不占<strong><code>4KB</code></strong>的磁盘空间。</p>
+<p><code>InnoDB</code>存储引擎的<strong>最小存储单元是<code>Page</code>页</strong>，页可用于存<strong>放数据</strong>也可用于存放<strong>键值<code>+</code>指针</strong>，指针大小在<code>InnoDB</code>源码中设置为<strong><code>6</code>字节</strong>，在<code>B+</code>树中<strong>叶子节点存放数据</strong>，<strong>非叶子节点存放键值<code>+</code>指针</strong>，默认一个页的大小是<strong><code>16382</code></strong>即<strong><code>16K</code></strong>。<code>InnoDB</code>的所有数据文件后缀为<strong><code>ibd</code></strong>，其大小始终都是<strong><code>16K</code>的整倍数</strong>。数据表中的数据都是存储在页中，若一行数据大小为<code>1K</code>，则一页可存放16行这样的数据。</p>
+<p>一个页中不可能所有空间都用于存放数据，它还会存放一些少量的其他字段比如<code>page level</code>，<code>index number</code>等等。</p>
+
+        </div>
+        
+    <footer class="article-footer">
+    </footer>
+    </div>
+</article>
+
+
+    
+    <nav id="article-nav">
+        
+            <a href="/Blog/DB/MySQL基础/" id="article-nav-newer" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Newer</strong>
+                <div class="article-nav-title">
+                    
+                        MySQL基础
+                    
+                </div>
+            </a>
+        
+        
+            <a href="/Blog/DB/分库分表/" id="article-nav-older" class="article-nav-link-wrap">
+                <strong class="article-nav-caption">Older</strong>
+                <div class="article-nav-title">分库分表</div>
+            </a>
+        
+    </nav>
+
+
+
+
+
+    
+    
+
+
+
+
+    <!-- baidu url auto push script -->
+    <script type="text/javascript">
+        !function () {
+            var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi, r = window.location.href,
+                o = document.referrer;
+            if (!e.test(r)) {
+                var n = "//api.share.baidu.com/s.gif";
+                o ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+                var t = new Image;
+                t.src = n
+            }
+        }(window);
+    </script>
 </section>
     </div>
     <footer id="footer">
