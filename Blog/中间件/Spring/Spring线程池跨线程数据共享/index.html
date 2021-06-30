@@ -9,18 +9,18 @@
         YingLong</title>
     
     
-        <meta name="keywords" content="Spring，线程池">
+        <meta name="keywords" content="Spring,线程池">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="在Spring Cloud中可能会用到sleuth做链路追踪，以及内部链路中需要用到Header中得一些数据，在单线程是没有问题得，但是在某些场景下就会有问题，比如上层业务系统得一个请求需要同时并发去调用基础服务得多个产品，这样请求到其他服务得链路追踪信息就不一样了等。 为了实现多线程并发情况下主线程和线程池的线程共享ThreadLocal变量，如MDC、RequestAttributes中的数据">
-<meta name="keywords" content="Spring，线程池">
+<meta name="keywords" content="Spring,线程池">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring线程池跨线程数据共享">
 <meta property="og:url" content="https://yaoyinglong.github.io/Blog/中间件/Spring/Spring线程池跨线程数据共享/index.html">
 <meta property="og:site_name" content="YingLong">
 <meta property="og:description" content="在Spring Cloud中可能会用到sleuth做链路追踪，以及内部链路中需要用到Header中得一些数据，在单线程是没有问题得，但是在某些场景下就会有问题，比如上层业务系统得一个请求需要同时并发去调用基础服务得多个产品，这样请求到其他服务得链路追踪信息就不一样了等。 为了实现多线程并发情况下主线程和线程池的线程共享ThreadLocal变量，如MDC、RequestAttributes中的数据">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-28T03:24:44.625Z">
+<meta property="og:updated_time" content="2021-06-30T01:42:42.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring线程池跨线程数据共享">
 <meta name="twitter:description" content="在Spring Cloud中可能会用到sleuth做链路追踪，以及内部链路中需要用到Header中得一些数据，在单线程是没有问题得，但是在某些场景下就会有问题，比如上层业务系统得一个请求需要同时并发去调用基础服务得多个产品，这样请求到其他服务得链路追踪信息就不一样了等。 为了实现多线程并发情况下主线程和线程池的线程共享ThreadLocal变量，如MDC、RequestAttributes中的数据">
@@ -649,6 +649,8 @@
                 
                     <li class="file"><a href="/Blog/设计模式/结构型模式/适配器模式/">适配器模式</a></li>
                 
+                    <li class="file"><a href="/Blog/设计模式/结构型模式/组合模式/">组合模式</a></li>
+                
             </ul>
         
                     </li>
@@ -776,7 +778,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring，线程池/">Spring，线程池</a>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>, <a class="tag-link" href="/tags/线程池/">线程池</a>
     </div>
 
                         
